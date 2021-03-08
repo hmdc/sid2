@@ -1,0 +1,20 @@
+{
+  "short_name": "SidLandingSite",
+  "name": "Sid Cloud Based Research Computing",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "sid_logo.png",
+      "type": "image/png",
+      "sizes": "180x100"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
