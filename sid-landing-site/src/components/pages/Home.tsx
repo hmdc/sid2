@@ -25,7 +25,7 @@ const Home = () => {
                     <a className="learn-more" href="https://www.iq.harvard.edu/client-support-services/confidential-data">Learn more</a>
                 </div>
                 <div className="feature-item">
-                    <h3>Statisticals Applications</h3>
+                    <h3>Statistical Applications</h3>
                     <div className="feature-item-content">
                     <p>
 	                    The following statistical applications are available on the RCE:
