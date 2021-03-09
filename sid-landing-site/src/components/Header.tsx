@@ -9,7 +9,7 @@ const Header = () => {
                     <li><a href="#">About</a></li>
                     <li><a href="#">Documentation</a></li>
                     <li><a href="#">Support</a></li>
-                    <li className="connect-icon"><a className="connect-icon" href="#">Connect to</a></li>
+                    <li className="connect-icon btn-hover-effect"><a className="connect-icon" href="#">Connect to</a></li>
                 </ul>
             </nav>
             

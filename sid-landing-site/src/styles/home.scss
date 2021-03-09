@@ -1,0 +1,101 @@
+#main-content {
+    padding: 2rem 6rem 3rem 6rem;
+    background-color: var(--color-main-brown);
+    font-size: 3rem;
+    text-align: center;
+
+    h2 {
+        position: absolute;
+        left: -1000px
+    }
+
+    p {
+        color: #fff;
+        font-weight: 250;
+        text-align: left;
+        padding: 2rem 0;
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        padding: 1.3rem 3rem;
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: var(--color-main-brown);
+        background-color: #fff;
+        border: 1px solid var(--color-main-brown);
+        border-radius: 20px;
+        box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+#features {
+    padding: 0 7rem;
+    display: flex;
+    gap: 20px;
+    font-size: 1.6rem;
+
+    .feature-item {
+        flex-basis: 33%;
+
+        p {
+            padding-bottom: 2.2rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            padding-bottom: 2.2rem;
+
+            li {
+                padding: 3px 0;
+            }
+        }
+
+        a {
+            color: var(--color-feature-title);
+        }
+    }
+
+    h3 {
+        padding: 4rem 0;
+        font-size: 3.5rem;
+        font-weight: normal;
+        color: var(--color-feature-title)
+    }
+
+    .feature-item-content {
+        color: var(--color-feature-text);
+        padding-bottom: 20px; 
+    }
+
+    a.learn-more {
+        text-decoration: none;
+        color: var(--color-feature-title);
+        padding-bottom: 8px; 
+        border-bottom: 2px solid var(--color-main-brown);
+    }
+
+    a.learn-more:after {
+        content: ' \02192';
+        font-family: 'Montserrat', Arial;
+    }
+}
+
+.feature-actions {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0;
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        padding: 1.3rem 3rem;
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #919191;
+        border: 3px solid var(--color-logo-main);
+        border-radius: 10px;
+        box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+    }
+}

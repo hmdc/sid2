@@ -6,6 +6,7 @@
     align-content: center;
     padding: 2rem 1rem 1rem 6rem;
     background-color: var(--color-main-backgroud);
+    border-bottom: 2px solid #7D7B79;
 
     a{
         text-decoration: none;
@@ -49,16 +50,12 @@
         a {
             text-decoration: none;
             white-space: nowrap;
-            font-weight: 400;
+            font-weight: 500;
             color: var(--color-main-text);
         }
 
         a:hover {
             text-decoration: underline;
-        }
-
-        li.connect-icon:hover {
-            transform: scale(0.96);
         }
 
         a.connect-icon {

@@ -1,10 +1,13 @@
 @import './header.scss';
+@import './home.scss';
 
 :root {
   --color-page-background: #fff;
   --color-main-brown: #DF800C;
   --color-main-backgroud: #F9F9F9;
   --color-main-text: #B8B8B8;
+  --color-feature-title: #215990;
+  --color-feature-text: #555;
   --color-logo-main: #0BBCE3;
 }
 
@@ -12,10 +15,14 @@ html {
   font: 300 62.5% "Lora", sans-serif;
 }
 
-body {
+* {
   margin: 0;
   padding: 0;
+}
+
+body {
   font-family:
+    'Lora',
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
@@ -41,4 +48,8 @@ code {
     Consolas,
     'Courier New',
     monospace;
+}
+
+.btn-hover-effect:hover {
+  transform: scale(0.96);
 }
