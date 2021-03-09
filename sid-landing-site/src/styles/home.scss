@@ -33,11 +33,12 @@
 #features {
     padding: 0 7rem;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
     font-size: 1.6rem;
 
     .feature-item {
         flex-basis: 33%;
+        padding: 0 20px;
 
         p {
             padding-bottom: 2.2rem;
@@ -61,7 +62,8 @@
         padding: 4rem 0;
         font-size: 3.5rem;
         font-weight: normal;
-        color: var(--color-feature-title)
+        color: var(--color-feature-title);
+        white-space: nowrap;
     }
 
     .feature-item-content {
@@ -76,7 +78,7 @@
         border-bottom: 2px solid var(--color-main-brown);
     }
 
-    a.learn-more:after {
+    a.learn-more::after {
         content: ' \02192';
         font-family: 'Montserrat', Arial;
     }

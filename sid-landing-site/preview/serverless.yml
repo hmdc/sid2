@@ -1,0 +1,34 @@
+service: sid-landing-site-preview
+
+provider:
+  name: aws
+  runtime: nodejs12.X
+  region: 'us-east-1'
+  stage: 'preview'
+
+custom:
+  bucketName: aday-sid-landing-site-preview
+
+resources:
+  Resources:
+    SidS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+    SidS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: SidS3Bucket
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action:
+                - s3:GetObject
+              Resource: arn:aws:s3:::${self:custom.bucketName}/*

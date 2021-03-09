@@ -9,7 +9,9 @@
     border-bottom: 2px solid #7D7B79;
 
     a{
+        position: relative;
         text-decoration: none;
+        outline: none;
         color: inherit;
     }
 
@@ -21,7 +23,7 @@
         color: var(--color-main-brown)
     }
 
-    h1 a:after {
+    h1 a::after {
         background-image: url('../assets/sid_logo.png');
         background-size: 117px 65px;
         display: inline-block;
@@ -52,10 +54,6 @@
             white-space: nowrap;
             font-weight: 500;
             color: var(--color-main-text);
-        }
-
-        a:hover {
-            text-decoration: underline;
         }
 
         a.connect-icon {
