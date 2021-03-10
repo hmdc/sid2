@@ -1,4 +1,5 @@
 import React from 'react'
+import { UrlConstants } from '../../utils/UrlUtils'
 
 const Home = () => {
     return (
@@ -70,7 +71,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="feature-actions">
-                <a className="btn-hover-effect" href="#">Connect to Sid</a>
+                <a className="btn-hover-effect" href={UrlConstants.URL_SID_CONNECT}>Connect to Sid</a>
             </div>
             
         </div>
