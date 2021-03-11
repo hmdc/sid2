@@ -1,0 +1,28 @@
+a.sid-connect {
+    display: inline-block;
+    font-size: 2.2rem;
+    text-decoration: none;
+    padding: 0.35em 0 10px 1rem;
+    border: 1px solid var(--color-logo-main);
+    border-radius: 8px;
+
+    span.connect-icon {
+        position: relative;
+        text-decoration: none;
+        white-space: nowrap;
+        font-weight: 500;
+        color: var(--color-logo-main);
+        padding: 0 78px 0 0;
+    }
+
+    span.connect-icon::after {
+        background-image: url('../assets/sid_logo.png');
+        background-size: 65px 36px;
+        position: absolute;
+        top: -3px;
+        right: 5px;
+        width: 65px;
+        height: 36px;
+        content: '';
+    }
+}

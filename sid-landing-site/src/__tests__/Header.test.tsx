@@ -22,6 +22,8 @@ it('Header - renders navigation with links', () => {
   const support = screen.getByText(/support/i)
   expect(support).toHaveAttribute('href', '/support')
 
-  const connectToSid = screen.getByText(/connect/i)
+  //const connectToSid = screen.getByText(/connect/i).closest('a')
+  //NEED CUSTOM FUNCTION AS THE LINK WRAPS A SPAN WITH THE TEXT
+  const connectToSid = screen.getByText((text, el) => el?.nodeName === 'A' && /connect/i.test(el.textContent || ''))
   expect(connectToSid).toHaveAttribute('href', 'https://www.sid.hmdc.harvard.edu/auth/cas')
 });
