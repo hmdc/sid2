@@ -8,6 +8,13 @@ The service has been developed using:
 * `yarn/1.22.10`
 * `React@17.0.1`
 
+## Building and testing
+Build the app. The `build` directory will contain all generated files:  
+`yarn build`
+
+Run the tests:  
+`yarn test`
+
 ## Running the service locally
 Running using react-scripts:  
 `yarn start`

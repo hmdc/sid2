@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <div id="homepage">
             <div id="main-content">
-                <h2>IQSS Description</h2>
+                <h2 className="content-hide">IQSS Description</h2>
                 <p className="main-text">
                 IQSS offer access to high-performance machines through its on-premise labs, data science consulting services, specialized social science research computing support, and data science products that the Harvard social science community has come to rely on.
                 </p>

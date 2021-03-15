@@ -1,0 +1,28 @@
+#about {
+  padding-bottom: 4rem;
+
+  .description {
+    padding: 2rem 6rem 3rem 6rem;
+    background-color: var(--color-main-brown);
+    font-size: 3rem;
+    text-align: center;
+    color: #fff;
+
+    p {
+      font-weight: 250;
+      text-align: left;
+      padding: 2rem 0;
+    }
+  }
+
+  section {
+    padding: 0 6rem 1rem 6rem;
+  }
+
+  section p {
+    color: var(--color-feature-text);
+    font-size: 1.6rem;
+    padding-bottom: 2rem;
+  }
+
+}
