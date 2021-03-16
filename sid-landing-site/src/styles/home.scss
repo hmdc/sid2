@@ -1,21 +1,28 @@
 #main-content {
     padding: 2rem 4% 3rem 4%;
     background-color: var(--color-main-brown);
-    font-size: 3rem;
+    font-size: 1rem;
     text-align: center;
+
+
+    @media (max-width: 780px) {
+        font-size: .8rem;
+    }
 
     p {
         color: #fff;
+        font-size: 3em;
         font-weight: 250;
         text-align: left;
-        padding: 2rem 0;
+        padding: 0.8em 0;
     }
+
 
     a {
         display: inline-block;
         text-decoration: none;
-        padding: 1.3rem 3rem;
-        font-size: 2.2rem;
+        padding: 0.6em 1.4em;
+        font-size: 2.2em;
         font-weight: bold;
         color: var(--color-main-brown);
         background-color: #fff;
