@@ -1,4 +1,5 @@
 @import './header.scss';
+@import './footer.scss';
 @import './home.scss';
 @import './about.scss';
 @import './documentation.scss';
@@ -11,7 +12,8 @@
   --color-page-background: #fff;
   --color-main-brown: #DF800C;
   --color-main-backgroud: #F9F9F9;
-  --color-main-text: #B8B8B8;
+  --color-main-borderline: #7D7B79;
+  --color-main-text: #808080;
   --color-feature-title: #215990;
   --color-feature-text: #555;
   --color-logo-main: #0BBCE3;
@@ -44,6 +46,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: black;
   font-size: 1.4rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 1rem;
+  }
 }
 
 code {

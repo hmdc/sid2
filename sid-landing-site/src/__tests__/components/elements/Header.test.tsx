@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 
-import Header from '../components/Header'
+import Header from '../../../components/elements/Header'
 
 afterEach(cleanup)
 

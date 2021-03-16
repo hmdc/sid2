@@ -1,6 +1,6 @@
 import React from 'react'
-import { UrlConstants } from '../utils/UrlUtils'
-import SidConnect from './elements/SidConnect'
+import { UrlConstants } from '../../utils/UrlUtils'
+import SidConnect from './SidConnect'
 
 const Header = () => {
     return (

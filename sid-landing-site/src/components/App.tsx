@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import { UrlConstants } from '../utils/UrlUtils';
-import Header from './Header';
+import Header from './elements/Header';
+import Footer from './elements/Footer';
 import Home from './pages/Home'
 import About from './pages/About'
 import Documentation from './pages/Documentation'
@@ -22,6 +23,7 @@ function App() {
             <Route exact path={UrlConstants.URL_SUPPORT} component={Support} />
             <Route component={NotFound} />
       </Switch>
+      <Footer />
     </div>
   )
 }

@@ -1,5 +1,5 @@
 #main-content {
-    padding: 2rem 6rem 3rem 6rem;
+    padding: 2rem 4% 3rem 4%;
     background-color: var(--color-main-brown);
     font-size: 3rem;
     text-align: center;
@@ -25,8 +25,15 @@
     }
 }
 
+
+@media (max-width: 1100px) {
+    #features {
+      flex-direction: column;
+    }
+}
+
 #features {
-    padding: 0 7rem;
+    padding: 0 4%;
     display: flex;
     justify-content: space-between;
     font-size: 1.6rem;
