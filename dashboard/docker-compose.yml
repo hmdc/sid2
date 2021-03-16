@@ -17,6 +17,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        SLURM_TAG: ${SLURM_TAG}
+        OOD_TAG: ${OOD_TAG}
     hostname: ood
     volumes_from:
       - slurmctld
@@ -61,6 +64,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.node
+      args:
+        SLURM_TAG: ${SLURM_TAG}
     command: ["slurmd"]
     priviledged: true
     hostname: c1
@@ -79,6 +84,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.node
+      args:
+        SLURM_TAG: ${SLURM_TAG}
     command: ["slurmd"]
     hostname: c2
     priviledged: true
