@@ -21,8 +21,12 @@ services:
         SLURM_TAG: ${SLURM_TAG}
         OOD_TAG: ${OOD_TAG}
     hostname: ood
-    volumes_from:
-      - slurmctld
+    volumes:
+      - etc_munge:/etc/munge
+      - etc_slurm:/etc/slurm
+      - slurm_jobdir:/data
+      - var_log_slurm:/var/log/slurm
+      - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
     expose:
       - "6817"
       - "8080"
@@ -48,7 +52,12 @@ services:
       - mysql
 
   slurmctld:
-    image: snkattck/slurm-docker-cluster:${SLURM_TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+      args:
+        SLURM_TAG: ${SLURM_TAG}
+    entrypoint: /usr/local/bin/with-ssh.sh
     command: ["slurmctld"]
     container_name: slurmctld
     hostname: slurmctld
@@ -58,6 +67,7 @@ services:
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
     expose:
+      - "22"
       - "6817"
 
   c1:
@@ -66,8 +76,9 @@ services:
       dockerfile: Dockerfile.node
       args:
         SLURM_TAG: ${SLURM_TAG}
+    entrypoint: /usr/local/bin/with-ssh.sh
     command: ["slurmd"]
-    priviledged: true
+    privileged: true
     hostname: c1
     container_name: c1
     volumes:
@@ -76,6 +87,7 @@ services:
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
     expose:
+      - "22"
       - "6818"
     depends_on:
       - "slurmctld"
@@ -86,9 +98,10 @@ services:
       dockerfile: Dockerfile.node
       args:
         SLURM_TAG: ${SLURM_TAG}
+    entrypoint: /usr/local/bin/with-ssh.sh
     command: ["slurmd"]
     hostname: c2
-    priviledged: true
+    privileged: true
     container_name: c2
     volumes:
       - etc_munge:/etc/munge
@@ -96,6 +109,7 @@ services:
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
     expose:
+      - "22"
       - "6818"
     depends_on:
       - "slurmctld"
