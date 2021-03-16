@@ -1,0 +1,101 @@
+version: "3"
+
+services:
+  mysql:
+    image: mariadb:10.4.18
+    hostname: mysql
+    container_name: mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: slurm_acct_db
+      MYSQL_USER: slurm
+      MYSQL_PASSWORD: password
+    volumes:
+      - var_lib_mysql:/var/lib/mysql
+
+  ood:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    hostname: ood
+    volumes_from:
+      - slurmctld
+    expose:
+      - "6817"
+      - "8080"
+      - "80"
+    depends_on:
+      - "slurmctld"
+    links:
+      - "slurmctld"
+
+
+  slurmdbd:
+    image: snkattck/slurm-docker-cluster:${SLURM_TAG}
+    command: ["slurmdbd"]
+    container_name: slurmdbd
+    hostname: slurmdbd
+    volumes:
+      - etc_munge:/etc/munge
+      - etc_slurm:/etc/slurm
+      - var_log_slurm:/var/log/slurm
+    expose:
+      - "6819"
+    depends_on:
+      - mysql
+
+  slurmctld:
+    image: snkattck/slurm-docker-cluster:${SLURM_TAG}
+    command: ["slurmctld"]
+    container_name: slurmctld
+    hostname: slurmctld
+    volumes:
+      - etc_munge:/etc/munge
+      - etc_slurm:/etc/slurm
+      - slurm_jobdir:/data
+      - var_log_slurm:/var/log/slurm
+    expose:
+      - "6817"
+
+  c1:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    command: ["slurmd"]
+    priviledged: true
+    hostname: c1
+    container_name: c1
+    volumes:
+      - etc_munge:/etc/munge
+      - etc_slurm:/etc/slurm
+      - slurm_jobdir:/data
+      - var_log_slurm:/var/log/slurm
+    expose:
+      - "6818"
+    depends_on:
+      - "slurmctld"
+
+  c2:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    command: ["slurmd"]
+    hostname: c2
+    priviledged: true
+    container_name: c2
+    volumes:
+      - etc_munge:/etc/munge
+      - etc_slurm:/etc/slurm
+      - slurm_jobdir:/data
+      - var_log_slurm:/var/log/slurm
+    expose:
+      - "6818"
+    depends_on:
+      - "slurmctld"
+
+volumes:
+  etc_munge:
+  etc_slurm:
+  slurm_jobdir:
+  var_lib_mysql:
+  var_log_slurm:

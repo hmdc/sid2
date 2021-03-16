@@ -1,0 +1,14 @@
+ARG SLURM_TAG
+
+FROM snkattck/slurm-docker-cluster:${SLURM_TAG}
+
+RUN yum install -y nc && \
+    groupadd -g 3210 ood && \
+    useradd -u 3210 --create-home --gid ood ood && \
+    echo -n "ood" | passwd --stdin ood && \
+    wget https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo && \
+    mv TurboVNC.repo /etc/yum.repos.d/ && \
+    yum install -y turbovnc && \
+    pip install websockify && \
+    mkdir -p /apps && \
+    singularity pull --name rserver-launcher-centos7.simg shub://OSC/centos7-launcher
