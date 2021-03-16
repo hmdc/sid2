@@ -31,7 +31,7 @@ const Header = () => {
                         <li><a className="link-hover-effect" href={UrlConstants.URL_ABOUT}>About</a></li>
                         <li><a className="link-hover-effect" href={UrlConstants.URL_DOCUMENTATION}>Documentation</a></li>
                         <li><a className="link-hover-effect" href={UrlConstants.URL_SUPPORT}>Support</a></li>
-                        <li className="tablet-hide"><SidConnect className="btn-hover-effect" /></li>
+                        <li className="tablet-hide item-sid-connect"><SidConnect className="btn-hover-effect" /></li>
                     </ul>
                 </nav>
             )}
