@@ -1,6 +1,7 @@
 @import './media.scss';
 @import './header.scss';
 @import './footer.scss';
+@import './footerFeatures.scss';
 @import './home.scss';
 @import './about.scss';
 @import './documentation.scss';
@@ -12,7 +13,8 @@
 :root {
   --color-page-background: #fff;
   --color-main-brown: #DF800C;
-  --color-main-backgroud: #F9F9F9;
+  --color-main-background: #F9F9F9;
+  --color-footer-background: #e6e6e6;
   --color-main-borderline: #7D7B79;
   --color-main-text: #808080;
   --color-feature-title: #215990;

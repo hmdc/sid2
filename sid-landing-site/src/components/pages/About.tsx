@@ -13,21 +13,21 @@ const About = () => {
         <h3 className="section-title">About Section 1</h3>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae voluptatum quas, quo deleniti neque sed nisi unde, quisquam, minima maiores soluta repellat eaque aliquam vel dolorum necessitatibus eius corrupti distinctio. Corporis architecto earum doloremque quia blanditiis minus voluptas accusamus at.</p>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae voluptatum quas, quo deleniti neque sed nisi unde, quisquam, minima maiores soluta repellat eaque aliquam vel dolorum necessitatibus eius corrupti distinctio. Corporis architecto earum doloremque quia blanditiis minus voluptas accusamus at.</p>
-        <a className="learn-more" href={UrlConstants.URL_ABOUT_SECTION1}>Learn more</a>
+        <a className="learn-more" href={UrlConstants.URL_ABOUT_SERVICES}>Learn more</a>
       </section>
 
       <section>
         <h3 className="section-title">About Section 1</h3>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae voluptatum quas, quo deleniti neque sed nisi unde, quisquam, minima maiores soluta repellat eaque aliquam vel dolorum necessitatibus eius corrupti distinctio. Corporis architecto earum doloremque quia blanditiis minus voluptas accusamus at.</p>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae voluptatum quas, quo deleniti neque sed nisi unde, quisquam, minima maiores soluta repellat eaque aliquam vel dolorum necessitatibus eius corrupti distinctio. Corporis architecto earum doloremque quia blanditiis minus voluptas accusamus at.</p>
-        <a className="learn-more" href={UrlConstants.URL_ABOUT_SECTION2}>Learn more</a>
+        <a className="learn-more" href={UrlConstants.URL_ABOUT_ROADMAP}>Learn more</a>
       </section>
 
       <section>
         <h3 className="section-title">About Section 1</h3>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae voluptatum quas, quo deleniti neque sed nisi unde, quisquam, minima maiores soluta repellat eaque aliquam vel dolorum necessitatibus eius corrupti distinctio. Corporis architecto earum doloremque quia blanditiis minus voluptas accusamus at.</p>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae voluptatum quas, quo deleniti neque sed nisi unde, quisquam, minima maiores soluta repellat eaque aliquam vel dolorum necessitatibus eius corrupti distinctio. Corporis architecto earum doloremque quia blanditiis minus voluptas accusamus at.</p>
-        <a className="learn-more" href={UrlConstants.URL_ABOUT_SECTION3}>Learn more</a>
+        <a className="learn-more" href={UrlConstants.URL_ABOUT_MIGRATION}>Learn more</a>
       </section>
     </div>
   )

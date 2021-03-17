@@ -1,0 +1,52 @@
+#footer-features {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  color: var(--color-main-borderline);
+  font-weight: 500;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  h3 {
+      background-image: url('../assets/iqss_logo_small.png');
+      background-size: 200px 53px;
+      display: inline-block;
+      width: 200px;
+      height: 53px;
+      text-indent: -99em;
+  }
+
+  .vcard span {
+    display: inline-block;
+    padding: .3rem 0;
+  }
+
+  .feature ul {
+    list-style-type: none;
+    padding: 1rem 0;
+
+    li {
+      padding: .3rem 0;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--color-main-text);
+  }
+
+  abbr {
+    text-decoration: none;
+  }
+}
+
+
+@media (max-width: 900px) {
+  #footer-features {
+    display: block;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}

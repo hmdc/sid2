@@ -1,12 +1,13 @@
 import React from 'react'
-import { UrlConstants } from '../../utils/UrlUtils'
+import FooterFeatures from './FooterFeatures'
 
 const currentYear = new Date().getFullYear()
 
 const Footer = () => {
     return (
         <footer>
-            <nav>
+            <FooterFeatures />
+            <nav className="footer-copy">
                 <ul>
                     <li className="copyright">Copyright © {currentYear} The President and Fellows of Harvard College</li>
                     <li><a className="link-hover-effect" href="https://hwp.harvard.edu/privacy-policy">Privacy</a></li>

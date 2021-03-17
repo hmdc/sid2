@@ -23,7 +23,7 @@ const Home = () => {
                             Therefore, you should know ahead of time if your data is rated as <a href="#">confidential information</a> by your <a href="http://vpr.harvard.edu/pages/human-subjects-and-irbs">IRB</a>.
                         </p>
                     </div>
-                    <a className="learn-more" href="https://www.iq.harvard.edu/client-support-services/confidential-data">Learn more</a>
+                    <a className="learn-more" href={UrlConstants.URL_ABOUT}>Learn more</a>
                 </div>
                 <div className="feature-item">
                     <h3>Statistical Applications</h3>
@@ -33,17 +33,17 @@ const Home = () => {
                     </p>
 
                     <ul>
-                        <li><a href="http://www.aptech.com/" target="_blank">GAUSS</a> (8, 14) </li>
-	                    <li><a href="http://www.wolfram.com/mathematica/" target="_blank">Mathematica</a> (latest version)</li>
-	                    <li><a href="http://www.mathworks.com/products/matlab/" target="_blank">MATLAB</a> (latest version)</li>
-	                    <li><a href="http://www.gnu.org/software/octave/" target="_blank">Octave</a> (latest version from <a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/repoview/octave.html">EPEL repo</a>)</li>
-	                    <li><a href="http://www.r-project.org/" target="_blank">R</a> (latest version from <a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/repoview/R.html">EPEL repo</a>)</li>
-	                    <li><a href="http://www.rstudio.com/" target="_blank">RStudio</a></li>
-	                    <li><a href="http://www.sas.com/" target="_blank">SAS</a> (latest version)</li>
-	                    <li><a href="http://www.stata.com/" target="_blank">Stata</a> SE and MP (latest version)</li>
+                        <li><a href="http://www.aptech.com/" target="_blank" rel="noreferrer">GAUSS</a> (8, 14) </li>
+	                    <li><a href="http://www.wolfram.com/mathematica/" target="_blank" rel="noreferrer">Mathematica</a> (latest version)</li>
+	                    <li><a href="http://www.mathworks.com/products/matlab/" target="_blank" rel="noreferrer">MATLAB</a> (latest version)</li>
+	                    <li><a href="http://www.gnu.org/software/octave/" target="_blank" rel="noreferrer">Octave</a> (latest version from <a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/repoview/octave.html">EPEL repo</a>)</li>
+	                    <li><a href="http://www.r-project.org/" target="_blank" rel="noreferrer">R</a> (latest version from <a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/repoview/R.html">EPEL repo</a>)</li>
+	                    <li><a href="http://www.rstudio.com/" target="_blank" rel="noreferrer">RStudio</a></li>
+	                    <li><a href="http://www.sas.com/" target="_blank" rel="noreferrer">SAS</a> (latest version)</li>
+	                    <li><a href="http://www.stata.com/" target="_blank" rel="noreferrer">Stata</a> SE and MP (latest version)</li>
                     </ul>
                     </div>
-                    <a className="learn-more" href="https://rce-docs.hmdc.harvard.edu/book/statistical-tutorials">Learn more</a>
+                    <a className="learn-more" href={UrlConstants.URL_DOCUMENTATION}>Learn more</a>
                 </div>
                 <div className="feature-item">
                     <h3>Tools &amp; Utilities</h3>
@@ -67,7 +67,7 @@ const Home = () => {
 	                    <li>CVS</li>
                     </ul>
                     </div>
-                    <a className="learn-more" href="https://rce-docs.hmdc.harvard.edu/book/programming-tools-and-utilities">Learn more</a>
+                    <a className="learn-more" href={UrlConstants.URL_DOCUMENTATION}>Learn more</a>
                 </div>
             </div>
             <div className="feature-actions">

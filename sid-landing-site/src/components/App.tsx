@@ -16,9 +16,9 @@ function App() {
       <Switch>
             <Route exact path={UrlConstants.URL_HOME} component={Home} />
             <Route exact path={UrlConstants.URL_ABOUT} component={About} />
-            <Route exact path={UrlConstants.URL_ABOUT_SECTION1} component={About} />
-            <Route exact path={UrlConstants.URL_ABOUT_SECTION2} component={About} />
-            <Route exact path={UrlConstants.URL_ABOUT_SECTION3} component={About} />
+            <Route exact path={UrlConstants.URL_ABOUT_SERVICES} component={About} />
+            <Route exact path={UrlConstants.URL_ABOUT_ROADMAP} component={About} />
+            <Route exact path={UrlConstants.URL_ABOUT_MIGRATION} component={About} />
             <Route exact path={UrlConstants.URL_DOCUMENTATION} component={Documentation} />
             <Route exact path={UrlConstants.URL_SUPPORT} component={Support} />
             <Route component={NotFound} />
