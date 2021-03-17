@@ -1,5 +1,7 @@
 import React from 'react'
 import { UrlConstants } from '../../utils/UrlUtils'
+import facebookLogo from '../../assets/facebook.png'
+import twitterLogo from '../../assets/twitter.png'
 
 const FooterFeatures = () => {
     return (
@@ -13,6 +15,16 @@ const FooterFeatures = () => {
                     <span>Cambridge, <abbr title="Massachusetts">MA</abbr> 02138</span><br />
                     <span>Phone: 617-496-2450</span><br />
                     <span>Email: <a href="mailto:help@iq.harvard.edu">help@iq.harvard.edu</a></span>
+                    <span>
+                    </span>
+                </p>
+                <p className="vcard-icons">
+	                <a href="https://www.facebook.com/iqssharvard" title="harvard facebook link">
+                        <img alt="facebook" src={facebookLogo} width="48" height="48" />
+                    </a>
+                    <a href="https://twitter.com/IQSS"  title="harvard twitter link">
+                        <img alt="twitter" src={twitterLogo} width="48" height="48" />
+                    </a>
                 </p>
             </div>
             <div className="feature">
