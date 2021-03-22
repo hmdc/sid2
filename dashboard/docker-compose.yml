@@ -26,6 +26,7 @@ services:
       - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
+      - .:/home/ood/ondemand/dev/sid2:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
     expose:
       - "6817"

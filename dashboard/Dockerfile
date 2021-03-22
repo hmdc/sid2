@@ -13,7 +13,7 @@ RUN yum install -y net-tools openssh-clients && \
     mkdir -p /etc/ood/config/clusters.d && \
     mkdir -p /etc/ood/config/apps/shell
 
-COPY ./ood_portal.yml /etc/ood/config/ood_portal.yml
+COPY ./ood_portal.yml ./nginx_stage.yml /etc/ood/config/
 RUN /opt/ood/ood-portal-generator/sbin/update_ood_portal && \
     systemctl enable httpd24-httpd && \
     groupadd -g 3210 ood && \

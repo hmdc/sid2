@@ -1,5 +1,6 @@
 import React from 'react'
 import { UrlConstants } from '../../utils/UrlUtils'
+import LearnMoreLink from '../elements/LearnMoreLink'
 
 const Home = () => {
     return (
@@ -23,7 +24,7 @@ const Home = () => {
                             Therefore, you should know ahead of time if your data is rated as <a href="#">confidential information</a> by your <a href="http://vpr.harvard.edu/pages/human-subjects-and-irbs">IRB</a>.
                         </p>
                     </div>
-                    <a className="learn-more" href={UrlConstants.URL_ABOUT}>Learn more</a>
+                    <LearnMoreLink href={UrlConstants.URL_ABOUT} />
                 </div>
                 <div className="feature-item">
                     <h3>Statistical Applications</h3>
@@ -43,7 +44,7 @@ const Home = () => {
 	                    <li><a href="http://www.stata.com/" target="_blank" rel="noreferrer">Stata</a> SE and MP (latest version)</li>
                     </ul>
                     </div>
-                    <a className="learn-more" href={UrlConstants.URL_DOCUMENTATION}>Learn more</a>
+                    <LearnMoreLink href={UrlConstants.URL_DOCUMENTATION} />
                 </div>
                 <div className="feature-item">
                     <h3>Tools &amp; Utilities</h3>
@@ -67,7 +68,7 @@ const Home = () => {
 	                    <li>CVS</li>
                     </ul>
                     </div>
-                    <a className="learn-more" href={UrlConstants.URL_DOCUMENTATION}>Learn more</a>
+                    <LearnMoreLink href={UrlConstants.URL_DOCUMENTATION} />
                 </div>
             </div>
             <div className="feature-actions">
