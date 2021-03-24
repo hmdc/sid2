@@ -1,6 +1,17 @@
 #!/bin/bash
 
 set -e
+
+# Check to see whether or not there is code loaded
+
+if [ -f "/home/ood/ondemand/dev/sid2/Gemfile" ]; then
+	echo "<<SID2>> Dashboard app detected, running bundle."
+	cd /home/ood/ondemand/dev/sid2
+	PATH=/home/ood/bin:$PATH
+	ln -sf /home/ood/ondemand/dev/sid2 /home/ood/ondemand/dev/dashboard
+	env PATH=/home/ood/bin:/home/ood/ondemand/dev/sid2/node_modules/.bin:$PATH su ood bash -c "scl enable rh-ruby25 rh-nodejs10 -- bash -c 'gem install bundler && bundle config set --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
+fi
+
 # Support changing environment variable options via docker run -e
 env > /etc/ood/config/apps/shell/env
 gosu munge /usr/sbin/munged
