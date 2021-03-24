@@ -18,6 +18,8 @@ RUN /opt/ood/ood-portal-generator/sbin/update_ood_portal && \
     systemctl enable httpd24-httpd && \
     groupadd -g 3210 ood && \
     useradd -u 3210 --create-home --gid ood ood && \
+    mkdir -p /home/ood/ondemand/data && \
+    chown -R ood:ood /home/ood && \
     echo -n "ood" | passwd --stdin ood && \
     scl enable httpd24 -- htdbm -bc /opt/rh/httpd24/root/etc/httpd/.htpasswd.dbm ood ood
 

@@ -65,7 +65,8 @@ build-iPhoneSimulator/
 build/
 build/Release
 coverage
-data
+data/*
+!data/.keep
 dist
 jspm_packages/
 lerna-debug.log*

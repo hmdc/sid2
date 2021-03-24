@@ -2,16 +2,18 @@ ARG SLURM_TAG
 
 FROM snkattck/slurm-docker-cluster:${SLURM_TAG}
 
-RUN yum install -y nc openssh-server && \
-    groupadd -g 3210 ood && \
+RUN groupadd -g 3210 ood && \
     useradd -u 3210 --create-home --gid ood ood && \
     echo -n "ood" | passwd --stdin ood && \
     wget https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo && \
     mv TurboVNC.repo /etc/yum.repos.d/ && \
-    yum install -y turbovnc && \
+    curl -L https://download2.rstudio.org/rstudio-server-rhel-1.1.463-x86_64.rpm -o rstudio-server-rhel-1.1.463-x86_64.rpm && \
+    yum install -y epel-release && \
+    yum install -y nc openssh-server turbovnc python-websockify nc R rstudio-server-rhel-1.1.463-x86_64.rpm && \
     mkdir -p /apps && \
     mkdir -p /run/sshd && \
     ssh-keygen -A && \
+    cd /apps && \
     singularity pull --name rserver-launcher-centos7.simg shub://OSC/centos7-launcher
 
 COPY with-ssh.sh /usr/local/bin/with-ssh.sh
