@@ -2,7 +2,7 @@
 const taskoids = {};
 const jobs = {};
 const grabSessions = async function() { 
-  const r = await fetch("https://vdi.rc.fas.harvard.edu/pun/dev/dashboard/batch_connect/sessions.json", { headers: { "Accept": "application/json"}});
+  const r = await fetch("/pun/dev/dashboard/batch_connect/sessions.json", { headers: { "Accept": "application/json"}});
   const j = await r.json();
   var e = '';
   for (const l of j) {
@@ -45,7 +45,6 @@ const gsi = setInterval(grabSessions, 12000);
 
 const add_taskoid = function(elem, sid, job_id) { 
   taskoids[sid] = setInterval(async () => {
-    //const s = await fetch(`https://vdi.rc.fas.harvard.edu/pun/dev/dashboard/batch_connect/sessions/${sid}.json`);
     var task = jobs[job_id];
     if (task === undefined) return;
 
@@ -90,7 +89,7 @@ const run_app = async function (app, attributes, elem) {
   $(`#${elem}`).empty().append('<div class="dot-flashing"/>');
   $(`#${elem}`).attr('disabled', true);
 
-  const r = await fetch(`https://vdi.rc.fas.harvard.edu/pun/dev/dashboard/api/sys/${app}/session_contexts`, {
+  const r = await fetch(`/pun/dev/dashboard/api/sys/${app}/session_contexts`, {
     method: "POST",
     headers: { "Accept": "application/json" },
     body: new URLSearchParams(

@@ -30,6 +30,8 @@ services:
       - ./data:/home/ood/ondemand/data:rw
       - .:/home/ood/ondemand/dev/sid2:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
+    ports:
+      - "80:80"
     expose:
       - "6817"
       - "8080"
