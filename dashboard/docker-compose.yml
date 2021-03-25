@@ -28,7 +28,7 @@ services:
       - var_log_slurm:/var/log/slurm
       - ./launchers/RStudio:/var/www/ood/apps/sys/RStudio
       - ./data:/home/ood/ondemand/data:rw
-      - .:/home/ood/ondemand/dev/sid2:rw
+      - .:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
     ports:
       - "80:80"
@@ -91,6 +91,7 @@ services:
       - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
+      - .:/home/ood/ondemand/dev/dashboard:rw
       - ./data:/home/ood/ondemand/data:rw
     expose:
       - "22"
@@ -114,6 +115,7 @@ services:
       - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
+      - .:/home/ood/ondemand/dev/dashboard:rw
       - ./data:/home/ood/ondemand/data:rw
     expose:
       - "22"

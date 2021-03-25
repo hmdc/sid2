@@ -58,6 +58,7 @@
 /test/version_tmp/
 /tmp/
 /vendor/bundle
+vendor/bundle
 bin
 bower_components
 build-iPhoneOS/
