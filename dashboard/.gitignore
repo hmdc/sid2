@@ -60,6 +60,7 @@
 /vendor/bundle
 vendor/bundle
 bin
+!launchers/**/bin
 bower_components
 build-iPhoneOS/
 build-iPhoneSimulator/
