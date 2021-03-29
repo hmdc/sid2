@@ -64,6 +64,8 @@ services:
       dockerfile: Dockerfile.node
       args:
         SLURM_TAG: ${SLURM_TAG}
+        OOD_UID: ${OOD_UID}
+        OOD_GID: ${OOD_GID}
     entrypoint: /usr/local/bin/with-ssh.sh
     command: ["slurmctld"]
     container_name: slurmctld
