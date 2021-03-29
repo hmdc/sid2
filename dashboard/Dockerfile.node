@@ -2,8 +2,11 @@ ARG SLURM_TAG
 
 FROM snkattck/slurm-docker-cluster:${SLURM_TAG}
 
-RUN groupadd -g 3210 ood && \
-    useradd -u 3210 --create-home --gid ood ood && \
+ARG OOD_UID=3210
+ARG OOD_GID=3210
+
+RUN groupadd -g $OOD_GID ood && \
+    useradd -u $OOD_UID --create-home --gid ood ood && \
     echo -n "ood" | passwd --stdin ood && \
     wget https://turbovnc.org/pmwiki/uploads/Downloads/TurboVNC.repo && \
     mv TurboVNC.repo /etc/yum.repos.d/ && \
