@@ -2,6 +2,8 @@ ARG SLURM_TAG
 
 FROM snkattck/slurm-docker-cluster:${SLURM_TAG}
 
+ARG OOD_UID=3210
+ARG OOD_GID=3210
 ARG OOD_TAG
 
 # Install Open On Demand, Singularity
@@ -16,8 +18,8 @@ RUN yum install -y net-tools openssh-clients && \
 COPY ./ood_portal.yml ./nginx_stage.yml /etc/ood/config/
 RUN /opt/ood/ood-portal-generator/sbin/update_ood_portal && \
     systemctl enable httpd24-httpd && \
-    groupadd -g 3210 ood && \
-    useradd -u 3210 --create-home --gid ood ood && \
+    groupadd -g $OOD_GID ood && \
+    useradd -u $OOD_UID --create-home --gid ood ood && \
     mkdir -p /home/ood/ondemand/data && \
     chown -R ood:ood /home/ood && \
     echo -n "ood" | passwd --stdin ood && \
