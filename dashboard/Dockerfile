@@ -21,7 +21,7 @@ RUN /opt/ood/ood-portal-generator/sbin/update_ood_portal && \
     groupadd -g $OOD_GID ood || : && \
     useradd -u $OOD_UID --create-home --gid $OOD_GID ood && \
     mkdir -p /home/ood/ondemand/data && \
-    chown -R ood:ood /home/ood && \
+    chown -R ${OOD_UID}:${OOD_GID} /home/ood && \
     echo -n "ood" | passwd --stdin ood && \
     scl enable httpd24 -- htdbm -bc /opt/rh/httpd24/root/etc/httpd/.htpasswd.dbm ood ood
 
