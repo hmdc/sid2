@@ -18,7 +18,7 @@ RUN yum install -y net-tools openssh-clients && \
 COPY ./ood_portal.yml ./nginx_stage.yml /etc/ood/config/
 RUN /opt/ood/ood-portal-generator/sbin/update_ood_portal && \
     systemctl enable httpd24-httpd && \
-    groupadd -g $OOD_GID ood && \
+    groupadd -g $OOD_GID ood || : && \
     useradd -u $OOD_UID --create-home --gid $OOD_GID ood && \
     mkdir -p /home/ood/ondemand/data && \
     chown -R ood:ood /home/ood && \
