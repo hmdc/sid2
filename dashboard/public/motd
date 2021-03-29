@@ -9,8 +9,7 @@ const grabSessions = async function() {
     jobs[l.job_id] = l;
     var v;
     if (l.connect) {
-      v = l
-          .view
+      v = unescape(l.view)
           .replace('<%= host %>', l.connect.table.host)
 	  .replace('<%= port %>', l.connect.table.port)
           .replace('<%= password %>', l.connect.table.password)

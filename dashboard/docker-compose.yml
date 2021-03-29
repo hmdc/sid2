@@ -20,6 +20,8 @@ services:
       args:
         SLURM_TAG: ${SLURM_TAG}
         OOD_TAG: ${OOD_TAG}
+        OOD_UID: ${OOD_UID}
+        OOD_GID: ${OOD_GID}
     hostname: ood
     volumes:
       - etc_munge:/etc/munge
@@ -31,7 +33,7 @@ services:
       - .:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
     ports:
-      - "80:80"
+      - "33000:80"
     expose:
       - "6817"
       - "8080"
@@ -81,6 +83,8 @@ services:
       dockerfile: Dockerfile.node
       args:
         SLURM_TAG: ${SLURM_TAG}
+        OOD_UID: ${OOD_UID}
+        OOD_GID: ${OOD_GID}
     entrypoint: /usr/local/bin/with-ssh.sh
     command: ["slurmd"]
     privileged: true
@@ -105,6 +109,8 @@ services:
       dockerfile: Dockerfile.node
       args:
         SLURM_TAG: ${SLURM_TAG}
+        OOD_UID: ${OOD_UID}
+        OOD_GID: ${OOD_GID}
     entrypoint: /usr/local/bin/with-ssh.sh
     command: ["slurmd"]
     hostname: c2
