@@ -8,7 +8,7 @@ The service has been developed using:
 * `yarn/1.22.10`
 * `React@17.0.1`
 
-Add `./node-modules/bin` directory to your path to run utilities without installing them globally.
+Add `./node-modules/bin` directory to your path to run utilities without installing them globally.  
 `PATH=$PATH:./node_modules/.bin`
 
 ## Building and testing
