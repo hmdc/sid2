@@ -4,7 +4,7 @@
     align-items: center;
     flex-wrap: wrap;
     align-content: center;
-    padding: 2rem 1rem 1rem 4%;
+    padding: 2rem 5rem 1rem 5rem;
     background-color: var(--color-main-background);
     border-bottom: 2px solid var(--color-main-borderline);
 
@@ -16,6 +16,9 @@
     }
 
     h1 {
+        position: relative;
+        transform: translate(0, -10%);
+        align-items: center;
         flex-grow: 10;
         font-size: 6rem;
         white-space: nowrap;
@@ -30,6 +33,8 @@
         width: 117px;
         height: 65px;
         content: '';
+        position: relative;
+        transform: translate(0, 10px);
     }
 
     @media (max-width: 780px) {

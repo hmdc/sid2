@@ -4,19 +4,19 @@ footer {
   padding-top: 2rem;
 
   nav.footer-copy {
-    padding: 1rem 0;
+    padding: 1rem 5rem;
     background-color: var(--color-footer-background);
 
     ul {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
-      align-items: center;
+      justify-content: space-between;
+      align-items: left;
       list-style-type: none;
-      color: var(--color-main-borderline);
+      color: var(--color-footer-text);
       font-weight: 500;
       white-space: nowrap;
-      max-width: 1000px;
+      //max-width: 1000px;
       margin: 0 auto;
 
       li {
@@ -35,7 +35,7 @@ footer {
         position: relative;
         text-decoration: none;
         outline: none;
-        color: inherit;
+        color: var(--color-footer-text);
         padding-bottom: 5px;
       }
     }

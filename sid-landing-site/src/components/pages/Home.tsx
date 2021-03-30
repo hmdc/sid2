@@ -12,6 +12,12 @@ const Home = () => {
                 </p>
                 <a className="btn-hover-effect" href="#">Learn more</a>
             </div>
+            <div id="status-bar">
+                <h2 className="content-hide">Status</h2>
+                <p className="status-text">
+                status
+                </p>
+            </div>
             <div id="features">
                 <div className="feature-item">
                     <h3>Data Levels Supported</h3>

@@ -1,5 +1,5 @@
 #main-content {
-    padding: 2rem 4% 3rem 4%;
+    padding: 2rem 5rem 3rem 5rem;
     background-color: var(--color-main-brown);
     font-size: 1rem;
     text-align: center;
@@ -40,7 +40,7 @@
 }
 
 #features {
-    padding: 0 4%;
+    padding: 0 3rem;
     display: flex;
     justify-content: space-between;
     font-size: 1.7rem;
@@ -102,5 +102,25 @@
         border: 3px solid var(--color-logo-main);
         border-radius: 10px;
         box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+#status-bar {
+    padding: 0 5rem 0 5rem; 
+    background-color: var(--color-status-background);
+    font-size: 1rem;
+    text-align: center;
+
+
+    @media (max-width: 780px) {
+        font-size: .8rem;
+    }
+
+    p {
+        color: #fff;
+        font-size: 3em;
+        font-weight: 250;
+        text-align: left;
+        padding: 0.1em 0;
     }
 }
