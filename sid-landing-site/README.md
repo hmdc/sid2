@@ -44,7 +44,7 @@ Stop the image and clean up:
 
 ## Deploy to AWS using serverless framework
 Serverless framework is installed as a dev dependency. There is a deployment script under `preview` folder.  
-This script will build the project, create an S3 bucket in AWS and copy the contents of the `build`folder into it.  
+This script will build the project, create an S3 bucket in AWS and copy the contents of the `build` folder into it.  
 It requires the AWS CLI to be installed locally and a valid AWS account to be configfured with the AWS CLI tool.  
 To run, execute:  
 `./preview/preview.sh`
