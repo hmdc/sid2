@@ -28,7 +28,7 @@ brew link --overwrite --force node@15
 If you need to manage multiple version of Node, use [n](https://github.com/tj/n)
 
 ## Building and testing
-Install yarn:
+Install yarn:  
 `npm install yarn`
 
 Install all the libraries needed for the project:  
