@@ -9,11 +9,13 @@ The service has been developed using:
 * `React@17.0.1`
 
 ## Prerequisites
-Clone this repo
-`git clone git@github.com:hmdc/sid2.git`
-`cd sid2/sid-landing-site`
+Clone this repo:
+```
+git clone git@github.com:hmdc/sid2.git
+cd sid2/sid-landing-site
+```
 
-Install Homebrew
+Install Homebrew:  
 `which brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
 Install/Upgrade Node.js
@@ -26,7 +28,7 @@ brew link --overwrite --force node@15
 If you need to manage multiple version of Node, use [n](https://github.com/tj/n)
 
 ## Building and testing
-Install yarn
+Install yarn:
 `npm install yarn`
 
 Install all the libraries needed for the project:  
@@ -47,8 +49,8 @@ Running using react-scripts:
 ### Docker
 The docker configuration uses the `node` image to build the project and the `nginx` image to run the site.
 
-Install Docker
-[https://docs.docker.com/docker-for-mac/install/](https://docs.docker.com/docker-for-mac/install/)
+Install Docker:  
+[https://docs.docker.com/docker-for-mac/install/](https://docs.docker.com/docker-for-mac/install/)  
 This requires creating a (free) Docker Hub account.
 
 Run these commands from the `sid-landing-site` project root folder.  
