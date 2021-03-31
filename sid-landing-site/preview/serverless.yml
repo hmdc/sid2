@@ -2,12 +2,11 @@ service: sid-landing-site-preview
 
 provider:
   name: aws
-  runtime: nodejs12.X
   region: 'us-east-1'
   stage: 'preview'
 
 custom:
-  bucketName: aday-sid-landing-site-preview
+  bucketName: ${env:BUCKET_NAME}
 
 resources:
   Resources:
