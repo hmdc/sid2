@@ -81,8 +81,8 @@ Then add a new [profile section](https://docs.aws.amazon.com/cli/latest/userguid
 Edit `./preview/preview.sh` and `./preview/serverless.yml` to specify a unique S3 bucket name.
 
 To run, set AWS auth environment variables and execute:  
-`./preview/preview.sh`
+`./preview/preview.sh <bucket_name>`
 
-E.g., with a profile configured in `~/.aws/credentials`:  
-`AWS_PROFILE=<profile> ./preview/preview.sh`
+E.g., with a profile named `dev-temp` configured in `~/.aws/credentials`:  
+`AWS_PROFILE=dev-temp ./preview/preview.sh myname-sid-landing-site-preview`
 
