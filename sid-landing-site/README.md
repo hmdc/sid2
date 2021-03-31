@@ -68,14 +68,21 @@ Stop the image and clean up:
 ## Deploy to AWS using serverless framework
 Serverless framework is installed as a dev dependency. There is a deployment script under `preview` folder.  
 This script will build the project, create an S3 bucket in AWS and copy the contents of the `build` folder into it.  
-This bucket is suitable for a demo, but for a production deployment a CloudFront Distribution should be used, so that the site returns the appropriate HTTP status codes.
+This bucket is suitable for a demo, but for a production deployment a CloudFront Distribution should be used, so that the site returns the appropriate HTTP error pages.
 
 It requires the AWS CLI to be installed locally and a valid AWS account to be configfured with the AWS CLI tool.  
 
+Note that if your AWS account requires MFA, you can no longer use an API token directly (as of ~2020). Attempting to do so will result in [obscure "Access Denied" errors](https://github.com/serverless/serverless/issues/4285#issuecomment-338177829). Instead you must [generate temporary credentials](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/):  
+`AWS_PROFILE=<profile> aws iam list-mfa-devices`
+`AWS_PROFILE=<profile> aws sts get-session-token --serial-number <SerialNumber> --token-code <code_from_app>`
+Then add a new [profile section](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) to your `~/.aws/credentials` with the temporary `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`.
+(Remember, never enter your secret access key anywhere it might be logged or publicly visible, such as your shell history file or `ps` on a multi-user system.)
+
 Edit `./preview/preview.sh` and `./preview/serverless.yml` to specify a unique S3 bucket name.
 
-To run, execute:  
+To run, set AWS auth environment variables and execute:  
 `./preview/preview.sh`
 
-
+E.g., with a profile configured in `~/.aws/credentials`:  
+`AWS_PROFILE=<profile> ./preview/preview.sh`
 
