@@ -78,9 +78,7 @@ Note that if your AWS account requires MFA, you can no longer use an API token d
 Then add a new [profile section](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) to your `~/.aws/credentials` with the temporary `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`.  
 (Remember, never enter your secret access key anywhere it might be logged or publicly visible, such as your shell history file or `ps` on a multi-user system.)
 
-Edit `./preview/preview.sh` and `./preview/serverless.yml` to specify a unique S3 bucket name.
-
-To run, set AWS auth environment variables and execute:  
+To run, select a globally unique S3 bucket name, set AWS auth environment variables and execute:  
 `./preview/preview.sh <bucket_name>`
 
 E.g., with a profile named `dev-temp` configured in `~/.aws/credentials`:  
