@@ -6,7 +6,7 @@ provider:
   stage: 'preview'
 
 custom:
-  bucketName: aday-sid-landing-site-preview
+  bucketName: ${env:BUCKET_NAME}
 
 resources:
   Resources:
