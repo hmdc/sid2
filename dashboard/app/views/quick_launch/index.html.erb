@@ -1,0 +1,121 @@
+<style>
+    .launcher-button-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+    }
+    .launcher-button-spinner .spinner-border{
+        width: 60px;
+        height: 60px;
+    }
+    .launcher-button {
+        position: relative;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+        border: 1px solid #337ab7;
+        border-radius: 30px;
+        margin-bottom: 20px;
+    }
+    .launcher-button:hover {
+        transform: scale(0.98);
+    }
+    .launcher-button .title{
+        text-transform: uppercase;
+        padding: 10px;
+    }
+</style>
+<script>
+  function showSpinner(launcherId) {
+      $(`#${launcherId}`).prepend('<div class="launcher-button-spinner"><div class="spinner-border" role="status"></div></div>');
+  }
+  function hideSpinner(launcherId) {
+      $(`#${launcherId} .launcher-button-spinner`).delay(1000).fadeOut(200);
+  }
+
+  function reloadSessions() {
+      $.getScript("<%= batch_connect_sessions_path(format: :js) %>")
+          .done(( data, textStatus ) => {
+              console.log( "Script executed" );
+              console.log( textStatus );
+          })
+          .fail(( jqxhr, settings, exception ) => {
+              console.log( "ERROR" );
+              console.log( jqxhr ); // Data returned
+              console.log( settings ); // Success
+              console.log( exception ); // 200
+          });
+  }
+
+  function launch(element) {
+      showSpinner("rstudio-button")
+      const payload = {
+          token: "sys/RStudio",
+          batch_connect_session_context: {
+              cluster: "dev-cluster",
+              bc_queue: "",
+              bc_account: "",
+              bc_num_slots: "1",
+              bc_num_hours: "1",
+              bc_email_on_started: "0"
+          }
+      }
+      $.ajax({
+          dataType: 'json',
+          type: 'POST',
+          contentType: 'application/json',
+          url: '<%= ws_sessions_path %>',
+          data: JSON.stringify(payload),
+      })
+      .done(data => {
+          console.log(data)
+          $("#sessions-container").prepend(`<div id="${data.id}"></div>`);
+          reloadSessions()
+      })
+      .fail(( jqxhr, settings, exception ) => {
+          console.log( "ERROR" );
+          console.log( jqxhr ); // Data returned
+          console.log( settings ); // Success
+          console.log( exception ); // 200
+      }).always(() => {
+          hideSpinner("rstudio-button")
+      });
+
+  }
+</script>
+<div id="app-launcher-container">
+  <div class="alert alert-info">
+    Welcome to the Social Sciences dashboard of the Cannon Cluster
+  </div>
+  <div>
+    <div id="sessions-container" class="batch-connect sessions" data-toggle="poll" data-url="<%= batch_connect_sessions_path(format: :js) %>" data-delay="<%= ENV["POLL_DELAY"] || 10000 %>">
+      <% if @sessions.empty? %>
+        <div class="ood-appkit markdown">
+          <p><%= t('dashboard.batch_connect_no_sessions') %></p>
+        </div>
+      <% else %>
+        <%= render partial: "batch_connect/sessions/panel", collection: @sessions, as: :session %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row row-eq-height">
+    <div class="col-sm-6 col-md-3">
+        <div id="rstudio-button" class="launcher-button" onclick="launch(this)">
+          <div class="title text-center">cannon</div>
+          <div class="panel-body">
+            <img src="<%= asset_url "rstudio_logo.png" %>" alt="RStudio Application" width=200 class="center-block"/>
+          </div>
+          <div class="panel-body">
+            <p>Run RStudio Server</p>
+            <p>2 CPU cores and 4 GB RAM</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+

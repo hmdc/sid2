@@ -1,0 +1,22 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+header sup {
+  font-variant: small-caps;
+}
+
+ul.dropdown-menu .popover {
+  width:300px;
+}
+
+.container.content {
+  width: 100%;
+  max-width: 1400px;
+}
+
+footer {
+  border-top: 1px solid #eee;
+  margin: 0px 15px;
+  padding-top: 30px;
+}
