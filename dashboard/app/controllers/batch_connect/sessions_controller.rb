@@ -5,7 +5,11 @@ class BatchConnect::SessionsController < ApplicationController
   # GET /batch_connect/sessions.json
   def index
     @sessions = BatchConnect::Session.all
-    @sessions.each(&:update_cache_completed!)
+    redirect = get_redirect
+    @sessions.each do |session|
+      session.update_cache_completed!
+      session.redirect = redirect
+    end
 
     set_app_groups
     set_my_quotas
@@ -36,7 +40,7 @@ class BatchConnect::SessionsController < ApplicationController
   def destroy
     set_session
 
-    redirect = params[:r] ? params[:r] : batch_connect_sessions_url
+    redirect = get_redirect || batch_connect_sessions_url
 
     if @session.destroy
       respond_to do |format|
@@ -63,4 +67,9 @@ class BatchConnect::SessionsController < ApplicationController
       @usr_app_groups = bc_usr_app_groups
       @dev_app_groups = bc_dev_app_groups
     end
+
+
+  def get_redirect
+    params[:r] ? params[:r] : nil
+  end
 end

@@ -14,14 +14,8 @@
     Welcome to the Social Sciences dashboard of the Cannon Cluster
   </div>
   <div>
-    <div id="sessions-container" class="batch-connect sessions" data-toggle="poll" data-url="<%= batch_connect_sessions_path(format: :js) %>" data-delay="<%= ENV["POLL_DELAY"] || 10000 %>">
-      <% if @sessions.empty? %>
-        <div class="ood-appkit markdown">
-          <p><%= t('dashboard.batch_connect_no_sessions') %></p>
-        </div>
-      <% else %>
-        <%= render partial: "batch_connect/sessions/panel", collection: @sessions, as: :session %>
-      <% end %>
+    <div id="sessions-container" class="batch-connect sessions" data-toggle="poll" data-url="<%= batch_connect_sessions_path(r: root_url, format: :js) %>" data-delay="<%= ENV["POLL_DELAY"] || 10000 %>">
+      <%= render partial: "batch_connect/sessions/panel", collection: @sessions, as: :session %>
     </div>
   </div>
 
