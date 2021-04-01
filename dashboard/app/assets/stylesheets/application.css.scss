@@ -107,19 +107,12 @@ pre.motd-monospaced {
   flex-direction: column;
 }
 .panel {
-  flex: 1;
-  border-radius: 30px;
-  border-color: rgb(78,155,244);
-  box-shadow: 5px;
-  border-width: medium;
 }
 .panel-default .panel-heading{
-  border: 0px;
-  background: transparent;
+
 }
 .panel-default .panel-footer{
-  border: 0px;
-  background: transparent;
+
 }
 
 /**
@@ -226,6 +219,8 @@ pre.motd-monospaced {
 @import "products";
 @import "batch_connect/sessions";
 @import "batch_connect/session_contexts";
+@import "spinner";
+@import "quick_launch";
 @import "insufficient_quota";
 @import "insufficient_balance";
 @import "fa_shims";

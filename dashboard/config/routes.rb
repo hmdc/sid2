@@ -15,6 +15,14 @@ Rails.application.routes.draw do
       root "session_contexts#new"
     end
   end
+
+  #NEW API ROUTES
+  namespace :ws do
+    get :sessions, to: "get_sessions#index"
+    post :sessions, to: "create_session#create"
+  end
+
+
   get "errors/not_found"
   get "errors/internal_server_error"
   get "dashboard/index"
@@ -34,7 +42,7 @@ Rails.application.routes.draw do
 
     root "apps#featured"
   else
-    root "dashboard#index"
+    root "quick_launch#index"
   end
 
   # App administration

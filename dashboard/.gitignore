@@ -19,6 +19,7 @@
 .eslintcache
 .fusebox/
 .grunt
+.idea
 .lock-wscript
 .next
 .node_repl_history

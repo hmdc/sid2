@@ -163,7 +163,7 @@ module BatchConnect::SessionsHelper
   def delete(session)
     link_to(
       icon("fas", "trash-alt", t('dashboard.batch_connect_sessions_delete_title'), class: "fa-fw"),
-      session,
+      batch_connect_session_path(session, r: session.redirect),
       method: :delete,
       class: "btn btn-danger pull-right btn-delete",
       title: t('dashboard.batch_connect_sessions_delete_hover'),

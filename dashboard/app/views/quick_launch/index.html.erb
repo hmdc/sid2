@@ -1,0 +1,26 @@
+<style>
+
+</style>
+<script>
+
+  const launchButtons = <%= raw @launchButtonsJson %>;
+
+</script>
+<div id="app-launcher-container">
+  <div id="launch-button-error" class="alert alert-danger" role="alert" style="display: none;">
+    There was an error submitting your job to the cluster
+  </div>
+  <div class="alert alert-info" role="alert">
+    Welcome to the Social Sciences dashboard of the Cannon Cluster
+  </div>
+  <div>
+    <div id="sessions-container" class="batch-connect sessions" data-toggle="poll" data-url="<%= batch_connect_sessions_path(r: root_url, format: :js) %>" data-delay="<%= ENV["POLL_DELAY"] || 10000 %>">
+      <%= render partial: "batch_connect/sessions/panel", collection: @sessions, as: :session %>
+    </div>
+  </div>
+
+  <div class="row row-eq-height">
+    <%= render partial: "launch_button", locals: {launchButtonId: "rstudio", launchButton: @launchButtons[:rstudio][:view]}%>
+  </div>
+</div>
+
