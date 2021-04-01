@@ -25,6 +25,7 @@
   margin-bottom: 20px;
   height: 220px;
   overflow: hidden;
+  cursor: pointer;
 }
 .launch-button:hover {
   transform: scale(0.98);
@@ -32,6 +33,21 @@
 .launch-button .title{
   text-transform: uppercase;
   padding: 10px;
+}
+.link-button {
+  border: 1px solid #CA8E6E;
+  outline: none;
+}
+.link-button a {
+  text-decoration: none;
+  color: inherit;
+
+}
+.link-button-text {
+  padding: 15px;
+  font-size: 3rem;
+  color: #CA8E6E;
+  text-align: center;
 }
 
 header sup {

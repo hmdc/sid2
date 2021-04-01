@@ -21,6 +21,10 @@
 
   <div class="row row-eq-height">
     <%= render partial: "launch_button", locals: {launchButtonId: "rstudio", launchButton: @launchButtons[:rstudio][:view]}%>
+
+    <%= render partial: "link_button", locals: {linkButtonId: "fasse"}%>
   </div>
 </div>
+
+<%= render partial: "help" %>
 
