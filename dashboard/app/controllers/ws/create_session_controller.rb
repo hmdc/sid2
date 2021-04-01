@@ -8,7 +8,7 @@ class Ws::CreateSessionController < ApplicationController
     session_context = app.build_session_context
     render_format = app.clusters.first.job_config[:adapter] unless app.clusters.empty?
     #READ ATTRIBUTES FROM PAYLOAD
-    session_context.attributes = params.require(:batch_connect_session_context).permit(session_context.attributes.keys)
+    session_context.attributes = params.permit(session_context.attributes.keys)
 
     cache_file = BatchConnect::Session.dataroot(app.token).tap { |p| p.mkpath unless p.exist? }.join("context.json")
 

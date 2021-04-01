@@ -56,6 +56,9 @@ module BatchConnect
     # @return [Boolean] true if job is completed
     attr_accessor :cache_completed
 
+    #Used to redirect to a different view on delete
+    attr_accessor :redirect
+
     # How many days before a Session record is considered old and ready to delete
     OLD_IN_DAYS=7
 
