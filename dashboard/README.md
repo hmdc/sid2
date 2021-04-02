@@ -7,15 +7,15 @@ The following will launch a Sid2 development environment with:
 - Slurmctld - Slurm master,
 - Slurmdbd - Slurm database
 - C1, C2 - Slurm execute nodes.
-- OOD - OpenOnDemand node with Sid2 installed as development.
+- OOD - OpenOnDemand node with Sid2 installed as as a [development-mode](https://osc.github.io/ood-documentation/master/app-development/enabling-development-mode.html) app.
 
 ### Pre-requisites
 
-- Docker
+- [Docker](https://docs.docker.com/engine/install)
 - Docker-compose
 - Make
 
-**For Mac OS X only**, make sure that your Docker daemon is permitted to manipulate files in the `/User` path. Otherwise, the app will not run. Please see [https://docs.docker.com/docker-for-mac/](https://docs.docker.com/docker-for-mac/) for further instructions. This is most likely configured by default (it is for me, at least) but it may not be for different versions of OS X.
+**For Mac OS X only**, make sure that your Docker daemon is permitted to manipulate files in the `/User` path. Otherwise, the app will not run. Please see FILE SHARING in [https://docs.docker.com/docker-for-mac/](https://docs.docker.com/docker-for-mac/) for further instructions. This is most likely configured by default (it is for me, at least) but it may not be for different versions of OS X.
 
 **This dev environment does not build properly/entirely on M1 (non-x86) Macs, just x86! CentOS7 does not have an M1 image nor does x86 emulation properly start Slurm as of now.**
 
@@ -28,7 +28,7 @@ The following will launch a Sid2 development environment with:
 
 ### Launching
 
-- Run `make` from checkout
+- Run `make` from checkout. The build process is finished when the `ood_1` container stops generating output, and the `slurmctld` container goes into an output loop.
 - The entire directory/checkout is mapped into the OOD and slurm containers. Changes made to code will immediately reflect within OOD (with the exception of CSS/JS changes which requires a rake, see Caveats.)
 
 ### Connecting
@@ -39,8 +39,8 @@ The following will launch a Sid2 development environment with:
 ### Validation
 
 - Can you run and connect to RStudio through the original OpenOnDemand dashboard?
-- Is the DEV menu on the top-bar visible?
-- Can you get into the developer menu and open Sid2?
+- Is the Develop menu on the top-bar visible?
+- Can you get into the Develop menu, select My SandBox Apps, and launch the Sid2 Ood Dashboard?
 - Does OOD prompt you to "initialize" the app after launching Sid2 from the developer menu? (It should..)
 - After application is initialized, does it show Sid2? Note that at this point Sid2 does not function properly as @adaybujeda is re-writing the frontend code and API routes. Proving that the dev environment works only requires that you can at least initialize the app and install its libraries.
 
@@ -48,4 +48,3 @@ The following will launch a Sid2 development environment with:
 
 - Run `make down`
 
-See (https://docs.docker.com/engine/install)[Installing docker]
