@@ -18,8 +18,10 @@ Rails.application.routes.draw do
 
   #NEW API ROUTES
   namespace :ws do
-    get :sessions, to: "get_sessions#index"
-    post :sessions, to: "create_session#create"
+    get "/sessions", to: "get_sessions#get_all"
+    get "/sessions/:session_id", to: "get_sessions#get_session"
+    post "/sessions", to: "ws_sessions#create"
+    delete "/sessions/:session_id", to: "ws_sessions#delete_session"
   end
 
 

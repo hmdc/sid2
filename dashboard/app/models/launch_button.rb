@@ -1,9 +1,8 @@
 class LaunchButton
 
-  queueValue = Rails.env.production? ? "shared" : nil
+  queueValue = Rails.env.production? ? "shared" : ""
 
   defaults = {
-    bc_queue: "",
     bc_account: "",
     bc_num_slots: "1",
     bc_num_hours: "1",
