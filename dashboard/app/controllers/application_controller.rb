@@ -26,7 +26,8 @@ class ApplicationController < ActionController::Base
   end
 
   def sys_apps
-    @sys_apps ||= SysRouter.apps
+    #RESTRICT THE INTERACTIVE APPS THAT APPEAR IN THE MENU
+    @sys_apps ||= SysRouter.apps.select { |app| NavConfig.select_interactive_apps(app) }
   end
 
   def dev_apps

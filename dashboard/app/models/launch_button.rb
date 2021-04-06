@@ -8,12 +8,20 @@ class LaunchButton
     bc_num_hours: "1",
     custom_memory_per_node: "4",
     custom_num_cores: "2",
+    custom_num_gpus: "0",
+    custom_time: "04:00:00",
     bc_queue: queueValue,
-    bc_email_on_started: "0"
+    envscript: "",
+    custom_email_address: "",
+    bc_email_on_started: "0",
+    custom_reservation: ""
   }
 
   rstudioData = defaults.merge({
     token: "sys/RStudio",
+    r_version:	"R/4.0.5-fasrc01",
+    rlibs: "",
+    custom_vanillaconf: "1",
     view: { logo: "rstudio_logo.png",
             logoWidth: "200",
             p1: "Run RStudio Server",
