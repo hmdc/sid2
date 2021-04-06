@@ -30,7 +30,9 @@ class Ws::GetSessionsController < ApplicationController
     time_limit = session.info.wallclock_limit
     time_used  = session.info.wallclock_time
     time_left = helpers.distance_of_time_in_words(time_limit - time_used, 0, false, :only => [:minutes, :hours], :accumulate_on => :hours) if time_limit
-    sessionHost = OodAppkit.shell.url(host: session.connect.host).to_s if session.running? && session.connect.host
+    sessionShellUrl = OodAppkit.shell.url(host: session.connect.host).to_s if session.running? && session.connect.host
+
+    view = OodAppkit.markdown.render(ERB.new(session.view, nil, "-").result(session.connect.instance_eval { binding })).html_safe if session.running?
 
     #IMPORTANT DATA
     # connect.host
@@ -40,17 +42,20 @@ class Ws::GetSessionsController < ApplicationController
 
     {
       id: session.id,
-      title: session.title,
+      clusterId: session.cluster_id,
+      jobId: session.job_id,
+      createdAt: session.created_at,
       token: session.token,
+      title: session.title,
       info: session.info,
       status: session.status.to_sym,
       connect: session.running? ? session.connect.to_h : nil,
-      session: session,
       time: session.info.wallclock_time.to_i / 60,     # only update every minute
-      time_left: time_left,
-      deleteIn: session.days_till_old,
-      sessionIdUrl: OodAppkit.files.url(path: session.staged_root).to_s,
-      sessionHost: sessionHost,
+      timeLeft: time_left,
+      deletedInDays: session.days_till_old,
+      sessionDataUrl: OodAppkit.files.url(path: session.staged_root).to_s,
+      sessionShellUrl: sessionShellUrl,
+      appLaunchView: view,
     }
   end
 end

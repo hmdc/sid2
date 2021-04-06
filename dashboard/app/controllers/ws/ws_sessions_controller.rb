@@ -23,7 +23,7 @@ class Ws::WsSessionsController < ApplicationController
     session = BatchConnect::Session.new
     if session.save(app: app, context: session_context, format: render_format)
       cache_file.write(session_context.to_json)  # save context to cache file
-      render json: { id: session.id, job_id: session.job_id }
+      render json: { id: session.id }
     else
       logger.error "Unable to create session"
       render json: { message: "Unable to create session", errors: session_context.errors }, status: :internal_server_error
