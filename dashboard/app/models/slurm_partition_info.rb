@@ -24,9 +24,10 @@ class SlurmPartitionInfo
     puts "Slurm Partition Info. Default=#{@default_partition} Partitions=#{@partitions}"
   end
 
-  def get_partitions(groups)
-    groups_array = groups.is_a?(Array) ? groups : [groups]
-    groups_array.map {|group_name| @partitions_by_group.fetch(group_name, [@default_partition])}.flatten.uniq
+  def get_partitions(group_names)
+    groups_array = group_names.is_a?(Array) ? group_names : [group_names]
+    user_partitions = groups_array.map {|group_name| @partitions_by_group.fetch(group_name, [])}.flatten.uniq
+    user_partitions.empty? ? [@default_partition] : user_partitions
   end
 
   private
