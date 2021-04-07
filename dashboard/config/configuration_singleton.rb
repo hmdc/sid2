@@ -26,6 +26,10 @@ class ConfigurationSingleton
   attr_accessor :app_sharing_facls_enabled
   alias_method :app_sharing_facls_enabled?, :app_sharing_facls_enabled
 
+  def slurm_partition_info
+    @slurm_partition_info ||= SlurmPartitionInfo.new
+  end
+
   # @return [String] memoized version string
   def app_version
     @app_version ||= (version_from_file(Rails.root) || version_from_git(Rails.root) || "Unknown").strip

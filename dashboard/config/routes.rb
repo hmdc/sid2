@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     get "/sessions/:session_id", to: "get_sessions#get_session"
     post "/sessions", to: "ws_sessions#create"
     delete "/sessions/:session_id", to: "ws_sessions#delete_session"
+
+    get "/partitions", to: "ws_partitions#get"
   end
 
 

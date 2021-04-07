@@ -8,7 +8,7 @@ class Ws::GetSessionsController < ApplicationController
       create_session_data session
     end
 
-    render json: response
+    render json: { items: response }
 
   rescue => error
     logger.error "action=getSessions user=#{@user} error=#{error}"
