@@ -4,6 +4,7 @@ class DashboardControllerTest < ActionController::TestCase
 
   def setup
     SysRouter.stubs(:base_path).returns(Rails.root.join("test/fixtures/sys"))
+    NavConfig.stubs(:apps_whitelist).returns(false)
   end
 
   def dropdown_list(title)

@@ -34,6 +34,16 @@
   text-transform: uppercase;
   padding: 10px;
 }
+
+.launch-button .panel-image{
+  height: 100px;
+  overflow: hidden;
+}
+
+.launch-button .panel-text {
+  padding: 15px 20px;
+}
+
 .link-button {
   border: 1px solid #CA8E6E;
   outline: none;

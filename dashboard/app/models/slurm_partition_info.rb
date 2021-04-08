@@ -19,6 +19,10 @@ class SlurmPartitionInfo
     end
   end
 
+  def get_default_partition
+    @default_partition
+  end
+
   def to_s
     super
     puts "Slurm Partition Info. Default=#{@default_partition} Partitions=#{@partitions}"
