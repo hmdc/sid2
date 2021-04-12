@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     post "/sessions", to: "ws_sessions#create"
     delete "/sessions/:session_id", to: "ws_sessions#delete_session"
 
-    get "/partitions", to: "ws_partitions#get"
+    get "/clusters", to: "ws_clusters#get"
   end
 
 

@@ -26,8 +26,8 @@ class ConfigurationSingleton
   attr_accessor :app_sharing_facls_enabled
   alias_method :app_sharing_facls_enabled?, :app_sharing_facls_enabled
 
-  def slurm_partition_info
-    @slurm_partition_info ||= SlurmPartitionInfo.new
+  def cluster_metadata
+    @cluster_metadata ||= Ws::ClusterMetadata.load
   end
 
   # @return [String] memoized version string
