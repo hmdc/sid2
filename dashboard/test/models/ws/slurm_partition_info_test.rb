@@ -50,4 +50,14 @@ class Ws::SlurmPartitionInfoTest < ActiveSupport::TestCase
     assert_equal 0, underTest.get_partitions("anything").length
   end
 
+  test "should default slurm file path when created without parameters" do
+    underTest = Ws::SlurmPartitionInfo.new
+    assert_equal "/etc/slurm/slurm.conf", underTest.get_file_path
+  end
+
+  test "should default slurm file path when created witho nil" do
+    underTest = Ws::SlurmPartitionInfo.new(nil)
+    assert_equal "/etc/slurm/slurm.conf", underTest.get_file_path
+  end
+
 end

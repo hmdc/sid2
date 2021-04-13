@@ -4,8 +4,8 @@ module Ws
     GROUPS_ENTRY = "allowgroups"
     DEFAULT_ENTRY = "default="
 
-    def initialize(configFilePath = '/etc/slurm/slurm.conf')
-      @file_path = configFilePath
+    def initialize(configFilePath = nil)
+      @file_path = configFilePath || "/etc/slurm/slurm.conf"
       @partitions = {}
       @partitions_by_group = Hash.new { |hash, key| hash[key] = [] }
       @default_partition = []
@@ -28,6 +28,10 @@ module Ws
       groups_array = group_names.is_a?(Array) ? group_names : [group_names]
       user_partitions = groups_array.map {|group_name| @partitions_by_group.fetch(group_name, [])}.flatten.uniq
       user_partitions.empty? ? @default_partition : user_partitions
+    end
+
+    def get_file_path
+      @file_path
     end
 
     def to_s
