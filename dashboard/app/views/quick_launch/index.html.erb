@@ -21,7 +21,7 @@
 
   <div class="row row-eq-height">
     <%= render partial: "launch_button", locals: {launchButtonId: "rstudio", launchButton: @launchButtons[:rstudio][:view]} if @launchButtons[:rstudio][:cluster]%>
-    <%= render partial: "launch_button", locals: {launchButtonId: "bc_desktop", launchButton: @launchButtons[:bc_desktop][:view]} if @launchButtons[:bc_desktop][:cluster]%>
+    <%= render partial: "launch_button", locals: {launchButtonId: "rdesktop", launchButton: @launchButtons[:rdesktop][:view]} if @launchButtons[:rdesktop][:cluster]%>
 
     <%= render partial: "link_button", locals: {linkButtonId: "fasse"}%>
   </div>

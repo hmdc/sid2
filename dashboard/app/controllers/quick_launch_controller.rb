@@ -6,7 +6,7 @@ class QuickLaunchController < ApplicationController
       session.redirect = root_url
     end
 
-    @launchButtons = LaunchButton.all
+    @launchButtons = Ws::LaunchButton.all
     launchButtonsConfiguration = {}
     @launchButtons.each do |appId, appData|
       oodApp = BatchConnect::App.from_token appData[:token]

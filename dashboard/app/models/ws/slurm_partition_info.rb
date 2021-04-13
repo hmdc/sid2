@@ -8,7 +8,7 @@ module Ws
       @file_path = configFilePath
       @partitions = {}
       @partitions_by_group = Hash.new { |hash, key| hash[key] = [] }
-      @default_partition = ""
+      @default_partition = []
 
       Rails.logger.info "Reading slurm config: #{@file_path}"
       if File.readable?(@file_path)
@@ -21,18 +21,17 @@ module Ws
     end
 
     def get_default_partition
-      @default_partition
-    end
-
-    def to_s
-      super
-      puts "Slurm Partition Info. Default=#{@default_partition} Partitions=#{@partitions}"
+      @default_partition.first
     end
 
     def get_partitions(group_names)
       groups_array = group_names.is_a?(Array) ? group_names : [group_names]
       user_partitions = groups_array.map {|group_name| @partitions_by_group.fetch(group_name, [])}.flatten.uniq
-      user_partitions.empty? ? [@default_partition] : user_partitions
+      user_partitions.empty? ? @default_partition : user_partitions
+    end
+
+    def to_s
+      "Slurm Partition Info. Default=#{@default_partition} Partitions=#{@partitions}"
     end
 
     private
@@ -67,7 +66,7 @@ module Ws
       default_item = partitionInfo.select { | item | item.downcase.start_with?(DEFAULT_ENTRY) }[0]
 
       partition_name = getValues(name_item)[0]
-      @default_partition = partition_name if default_item && getValues(default_item)[0].downcase == "yes"
+      @default_partition = [partition_name] if default_item && getValues(default_item)[0].downcase == "yes"
       groups = groups_item ? getValues(groups_item) : []
       result = {}
       result[partition_name] = groups
