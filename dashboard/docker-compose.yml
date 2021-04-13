@@ -28,8 +28,8 @@ services:
       - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
-      - ./launchers/RStudio:/var/www/ood/apps/sys/RStudio
-      - ./launchers/odysseyrd:/var/www/ood/apps/sys/odysseyrd
+      - ./launchers/Rstudio:/var/www/ood/apps/sys/Rstudio
+      - ./launchers/OdysseyRD:/var/www/ood/apps/sys/OdysseyRD
       - ./data:/home/ood/ondemand/data:rw
       - .:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
