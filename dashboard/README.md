@@ -48,3 +48,14 @@ The following will launch a Sid2 development environment with:
 
 - Run `make down`
 
+## Deploying to QA (your FASRC account)
+
+- Run `make qa`. This will prompt you for your FASRC SSH credentials (password and pin) twice as it creates/validates the pre-requisite directory structure as setup in your home directory.
+- Once completed, visit:
+
+  https://vdi.rc.fas.harvard.edu/pun/sys/dashboard/admin/dev/products/dashboard
+
+- Click the **Bundle Install** button. this will run bundle install on the OOD web host in the background. There is no way to tell when bundle is finished - I would wait 20 or 25 minutes - if you want you can continually run `du -c` on `~/fasrc/dev/dashboard/vendor` and wait until the size stops climbing. There's a better way to do this - get access to the web host so we can run bundle and ruby ourselves - these aren't available on the login node nor do I see ruby in `modules`. Secondarily, we could use `pkgsrc` and `rvm` to ensure we have the proper binaries versioned appropriately. This will be necessary when we start supporting OOD versions greater than the version currently installed on FASRC.
+- Click **Restart App**
+- Click **Launch Ood Dashboard**
+- You should be able to run RStudio.
