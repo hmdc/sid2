@@ -17,7 +17,7 @@ module Ws
     }
 
     rstudioData = defaults.merge({
-      token: "sys/RStudio",
+      token: "sys/Rstudio",
       r_version:	"R/4.0.5-fasrc01",
       rlibs: "",
       custom_vanillaconf: "1",
@@ -30,7 +30,7 @@ module Ws
       })
 
     bc_desktopData = defaults.merge({
-      token: "sys/odysseyrd",
+      token: "sys/OdysseyRD",
       bc_vnc_resolution: "1024x768",
       custom_desktop: "1",
       matlab_version: "NULL",
