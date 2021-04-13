@@ -27,9 +27,9 @@ class Ws::GetSessionsController < ApplicationController
 
   private
   def create_session_data(session)
+    sessionDataUrl = OodAppkit.files.url(path: session.staged_root).to_s
     sessionShellUrl = OodAppkit.shell.url(host: session.connect.host).to_s if session.running? && session.connect.host
-
-    view = OodAppkit.markdown.render(ERB.new(session.view, nil, "-").result(session.connect.instance_eval { binding })).html_safe if session.running?
+    connect = create_connect_data session
 
     {
       id: session.id,
@@ -38,15 +38,38 @@ class Ws::GetSessionsController < ApplicationController
       createdAt: session.created_at,
       token: session.token,
       title: session.title,
-      info: session.info,
+      info: session.info.to_h,
       status: session.status.to_sym,
-      connect: session.running? ? session.connect.to_h : nil,
+      connect: connect,
       wallClockTimeSeconds: session.info.wallclock_time,
       wallClockLimitSeconds: session.info.wallclock_limit,
       deletedInDays: session.days_till_old,
-      sessionDataUrl: OodAppkit.files.url(path: session.staged_root).to_s,
+      sessionDataUrl: sessionDataUrl,
       sessionShellUrl: sessionShellUrl,
-      appLaunchView: view,
     }
+  end
+
+  def create_connect_data(session)
+    connect_data = nil
+    if session.running?
+      connect_data = session.connect.to_h
+      if session.view
+        connect_data[:url] = parse_form_action(session)
+      else
+        connect_data[:url] = helpers.novnc_link(session.connect, view_only: false)
+      end
+    end
+
+    connect_data
+  end
+
+  def parse_form_action(session)
+    #RENDER VIEW HTML AS OOD AND GET THE ACTION URL FROM THE FORM
+    view = OodAppkit.markdown.render(ERB.new(session.view, nil, "-").result(session.connect.instance_eval { binding }))
+    view_html = Nokogiri::HTML(view)
+    view_html.at("form")["action"]
+  rescue => error
+    logger.error "action=view_form_action user=#{@user} error=#{error}"
+    ""
   end
 end
