@@ -72,10 +72,7 @@ This bucket is suitable for a demo, but for a production deployment a CloudFront
 
 It requires the AWS CLI to be installed locally and a valid AWS account to be configfured with the AWS CLI tool.  
 
-Note that if your AWS account requires MFA, you can no longer use an API token directly (as of ~2020). Attempting to do so will result in [obscure "Access Denied" errors](https://github.com/serverless/serverless/issues/4285#issuecomment-338177829). Instead you must [generate temporary credentials](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/):  
-`AWS_PROFILE=<profile> aws iam list-mfa-devices`  
-`AWS_PROFILE=<profile> aws sts get-session-token --serial-number <SerialNumber> --token-code <code_from_app>`  
-Then add a new [profile section](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) to your `~/.aws/credentials` with the temporary `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`.  
+Note that if your AWS account requires MFA, you can no longer use an API token directly (as of ~2020). Attempting to do so will result in [obscure "Access Denied" errors](https://github.com/serverless/serverless/issues/4285#issuecomment-338177829). Instead you must [generate temporary credentials](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/) ([example](https://wiki.harvard.edu/confluence/display/HMDC/Terraforming+Sid#TerraformingSid-Generateasessiontoken)).
 (Remember, never enter your secret access key anywhere it might be logged or publicly visible, such as your shell history file or `ps` on a multi-user system.)
 
 To run, select a globally unique S3 bucket name, set AWS auth environment variables and execute:  
