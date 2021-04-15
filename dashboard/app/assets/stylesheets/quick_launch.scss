@@ -30,18 +30,19 @@
 .launch-button:hover {
   transform: scale(0.98);
 }
+
 .launch-button .title{
   text-transform: uppercase;
   padding: 10px;
 }
 
 .launch-button .panel-image{
-  height: 100px;
+  height: 120px;
   overflow: hidden;
 }
 
 .launch-button .panel-text {
-  padding: 15px 20px;
+  padding: 0 20px 15px 20px;
 }
 
 .link-button {

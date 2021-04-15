@@ -29,7 +29,7 @@ module Ws
             }
       })
 
-    bc_desktopData = defaults.merge({
+    desktopData = defaults.merge({
       token: "sys/OdysseyRD",
       bc_vnc_resolution: "1024x768",
       custom_desktop: "1",
@@ -40,14 +40,29 @@ module Ws
 
       view: { logo: "desktop_logo.svg",
               logoWidth: "100",
+              style: "margin-top: 5px;",
               p1: "Run Unix Desktop",
               p2: "2 CPU cores and 4GB RAM",
             }
      })
 
+    jupiterLabData = defaults.merge({
+       token: "sys/JupyterLab",
+       custom_memory_per_node: "8",
+       custom_num_cores: "1",
+       view: { logo: "jupyter_logo.svg",
+               logoWidth: "85",
+               style: "margin-top: -10px;",
+               p1: "Run Jupiter Lab",
+               p2: "1 CPU core and 8GB RAM",
+       }
+    })
+
+
     @@LAUNCH_BUTTONS = {
       rstudio: rstudioData,
-      rdesktop: bc_desktopData,
+      rdesktop: desktopData,
+      jupiterlab: jupiterLabData,
     }
 
     def self.all

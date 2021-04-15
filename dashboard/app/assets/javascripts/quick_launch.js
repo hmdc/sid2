@@ -11,10 +11,7 @@ const LaunchButtonService = (function (){
     }
 
     function reloadSessions(reloadSessionsUrl) {
-        $.getScript(reloadSessionsUrl)
-            .fail(( jqxhr, settings, exception ) => {
-                console.log(`Error getting session data exception=${exception}`);
-            });
+        return $.getScript(reloadSessionsUrl)
     }
 
     function submitJobToCluster(event) {
@@ -33,12 +30,17 @@ const LaunchButtonService = (function (){
         .done(data => {
             $("#sessions-container").prepend(`<div id="${data.id}"></div>`);
             reloadSessions(reloadSessionsUrl)
+                .fail(( jqxhr, settings, exception ) => {
+                    console.log(`Error getting session data exception=${exception}`);
+                })
+                .always(() => {
+                    hideSpinner(launchButtonId)
+                });
         })
         .fail(( jqxhr, settings, exception ) => {
             console.log(`Error submitting job exception=${exception}`);
-            showError()
-        }).always(() => {
             hideSpinner(launchButtonId)
+            showError()
         })
     }
 

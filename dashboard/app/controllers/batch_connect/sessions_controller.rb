@@ -26,7 +26,7 @@ class BatchConnect::SessionsController < ApplicationController
     set_session
     respond_to do |format|
       format.json { render json: {
-	"status": @session.status,
+	      "status": @session.status,
         "id": @session.id,
         "created_at": @session.created_at,
         "title": @session.title,
