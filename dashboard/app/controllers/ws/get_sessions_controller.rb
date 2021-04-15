@@ -40,6 +40,7 @@ class Ws::GetSessionsController < ApplicationController
       title: session.title,
       info: session.info.to_h,
       status: session.status.to_sym,
+      type: session.script_type,
       connect: connect,
       wallClockTimeSeconds: session.info.wallclock_time,
       wallClockLimitSeconds: session.info.wallclock_limit,

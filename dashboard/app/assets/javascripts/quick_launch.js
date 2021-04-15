@@ -30,14 +30,14 @@ const LaunchButtonService = (function (){
             url: submitJobUrl,
             data: JSON.stringify(payload),
         })
-            .done(data => {
-                $("#sessions-container").prepend(`<div id="${data.id}"></div>`);
-                reloadSessions(reloadSessionsUrl)
-            })
-            .fail(( jqxhr, settings, exception ) => {
-                console.log(`Error submitting job exception=${exception}`);
-                showError()
-            }).always(() => {
+        .done(data => {
+            $("#sessions-container").prepend(`<div id="${data.id}"></div>`);
+            reloadSessions(reloadSessionsUrl)
+        })
+        .fail(( jqxhr, settings, exception ) => {
+            console.log(`Error submitting job exception=${exception}`);
+            showError()
+        }).always(() => {
             hideSpinner(launchButtonId)
         })
     }

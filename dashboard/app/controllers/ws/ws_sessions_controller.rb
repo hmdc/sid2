@@ -26,7 +26,7 @@ class Ws::WsSessionsController < ApplicationController
       render json: { id: session.id }
     else
       logger.error "Unable to create session"
-      render json: { message: "Unable to create session", errors: session_context.errors }, status: :internal_server_error
+      render json: { message: "Unable to create session", errors: session_context.errors.full_messages }, status: :internal_server_error
     end
 
   rescue => error
@@ -44,11 +44,11 @@ class Ws::WsSessionsController < ApplicationController
     if session.destroy
       render json: {}, status: :no_content
     else
-      render json: session.errors, status: :internal_server_error
+      render json: { message: "Unable to delete session", errors: session.errors.full_messages }, status: :internal_server_error
     end
 
   rescue => error
     logger.error "action=deleteSession user=#{@user} error=#{error}"
-    render json: { message: error }, status: :internal_server_error
+    render json: { message: "Unable to delete session", errors: error }, status: :internal_server_error
   end
 end

@@ -16,7 +16,7 @@ dev:
 
 qa:
 	ssh $(FASRC_USERNAME)@$(FASRC_LOGIN_HOST) mkdir -p ./fasrc/dev/dashboard || :
-	rsync -avz . -e ssh $(FASRC_USERNAME)@$(FASRC_LOGIN_HOST):./fasrc/dev/dashboard
+	rsync -avz --exclude-from='rsync-exclude.conf' . -e ssh $(FASRC_USERNAME)@$(FASRC_LOGIN_HOST):./fasrc/dev/dashboard
 
 down:
 

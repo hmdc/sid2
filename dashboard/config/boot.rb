@@ -15,6 +15,8 @@ Configuration.load_dotenv_files
 local_dataroot = "~/#{ENV['OOD_PORTAL'] || 'ondemand'}/data/#{ENV['APP_TOKEN'] || 'sys/dashboard'}"
 ENV['OOD_DATAROOT'] = Pathname.new(local_dataroot).expand_path.to_s
 ENV['OOD_BRAND_BG_COLOR'] = "#E9E9E9"
+ENV['OOD_BRAND_LINK_ACTIVE_BG_COLOR'] = "#3B3D3F"
+
 
 # Rails 5.2.3 suggests adding bootsnap (https://github.com/Shopify/bootsnap)
 # which writes to /tmp as it does not appear to write to a user-namespaced

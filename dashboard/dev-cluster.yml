@@ -23,3 +23,17 @@ v2:
         export WEBSOCKIFY_CMD="/usr/bin/websockify"
         %s
       set_host: "host=$(hostname -A | awk '{print $1}')"
+    turbovnc:
+      script_wrapper: |
+        module purge
+        export PATH="/opt/TurboVNC/bin/:$PATH"
+        export WEBSOCKIFY_CMD="/usr/bin/websockify"
+        %s
+      set_host: "host=$(hostname -A | awk '{print $1}')"
+    kvm:
+      script_wrapper: |
+        module purge
+        export PATH="/opt/TurboVNC/bin/:$PATH"
+        export WEBSOCKIFY_CMD="/opt/websockify/bin/run"
+        %s
+      set_host: "host=$(hostname -A | awk '{print $1}')"
