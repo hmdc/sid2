@@ -24,7 +24,7 @@ module Ws
 
       view: { logo: "rstudio_logo.png",
               logoWidth: "200",
-              p1: "Run RStudio Server",
+              p1: "Run Rstudio Server",
               p2: "2 CPU cores and 4GB RAM",
             }
       })
@@ -41,7 +41,7 @@ module Ws
       view: { logo: "desktop_logo.svg",
               logoWidth: "100",
               style: "margin-top: 5px;",
-              p1: "Run Unix Desktop",
+              p1: "Run FAS-RC Remote Desktop",
               p2: "2 CPU cores and 4GB RAM",
             }
      })
@@ -58,11 +58,23 @@ module Ws
        }
     })
 
+    terminalData = {
+      #URL FOR THE SHELL APP FOR THE CLUSTER LOGIN NODE. SELECT THE FIRST ONE. OOD SUPPORTS MULTIPLE, ONE PER CLUSTER
+      view: { url: SysRouter.apps.select {|app| app.name == "shell"}.first&.links.first&.url,
+              logo: "term_logo.svg",
+              logoWidth: "125",
+              style: "margin-top: -18px;",
+              p1: nil,
+              p2: "Open a web based terminal session",
+      }
+    }
+
 
     @@LAUNCH_BUTTONS = {
       rstudio: rstudioData,
       rdesktop: desktopData,
       jupiterlab: jupiterLabData,
+      terminal: terminalData,
     }
 
     def self.all

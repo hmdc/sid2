@@ -43,6 +43,12 @@
 
 .launch-button .panel-text {
   padding: 0 20px 15px 20px;
+  white-space: nowrap;
+}
+
+.launch-button a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .link-button {

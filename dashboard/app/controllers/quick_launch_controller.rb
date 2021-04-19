@@ -8,7 +8,10 @@ class QuickLaunchController < ApplicationController
 
     @launchButtons = Ws::LaunchButton.all
     launchButtonsConfiguration = {}
+    #ADD CLUSTER AND DEFAULT PARTITION INFO TO BUTTON CONFIG
+    #IF NO CLUSTER IS NIL, THE BUTTON WILL NOT BE RENDERED
     @launchButtons.each do |appId, appData|
+      next if !appData[:token]
       oodApp = BatchConnect::App.from_token appData[:token]
       cluster_id = oodApp.clusters.first.id.to_s if oodApp.clusters.any?
       cluster_metadata = ::Configuration.cluster_metadata.select{|metadata| metadata.cluster_id == cluster_id}.first
