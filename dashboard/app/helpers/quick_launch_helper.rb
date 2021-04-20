@@ -8,7 +8,7 @@ module QuickLaunchHelper
   end
 
   def sys_url(from_url)
-    from_url ? from_url.gsub('/pun/dev', '/pun/sys') : from_url
+    from_url ? from_url.gsub(root_path, '/pun/sys/dashboard/') : from_url
   end
 
   def number_of_sessions_text_id
