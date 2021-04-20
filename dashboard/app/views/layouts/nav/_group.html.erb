@@ -10,7 +10,7 @@
             <%=
               #LINK TO MAIN DASHBOARD APP INSTEAD OF THIS PASSENGER APP
               link_to(
-                link.url.to_s.gsub("/pun/dev", "/pun/sys"),
+                sys_url(link.url.to_s),
                 title: link.title,
                 target: link.new_tab? ? "_blank" : nil
               ) do

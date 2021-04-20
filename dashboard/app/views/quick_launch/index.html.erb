@@ -15,9 +15,17 @@
   </div>
   <div>
     <div id="sessions-container" class="batch-connect sessions" data-toggle="poll" data-url="<%= batch_connect_sessions_path(r: root_url, format: :js) %>" data-delay="<%= ENV["POLL_DELAY"] || 10000 %>">
-      <%= render partial: "batch_connect/sessions/panel", collection: @sessions, as: :session %>
+      <%= render partial: "batch_connect/sessions/panel", collection: @sessions.first(quick_launch_max_sessions), as: :session %>
     </div>
   </div>
+
+  <div class="alert pull-right" role="alert">
+    <a class="btn btn-primary" href="<%= sys_url(batch_connect_sessions_path) %>" role="button">
+      <i class="fas fa-window-restore" aria-hidden="true"></i>
+      <span><%= t('dashboard.nav_sessions') %> <%= number_of_sessions_text(@sessions.length) %></span>
+    </a>
+  </div>
+  <div class="clearfix"></div>
 
   <div class="row row-eq-height">
     <%= render partial: "launch_button", locals: {launchButtonId: "rstudio", launchButton: @launchButtons[:rstudio][:view]} if @launchButtons[:rstudio][:cluster] %>

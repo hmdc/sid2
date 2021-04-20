@@ -7,7 +7,7 @@ class QuickLaunchController < ApplicationController
     end
 
     @launchButtons = Ws::LaunchButton.all
-    launchButtonsConfiguration = {}
+    launchButtonsConfiguration = {maxSessions: helpers.quick_launch_max_sessions}
     #ADD CLUSTER AND DEFAULT PARTITION INFO TO BUTTON CONFIG
     #IF NO CLUSTER IS NIL, THE BUTTON WILL NOT BE RENDERED
     @launchButtons.each do |appId, appData|

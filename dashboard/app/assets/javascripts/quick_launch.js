@@ -1,21 +1,30 @@
 const LaunchButtonService = (function (){
+    let buttonEnabled = true
+
     function showError() {
         $("#launch-button-error").fadeOut(1000).fadeIn(1000)
     }
 
     function showSpinner(launchButtonId) {
+        buttonEnabled = false
         $(`#${launchButtonId} .launch-button-spinner`).show()
     }
     function hideSpinner(launchButtonId) {
         $(`#${launchButtonId} .launch-button-spinner`).delay(1000).fadeOut(200)
+        buttonEnabled = true
     }
 
-    function reloadSessions(reloadSessionsUrl) {
+    function reloadSessions(sessionId, reloadSessionsUrl) {
+        $("#sessions-container").prepend(`<div id="${sessionId}"></div>`);
         return $.getScript(reloadSessionsUrl)
     }
 
     function submitJobToCluster(event) {
         const launchButtonId = event.currentTarget.id
+        if(!buttonEnabled) {
+            console.log(`QuickLaunchButton is not enabled: ${launchButtonId}`)
+            return
+        }
         const submitJobUrl = event.currentTarget.getAttribute("data-url")
         const reloadSessionsUrl = event.currentTarget.getAttribute("data-reload-url")
         showSpinner(launchButtonId)
@@ -28,12 +37,14 @@ const LaunchButtonService = (function (){
             data: JSON.stringify(payload),
         })
         .done(data => {
-            $("#sessions-container").prepend(`<div id="${data.id}"></div>`);
-            reloadSessions(reloadSessionsUrl)
+            reloadSessions(data.id, reloadSessionsUrl)
                 .fail(( jqxhr, settings, exception ) => {
                     console.log(`Error getting session data exception=${exception}`);
                 })
                 .always(() => {
+                    //ONLY SHOW THE FIRST launchButtons['maxSessions'] SESSIONS
+                    const maxSessions = launchButtons['maxSessions']
+                    $(`#sessions-container > div:nth-child(${maxSessions})`).nextAll().fadeOut(1000, function() { $(this).remove(); })
                     hideSpinner(launchButtonId)
                 });
         })

@@ -7,7 +7,7 @@
     <%= nav_link(t('dashboard.nav_develop_docs'), "book", Configuration.developer_docs_url, target: "_blank") %>
     <%= nav_link(products_title(:dev), "cog", products_path(type: "dev").gsub("/pun/dev", "/pun/sys")) %>
     <% if Configuration.app_sharing_enabled? %>
-      <%= nav_link(products_title(:usr), "share-alt", products_path(type: "usr").gsub("/pun/dev", "/pun/sys")) %>
+      <%= nav_link(products_title(:usr), "share-alt", sys_url(products_path(type: "usr"))) %>
     <% end %>
   </ul>
 </li>

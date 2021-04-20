@@ -60,7 +60,7 @@ module Ws
 
     terminalData = {
       #URL FOR THE SHELL APP FOR THE CLUSTER LOGIN NODE. SELECT THE FIRST ONE. OOD SUPPORTS MULTIPLE, ONE PER CLUSTER
-      view: { url: SysRouter.apps.select {|app| app.name == "shell"}.first&.links.first&.url,
+      view: { url: SysRouter.apps.select {|app| app.name == "shell"}.first&.links&.first&.url,
               logo: "term_logo.svg",
               logoWidth: "125",
               style: "margin-top: -18px;",

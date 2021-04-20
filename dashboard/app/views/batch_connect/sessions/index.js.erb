@@ -17,4 +17,7 @@
       $(this).remove();
     }
   });
+
+    <%# UPDATE THE NUMBER OF SESSIONS %>
+    $('#<%= number_of_sessions_text_id %>').replaceWith('<%= number_of_sessions_text(@sessions.length) %>');
 })();
