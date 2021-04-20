@@ -28,11 +28,12 @@
   <div class="clearfix"></div>
 
   <div class="row row-eq-height">
-    <%= render partial: "launch_button", locals: {launchButtonId: "rstudio", launchButton: @launchButtons[:rstudio][:view]} if @launchButtons[:rstudio][:cluster] %>
-    <%= render partial: "launch_button", locals: {launchButtonId: "rdesktop", launchButton: @launchButtons[:rdesktop][:view]} if @launchButtons[:rdesktop][:cluster] %>
-    <%= render partial: "launch_button", locals: {launchButtonId: "jupiterlab", launchButton: @launchButtons[:jupiterlab][:view]} if @launchButtons[:jupiterlab][:cluster] %>
+    <%= render partial: "launch_button", locals: { launchButtonId: "rstudio", launchButton: @launchButtons[:rstudio][:view] } if @launchButtons[:rstudio][:cluster] %>
+    <%= render partial: "launch_button", locals: { launchButtonId: "rdesktop", launchButton: @launchButtons[:rdesktop][:view] } if @launchButtons[:rdesktop][:cluster] %>
+    <%= render partial: "launch_button", locals: { launchButtonId: "jupiterlab", launchButton: @launchButtons[:jupiterlab][:view] } if @launchButtons[:jupiterlab][:cluster] %>
+    <%= render partial: "launch_button", locals: { launchButtonId: "stata", launchButton: @launchButtons[:stata][:view] } if @launchButtons[:stata][:cluster] %>
 
-    <%= render partial: "link_button", locals: {launchButtonId: "terminal", launchButton: @launchButtons[:terminal][:view]} if @launchButtons[:terminal][:view][:url] %>
+    <%= render partial: "link_button", locals: { launchButtonId: "terminal", launchButton: @launchButtons[:terminal][:view] } if @launchButtons[:terminal][:view][:url] %>
 
     <%= render partial: "fasse_button" %>
   </div>

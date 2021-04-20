@@ -58,6 +58,20 @@ module Ws
        }
     })
 
+    stataData = defaults.merge({
+        token: "sys/Stata",
+        bc_vnc_resolution: "1024x768",
+        stata_version: "stata/16.0-fasrc01",
+        custom_memory_per_node: "8",
+        custom_num_cores: "1",
+        view: { logo: "stata_logo.svg",
+                logoWidth: "200",
+                style: "margin-top: 15px;",
+                p1: "Run Stata",
+                p2: "1 CPU core and 8GB RAM",
+        }
+      })
+
     terminalData = {
       #URL FOR THE SHELL APP FOR THE CLUSTER LOGIN NODE. SELECT THE FIRST ONE. OOD SUPPORTS MULTIPLE, ONE PER CLUSTER
       view: { url: SysRouter.apps.select {|app| app.name == "shell"}.first&.links&.first&.url,
@@ -74,6 +88,7 @@ module Ws
       rstudio: rstudioData,
       rdesktop: desktopData,
       jupiterlab: jupiterLabData,
+      stata: stataData,
       terminal: terminalData,
     }
 
