@@ -36,7 +36,7 @@ class Ws::WsSessionsController < ApplicationController
 
   def delete_session
     if !BatchConnect::Session.exist(params[:session_id])
-      render json: { message: "Invalid sessionId: #{params[:session_id]}" }, status: :not_found
+      render json: { message: "Not found sessionId: #{params[:session_id]}" }, status: :not_found
       return
     end
 
