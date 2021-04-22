@@ -76,6 +76,20 @@ module Ws
         }
       })
 
+    sasData = defaults.merge({
+       token: "sys/SAS",
+       bc_vnc_resolution: "1024x768",
+       custom_memory_per_node: "4",
+       custom_num_cores: "1",
+       view: { logo: "sas_logo.png",
+               logoWidth: "180",
+               style: "margin-top: 3px",
+               p1: "Run SAS",
+               p2: "1 CPU core and 4GB RAM",
+               p3: "[4hr] Job run time",
+       }
+     })
+
     terminalData = {
       #URL FOR THE SHELL APP FOR THE CLUSTER LOGIN NODE. SELECT THE FIRST ONE. OOD SUPPORTS MULTIPLE, ONE PER CLUSTER
       view: { url: SysRouter.apps.select {|app| app.name == "shell"}.first&.links&.first&.url,
@@ -94,6 +108,7 @@ module Ws
       rdesktop: desktopData,
       jupiterlab: jupiterLabData,
       stata: stataData,
+      sas: sasData,
       terminal: terminalData,
     }
 

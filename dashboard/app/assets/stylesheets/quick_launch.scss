@@ -7,6 +7,20 @@
   margin-bottom: 40px;
 }
 
+.quick-launch-buttons-container {
+  border-bottom: 1px solid #ddd;
+  padding: 0 15px 10px 15px;
+  margin-bottom: 15px;
+}
+
+.quick-launch-buttons-container h3 {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #337ab7;
+}
+
 .launch-button-spinner {
   display: flex;
   justify-content: center;
