@@ -26,6 +26,7 @@ module Ws
               logoWidth: "200",
               p1: "Run Rstudio Server",
               p2: "2 CPU cores and 4GB RAM",
+              p3: "[4hr] Job run time",
             }
       })
 
@@ -43,6 +44,7 @@ module Ws
               style: "margin-top: 5px;",
               p1: "Run FAS-RC Remote Desktop",
               p2: "2 CPU cores and 4GB RAM",
+              p3: "[4hr] Job run time",
             }
      })
 
@@ -55,6 +57,7 @@ module Ws
                style: "margin-top: -10px;",
                p1: "Run Jupiter Lab",
                p2: "1 CPU core and 8GB RAM",
+               p3: "[4hr] Job run time",
        }
     })
 
@@ -69,6 +72,7 @@ module Ws
                 style: "margin-top: 15px;",
                 p1: "Run Stata",
                 p2: "1 CPU core and 8GB RAM",
+                p3: "[4hr] Job run time",
         }
       })
 
@@ -79,7 +83,8 @@ module Ws
               logoWidth: "125",
               style: "margin-top: -18px;",
               p1: nil,
-              p2: "Open a web based terminal session",
+              p2: nil,
+              p3: "Open a web based terminal session",
       }
     }
 

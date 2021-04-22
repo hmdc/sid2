@@ -20,4 +20,5 @@
 
     <%# UPDATE THE NUMBER OF SESSIONS %>
     $('#<%= number_of_sessions_text_id %>').replaceWith('<%= number_of_sessions_text(@sessions.length) %>');
+    $('#<%= view_interactive_sessions_link_container_id %>').toggle(<%= show_more_sessions_link?(@sessions.length) %>);
 })();

@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+#view-interactive-sessions-container {
+  margin-bottom: 40px;
+}
+
 .launch-button-spinner {
   display: flex;
   justify-content: center;
@@ -37,13 +42,17 @@
 }
 
 .launch-button .panel-image{
-  height: 120px;
+  height: 110px;
   overflow: hidden;
 }
 
 .launch-button .panel-text {
   padding: 0 20px 15px 20px;
   white-space: nowrap;
+}
+
+.panel-text p {
+  margin: 0;
 }
 
 .launch-button a {
@@ -61,10 +70,16 @@
 
 }
 .link-button-text {
-  padding: 15px;
+  padding: 0 15px;
+  height: 135px;
+  overflow: hidden;
   font-size: 3rem;
   color: #CA8E6E;
   text-align: center;
+}
+
+#fasse-button p {
+  padding: 15px;
 }
 
 header sup {
