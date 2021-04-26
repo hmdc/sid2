@@ -8,17 +8,32 @@
 }
 
 .quick-launch-buttons-container {
+
+}
+
+.app-launcher-title {
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.app-launcher-help {
+  padding: 15px 0;
+}
+
+.quick-launch-buttons-title {
   border-bottom: 1px solid #ddd;
-  padding: 0 15px 10px 15px;
+  padding: 15px 0;
   margin-bottom: 15px;
 }
 
-.quick-launch-buttons-container h3 {
+.quick-launch-buttons-title h3 {
+  display: inline-block;
   padding: 0;
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  color: #337ab7;
+  color: #3B3D3F;
 }
 
 .launch-button-spinner {

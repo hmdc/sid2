@@ -7,7 +7,7 @@
     sessions.push('<%= session.id %>');
     $target = $('#<%= session.id %>');
     if ( $target.data('hash') !== '<%= session.to_hash %>' ) {
-      $target.replaceWith('<%= j render(partial: "panel", locals: { session: session }) %>');
+      $target.replaceWith('<%= j render(partial: "batch_connect/sessions/panel", locals: { session: session }) %>');
     }
   <% end %>
 
@@ -19,6 +19,8 @@
   });
 
     <%# UPDATE THE NUMBER OF SESSIONS %>
-    $('#<%= number_of_sessions_text_id %>').replaceWith('<%= number_of_sessions_text(@sessions.length) %>');
-    $('#<%= view_interactive_sessions_link_container_id %>').toggle(<%= show_more_sessions_link?(@sessions.length) %>);
+    $('[data-selector="number-of-sessions"]').text('(<%= @sessions.length %>)');
+    $('[data-selector="more-sessions"]').toggle(<%= show_more_sessions_link?(@sessions) %>);
+    $('[data-selector="active-sessions"]').toggle(<%= has_active_sessions?(@sessions) %>);
+    $('[data-selector="no-active-sessions"]').toggle(<%= !has_active_sessions?(@sessions) %>);
 })();

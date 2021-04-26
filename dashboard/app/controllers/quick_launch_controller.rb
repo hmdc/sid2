@@ -1,10 +1,6 @@
 class QuickLaunchController < ApplicationController
   def index
-    @sessions = BatchConnect::Session.all
-    @sessions.each do |session|
-      session.update_cache_completed!
-      session.redirect = root_url
-    end
+    set_sessions
 
     @launchButtons = Ws::LaunchButton.all
     launchButtonsConfiguration = {maxSessions: helpers.quick_launch_max_sessions}
@@ -23,5 +19,23 @@ class QuickLaunchController < ApplicationController
 
     @launchButtonsJson = launchButtonsConfiguration.to_json
     render layout: "sid"
+  end
+
+  def sessions_js
+    set_sessions
+
+    render "batch_connect/sessions/index"
+  end
+
+  private
+
+  def set_sessions
+    @sessions = BatchConnect::Session.all
+    @sessions.each do |session|
+      session.update_cache_completed!
+      session.redirect = root_url
+    end
+
+    @sessions = @sessions.reject { |s| s.completed? }
   end
 end

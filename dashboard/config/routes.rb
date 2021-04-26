@@ -26,6 +26,9 @@ Rails.application.routes.draw do
     get "/clusters", to: "ws_clusters#get"
   end
 
+  get "/launchers", to: "quick_launch#index"
+  get "/launchers/sessions", to: "quick_launch#sessions_js"
+
 
   get "errors/not_found"
   get "errors/internal_server_error"
