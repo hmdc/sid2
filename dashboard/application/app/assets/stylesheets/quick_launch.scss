@@ -80,6 +80,14 @@
   white-space: nowrap;
 }
 
+.launch-button .title-text {
+  font-weight: 450;
+}
+
+.launch-button .small-text {
+  font-size: 12px;
+}
+
 .panel-text p {
   margin: 0;
 }
@@ -91,24 +99,46 @@
 
 .link-button {
   border: 1px solid #CA8E6E;
+  border: 1px solid #F24827;
   outline: none;
+}
+
+.launch-button-hover {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 20px;
+  color: #fff;
+}
+
+.launch-button:hover .launch-button-hover {
+  display: flex;
 }
 .link-button a {
   text-decoration: none;
   color: inherit;
 
 }
-.link-button-text {
+.link-button-title {
   padding: 0 15px;
-  height: 135px;
-  overflow: hidden;
-  font-size: 3rem;
-  color: #CA8E6E;
+  font-size: 26px;
+  color: #F24827;
+  text-align: center;
+}
+
+.link-button-subtitle {
+  font-size: 18px;
   text-align: center;
 }
 
 #fasse-button p {
-  padding: 15px;
+  margin: 0;
+  padding: 0 15px;
 }
 
 header sup {
