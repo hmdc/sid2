@@ -195,6 +195,18 @@ class OodApp
     end
   end
 
+  def image_path
+    path.join("image.png")
+  end
+
+  def image_uri
+    if image_path.file?
+      app_image_path(name, type, owner)
+    else
+      "fas://cog"
+    end
+  end
+
   class SetupScriptFailed < StandardError; end
   # run the production setup script for setting up the user's
   # dataroot and database for the current app, if the production

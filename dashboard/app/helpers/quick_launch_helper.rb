@@ -24,4 +24,9 @@ module QuickLaunchHelper
   def sys_url(from_url)
     from_url ? from_url.gsub(root_path, '/pun/sys/dashboard/') : from_url
   end
+
+  def terminal_url
+    #URL FOR THE SHELL APP FOR THE CLUSTER LOGIN NODE. SELECT THE FIRST ONE. OOD SUPPORTS MULTIPLE, ONE PER CLUSTER
+    SysRouter.apps.select {|app| app.name == "shell"}.first&.links&.first&.url
+  end
 end

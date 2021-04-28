@@ -3,7 +3,7 @@
 </style>
 <script>
 
-  const launchButtons = <%= raw @launchButtonsJson %>;
+  const launchButtons = <%= raw @launcher_buttons_json %>;
 
 </script>
 <div id="app-launcher-container">
@@ -43,19 +43,18 @@
       <a href="<%= sys_url(batch_connect_sessions_path) %>">view all interactive app options</a>
     </div>
     <div class="row row-eq-height">
-      <%= render partial: "launch_button", locals: { launchButtonId: "rstudio", launchButton: @launchButtons[:rstudio][:view] } if @launchButtons[:rstudio][:cluster] %>
-      <%= render partial: "launch_button", locals: { launchButtonId: "rdesktop", launchButton: @launchButtons[:rdesktop][:view] } if @launchButtons[:rdesktop][:cluster] %>
-      <%= render partial: "launch_button", locals: { launchButtonId: "jupiterlab", launchButton: @launchButtons[:jupiterlab][:view] } if @launchButtons[:jupiterlab][:cluster] %>
-      <%= render partial: "launch_button", locals: { launchButtonId: "stata", launchButton: @launchButtons[:stata][:view] } if @launchButtons[:stata][:cluster] %>
-      <%= render partial: "launch_button", locals: { launchButtonId: "sas", launchButton: @launchButtons[:sas][:view] } if @launchButtons[:sas][:cluster] %>
+      <%= render partial: "launch_button", locals: { launcher_button_id: "rstudio", launcher_button: @launcher_buttons[:rstudio] } %>
+      <%= render partial: "launch_button", locals: { launcher_button_id: "rdesktop", launcher_button: @launcher_buttons[:rdesktop] } %>
+      <%= render partial: "launch_button", locals: { launcher_button_id: "jupyter", launcher_button: @launcher_buttons[:jupyter] } %>
+      <%= render partial: "launch_button", locals: { launcher_button_id: "stata", launcher_button: @launcher_buttons[:stata] } %>
+      <%= render partial: "launch_button", locals: { launcher_button_id: "sas", launcher_button: @launcher_buttons[:sas] } %>
     </div>
 
     <div class="quick-launch-buttons-title">
       <h3>Quick links</h3>
     </div>
     <div class="row row-eq-height">
-      <%= render partial: "link_button", locals: { launchButtonId: "terminal", launchButton: @launchButtons[:terminal][:view] } if @launchButtons[:terminal][:view][:url] %>
-
+      <%= render partial: "terminal_button" %>
       <%= render partial: "fasse_button" %>
     </div>
   </div>

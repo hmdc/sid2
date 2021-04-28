@@ -217,6 +217,13 @@ module BatchConnect
       Pathname.new(root).glob("info.{md,html}.erb").find(&:file?).try(:read)
     end
 
+    # View used for session if it exists
+    # @return [String, nil] session view
+    def launch_button
+      file = root.join("launch_button.yml")
+      read_yaml_erb(path: file) if file.file?
+    end
+
     # Paths to custom javascript files
     # @return [Pathname] paths to custom javascript files that exist
     def custom_javascript_files

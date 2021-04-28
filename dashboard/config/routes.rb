@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     delete "/sessions/:session_id", to: "ws_sessions#delete_session"
 
     get "/clusters", to: "ws_clusters#get"
+
+    get "/launchers", to: "ws_launchers#get"
   end
 
   get "/launchers", to: "quick_launch#index"
@@ -41,6 +43,7 @@ Rails.application.routes.draw do
 
   get "apps/show/:name(/:type(/:owner))" => "apps#show", as: "app", defaults: { type: "sys" }
   get "apps/icon/:name(/:type(/:owner))" => "apps#icon", as: "app_icon", defaults: { type: "sys" }
+  get "apps/image/:name(/:type(/:owner))" => "apps#image", as: "app_image", defaults: { type: "sys" }
   get "apps/index" => "apps#index"
 
   if Configuration.app_sharing_enabled?

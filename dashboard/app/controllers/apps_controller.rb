@@ -60,6 +60,16 @@ class AppsController < ApplicationController
     end
   end
 
+  def image
+    set_app
+
+    if @app.image_path.file?
+      send_file @app.image_path, :type => 'image/png', :disposition => 'inline'
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   private
 
   def set_app
