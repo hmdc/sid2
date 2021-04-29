@@ -19,4 +19,4 @@ view:
   style: "margin-top: -10px;"
   p1: "Run Jupiter Lab"
   p2: "1 CPU core and 8GB RAM"
-  p3: "[4hr] Job run time"
+  p3: "[4 hours] Job run time"

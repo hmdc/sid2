@@ -22,19 +22,12 @@
   <div data-selector="active-sessions" class="quick-launch-buttons-title" style="<%= has_active_sessions?(@sessions) ? "" : "display:none" %>">
     <h3>Active interactive sessions</h3>
     <a data-selector="more-sessions" href="<%= sys_url(batch_connect_sessions_path) %>" style="<%= show_more_sessions_link?(@sessions) ? "" : "display:none" %>">
-      view all my Interactive sessions
+      view all my Interactive sessions <span data-selector="number-of-sessions">(<%= @sessions.length %>)</span>
     </a>
   </div>
 
   <div id="sessions-container" class="batch-connect sessions" data-toggle="poll" data-url="<%= launchers_sessions_path(r: root_url, format: :js) %>" data-delay="<%= ENV["POLL_DELAY"] || 10000 %>">
     <%= render partial: "batch_connect/sessions/panel", collection: @sessions.first(quick_launch_max_sessions), as: :session %>
-  </div>
-
-  <div data-selector="more-sessions" style="<%= show_more_sessions_link?(@sessions) ? "" : "display:none" %>">
-    <a href="<%= sys_url(batch_connect_sessions_path) %>" role="button">
-      <i class="fas fa-window-restore" aria-hidden="true"></i>
-      <span>View all my Interactive sessions <span data-selector="number-of-sessions">(<%= @sessions.length %>)</span></span>
-    </a>
   </div>
 
   <div class="quick-launch-buttons-container">

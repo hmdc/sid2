@@ -25,4 +25,4 @@ view:
   style: "margin-top: 5px;"
   p1: "Run FAS-RC Remote Desktop"
   p2: "2 CPU cores and 4GB RAM"
-  p3: "[4hr] Job run time"
+  p3: "[4 hours] Job run time"

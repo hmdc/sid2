@@ -70,7 +70,7 @@ class LauncherButton
     hsh[:metadata] = @metadata.clone
     hsh[:form] = @form.clone
     hsh[:form][:cluster] = cluster
-    hsh[:form][:bc_queue] = default_partition
+    hsh[:form][:bc_queue] = default_partition unless hsh[:form][:bc_queue]
     hsh[:view] = @view.clone
     return hsh
   end
