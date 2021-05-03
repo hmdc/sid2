@@ -20,4 +20,4 @@ view:
   style: ""
   p1: "Run Rstudio Server"
   p2: "2 CPU cores and 4GB RAM"
-  p3: "[4 hours] Job run time"
+  p3: "4 hours job run time"
