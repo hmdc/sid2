@@ -37,7 +37,7 @@ module Dashboard
 
     # Custom error pages
     config.exceptions_app = self.routes
-    config.action_controller.relative_url_root  = "/pun/dev/dashboard"
+
     if ::Configuration.load_external_config?
       config.paths["config/initializers"] << ::Configuration.config_root.join("initializers").to_s
       config.paths["app/views"].unshift ::Configuration.config_root.join("views").to_s
