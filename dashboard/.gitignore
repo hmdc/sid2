@@ -16,6 +16,7 @@
 .dynamodb/
 .env
 .env.test
+.env.local
 .eslintcache
 .fusebox/
 .grunt
