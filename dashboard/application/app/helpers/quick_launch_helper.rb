@@ -22,7 +22,9 @@ module QuickLaunchHelper
   end
 
   def sys_url(from_url)
-    from_url ? from_url.gsub(root_path, '/pun/sys/dashboard/') : from_url
+    # DISABLE TO STAY WITHIN PASSENGER APP - THIS WILL BE UPDATED FOR NEXT ITERATION
+    #from_url ? from_url.gsub(root_path, '/pun/sys/dashboard/') : from_url
+    from_url
   end
 
   def terminal_url

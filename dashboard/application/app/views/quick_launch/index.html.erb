@@ -36,11 +36,9 @@
       <a href="<%= sys_url(batch_connect_sessions_path) %>">view all interactive app options</a>
     </div>
     <div class="row row-eq-height">
-      <%= render partial: "launch_button", locals: { launcher_button_id: "rstudio", launcher_button: @launcher_buttons[:rstudio] } %>
-      <%= render partial: "launch_button", locals: { launcher_button_id: "rdesktop", launcher_button: @launcher_buttons[:rdesktop] } %>
-      <%= render partial: "launch_button", locals: { launcher_button_id: "jupyter", launcher_button: @launcher_buttons[:jupyter] } %>
-      <%= render partial: "launch_button", locals: { launcher_button_id: "stata", launcher_button: @launcher_buttons[:stata] } %>
-      <%= render partial: "launch_button", locals: { launcher_button_id: "sas", launcher_button: @launcher_buttons[:sas] } %>
+      <% @launchers.each do |launcher| %>
+      <%= render partial: "launch_button", locals: { launcher_button_id: launcher[:metadata][:id], launcher_button: launcher[:view] } %>
+      <% end %>
     </div>
 
     <div class="quick-launch-buttons-title">

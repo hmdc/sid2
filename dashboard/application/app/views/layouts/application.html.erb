@@ -22,11 +22,9 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <% if ENV['SID2__OOD_DASHBOARD_HEADER_IMG_LOGO'].present? %>
-          <a class="navbar-brand navbar-brand-logo" href="<%= root_path %>"><img src="<%= ENV['SID2__OOD_DASHBOARD_HEADER_IMG_LOGO'] %>"></a>
-        <% else %>
-          <a class="navbar-brand" href="<%= root_path %>"><%= OodAppkit.dashboard.title.html_safe %></a>
-        <% end %>
+        <a class="navbar-brand navbar-brand-logo" href="<%= root_path %>">
+          <%= image_tag( "sid_logo.png", alt: "Sid Open OnDemand", height: "40") %>
+        </a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
         <ul class="nav navbar-nav">
@@ -35,6 +33,9 @@
           <%= render partial: 'layouts/nav/all_apps' if Configuration.show_all_apps_link? %>
         </ul>
         <div class="navbar-right">
+          <ul class="nav navbar-nav">
+            <%= render partial: 'layouts/nav/sid_menu' %>
+          </ul>
           <ul class="nav navbar-nav">
             <%= render partial: 'layouts/nav/develop_dropdown' if Configuration.app_development_enabled? %>
             <%= render partial: "layouts/nav/help_dropdown" %>

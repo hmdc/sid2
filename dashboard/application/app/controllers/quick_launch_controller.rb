@@ -2,20 +2,20 @@ class QuickLaunchController < ApplicationController
   def index
     set_sessions
 
-    @launcher_buttons = {}
     launcher_buttons_configuration = { maxSessions: helpers.quick_launch_max_sessions }
+
+    @launchers = []
 
     LauncherButton.launchers.each do |launcher_config|
       next if !launcher_config.cluster
 
       launcher_id = launcher_config.id
       launcher = launcher_config.to_h
-      @launcher_buttons[launcher_id.to_sym] = launcher[:view]
+      @launchers.push launcher
       launcher_buttons_configuration[launcher_id] = launcher[:form]
     end
 
     @launcher_buttons_json = launcher_buttons_configuration.to_json
-    render layout: "sid"
   end
 
   def sessions_js
