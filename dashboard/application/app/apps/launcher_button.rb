@@ -35,7 +35,8 @@ class LauncherButton
       app_launchers[launcher.id] = launcher
     end
 
-    app_launchers.values
+    #ODER BY order field. ITEMS WITHOUT order field WILL GO LAST
+    app_launchers.values.sort
   end
 
   def initialize(metadata, config)
@@ -47,10 +48,15 @@ class LauncherButton
     raise ArgumentError, "launch button config must defined an id metadata=#{metadata}" unless @metadata[:id]
 
     @metadata[:id] = @metadata[:id].downcase
+    @metadata[:order] = config[:order]
   end
 
   def id
     return @metadata[:id]
+  end
+
+  def order
+    return @metadata[:order]
   end
 
   def cluster
@@ -73,6 +79,13 @@ class LauncherButton
     hsh[:form][:bc_queue] = default_partition unless hsh[:form][:bc_queue]
     hsh[:view] = @view.clone
     return hsh
+  end
+
+  def <=> (other)
+    return 0 if !order && !other.order
+    return 1 if !order
+    return -1 if !other.order
+    order <=> other.order
   end
 
   private
