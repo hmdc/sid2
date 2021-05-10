@@ -1,0 +1,13 @@
+{
+  "job_name": "dev/dashboard/sys/OdysseyRD",
+  "workdir": "/home/ood/ondemand/data/sys/dashboard/batch_connect/sys/OdysseyRD/output/c6c0cd3c-e087-4be2-be48-a3a631876521",
+  "output_path": "/home/ood/ondemand/data/sys/dashboard/batch_connect/sys/OdysseyRD/output/c6c0cd3c-e087-4be2-be48-a3a631876521/output.log",
+  "shell_path": "/bin/bash",
+  "wall_time": 3600,
+  "native": [
+    "-N",
+    1
+  ],
+  "queue_name": "normal",
+  "email_on_started": false
+}

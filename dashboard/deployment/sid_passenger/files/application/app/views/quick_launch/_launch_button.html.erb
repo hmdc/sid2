@@ -1,0 +1,24 @@
+<% if launcher_button  %>
+<div class="<%= button_column_classes %>">
+  <div id="<%= launcher_button_id %>"
+       data-toggle="launch-button"
+       data-url="<%= ws_sessions_path %>"
+       data-reload-url="<%= launchers_sessions_path(r: root_url, format: :js) %>"
+       class="launch-button">
+    <div class="launch-button-spinner" style="display: none;">
+      <div class="spinner-border" role="status"></div>
+    </div>
+
+    <div class="title text-center title-text">cannon</div>
+    <div class="panel-body panel-image">
+      <img src="<%= asset_url launcher_button[:logo] %>" alt="Application logo" width="<%= launcher_button[:logoWidth] || 200 %>" class="center-block"  style="<%= launcher_button[:style] || '' %>"/>
+    </div>
+    <div class="panel-body panel-text">
+      <p class="title-text"><%= launcher_button[:p1] || "&nbsp;".html_safe %></p>
+      <p class="small-text"><%= launcher_button[:p2] || "&nbsp;".html_safe %></p>
+      <p class="small-text"><%= launcher_button[:p3] || "&nbsp;".html_safe %></p>
+    </div>
+  </div>
+</div>
+<% end %>
+

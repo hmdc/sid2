@@ -1,0 +1,13 @@
+{
+  "job_name": "dev/dashboard/sys/Rstudio",
+  "workdir": "/home/ood/ondemand/data/sys/dashboard/batch_connect/sys/Rstudio/output/070394be-e34f-4e11-8b89-d24f464da5c2",
+  "output_path": "/home/ood/ondemand/data/sys/dashboard/batch_connect/sys/Rstudio/output/070394be-e34f-4e11-8b89-d24f464da5c2/output.log",
+  "shell_path": "/bin/bash",
+  "queue_name": "mandalorian",
+  "wall_time": 3600,
+  "native": [
+    "-N",
+    1
+  ],
+  "email_on_started": false
+}
