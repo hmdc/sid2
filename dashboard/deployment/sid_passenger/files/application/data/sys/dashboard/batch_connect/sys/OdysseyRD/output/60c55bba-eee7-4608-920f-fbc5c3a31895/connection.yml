@@ -1,8 +1,0 @@
-host: c2
-port: 5901
-password: 8ta6Gc8U
-display: 1
-websocket: 7320
-spassword: QY5Q5mci
-vnc_connection_file: /home/ood/ondemand/data/sys/dashboard/batch_connect/sys/OdysseyRD/output/60c55bba-eee7-4608-920f-fbc5c3a31895/turbovnc_connection_3.vnc
-staging_folder: /home/ood/ondemand/data/sys/dashboard/batch_connect/sys/OdysseyRD/output/60c55bba-eee7-4608-920f-fbc5c3a31895

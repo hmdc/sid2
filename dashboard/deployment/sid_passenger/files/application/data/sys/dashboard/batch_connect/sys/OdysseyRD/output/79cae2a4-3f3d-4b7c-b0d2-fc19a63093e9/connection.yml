@@ -1,8 +1,0 @@
-host: c2
-port: 5902
-password: MJslRMsS
-display: 2
-websocket: 9866
-spassword: SuCrdoQo
-vnc_connection_file: /home/ood/ondemand/data/sys/dashboard/batch_connect/sys/OdysseyRD/output/79cae2a4-3f3d-4b7c-b0d2-fc19a63093e9/turbovnc_connection_5.vnc
-staging_folder: /home/ood/ondemand/data/sys/dashboard/batch_connect/sys/OdysseyRD/output/79cae2a4-3f3d-4b7c-b0d2-fc19a63093e9

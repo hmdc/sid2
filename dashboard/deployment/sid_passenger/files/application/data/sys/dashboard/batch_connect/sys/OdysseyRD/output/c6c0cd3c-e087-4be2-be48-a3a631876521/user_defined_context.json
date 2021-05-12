@@ -1,8 +1,0 @@
-{
-  "cluster": "dev-cluster",
-  "bc_account": "",
-  "bc_num_hours": "1",
-  "bc_num_slots": "1",
-  "bc_queue": "normal",
-  "bc_email_on_started": "0"
-}
