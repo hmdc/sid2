@@ -2,13 +2,14 @@
 order: 20
 form:
   token: "sys/OdysseyRD"
+  bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
   bc_num_hours: "1"
   custom_memory_per_node: "4"
   custom_num_cores: "2"
   custom_num_gpus: "0"
-  custom_time: "04:00:00"
+  custom_time: "08:00:00"
   envscript: ""
   custom_email_address: ""
   bc_email_on_started: "0"
