@@ -1,0 +1,94 @@
+%navbar-brand {
+  float: left;
+  padding: $navbar-padding-vertical $navbar-padding-horizontal;
+  font-size: $font-size-large;
+  line-height: $line-height-computed;
+  height: $navbar-height;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  > img {
+    display: block;
+  }
+}
+
+.ood-appkit.navbar {
+  ul.navbar-breadcrumbs {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    @media (min-width: $grid-float-breakpoint) {
+      & {
+        margin-left: -$navbar-padding-horizontal;
+      }
+    }
+
+    > li {
+      float: left;
+
+      > a {
+        @extend %navbar-brand;
+      }
+
+      + li:before {
+        @extend %navbar-brand;
+        padding: $navbar-padding-vertical 0;
+        content: '/';
+      }
+    }
+  }
+
+  &.navbar-default {
+    ul.navbar-breadcrumbs > li {
+      > a {
+        color: $navbar-default-brand-hover-color;
+        &:hover,
+        &:focus {
+          color: $navbar-default-brand-color;
+          background-color: $navbar-default-brand-hover-bg;
+        }
+      }
+
+      &:last-child > a {
+        color: $navbar-default-brand-color;
+        &:hover,
+        &:focus {
+          color: $navbar-default-brand-hover-color;
+        }
+      }
+
+      + li:before {
+        color: $navbar-default-brand-hover-color;
+      }
+    }
+  }
+
+  &.navbar-inverse {
+    ul.navbar-breadcrumbs > li {
+      > a {
+        color: $navbar-inverse-brand-hover-color;
+        &:hover,
+        &:focus {
+          color: $navbar-inverse-brand-color;
+          background-color: $navbar-inverse-brand-hover-bg;
+        }
+      }
+
+      &:last-child > a {
+        color: $navbar-inverse-brand-color;
+        &:hover,
+        &:focus {
+          color: $navbar-inverse-brand-hover-color;
+        }
+      }
+
+      + li:before {
+        color: $navbar-inverse-brand-hover-color;
+      }
+    }
+  }
+}

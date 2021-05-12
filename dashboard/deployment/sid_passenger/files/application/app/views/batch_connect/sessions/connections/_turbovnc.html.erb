@@ -1,0 +1,25 @@
+<ul>
+  <li>
+    <b>To connect with <a href="https://www.turbovnc.org/" target="_blank">TurboVNC</a> client:</b>
+    <ol>
+      <li>
+        Download and install the latest
+        <a href="https://sourceforge.net/projects/turbovnc/files/" target="_blank"> TurboVNC client </a>
+        if you don't already have it
+      </li>
+      <li>
+        <a  class="btn btn-primary" href="/pun/sys/files/fs<%= connect.vnc_connection_file %>" download
+        <i class="fa fa-eye"></i>Download and open the VNC connection file
+        </a>
+      </li>
+    </ol>
+  </li>
+  <br>
+  <li>
+    <b>To connect with any other VNC client:</b><br>
+    point your favorite client to
+    <pre><code><%= connect.host %>:<%= connect.port %></code></pre>
+    and connect using the password
+    <pre><code><%= connect.password %></code></pre>
+  </li>
+</ul>

@@ -1,0 +1,23 @@
+---
+order: 30
+form:
+  token: "sys/JupyterLab"
+  bc_account: ""
+  bc_num_slots: "1"
+  bc_num_hours: "1"
+  custom_memory_per_node: "8"
+  custom_num_cores: "1"
+  custom_num_gpus: "0"
+  custom_time: "04:00:00"
+  envscript: ""
+  custom_email_address: ""
+  bc_email_on_started: "0"
+  custom_reservation: ""
+
+view:
+  logo: "jupyter_logo.svg"
+  logoWidth: "85"
+  style: "margin-top: -10px;"
+  p1: "Run Jupiter Lab"
+  p2: "1 CPU core and 8GB RAM"
+  p3: "4 hours job run time"
