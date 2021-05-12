@@ -1,0 +1,13 @@
+name: production-build
+
+on:
+  push:
+    branches: [master, ci_build]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run release step
+        run: make release
