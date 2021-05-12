@@ -1,0 +1,120 @@
+I"‡
+(function() {
+  var Poller, Timer;
+
+  Timer = (function() {
+    function Timer(callback, delay1) {
+      this.callback = callback;
+      this.delay = delay1;
+      this.remaining = this.delay;
+      this.active = true;
+      this.resume();
+    }
+
+    Timer.prototype.resume = function() {
+      if (!this.active) {
+        return;
+      }
+      this.start = new Date();
+      clearTimeout(this.timerId);
+      return this.timerId = setTimeout(this.callback, this.remaining);
+    };
+
+    Timer.prototype.restart = function() {
+      if (!this.active) {
+        return;
+      }
+      this.remaining = this.delay;
+      return this.resume();
+    };
+
+    Timer.prototype.pause = function() {
+      if (!this.active) {
+        return;
+      }
+      clearTimeout(this.timerId);
+      return this.remaining -= new Date() - this.start;
+    };
+
+    Timer.prototype.stop = function() {
+      if (!this.active) {
+        return;
+      }
+      clearTimeout(this.timerId);
+      return this.active = false;
+    };
+
+    return Timer;
+
+  })();
+
+  Poller = (function() {
+    function Poller(url1, delay1) {
+      this.url = url1;
+      this.delay = delay1;
+      this.poll();
+    }
+
+    Poller.prototype.poll = function() {
+      return this.timer = new Timer(this.request.bind(this), this.delay);
+    };
+
+    Poller.prototype.request = function() {
+      var that;
+      that = this;
+      return $.getScript(this.url).done(function(script, textStatus, jqxhr) {
+        console.log(textStatus);
+      }).fail(function(jqxhr, textStatus, errorThrown) {
+        console.log(textStatus);
+      }).always(function() {
+        that.poll();
+      });
+    };
+
+    Poller.prototype.pause = function() {
+      return this.timer.pause();
+    };
+
+    Poller.prototype.resume = function() {
+      return this.timer.resume();
+    };
+
+    return Poller;
+
+  })();
+
+  jQuery(function() {
+    var polls;
+    polls = [];
+    $('[data-toggle="poll"]').each(function() {
+      var delay, url;
+      url = $(this).data('url');
+      delay = $(this).data('delay');
+      if (url && delay) {
+        return polls.push(new Poller(url, delay));
+      }
+    });
+    return $(document).on({
+      'show.bs.modal': function() {
+        var i, len, poll, results;
+        results = [];
+        for (i = 0, len = polls.length; i < len; i++) {
+          poll = polls[i];
+          results.push(poll.pause());
+        }
+        return results;
+      },
+      'hidden.bs.modal': function() {
+        var i, len, poll, results;
+        results = [];
+        for (i = 0, len = polls.length; i < len; i++) {
+          poll = polls[i];
+          results.push(poll.resume());
+        }
+        return results;
+      }
+    });
+  });
+
+}).call(this);
+:ET

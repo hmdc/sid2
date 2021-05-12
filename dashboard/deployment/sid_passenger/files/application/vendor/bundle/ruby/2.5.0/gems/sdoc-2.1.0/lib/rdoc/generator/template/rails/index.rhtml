@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= @options.title %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=<%= @options.charset %>" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= include_template '_head.rhtml', {:rel_prefix => rel_prefix, tree_keys: []} %>
+</head>
+
+<body>
+
+    <%= include_template '_panel.rhtml' %>
+
+    <div class="banner">
+        <% if ENV['HORO_PROJECT_NAME'] %>
+            <span><%= ERB::Util.html_escape(ENV['HORO_PROJECT_NAME']) %> <%= ERB::Util.html_escape(ENV['HORO_PROJECT_VERSION']) %></span><br />
+        <% end %>
+        <h2>
+            <%= h index.name %>
+        </h2>
+        <ul class="files">
+            <li><%= h index.relative_name %></li>
+            <li>Last modified: <%= index.last_modified %></li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <%= include_template '_context.rhtml', {:context => index } %>
+    </div>
+  </body>
+</html>
+

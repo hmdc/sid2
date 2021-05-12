@@ -1,0 +1,88 @@
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/redcarpet-3.5.1/ext/redcarpet
+/opt/rh/rh-ruby25/root/usr/bin/ruby -r ./siteconf20210512-36-6yjmmj.rb extconf.rb
+creating Makefile
+
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/redcarpet-3.5.1/ext/redcarpet
+make "DESTDIR=" clean
+rm -f 
+rm -f redcarpet.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/redcarpet-3.5.1/ext/redcarpet
+make "DESTDIR="
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o autolink.o -c autolink.c
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o buffer.o -c buffer.c
+buffer.c: In function ‘bufcstr’:
+buffer.c:111:2: warning: passing argument 1 of ‘bufgrow’ discards ‘const’ qualifier from pointer target type [enabled by default]
+  if (buf->size + 1 <= buf->asize || bufgrow(buf, buf->size + 1) == BUF_OK) {
+  ^
+buffer.c:60:1: note: expected ‘struct buf *’ but argument is of type ‘const struct buf *’
+ bufgrow(struct buf *buf, size_t neosz)
+ ^
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o houdini_href_e.o -c houdini_href_e.c
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o houdini_html_e.o -c houdini_html_e.c
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o html.o -c html.c
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o html_smartypants.o -c html_smartypants.c
+html_smartypants.c: In function ‘smartypants_cb__ltag’:
+html_smartypants.c:385:2: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  if (next_to_closing_a && strncmp("&#39;", text+(i+1), 5) == 0) {
+  ^
+In file included from html_smartypants.c:26:0:
+/usr/include/string.h:395:15: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+ extern size_t strlen (const char *__s)
+               ^
+html_smartypants.c:385:2: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+  if (next_to_closing_a && strncmp("&#39;", text+(i+1), 5) == 0) {
+  ^
+In file included from html_smartypants.c:26:0:
+/usr/include/string.h:395:15: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+ extern size_t strlen (const char *__s)
+               ^
+html_smartypants.c:385:2: warning: pointer targets in passing argument 2 of ‘__builtin_strcmp’ differ in signedness [-Wpointer-sign]
+  if (next_to_closing_a && strncmp("&#39;", text+(i+1), 5) == 0) {
+  ^
+html_smartypants.c:385:2: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+html_smartypants.c:385:2: warning: pointer targets in passing argument 2 of ‘__builtin_strcmp’ differ in signedness [-Wpointer-sign]
+html_smartypants.c:385:2: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+html_smartypants.c:385:2: warning: pointer targets in passing argument 1 of ‘strlen’ differ in signedness [-Wpointer-sign]
+In file included from html_smartypants.c:26:0:
+/usr/include/string.h:395:15: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+ extern size_t strlen (const char *__s)
+               ^
+html_smartypants.c:385:2: warning: pointer targets in passing argument 2 of ‘__builtin_strcmp’ differ in signedness [-Wpointer-sign]
+  if (next_to_closing_a && strncmp("&#39;", text+(i+1), 5) == 0) {
+  ^
+html_smartypants.c:385:2: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+html_smartypants.c:385:2: warning: pointer targets in passing argument 2 of ‘__builtin_strcmp’ differ in signedness [-Wpointer-sign]
+html_smartypants.c:385:2: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+html_smartypants.c:385:2: warning: pointer targets in passing argument 2 of ‘strncmp’ differ in signedness [-Wpointer-sign]
+In file included from html_smartypants.c:26:0:
+/usr/include/string.h:143:12: note: expected ‘const char *’ but argument is of type ‘const uint8_t *’
+ extern int strncmp (const char *__s1, const char *__s2, size_t __n)
+            ^
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o markdown.o -c markdown.c
+markdown.c: In function ‘sd_markdown_render’:
+markdown.c:2836:3: warning: passing argument 1 of ‘is_codefence’ discards ‘const’ qualifier from pointer target type [enabled by default]
+   if (codefences_enabled && (is_codefence(document + beg, doc_size - beg, NULL) != 0))
+   ^
+markdown.c:1389:1: note: expected ‘uint8_t *’ but argument is of type ‘const uint8_t *’
+ is_codefence(uint8_t *data, size_t size, struct buf *syntax)
+ ^
+markdown.c: At top level:
+markdown.c:94:15: warning: ‘char_underline’ declared ‘static’ but never defined [-Wunused-function]
+ static size_t char_underline(struct buf *ob, struct sd_markdown *rndr, uint8_t *data, size_t offset, size_t size);
+               ^
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o rc_markdown.o -c rc_markdown.c
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o rc_render.o -c rc_render.c
+rc_render.c: In function ‘rndr_link_attributes’:
+rc_render.c:287:28: warning: variable ‘rndr’ set but not used [-Wunused-but-set-variable]
+  struct rb_redcarpet_rndr *rndr;
+                            ^
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -fvisibility=hidden -m64 -o stack.o -c stack.c
+rm -f redcarpet.so
+gcc -shared -o redcarpet.so autolink.o buffer.o houdini_href_e.o houdini_html_e.o html.o html_smartypants.o markdown.o rc_markdown.o rc_render.o stack.o -L. -L/opt/rh/rh-ruby25/root/usr/lib64 -L. -Wl,-z,relro -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro  -m64  -m64  -lruby  -lpthread -ldl -lcrypt -lm   -lc
+
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/redcarpet-3.5.1/ext/redcarpet
+make "DESTDIR=" install
+/usr/bin/mkdir -p . ./.gem.20210512-36-zan0gb
+exit > .sitearchdir.time
+/usr/bin/install -c -m 0755 redcarpet.so ./.gem.20210512-36-zan0gb

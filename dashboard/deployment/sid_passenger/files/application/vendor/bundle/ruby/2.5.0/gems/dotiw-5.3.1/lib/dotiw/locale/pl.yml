@@ -1,0 +1,74 @@
+pl:
+  datetime:
+    dotiw:
+      seconds:
+        one: "1 sekunda"
+        few: "%{count} sekundy"
+        many: "%{count} sekund"
+        other: "%{count} sekund"
+      minutes:
+        one: "1 minuta"
+        few: "%{count} minuty"
+        many: "%{count} minut"
+        other: "%{count} minut"
+      hours:
+        one: "1 godzina"
+        few: "%{count} godziny"
+        many: "%{count} godzin"
+        other: "%{count} godzin"
+      days:
+        one: "1 dzień"
+        few: "%{count} dni"
+        many: "%{count} dni"
+        other: "%{count} dni"
+      weeks:
+        one: "1 tydzień"
+        few: "%{count} tygodnie"
+        many: "%{count} tygodni"
+        other: "%{count} tygodni"
+      months:
+        one: "1 miesiąc"
+        few: "%{count} miesiące"
+        many: "%{count} miesięcy"
+        other: "%{count} miesięcy"
+      years:
+        one: "1 rok"
+        few: "%{count} lata"
+        many: "%{count} lat"
+        other: "%{count} lat"
+      less_than_x: "mniej niż %{distance}"
+    dotiw_compact:
+      seconds:
+        one: 1s
+        other: "%{count}s"
+      minutes:
+        one: 1m
+        other: "%{count}m"
+      hours:
+        one: 1g
+        other: "%{count}g"
+      days:
+        one: 1d
+        other: "%{count}d"
+      weeks:
+        one: 1t
+        other: "%{count}t"
+      months:
+        one: 1mi
+        other: "%{count}mi"
+      years:
+        one: 1r
+        other: "%{count}l"
+      less_than_x: "<%{distance}"
+      words_connector: ""
+      two_words_connector: ""
+      last_word_connector: ""
+      about_x_years:
+        one: ~1r
+        any: "~%{count}r"
+      over_x_years:
+        one: ">1r"
+        other: ">%{count}r"
+      almost_x_years:
+        one: ~1r
+        any: "~%{count}r"

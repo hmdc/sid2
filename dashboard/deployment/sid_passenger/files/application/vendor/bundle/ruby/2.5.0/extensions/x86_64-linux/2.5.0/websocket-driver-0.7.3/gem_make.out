@@ -1,0 +1,20 @@
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+/opt/rh/rh-ruby25/root/usr/bin/ruby -r ./siteconf20210512-36-645d0r.rb extconf.rb
+creating Makefile
+
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" clean
+rm -f 
+rm -f websocket_mask.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR="
+gcc -I. -I/opt/rh/rh-ruby25/root/usr/include -I/opt/rh/rh-ruby25/root/usr/include/ruby/backward -I/opt/rh/rh-ruby25/root/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -mtune=generic -fPIC -m64 -o websocket_mask.o -c websocket_mask.c
+rm -f websocket_mask.so
+gcc -shared -o websocket_mask.so websocket_mask.o -L. -L/opt/rh/rh-ruby25/root/usr/lib64 -L. -Wl,-z,relro -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro  -m64  -m64  -lruby  -lpthread -ldl -lcrypt -lm   -lc
+
+current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/mkdir -p . ./.gem.20210512-36-kwdgha
+exit > .sitearchdir.time
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20210512-36-kwdgha
