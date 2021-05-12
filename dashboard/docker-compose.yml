@@ -30,7 +30,7 @@ services:
       - var_log_slurm:/var/log/slurm
       - ./application/launchers/Rstudio:/var/www/ood/apps/sys/Rstudio
       - ./application/launchers/OdysseyRD:/var/www/ood/apps/sys/OdysseyRD
-      - ./application/data:/home/ood/ondemand/data:rw
+      - ./data:/home/ood/ondemand/data:rw
       - ./application:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
     ports:
@@ -99,7 +99,7 @@ services:
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
       - ./application:/home/ood/ondemand/dev/dashboard:rw
-      - ./application/data:/home/ood/ondemand/data:rw
+      - ./data:/home/ood/ondemand/data:rw
     expose:
       - "22"
       - "6818"
@@ -125,7 +125,7 @@ services:
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
       - ./application:/home/ood/ondemand/dev/dashboard:rw
-      - ./application/data:/home/ood/ondemand/data:rw
+      - ./data:/home/ood/ondemand/data:rw
     expose:
       - "22"
       - "6818"
