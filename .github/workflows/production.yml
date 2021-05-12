@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Dashboard directory
-        run: cd dashboard
       - name: Run release step
+        working-directory: ./dashboard
         run: make release
