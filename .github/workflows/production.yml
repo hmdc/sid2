@@ -1,14 +1,26 @@
 name: production-build
 
 on:
-  push:
-    branches: [master, ci_build]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag number for release'
+        required: true
+        default: '0.9.0'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run release step
+      - name: Creates build
         working-directory: ./dashboard
-        run: make release
+        run: SID_TAG=${{ github.event.inputs.logLevel }} make release
+      - name: Commits release
+        run: |
+          git config --global user.name 'CI Pipeline'
+          git config --global user.email 'ci-pipeline@users.noreply.github.com'
+          git checkout -b release_${{ github.event.inputs.logLevel }}
+          git add ./deployment/sid_passenger/files/application -f
+          git commit -m "Release release_${{ github.event.inputs.logLevel }}"
+          git push origin release_${{ github.event.inputs.logLevel }}
