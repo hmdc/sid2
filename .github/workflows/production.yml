@@ -20,7 +20,8 @@ jobs:
         run: |
           git config --global user.name 'CI Pipeline'
           git config --global user.email 'ci-pipeline@users.noreply.github.com'
-          git checkout -b release_${{ github.event.inputs.tag }}
           git add ./dashboard/deployment/sid_passenger/files/application -f
-          git commit -m "Release release_${{ github.event.inputs.tag }}"
-          git push origin release_${{ github.event.inputs.tag }}
+          git commit -m "Created release v${{ github.event.inputs.tag }}"
+          git push
+          git tag -a v${{ github.event.inputs.tag }} -m "Created release v${{ github.event.inputs.tag }}"
+          git push --tags
