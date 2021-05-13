@@ -49,6 +49,7 @@ class LauncherButton
 
     @metadata[:id] = @metadata[:id].downcase
     @metadata[:order] = config[:order]
+    @metadata[:status] = config[:status] ?  config[:status].downcase : "active"
   end
 
   def id
@@ -57,6 +58,10 @@ class LauncherButton
 
   def order
     return @metadata[:order]
+  end
+
+  def disabled?
+    return @metadata[:status] == "disabled"
   end
 
   def cluster

@@ -1,7 +1,7 @@
 ---
 order: 30
 form:
-  token: "sys/JupyterLab"
+  token: "sys/Jupyter"
   bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
@@ -11,6 +11,8 @@ form:
   custom_num_gpus: "0"
   custom_time: "08:00:00"
   envscript: ""
+  modules: ""
+  jupyterlab_switch: "1"
   custom_email_address: ""
   bc_email_on_started: "0"
   custom_reservation: ""
@@ -21,4 +23,4 @@ view:
   style: "margin-top: -10px;"
   p1: "Run Jupiter Lab"
   p2: "1 CPU core and 8GB RAM"
-  p3: "4 hours job run time"
+  p3: "8 hours job run time"

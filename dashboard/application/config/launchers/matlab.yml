@@ -1,7 +1,7 @@
 ---
-order: 40
+status: disabled
 form:
-  token: "sys/Stata"
+  token: "sys/Matlab"
   bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
@@ -10,17 +10,16 @@ form:
   custom_num_cores: "1"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
-  envscript: ""
   custom_email_address: ""
   bc_email_on_started: "0"
   custom_reservation: ""
   bc_vnc_resolution: "1024x768"
-  stata_version: "stata/16.0-fasrc01"
+  matlab_version: "/n/singularity_images/OOD/matlab/current/Matlab2020a_standard-xfce-el7-7.6.1810.sif"
 
 view:
-  logo: "stata_logo.svg"
-  logoWidth: "200"
-  style: "margin-top: 15px;"
-  p1: "Run Stata"
+  logo: "matlab_logo.png"
+  logoWidth: "230"
+  style: "margin-top: -30px;"
+  p1: "Run Matlab"
   p2: "1 CPU core and 8GB RAM"
   p3: "8 hours job run time"

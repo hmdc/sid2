@@ -22,4 +22,4 @@ view:
   style: "margin-top: 3px"
   p1: "Run SAS"
   p2: "1 CPU core and 4GB RAM"
-  p3: "4 hours job run time"
+  p3: "8 hours job run time"

@@ -8,6 +8,7 @@ class QuickLaunchController < ApplicationController
 
     LauncherButton.launchers.each do |launcher_config|
       next if !launcher_config.cluster
+      next if launcher_config.disabled?
 
       launcher_id = launcher_config.id
       launcher = launcher_config.to_h
