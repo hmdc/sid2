@@ -10,6 +10,69 @@
 
 // make navbar the grey default color
 // changed from the red color we use for branding
+
+//FIXES TO COLOR IN NAVIGATION
+.navbar-inverse {
+  .navbar-nav .open .dropdown-menu > li > a {
+    color: #767676;
+  }
+
+  @media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu .divider {
+      background-color: #919191 !important;
+    }
+  }
+
+  .navbar-toggle {
+    border-color: #767676;
+    .icon-bar {
+      background-color: #767676;
+    }
+  }
+
+  .navbar-toggle:hover, .navbar-toggle:focus {
+    background-color: #767676;
+    .icon-bar {
+      background-color: #fff;
+    }
+  }
+
+  .navbar-collapse, .navbar-form {
+    margin-top: 5px;
+    border-color: #919191;
+  }
+}
+
+//BETTER NAVIGATION COLLAPSING FOR SID ITEMS
+.sid-nav-lg-shown, .sid-nav-md-shown {
+  display: none !important;
+}
+
+@media (min-width: 768px) and (max-width: 1500px) {
+  .sid-nav-lg-hidden {
+    display: none !important;
+  }
+  .sid-nav-lg-shown {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1300px) {
+  .sid-nav-md-hidden {
+    display: none !important;
+  }
+  .sid-nav-md-shown {
+    display: block !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 900px) {
+  .navbar-nav li {
+    font-size: 13px;
+  }
+}
+
+//----------------------------
+
 .navbar-inverse-ood-grey-color{
   .navbar-inverse {
     background-color: #53565a;

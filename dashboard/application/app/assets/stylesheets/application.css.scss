@@ -207,7 +207,7 @@ pre.motd-monospaced {
   @include responsive-invisibility('.hidden-md-nav');
 }
 
-.navbar.navbar-inverse.navbar-static-top {
+.navbar.navbar-inverse {
   padding: 5px;
   border-width: 0 0 3px;
   border-color: transparent;
