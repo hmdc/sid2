@@ -20,7 +20,7 @@ form:
 view:
   logo: "stata_logo.svg"
   logoWidth: "200"
-  style: "margin-top: 15px;"
+  style: "margin-top: 20px;"
   p1: "Run Stata"
   p2: "1 CPU core and 8GB RAM"
   p3: "8 hours job run time"

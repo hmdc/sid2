@@ -19,7 +19,7 @@ form:
 view:
   logo: "sas_logo.png"
   logoWidth: "180"
-  style: "margin-top: 3px"
+  style: "margin-top: 13px"
   p1: "Run SAS"
   p2: "1 CPU core and 4GB RAM"
   p3: "8 hours job run time"

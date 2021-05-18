@@ -19,7 +19,7 @@ form:
 view:
   logo: "matlab_logo.png"
   logoWidth: "230"
-  style: "margin-top: -30px;"
+  style: "margin-top: -15px;"
   p1: "Run Matlab"
   p2: "1 CPU core and 8GB RAM"
   p3: "8 hours job run time"

@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$launcher-border-color-light: #2D9BF0;
+$launcher-border-color: #337ab7;
+$launcher-border-color-secondary: #808080;
+$launcher-border-color-fasse: #DA6027;
 
 #view-interactive-sessions-container {
   margin-bottom: 40px;
@@ -53,8 +57,8 @@
 }
 .launch-button {
   position: relative;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  border: 1px solid #337ab7;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  border: 4px solid $launcher-border-color-light;
   border-radius: 30px;
   margin-bottom: 20px;
   height: 220px;
@@ -71,8 +75,22 @@
 }
 
 .launch-button .panel-image{
-  height: 110px;
+  height: 120px;
   overflow: hidden;
+}
+
+.launch-button .terminal-image{
+  height: 155px;
+  overflow: hidden;
+}
+
+.launch-button .all-image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  overflow: hidden;
+  margin-bottom: 30px;
 }
 
 .launch-button .panel-text {
@@ -81,11 +99,13 @@
 }
 
 .launch-button .title-text {
-  font-weight: 450;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .launch-button .small-text {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .panel-text p {
@@ -98,8 +118,12 @@
 }
 
 .link-button {
-  border: 1px solid #CA8E6E;
-  border: 1px solid #F24827;
+  border-color: $launcher-border-color-fasse;
+  outline: none;
+}
+
+.secondary-button {
+  border-color: $launcher-border-color-secondary;
   outline: none;
 }
 
@@ -119,6 +143,13 @@
 .launch-button:hover .launch-button-hover {
   display: flex;
 }
+
+.launch-button .fasse-title{
+  height: 140px;
+  overflow: hidden;
+  padding-top: 40px;
+}
+
 .link-button a {
   text-decoration: none;
   color: inherit;
@@ -127,7 +158,7 @@
 .link-button-title {
   padding: 0 15px;
   font-size: 26px;
-  color: #F24827;
+  color: $launcher-border-color-fasse;
   text-align: center;
 }
 
@@ -139,6 +170,15 @@
 #fasse-button p {
   margin: 0;
   padding: 0 15px;
+}
+
+.all-image i {
+  font-size: 80px;
+  color: $launcher-border-color-secondary;
+}
+
+.all-image span {
+  padding-left: 10px;
 }
 
 header sup {
