@@ -189,11 +189,6 @@ $launcher-color-brown: #DA6027;
   padding: 0 15px;
 }
 
-.all-image i {
-  font-size: 80px;
-  color: $launcher-border-color-secondary;
-}
-
 .all-image span {
   padding-left: 10px;
 }
@@ -232,9 +227,17 @@ footer {
 
   .docs-sections-container {
     display: flex;
+    gap: 40px;
     margin-bottom: 30px;
     section {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .docs-sections-container {
+      flex-direction: column;
+      gap: 0;
     }
   }
 
@@ -254,4 +257,49 @@ footer {
   .docs-footer {
     font-style: italic;
   }
+}
+
+span.arrow {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin-left: 65px;
+
+  i {
+    position: absolute;
+    display: inline-block;
+    width: 80px;
+    height: 10px;
+    border-radius: 5px;
+    top: 21px;
+    left: -50px;
+    background-color: currentColor;
+  }
+}
+
+span.arrow::before {
+  content: "";
+  position: absolute;
+  top: 32px;
+  display: inline-block;
+  left: 0px;
+  height: 10px;
+  width: 40px;
+  border-radius: 5px;
+  background-color: currentColor;
+  transform: rotate(-45deg);
+}
+
+span.arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 30px;
+  display: inline-block;
+  left: 0px;
+  height: 10px;
+  width: 40px;
+  border-radius: 5px;
+  background-color: currentColor;
+  transform: rotate(45deg);
 }
