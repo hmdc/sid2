@@ -25,8 +25,8 @@ class Ws::WsSessionsController < ApplicationController
       cache_file.write(session_context.to_json)  # save context to cache file
       render json: { id: session.id }
     else
-      logger.error "Unable to create session"
-      render json: { message: "Unable to create session", errors: session_context.errors.full_messages }, status: :internal_server_error
+      logger.error "action=createSession user=#{@user} errors=#{session.errors.full_messages}"
+      render json: { message: "Unable to create session", errors: session.errors.full_messages }, status: :internal_server_error
     end
 
   rescue => error
@@ -44,6 +44,7 @@ class Ws::WsSessionsController < ApplicationController
     if session.destroy
       render json: {}, status: :no_content
     else
+      logger.error "action=deleteSession user=#{@user} errors=#{session.errors.full_messages}"
       render json: { message: "Unable to delete session", errors: session.errors.full_messages }, status: :internal_server_error
     end
 

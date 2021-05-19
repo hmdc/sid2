@@ -21,6 +21,6 @@ view:
   logo: "jupyter_logo.svg"
   logoWidth: "85"
   style: "margin-top: -5px;"
-  p1: "Run Jupiter Lab"
+  p1: "Run Jupyter notebook / Jupyterlab"
   p2: "1 CPU core and 8GB RAM"
   p3: "8 hours job run time"

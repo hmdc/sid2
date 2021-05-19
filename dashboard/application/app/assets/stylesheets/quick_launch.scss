@@ -5,7 +5,7 @@
 $launcher-border-color-light: #2D9BF0;
 $launcher-border-color: #337ab7;
 $launcher-border-color-secondary: #808080;
-$launcher-border-color-fasse: #DA6027;
+$launcher-color-brown: #DA6027;
 
 #view-interactive-sessions-container {
   margin-bottom: 40px;
@@ -15,29 +15,40 @@ $launcher-border-color-fasse: #DA6027;
 
 }
 
-.app-launcher-title {
-  padding: 10px 15px;
-  font-size: 18px;
-  font-weight: 500;
+#app-launcher-container {
+  .row {
+    margin-bottom: 40px;
+  }
 }
 
-.app-launcher-help {
-  padding: 15px 0;
+.app-launcher-title {
+  padding: 40px 0;
+
+  h2 {
+    font-size: 60px;
+    letter-spacing: 1px;
+    color: $launcher-color-brown;
+  }
+
+  img {
+    width: 120px;
+    margin-top: -25px;
+  }
 }
 
 .quick-launch-buttons-title {
-  border-bottom: 1px solid #ddd;
   padding: 15px 0;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .quick-launch-buttons-title h3 {
   display: inline-block;
   padding: 0;
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  color: #3B3D3F;
+  color: $launcher-border-color-secondary;
+  font-size: 24px;
+  letter-spacing: 1px;
+  font-weight: 300;
 }
 
 .launch-button-spinner {
@@ -50,10 +61,16 @@ $launcher-border-color-fasse: #DA6027;
   border-radius: 30px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
+  z-index: 1;
 }
 .launch-button-spinner .spinner-border{
   width: 60px;
   height: 60px;
+}
+.launch-button-container {
+  position: relative;
+  height: 220px;
+  margin-bottom: 20px;
 }
 .launch-button {
   position: relative;
@@ -61,7 +78,7 @@ $launcher-border-color-fasse: #DA6027;
   border: 4px solid $launcher-border-color-light;
   border-radius: 30px;
   margin-bottom: 20px;
-  height: 220px;
+  height: 100%;
   overflow: hidden;
   cursor: pointer;
 }
@@ -118,7 +135,7 @@ $launcher-border-color-fasse: #DA6027;
 }
 
 .link-button {
-  border-color: $launcher-border-color-fasse;
+  border-color: $launcher-color-brown;
   outline: none;
 }
 
@@ -158,7 +175,7 @@ $launcher-border-color-fasse: #DA6027;
 .link-button-title {
   padding: 0 15px;
   font-size: 26px;
-  color: $launcher-border-color-fasse;
+  color: $launcher-color-brown;
   text-align: center;
 }
 
@@ -198,4 +215,43 @@ footer {
   border-top: 1px solid #eee;
   margin: 0px 15px;
   padding-top: 30px;
+}
+
+#help-container, #docs-container {
+  display: flex;
+  justify-content: center;
+  background-color: #F0F0F0;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  .docs-sections-container {
+    display: flex;
+    margin-bottom: 30px;
+    section {
+      width: 100%;
+    }
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: $launcher-color-brown;
+    letter-spacing: 0.5px;
+  }
+
+  .docs-footer {
+    font-style: italic;
+  }
 }

@@ -7,22 +7,22 @@
 
 </script>
 <div id="app-launcher-container">
-  <div id="launch-button-error" class="alert alert-danger" role="alert" style="display: none;">
+  <div id="launch-button-error" class="alert alert-danger alert-dismissable" role="alert" style="display: none;">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
     There was an error submitting your job to the cluster
   </div>
-  <div class="alert alert-info app-launcher-title" role="alert">
-    Welcome to the Social Sciences dashboard of the FAS Cannon Cluster
-  </div>
 
-  <div data-selector="no-active-sessions" class="ood-appkit markdown app-launcher-help" style="<%= has_active_sessions?(@sessions) ? "display:none" : "" %>">
-    <p>To start an interactive session with a default set of resources, click an app icon below.</p>
-    <p>If you need different resources than those listed, <a href="<%= batch_connect_sessions_path %>">create a customized session</a> using the Interactive Apps menu</p>
+  <div data-selector="no-active-sessions" class="app-launcher-title" style="<%= has_active_sessions?(@sessions) ? "display:none" : "" %>">
+    <h2>Welcome to <img src="<%= asset_url "sid_logo.png" %>"></h2>
   </div>
 
   <div data-selector="active-sessions" class="quick-launch-buttons-title" style="<%= has_active_sessions?(@sessions) ? "" : "display:none" %>">
     <h3>Active interactive sessions</h3>
     <a data-selector="more-sessions" href="<%= batch_connect_sessions_path %>" style="<%= show_more_sessions_link?(@sessions) ? "" : "display:none" %>">
-      view all my Interactive sessions <span data-selector="number-of-sessions">(<%= @sessions.length %>)</span>
+      view all <span data-selector="number-of-sessions">(<%= @sessions.length %>)</span>
     </a>
   </div>
 
@@ -32,8 +32,7 @@
 
   <div class="quick-launch-buttons-container">
     <div class="quick-launch-buttons-title">
-      <h3>Start an interactive app</h3>
-      <a href="<%= batch_connect_sessions_path %>">view all interactive app options</a>
+      <h3>Start an interactive job</h3>
     </div>
     <div class="row row-eq-height">
       <% @launchers.each do |launcher| %>
@@ -52,5 +51,5 @@
   </div>
 </div>
 
-<%= render partial: "help" %>
+<%= render partial: "docs" %>
 

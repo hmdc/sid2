@@ -14,7 +14,7 @@ Configuration.load_dotenv_files
 #ENV['OOD_DATAROOT'] = Configuration.dataroot.to_s
 local_dataroot = "~/#{ENV['OOD_PORTAL'] || 'ondemand'}/data/#{ENV['APP_TOKEN'] || 'sys/dashboard'}"
 ENV['OOD_DATAROOT'] = Pathname.new(local_dataroot).expand_path.to_s
-ENV['OOD_BRAND_BG_COLOR'] = "#E9E9E9"
+ENV['OOD_BRAND_BG_COLOR'] = "#F0F0F0"
 ENV['OOD_BRAND_LINK_ACTIVE_BG_COLOR'] = "#3B3D3F"
 
 

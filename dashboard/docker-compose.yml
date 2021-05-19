@@ -33,6 +33,7 @@ services:
       - ./data:/home/ood/ondemand/data:rw
       - ./application:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
+      - ./status.md:/etc/ood/config/announcements.d/01_status.md
     ports:
       - "33000:80"
     expose:

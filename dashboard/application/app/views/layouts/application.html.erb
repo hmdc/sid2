@@ -57,12 +57,6 @@
 
   <div class="container content" role="main">
 
-    <% @announcements.select(&:valid?).each do |announcement| %>
-      <div class="alert alert-<%= announcement.type %> announcement" role="alert">
-        <%= raw OodAppkit.markdown.render(announcement.msg) %>
-      </div>
-    <% end %>
-
     <%= render "layouts/browser_warning" %>
 
     <%= render partial: "shared/insufficient_quota", locals: { quotas: @my_quotas } if @my_quotas && @my_quotas.any? %>

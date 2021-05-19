@@ -4,11 +4,11 @@
        data-toggle="launch-button"
        data-url="<%= ws_sessions_path %>"
        data-reload-url="<%= launchers_sessions_path(r: root_url, format: :js) %>"
-       class="launch-button">
-    <div class="launch-button-spinner" style="display: none;">
-      <div class="spinner-border" role="status"></div>
-    </div>
-
+       class="launch-button-container">
+  <div class="launch-button-spinner" style="display: none;">
+    <div class="spinner-border" role="status"></div>
+  </div>
+  <div class="launch-button">
     <div class="panel-body panel-image">
       <img src="<%= asset_url launcher_button[:logo] %>" alt="Application logo" width="<%= launcher_button[:logoWidth] || 200 %>" class="center-block"  style="<%= launcher_button[:style] || '' %>"/>
     </div>
@@ -19,6 +19,7 @@
       <p class="small-text">CANNON cluster</p>
     </div>
   </div>
+</div>
 </div>
 <% end %>
 

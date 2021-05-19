@@ -47,9 +47,11 @@ class LauncherButton
     raise ArgumentError, "launch button config must defined a token field id=#{id} metadata=#{metadata}" unless @form[:token]
     raise ArgumentError, "launch button config must defined an id metadata=#{metadata}" unless @metadata[:id]
 
+    set_cluster
+    set_partition
     @metadata[:id] = @metadata[:id].downcase
     @metadata[:order] = config[:order]
-    @metadata[:status] = config[:status] ?  config[:status].downcase : "active"
+    @metadata[:status] = config[:status] ? config[:status].downcase : "active"
   end
 
   def id
@@ -60,28 +62,16 @@ class LauncherButton
     return @metadata[:order]
   end
 
-  def disabled?
-    return @metadata[:status] == "disabled"
-  end
-
-  def cluster
-    return @cluster if @cluster
-    ood_app = BatchConnect::App.from_token @form[:token]
-    @cluster = ood_app.clusters.first.id.to_s if ood_app.clusters.any?
-  end
-
-  def default_partition
-    return @default_partition if @default_partition
-    cluster_metadata = ::Configuration.cluster_metadata.select{|metadata| metadata.cluster_id == cluster}.first
-    @default_partition = cluster_metadata.default_partition if cluster_metadata
+  def active?
+    return @metadata[:status] == "active" && @cluster && @launcher_partition
   end
 
   def to_h
     hsh = {}
     hsh[:metadata] = @metadata.clone
     hsh[:form] = @form.clone
-    hsh[:form][:cluster] = cluster
-    hsh[:form][:bc_queue] = default_partition unless hsh[:form][:bc_queue]
+    hsh[:form][:cluster] = @cluster
+    hsh[:form][:bc_queue] = @launcher_partition
     hsh[:view] = @view.clone
     return hsh
   end
@@ -97,6 +87,25 @@ class LauncherButton
   def self.read_yaml(path:)
     contents = path.read
     YAML.safe_load(contents).to_h.deep_symbolize_keys
+  end
+
+  def set_cluster
+    ood_app = BatchConnect::App.from_token @form[:token]
+    @cluster = ood_app.clusters.first.id.to_s if ood_app.clusters.any?
+  end
+
+  def set_partition
+    cluster_metadata = ::Configuration.cluster_metadata.select{|metadata| metadata.cluster_id == @cluster}.first
+    if !cluster_metadata
+      return
+    end
+
+    if(@form[:bc_queue])
+      user_groups = User.new.groups.map { |g| g.name}
+      @launcher_partition = cluster_metadata.partitions(user_groups).include?(@form[:bc_queue]) ? @form[:bc_queue] : nil
+    else
+      @launcher_partition = cluster_metadata.default_partition
+    end
   end
 
 end
