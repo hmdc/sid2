@@ -50,6 +50,7 @@
         <p>
           You can find information on our <a href="https://www.rc.fas.harvard.edu/maintenance" target="_blank">monthly planned maintenance window at this page.</a>
         </p>
+
         <% @announcements.select(&:valid?).each do |announcement| %>
             <%= raw OodAppkit.markdown.render(announcement.msg) %>
         <% end %>

@@ -189,8 +189,15 @@ $launcher-color-brown: #DA6027;
   padding: 0 15px;
 }
 
-.all-image span {
-  padding-left: 10px;
+.all-image {
+  span {
+    padding-left: 10px;
+  }
+
+  i {
+    font-size: 75px;
+    color: $launcher-border-color-secondary;
+  }
 }
 
 header sup {
@@ -274,7 +281,7 @@ span.arrow {
     border-radius: 5px;
     top: 21px;
     left: -50px;
-    background-color: currentColor;
+    background-color: $launcher-border-color-secondary;
   }
 }
 
@@ -287,7 +294,7 @@ span.arrow::before {
   height: 10px;
   width: 40px;
   border-radius: 5px;
-  background-color: currentColor;
+  background-color: $launcher-border-color-secondary;
   transform: rotate(-45deg);
 }
 
@@ -300,6 +307,6 @@ span.arrow::after {
   height: 10px;
   width: 40px;
   border-radius: 5px;
-  background-color: currentColor;
+  background-color: $launcher-border-color-secondary;
   transform: rotate(45deg);
 }
