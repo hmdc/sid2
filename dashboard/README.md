@@ -1,8 +1,8 @@
 # Sid2
 
-## Launching the Sid2 development environment
+## Launching the Sid Dashboard development environment
 
-The following will launch a Sid2 development environment with:
+The following will launch a Sid Dashboard development environment with:
 
 - Slurmctld - Slurm master,
 - Slurmdbd - Slurm database

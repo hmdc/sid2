@@ -11,6 +11,10 @@
 // make navbar the grey default color
 // changed from the red color we use for branding
 
+.navbar .app-icon {
+  margin-right: 5px;
+}
+
 //FIXES TO COLOR IN NAVIGATION
 .navbar-inverse {
   .navbar-nav .open .dropdown-menu > li > a {

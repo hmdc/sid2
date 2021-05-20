@@ -188,7 +188,7 @@ class DashboardControllerTest < ActionController::TestCase
     assert_select ".navbar-collapse > .nav li.dropdown[title]", 5
     assert_select  dropdown_link(1), text: "Files"
     assert_select  dropdown_link(2), text: "Jobs"
-    assert_select  dropdown_link(3), text: "Clusters"
+    assert_select  dropdown_link(3), text: "Terminals"
     assert_select  dropdown_link(4), text: "Interactive Apps"
     assert_select  dropdown_link(5), text: "Gateway Apps"
   end
@@ -207,7 +207,7 @@ class DashboardControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_select ".navbar-collapse > .nav li.dropdown[title]", 5
-    assert_select dropdown_link(1), text: "Clusters"
+    assert_select dropdown_link(1), text: "Terminals"
     assert_select dropdown_link(2), text: "Files"
     assert_select dropdown_link(3), text: "Gateway Apps"
     assert_select dropdown_link(4), text: "Interactive Apps"
