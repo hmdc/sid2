@@ -3,7 +3,7 @@ name: continous-integration
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
