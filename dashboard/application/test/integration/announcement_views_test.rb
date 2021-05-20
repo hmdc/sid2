@@ -1,5 +1,6 @@
 require 'test_helper'
 
+
 class AnnouncementViewsTest < ActionDispatch::IntegrationTest
   test "announcement is displayed if exists" do
     f = Tempfile.open(["announcement", ".md"])

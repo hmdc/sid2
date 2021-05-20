@@ -52,7 +52,9 @@
         </p>
 
         <% @announcements.select(&:valid?).each do |announcement| %>
+          <div class="announcement">
             <%= raw OodAppkit.markdown.render(announcement.msg) %>
+          </div>
         <% end %>
       </section>
     </div>
