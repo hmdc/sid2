@@ -63,7 +63,7 @@ class LauncherButton
   end
 
   def active?
-    return @metadata[:status] == "active" && @cluster && @launcher_partition
+    return @metadata[:status] == "active" && @cluster != nil && @launcher_partition != nil
   end
 
   def to_h
