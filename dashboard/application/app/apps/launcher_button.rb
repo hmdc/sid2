@@ -22,12 +22,12 @@ class LauncherButton
     #SYSTEM CONFIGURED LAUNCHERS
     SysRouter.apps.each do |sys_app|
       app = BatchConnect::App.from_token sys_app.token
-      next if !app.launch_button
+      next if !app.launcher_button
       metadata = { id: sys_app.name }
       metadata[:type] = "system"
       metadata[:path] = sys_app.path
 
-      launch_button_config = app.launch_button.clone
+      launch_button_config = app.launcher_button.clone
       launch_button_config[:form][:token] = sys_app.token
       launch_button_config[:view][:logo] = sys_app.image_uri
 
@@ -44,12 +44,13 @@ class LauncherButton
     @form = config[:form]
     @view = config[:view]
 
-    raise ArgumentError, "launch button config must defined a token field id=#{id} metadata=#{metadata}" unless @form[:token]
+    @metadata[:id] = config[:id] ? config[:id].downcase : @metadata[:id]&.downcase
+
     raise ArgumentError, "launch button config must defined an id metadata=#{metadata}" unless @metadata[:id]
+    raise ArgumentError, "launch button config must defined a token field id=#{id} metadata=#{metadata}" unless @form[:token]
 
     set_cluster
     set_partition
-    @metadata[:id] = @metadata[:id].downcase
     @metadata[:order] = config[:order]
     @metadata[:status] = config[:status] ? config[:status].downcase : "active"
   end

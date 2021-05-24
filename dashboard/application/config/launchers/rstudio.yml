@@ -1,4 +1,5 @@
 ---
+id: "rstudio"
 order: 10
 form:
   token: "sys/Rstudio"
