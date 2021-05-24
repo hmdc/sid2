@@ -11,7 +11,7 @@ Configuration section at the root of the file to set:
 * `id:` is a unique identifier for each launcher. System launchers with the same id as application launchers will override their configuration.
 default id value is taken from the filename without the extension. Id Value can be overridden with the property `id` within the configuration file.
 * `order:` this is an integer value used to order the list of launchers. Smallest value goes first. Negative values are allowed.
-* `status:` string property. If status==disabled, the launcher will not appear in the Sid dashboard.
+© string property. If status==disabled, the launcher will not appear in the Sid dashboard.
 
 ### Form
 Configuration section to set the runtime options for the application. The options follow the same naming that OOD uses to launch interactive applications with the form.
@@ -24,6 +24,12 @@ Configuration section for the display options for the launcher button
 * `logo:` Image file to display in the launcher. The field takes a path relative from the application assets folder: `application/app/assets/images`
 * `logoWidth` and `style` fields are used to style the image with the space in the launcher button.
 * `p1`, `p2`, and `p3` are used to display text within the launcher. Each `p` represents a line of text. Set to `nil` to display an empty line.
+
+### Sid Dashboard index page
+The index page that displays all the launcher buttons has some safeguards. It will not show a launcher button in the following conditions:
+* `status:` if the status is `disabled`
+* `token:` the value is for an application that is not installed or invalid
+* `bc_queue:` the partition is not accessible for the current user or is invalid.
 
 ## System Launchers
 System launchers are configured by system administrators within the OOD installation. These are files that can be added to each of the installed applications that OOD can execute from the interactive apps section.

@@ -1,5 +1,4 @@
 ---
-status: disabled
 form:
   token: "sys/Matlab"
   bc_queue: "test"
