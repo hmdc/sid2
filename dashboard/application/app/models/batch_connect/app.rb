@@ -219,8 +219,8 @@ module BatchConnect
 
     # View used for session if it exists
     # @return [String, nil] session view
-    def launch_button
-      file = root.join("launch_button.yml")
+    def launcher_button
+      file = root.join("launcher_button.yml")
       read_yaml_erb(path: file) if file.file?
     end
 

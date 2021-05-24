@@ -58,3 +58,7 @@ The following will launch a Sid Dashboard development environment with:
 
   and go through the same Validation process as for the development environment.
 
+## Launcher button configuration
+
+To add or update launcher buttons, follow the instructions [here](launchers.md)
+
