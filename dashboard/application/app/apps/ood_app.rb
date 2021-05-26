@@ -196,14 +196,15 @@ class OodApp
   end
 
   def image_path
-    path.join("image.png")
+    image_file = path.glob("image.{jpg,gif,png,svg}").find(&:file?)
+    image_file ? image_file : path.join("image.jpg")
   end
 
   def image_uri
     if image_path.file?
       app_image_path(name, type, owner)
     else
-      "fas://cog"
+      "iqss_logo.png"
     end
   end
 

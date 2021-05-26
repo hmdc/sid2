@@ -2,6 +2,13 @@ require 'ostruct'
 
 class AppsController < ApplicationController
 
+  IMAGE_TYPE_MAPPER = {
+    ".jpg" => "image/jpeg",
+    ".gif" => "image/gif",
+    ".png" => "image/png",
+    ".svg" => "image/svg+xml",
+  }
+
   def index
     @core_app_groups = OodAppGroup.select(titles: %w(Files Jobs Clusters), groups: sys_app_groups)
     @app_groups = sys_app_groups.select {|g| ! %w(Files Jobs Clusters).include?(g.title) }
@@ -64,7 +71,7 @@ class AppsController < ApplicationController
     set_app
 
     if @app.image_path.file?
-      send_file @app.image_path, :type => 'image/png', :disposition => 'inline'
+      send_file @app.image_path, :type => IMAGE_TYPE_MAPPER[@app.image_path.extname], :disposition => 'inline'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
