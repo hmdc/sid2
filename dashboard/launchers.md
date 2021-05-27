@@ -35,10 +35,10 @@ The index page that displays all the launcher buttons has some safeguards. It wi
 System launchers are configured by system administrators within the OOD installation. These are files that can be added to each of the installed applications that OOD can execute from the interactive apps section.
 These applications are installed under: `/var/www/ood/apps/sys`. To configure a launcher, we need to add a `launcher_button.yml` file within the application folder we want a launcher button for. See example for local environment: [application/launchers/Rstudio/launcher_button.yml](application/launchers/Rstudio/launcher_button.yml)
 
-System launchers have the same configuration properties as application launchers.
+System launchers have the same configuration properties as application launchers, but there are some minor changes:
 * `id:` default id value comes from the name of the application as provided by OOD. OOD creates the name from the folder name. This value can be overridden with the `id` field.
 * `token:` is automatically populated by the system. Cannot be overridden.
-* `logo:` to display an image, an `image.png` file can be added to the application directory. If available, this image will be used in the launcher button.
+* `logo:` to display an image, an `image.{jpg|gif|png|svg}` file can be added to the application directory. If available, this image will be used in the launcher button. If no image file is added, the default will be used:`iqss_logo.png`
 
 ## Launchers API
 There is a launchers endpoint that shows all launchers with its configuration.  
