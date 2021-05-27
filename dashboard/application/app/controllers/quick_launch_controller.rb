@@ -7,7 +7,7 @@ class QuickLaunchController < ApplicationController
     @launchers = []
 
     LauncherButton.launchers.each do |launcher_config|
-      next if !launcher_config.active?
+      next if !launcher_config.operational?
 
       launcher_id = launcher_config.id
       launcher = launcher_config.to_h

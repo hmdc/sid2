@@ -19,9 +19,14 @@ class LauncherButtonTest < ActiveSupport::TestCase
     assert_equal "id_null_order", result[3].id
   end
 
-  test "active? should be false if token is invalid" do
+  test "status should default to active" do
+    under_test = create_launcher(order:10)
+    assert_equal "active", under_test.to_h[:metadata][:status]
+  end
+
+  test "operational? should be false if token is invalid" do
     under_test = create_launcher(app_token:"invalid/app", order:10)
-    assert_equal false, under_test.active?
+    assert_equal false, under_test.operational?
   end
 
   test "order method should return configured order" do

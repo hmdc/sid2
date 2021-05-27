@@ -63,13 +63,14 @@ class LauncherButton
     return @metadata[:order]
   end
 
-  def active?
+  def operational?
     return @metadata[:status] == "active" && @cluster != nil && @launcher_partition != nil
   end
 
   def to_h
     hsh = {}
     hsh[:metadata] = @metadata.clone
+    hsh[:metadata][:operational] = operational?
     hsh[:form] = @form.clone
     hsh[:form][:cluster] = @cluster
     hsh[:form][:bc_queue] = @launcher_partition
