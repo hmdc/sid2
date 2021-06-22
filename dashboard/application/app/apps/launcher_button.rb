@@ -9,7 +9,7 @@ class LauncherButton
       launchers_path.children.each do |launcher_file|
         file_id = launcher_file.basename(launcher_file.extname).to_s
         metadata = { id: file_id }
-        metadata[:type] = "application"
+        metadata[:type] = "internal"
         metadata[:path] = launcher_file.to_s
 
         config = read_yaml(path: launcher_file)
