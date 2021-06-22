@@ -19,12 +19,12 @@ class LauncherButton
       end
     end
 
-    #SYSTEM CONFIGURED LAUNCHERS
+    #EXTERNAL CONFIGURED LAUNCHERS
     SysRouter.apps.each do |sys_app|
       app = BatchConnect::App.from_token sys_app.token
       next if !app.launcher_button
       metadata = { id: sys_app.name }
-      metadata[:type] = "system"
+      metadata[:type] = "external"
       metadata[:path] = sys_app.path
 
       launch_button_config = app.launcher_button.clone

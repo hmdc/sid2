@@ -2,7 +2,7 @@
 
 ## Types of Launcher Configurations
 
-Launcher button configurations can be specified either as [Application Launchers](#application-launchers), within the `Sid Dashboard`, or as [System Launchers](#system-launchers), within each OOD application's installation directory.
+Launcher button configurations can be specified either as [Application Launchers](#application-launchers), within the `Sid Dashboard`, or as [External Launchers](#external-launchers), within each OOD application's installation directory.
 
 ## Application Launchers
 Application launchers are configured within the `Sid Dashboard` code base, under the directory: `application/config/launchers`
@@ -16,7 +16,7 @@ Configuration section at the root of the file to set the following keys:
 * `id` is a unique identifier for each launcher. System Launchers with the same `id` as Application Launchers will override their configuration.
 Default `id` value is taken from the filename without the extension.
 * `order` is an integer value used to order the list of launchers. Smallest value goes first. Negative values are allowed.
-© string property. However if `status`==disabled, the launcher will not appear in the Sid dashboard.
+* `status:` optional string property, defaults to `active`. It is used to disable a launcher without deleting the configuration file. If status!=`active`, the launcher will not appear in the Sid dashboard.
 
 #### Form
 Configuration section to set the runtime options for the application. The options follow the same naming as those in the form that OOD uses to launch interactive applications.
@@ -26,27 +26,28 @@ Configuration section to set the runtime options for the application. The option
 
 #### View
 Configuration section for the display options for the launcher button
-* `logo` image file to display in the launcher. The field takes a path relative from the application assets folder: `application/app/assets/images`
-* `logoWidth` and `style` fields are used to style the image with the space in the launcher button.
+* `logo:` Image file to display in the launcher, this value is compulsory. The field takes a path relative from the application assets folder: `application/app/assets/images`
+* `logoWidth:` integer value used to adjust the logo width to the space in the launcher button. The height will adjust automatically keeping the logo aspect ratio.
+* `style:` optional css style added to the logo HTML mainly to adjust the top margin. eg: `margin-top: 10px;`
 * `p1`, `p2`, and `p3` are used to display text within the launcher. Each `p` represents a line of text. Set to `nil` to display an empty line.
 
 ### Showing/Hiding Launchers on the Sid Dashboard index page
 The index page that displays all the launcher buttons has some safeguards. It will not show a launcher button in any of the following conditions:
-* `status` is `disabled`.
-* `token` value is for an application that is not installed or invalid.
-* `bc_queue` partition is not accessible for the current user or is invalid.
+* `status:` if the status value is not `active`
+* `token:` the value is for an application that is not installed or is invalid
+* `bc_queue:` the partition is not accessible for the current user or is invalid.
 
-## System Launchers
-System launchers are configured by system administrators within the OOD installation. These are files that can be added to each of the installed applications that OOD can execute from the interactive apps section.
-These applications are installed under: `/var/www/ood/apps/sys`. To configure a launcher, you need to add a `launcher_button.yml` file within the application folder you want a launcher button for. See example for local environment: [application/launchers/Rstudio/launcher_button.yml](application/launchers/Rstudio/launcher_button.yml)
+## External Launchers
+External launchers are configured by system administrators within the OOD installation. These are files that can be added to each of the installed applications that OOD can execute from the interactive apps section.
+These applications are installed under: `/var/www/ood/apps/sys`. To configure an external launcher, we need to add a `launcher_button.yml` file within the application folder we want a launcher button for. See example for local environment: [application/launchers/Rstudio/launcher_button.yml](application/launchers/Rstudio/launcher_button.yml)
 
-System Launchers have the same configuration properties as Application Launchers, but there are some minor changes:
-* `id` default id value comes from the name of the application as provided by OOD. OOD creates the name from the folder name. This value can be overridden with the `id` field.
-* `token` is automatically populated by the system. Cannot be overridden.
-* `logo` to display an image, an `image.{jpg|gif|png|svg}` file can be added to the application directory. If available, this image will be used in the launcher button. If no image file is added, the default will be used:`iqss_logo.png`
+External launchers have the same configuration properties as Application Launchers, but there are some minor changes:
+* `id:` default id value comes from the name of the application as provided by OOD. OOD creates the application name from the folder name. This value can be overridden with the `id` field.
+* `token:` is automatically populated by the system based on the application. Cannot be overridden.
+* `logo:` to display a custom image, an `image.{jpg|gif|png|svg}` file can be added to the application directory. If available, this image will be used in the launcher button. If no image file is added, the default will be used:`iqss_logo.png`
 
 ## Launchers API
 There is a launchers endpoint that shows all launchers with its configuration.  
-It returns a list of all the launchers in order.
+It returns a list of all the application and external launchers available in the system. The launchers are ordered by the order property: smaller values first, nil/missing values last.
 
 `<application-root>/ws/launchers`
