@@ -2,7 +2,7 @@
 
 ## Types of Launcher Configurations
 
-Launcher button configurations are YAML files that can be specified either as [Internal Launcher Files](#internal-launcher-files), within the `Sid Dashboard`, or as [External Launchers](#external-launchers), within each OOD application's installation directory.
+Launcher button configurations are YAML files that can be specified either as [Internal Launcher Files](#internal-launcher-files), within the `Sid Dashboard`, or as [External Launcher Files](#external-launcher-files), within each OOD application's installation directory.
 
 ## Internal Launcher Files
 Internal launcher files are configured within the `Sid Dashboard` code base, under the directory: `application/config/launchers`
