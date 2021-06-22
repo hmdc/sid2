@@ -10,6 +10,30 @@ class LauncherButtonTest < ActiveSupport::TestCase
     assert_raises(ArgumentError) { create_launcher(id:nil, order:10) }
   end
 
+  test "should throw exception when form is not provided" do
+    config = {
+      view: {
+        p1: SecureRandom.uuid.to_s
+      }
+    }
+
+    metadata = { id: SecureRandom.uuid.to_s }
+
+    assert_raises(ArgumentError) { LauncherButton.new(metadata, config) }
+  end
+
+  test "should throw exception when view is not provided" do
+    config = {
+      form: {
+        token: "test/token"
+      }
+    }
+
+    metadata = { id: SecureRandom.uuid.to_s }
+
+    assert_raises(ArgumentError) { LauncherButton.new(metadata, config) }
+  end
+
   test "Implements <=> to order by order field with nulls last" do
     launchers = [create_launcher(id:"id_null_order", order:nil), create_launcher(id:"id_1", order:100), create_launcher(id:"id_2", order:-100), create_launcher(id:"id_3", order:0)]
     result = launchers.sort
@@ -22,6 +46,11 @@ class LauncherButtonTest < ActiveSupport::TestCase
   test "status should default to active" do
     under_test = create_launcher(order:10)
     assert_equal "active", under_test.to_h[:metadata][:status]
+  end
+
+  test "logo should default to iqss_logo.png" do
+    under_test = create_launcher()
+    assert_equal "iqss_logo.png", under_test.to_h[:view][:logo]
   end
 
   test "operational? should be false if token is invalid" do
@@ -52,6 +81,9 @@ class LauncherButtonTest < ActiveSupport::TestCase
       order: order,
       form: {
         token: app_token
+      },
+      view: {
+        p1: SecureRandom.uuid.to_s
       }
     }
 

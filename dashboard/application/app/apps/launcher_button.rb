@@ -47,12 +47,15 @@ class LauncherButton
     @metadata[:id] = config[:id] ? config[:id].downcase : @metadata[:id]&.downcase
 
     raise ArgumentError, "launch button config must defined an id metadata=#{metadata}" unless @metadata[:id]
-    raise ArgumentError, "launch button config must defined a token field id=#{id} metadata=#{metadata}" unless @form[:token]
+    raise ArgumentError, "launch button config must defined a form section field id=#{id} metadata=#{metadata}" unless @form
+    raise ArgumentError, "launch button config must defined a form.token field id=#{id} metadata=#{metadata}" unless @form[:token]
+    raise ArgumentError, "launch button config must defined a view section field id=#{id} metadata=#{metadata}" unless @view
 
     set_cluster
     set_partition
     @metadata[:order] = config[:order]
     @metadata[:status] = config[:status] ? config[:status].downcase : "active"
+    @view[:logo] =  "iqss_logo.png" unless @view[:logo]
   end
 
   def id
