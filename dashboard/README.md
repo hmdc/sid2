@@ -62,3 +62,7 @@ The following will launch a Sid Dashboard development environment with:
 
 To add or update launcher buttons, follow the instructions [here](launchers.md)
 
+## Quick links configuration
+
+To add or update quick link buttons, follow the instructions [here](quick_links.md)
+
