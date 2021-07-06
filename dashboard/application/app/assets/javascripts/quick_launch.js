@@ -1,6 +1,10 @@
 const LaunchButtonService = (function (){
     let buttonEnabled = true
 
+    function pushAnalytics(launchButtonId) {
+        dataLayer && dataLayer.push({'event':'launcherClick','launcherButtonId':launchButtonId});
+    }
+
     function showError() {
         $("#launch-button-error").fadeOut(1000).fadeIn(1000)
     }
@@ -46,11 +50,13 @@ const LaunchButtonService = (function (){
                     const maxSessions = launchButtons['maxSessions']
                     $(`#sessions-container > div:nth-child(${maxSessions})`).nextAll().fadeOut(1000, function() { $(this).remove(); })
                     hideSpinner(launchButtonId)
+                    pushAnalytics(launchButtonId);
                 });
         })
         .fail(( jqxhr, settings, exception ) => {
             console.log(`Error submitting job exception=${exception}`);
             hideSpinner(launchButtonId)
+            pushAnalytics(launchButtonId);
             showError()
         })
     }
