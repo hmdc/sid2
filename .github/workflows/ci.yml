@@ -3,7 +3,8 @@ name: continous-integration
 on:
   push:
     branches:
-      - master
+      - canary
+      - stable
 
 jobs:
   build:
