@@ -1,4 +1,4 @@
-package com.iqss.keycloak.auth.spi;
+package edu.harvard.iq.keycloak.auth.spi;
 
 import org.keycloak.Config;
 import org.keycloak.authentication.Authenticator;
