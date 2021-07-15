@@ -48,9 +48,9 @@ The following will launch a Sid Dashboard development environment with:
 
 - Run `make down`
 
-## Deploying to QA (your FASRC account)
+## Deploying to remote development (your FASRC account)
 
-- Run `make qa`. `make qa` builds all required OOD/Ruby libs locally and exports built artifacts to FASRC. This task will prompt you for your FASRC SSH credentials (password and pin) twice as it creates/validates the pre-requisite directory structure as setup in your home directory.
+- Run `make remote-dev`. `make remote-dev` builds all required OOD/Ruby libs locally and exports built artifacts to FASRC. This task will prompt you for your FASRC SSH credentials (password and pin) twice as it creates/validates the pre-requisite directory structure as setup in your home directory.
   
 - Once completed, visit:
 
