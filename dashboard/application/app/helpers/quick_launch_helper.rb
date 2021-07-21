@@ -22,7 +22,7 @@ module QuickLaunchHelper
   end
 
   def sys_url(from_url)
-    from_url ? from_url.gsub(root_path, '/pun/sys/dashboard/') : from_url
+    from_url ? from_url.sub(root_path, '/pun/sys/dashboard/') : from_url
   end
 
   def terminal_url
