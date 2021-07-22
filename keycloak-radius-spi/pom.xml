@@ -42,6 +42,11 @@
             <version>3.0.24.Final</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.tinyradius</groupId>
+            <artifactId>tinyradius</artifactId>
+            <version>1.1.1-SNAPSHOT</version>
+        </dependency>
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>junit</groupId>

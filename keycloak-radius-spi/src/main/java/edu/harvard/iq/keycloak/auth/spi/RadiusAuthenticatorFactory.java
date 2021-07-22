@@ -1,5 +1,6 @@
 package edu.harvard.iq.keycloak.auth.spi;
 
+import org.jboss.logging.Logger;
 import org.keycloak.Config;
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.authentication.AuthenticatorFactory;
@@ -8,12 +9,25 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class RadiusAuthenticatorFactory implements AuthenticatorFactory {
 
+    private static final Logger logger = Logger.getLogger(RadiusAuthenticator.class);
+
     public static final String PROVIDER_ID = "iqss-radius-authenticator";
+
+    private final List<ProviderConfigProperty> configProperties;
+
+    public RadiusAuthenticatorFactory() {
+        configProperties = Arrays.asList(
+                RadiusAuthenticatorProperties.HOST.getProviderProperty(),
+                RadiusAuthenticatorProperties.PORT.getProviderProperty(),
+                RadiusAuthenticatorProperties.SHARED_SECRET.getProviderProperty(),
+                RadiusAuthenticatorProperties.FORM_TOKEN_LABEL.getProviderProperty()
+                );
+    }
 
     @Override
     public String getId() {
@@ -22,7 +36,7 @@ public class RadiusAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public Authenticator create(KeycloakSession session) {
-        return null;
+        return new RadiusAuthenticator();
     }
 
     @Override
@@ -42,7 +56,7 @@ public class RadiusAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
-        return Collections.emptyList();
+        return configProperties;
     }
 
     @Override
