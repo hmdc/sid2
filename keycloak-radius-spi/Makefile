@@ -5,13 +5,16 @@ all:: dev
 .PHONY: build dev reset
 
 build:
-	mvn clean install
+	mvn clean
+	mvn install
 
 dev:
-	mvn clean install
+	mvn clean
+	mvn install
 	docker-compose up --build
 
 reset:
-	mvn clean install
+	mvn clean
+	mvn install
 	docker-compose down -v || :
 	docker-compose up --build

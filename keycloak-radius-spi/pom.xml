@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.tinyradius</groupId>
             <artifactId>tinyradius</artifactId>
-            <version>1.1.1-SNAPSHOT</version>
+            <version>1.1.1</version>
         </dependency>
         <!-- TEST DEPENDENCIES -->
         <dependency>
@@ -87,6 +87,28 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install-external</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${basedir}/libs/tinyradius-1.1.1.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>org.tinyradius</groupId>
+                            <artifactId>tinyradius</artifactId>
+                            <version>1.1.1</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

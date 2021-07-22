@@ -11,6 +11,11 @@ The service provider is configurable, the following parameters can be provided:
  * mvn 3.8
  * GNU Make. Tested with version 3.81
 
+### Technical Notes
+The `tinyradius` library is used to connect to the Radius server. This library is not deployed into maven central, so the Maven command will not find it.
+
+We have added the library into the project and created a Maven task to install it as part of `clean` target. The make script has been updated to execute `mvn clean` before all tasks.
+
 ## Radius MFA Authenticator Installation
 Build the `Radius MFA` custom SPI jar, from the root of the project, execute:  
 `make build`  
