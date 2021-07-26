@@ -16,7 +16,7 @@ $launcher-color-brown: #DA6027;
 }
 
 #app-launcher-container {
-  .row {
+  .launch-button-container-flex {
     margin-bottom: 40px;
   }
 }
@@ -51,6 +51,14 @@ $launcher-color-brown: #DA6027;
   font-weight: 300;
 }
 
+
+.launch-button-container-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+}
+
 .launch-button-spinner {
   display: flex;
   justify-content: center;
@@ -69,6 +77,7 @@ $launcher-color-brown: #DA6027;
 }
 .launch-button-container {
   position: relative;
+  width: 320px;
   height: 220px;
   margin-bottom: 20px;
 }
@@ -111,7 +120,7 @@ $launcher-color-brown: #DA6027;
 }
 
 .launch-button .panel-text {
-  padding: 0 20px 15px 20px;
+  padding: 0 20px 15px 15px;
   white-space: nowrap;
 }
 

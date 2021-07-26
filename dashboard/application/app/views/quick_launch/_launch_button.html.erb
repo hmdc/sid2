@@ -13,7 +13,7 @@
       <img src="<%= asset_url launcher_button[:logo] %>" alt="Application logo" width="<%= launcher_button[:logoWidth] || 200 %>" class="center-block"  style="<%= launcher_button[:style] || '' %>"/>
     </div>
     <div class="panel-body panel-text">
-      <p class="title-text"><%= launcher_button[:p1] || "&nbsp;".html_safe %></p>
+      <p class="title-text"><%= launcher_button[:p1].html_safe || "&nbsp;".html_safe %></p>
       <p class="small-text"><%= launcher_button[:p2] || "&nbsp;".html_safe %></p>
       <p class="small-text"><%= launcher_button[:p3] || "&nbsp;".html_safe %></p>
       <p class="small-text">Cannon cluster</p>
