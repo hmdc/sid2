@@ -97,6 +97,7 @@
                         <phase>clean</phase>
                         <configuration>
                             <file>${basedir}/libs/tinyradius-1.1.1.jar</file>
+                            <pomFile>${basedir}/libs/tinyradius-1.1.1.pom</pomFile>
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>org.tinyradius</groupId>
                             <artifactId>tinyradius</artifactId>
