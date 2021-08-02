@@ -26,6 +26,13 @@ Keycloak supports hot deployments, so copying the JAR artifact should automatica
 Once deployed, the `Radius MFA` flow execution will be available to use within an authentication flow.  
 To access the configuration parameters, once the `Radius MFA` execution has been added to an authentication flow, The config menu is available on right-hand side of the execution under `Actions > Config`.
 
+### Configuration properties
+
+- `radiusmfa.host`: RADIUS server hostname, eg: radius.server.com (required)
+- `radiusmfa.port`: Override value for RADIUS server port, defaults to 1812 (optional)
+- `radiusmfa.shared_secret`: RADIUS server shared secret (required)
+- `radiusmfa.form_token_label`: Text label for the TOTP token form field, defaults to token (optional)
+
 ### Sample log entries when deploying the custom SPI
 Standard log location folder: `/opt/jboss/keycloak/standalone/log`
 ```
