@@ -1,6 +1,5 @@
-package edu.harvard.iq.keycloak.auth.spi;
+package edu.harvard.iq.keycloak.auth.spi.util;
 
-import org.tinyradius.packet.AccessRequest;
 import org.tinyradius.util.RadiusClient;
 
 public class RadiusConnectivityCheck {
@@ -11,9 +10,8 @@ public class RadiusConnectivityCheck {
         String username = args[2];
         String password = args[3];
         System.out.println(String.format("Connecting to: %s secret: %s username: %s password: %s", hostname, secret, username, password));
-        AccessRequest request = new AccessRequest();
         RadiusClient rc = new RadiusClient(hostname, secret);
         boolean result = rc.authenticate(username, password);
-        System.out.println(result);
+        System.out.println(String.format("Completed test, success=%s", result));
     }
 }

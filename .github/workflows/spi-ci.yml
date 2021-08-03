@@ -5,6 +5,8 @@ on:
     branches:
       - canary
       - stable
+    paths:
+      - 'keycloak-radius-spi/**'
 
 jobs:
   build:
@@ -12,5 +14,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and Tests
-        working-directory: ./dashboard
-        run: make test
+        working-directory: ./keycloack-radius-spi
+        run: make docker-build

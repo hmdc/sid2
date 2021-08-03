@@ -1,12 +1,14 @@
 # Keycloak Radius SPI - Radius MFA
 `Radius MFA` is a custom service provider that integrates Radius as an authenticator execution for Keycloak authentication flow.  
-The service provider is configurable, the following parameters can be provided:
- * Hostname
- * Port
+The service provider is configurable, the following parameters can be provided, see [RadiusAuthenticatorProperty.java]([src/main/java/edu/harvard/iq/keycloak/auth/spi/RadiusAuthenticatorProperty.java) for more information:
+ * Hostnames
  * Shared secret
  * Form token field label
+ * Client retries
+ * Client socket timeout
 
 ## System requirements
+ * Docker. Tested with version 20.10.6
  * java >= 8
  * mvn 3.8
  * GNU Make. Tested with version 3.81
@@ -28,10 +30,11 @@ To access the configuration parameters, once the `Radius MFA` execution has been
 
 ### Configuration properties
 
-- `radiusmfa.host`: RADIUS server hostname, eg: radius.server.com (required)
-- `radiusmfa.port`: Override value for RADIUS server port, defaults to 1812 (optional)
+- `radiusmfa.hostnames`: Comma separated list of server hostnames with optional port (defaults to 1812), eg: radius1.server.com,radius2.server.com:1812 (required)
 - `radiusmfa.shared_secret`: RADIUS server shared secret (required)
-- `radiusmfa.form_token_label`: Text label for the TOTP token form field, defaults to token (optional)
+- `radiusmfa.form_token_label`: Text label for the TOTP token form field, defaults to "Token" (optional)
+- `radiusmfa.client_timeout`: Client wait time for a response from RADIUS in milliseconds, defaults to 3000 (optional)
+- `radiusmfa.client_retries`: Number of attempts to connect to a Radius server when there are errors, defaults to 3 (optional)
 
 ### Sample log entries when deploying the custom SPI
 Standard log location folder: `/opt/jboss/keycloak/standalone/log`
@@ -64,5 +67,5 @@ To quickly test the connectivity to the Radius server, we have created a small u
 To execute, build the `Radius MFA` custom SPI jar and execute the utility class:  
 ```
 make build
-java -cp target/keycloak-radius-spi-jar-with-dependencies.jar edu.harvard.iq.keycloak.auth.spi.RadiusConnectivityCheck radius-host radius-secret username pasword
+java -cp target/keycloak-radius-spi-jar-with-dependencies.jar edu.harvard.iq.keycloak.auth.spi.util.RadiusConnectivityCheck radius-host radius-secret username pasword
 ```

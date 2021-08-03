@@ -4,17 +4,19 @@ all::
 all:: dev
 .PHONY: build dev reset
 
+WORKING_DIR := $(shell pwd)
+
 build:
-	mvn clean
-	mvn install
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn package
 
 dev:
-	mvn clean
-	mvn install
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn package
 	docker-compose up --build
 
 reset:
-	mvn clean
-	mvn install
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn package
 	docker-compose down -v || :
 	docker-compose up --build
+
+ci:
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn test

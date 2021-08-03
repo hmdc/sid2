@@ -1,5 +1,6 @@
 package edu.harvard.iq.keycloak.auth.spi;
 
+import edu.harvard.iq.keycloak.auth.spi.config.HostnamesParser;
 import org.jboss.logging.Logger;
 import org.keycloak.Config;
 import org.keycloak.authentication.Authenticator;
@@ -18,15 +19,19 @@ public class RadiusAuthenticatorFactory implements AuthenticatorFactory {
 
     public static final String PROVIDER_ID = "iqss-radius-authenticator";
 
+    private final RadiusAuthServiceFactory radiusAuthServiceFactory;
     private final List<ProviderConfigProperty> configProperties;
 
     public RadiusAuthenticatorFactory() {
+        radiusAuthServiceFactory = new RadiusAuthServiceFactory(new HostnamesParser());
         configProperties = Arrays.asList(
-                RadiusAuthenticatorProperties.HOST.getProviderProperty(),
-                RadiusAuthenticatorProperties.PORT.getProviderProperty(),
-                RadiusAuthenticatorProperties.SHARED_SECRET.getProviderProperty(),
-                RadiusAuthenticatorProperties.FORM_TOKEN_LABEL.getProviderProperty()
+                RadiusAuthenticatorProperty.HOSTNAMES.getProviderProperty(),
+                RadiusAuthenticatorProperty.SHARED_SECRET.getProviderProperty(),
+                RadiusAuthenticatorProperty.FORM_TOKEN_LABEL.getProviderProperty(),
+                RadiusAuthenticatorProperty.CLIENT_RETRIES.getProviderProperty(),
+                RadiusAuthenticatorProperty.CLIENT_TIMEOUT.getProviderProperty()
                 );
+        logger.info("action=init RadiusAuthenticatorFactory created");
     }
 
     @Override
@@ -36,7 +41,7 @@ public class RadiusAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public Authenticator create(KeycloakSession session) {
-        return new RadiusAuthenticator();
+        return new RadiusAuthenticator(radiusAuthServiceFactory);
     }
 
     @Override
