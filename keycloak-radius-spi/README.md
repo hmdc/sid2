@@ -9,8 +9,6 @@ The service provider is configurable, the following parameters can be provided, 
 
 ## System requirements
  * Docker. Tested with version 20.10.6
- * java >= 8
- * mvn 3.8
  * GNU Make. Tested with version 3.81
 
 ### Technical Notes
@@ -19,11 +17,13 @@ The `tinyradius` library is used to connect to the Radius server. This library i
 We have added the library into the project and created a Maven task to install it as part of `clean` target. The make script has been updated to execute `mvn clean` before all tasks.
 
 ## Radius MFA Authenticator Installation
-Build the `Radius MFA` custom SPI jar, from the root of the project, execute:  
-`make build`  
-This will generate the `target/keycloak-radius-spi-jar-with-dependencies.jar` JAR artifact.  
-Copy the JAR into the Keycloak deployment folder, usually: `/opt/jboss/keycloak/standalone/deployments/`  
-Keycloak supports hot deployments, so copying the JAR artifact should automatically deploy the SPI.
+To build the `Radius MFA` custom SPI jar:
+1) Start the Docker daemon.
+2) From the root of the project, execute:  
+   `make build`  
+   This will generate the `target/keycloak-radius-spi-jar-with-dependencies.jar` JAR artifact.  
+3) Copy the JAR into the Keycloak deployment folder, usually: `/opt/jboss/keycloak/standalone/deployments/`  
+   Keycloak supports hot deployments, so copying the JAR artifact should automatically deploy the SPI.
 
 Once deployed, the `Radius MFA` flow execution will be available to use within an authentication flow.  
 To access the configuration parameters, once the `Radius MFA` execution has been added to an authentication flow, The config menu is available on right-hand side of the execution under `Actions > Config`.
@@ -58,9 +58,12 @@ admin password: admin
 Local Radius users are configured using the [./raddb/authorize file](./raddb/authorize)
 
 ### Local Keycloak configuration
-TODO: Create realm  
-TODO: Create users  
-TODO: Update authentication workflow with custom SPI
+- [Create a realm](https://www.keycloak.org/docs/latest/server_admin/index.html#_create-realm)
+- [Create users](https://www.keycloak.org/docs/latest/server_admin/index.html#_create-new-user)
+- [Copy the "browser" authentication flow](https://www.keycloak.org/docs/latest/server_admin/index.html#built-in-flows)
+- [Update authentication flow to add the custom SPI](https://www.keycloak.org/docs/latest/server_admin/index.html#creating-flows)
+- Click `Actions > Config` to configure the SPI
+- Assign the flow as the default browser flow for the Realm (under the Realm config Bindings tab) or a Client (under the Client config Settings tab)
 
 ## Testing Radius connectivity
 To quickly test the connectivity to the Radius server, we have created a small utility class that will make an authentication request.  
