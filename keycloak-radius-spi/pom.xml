@@ -16,6 +16,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <keycloak.version>13.0.1</keycloak.version>
     </properties>
+    <repositories>
+        <repository>
+            <id>maven-local-repo</id>
+            <name>Maven local repository</name>
+            <url>file://maven-local-repo</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
