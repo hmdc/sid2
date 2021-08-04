@@ -11,6 +11,30 @@ The service provider is configurable, the following parameters can be provided, 
  * Docker. Tested with version 20.10.6
  * GNU Make. Tested with version 3.81
 
+### Keycloak server
+We are using Keycloak version `13.0.1`. In order to align the local development environment, and the development libraries with the production version of Keycloak we need to keep the version in sync.
+
+The Keycloak version for the Docker container is configured in the image section of the keycloak service in the [docker-compose file](docker-compose.yml)
+```
+...
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:13.0.1
+    hostname: keycloak
+...
+```
+
+The Keycloak version for the Java libraries is configured in the properties section of the [Maven POM file](pom.xml)
+```
+...
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <keycloak.version>13.0.1</keycloak.version>
+    </properties>
+...
+```
+
 ### Technical Notes
 The `tinyradius` library is used to connect to the Radius server. This library is not deployed into maven central, so the Maven command will not find it.
 
