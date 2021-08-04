@@ -7,16 +7,16 @@ all:: dev
 WORKING_DIR := $(shell pwd)
 
 build:
-	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn package
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 /bin/bash -c "mvn clean && mvn package"
 
 dev:
-	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn package
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 /bin/bash -c "mvn clean && mvn package"
 	docker-compose up --build
 
 reset:
-	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn package
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 /bin/bash -c "mvn clean && mvn package"
 	docker-compose down -v || :
 	docker-compose up --build
 
 ci:
-	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 mvn clean && mvn test
+	docker run -it --rm -v $(WORKING_DIR):/usr/local/app -w /usr/local/app maven:3-openjdk-11 /bin/bash -c "mvn clean && mvn package"
