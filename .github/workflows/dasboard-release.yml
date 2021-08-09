@@ -1,18 +1,18 @@
-name: production-build
+name: dashboard-production-build
 
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag number for release'
+        description: 'Tag number for release, eg: 0.9.0'
         required: true
-        default: '0.9.0'
 
 jobs:
-  build:
+  create-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
       - name: Creates build
         working-directory: ./dashboard
         run: make release
