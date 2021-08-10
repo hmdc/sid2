@@ -10,7 +10,8 @@
     }
   },
   "git": {
-    "requireCleanWorkingDir": false
+    "requireCleanWorkingDir": false,
+    "preRelease": true
   },
   "github": {
     "release": true,
