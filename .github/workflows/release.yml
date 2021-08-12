@@ -23,7 +23,7 @@ jobs:
       - name: Upload release artifact
         uses: actions/upload-artifact@v2
         with:
-          name: spi-release-artifact
+          name: dashboard-release-artifact
           retention-days: 1
           path: ./dashboard/target/sid2-dashboard.tar.gz
   create-release-keycloak-spi:
@@ -39,7 +39,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Build and Tests
+      - name: Build and test
         working-directory: ./keycloak-radius-spi
         run: make build
       - name: Upload release artifact
@@ -58,11 +58,11 @@ jobs:
           fetch-depth: 0
       - name: Read .node_version
         run: echo ::set-output name=NODE_VERSION::$(cat .node-version)
-        id: node_version
+        id: get_node_version
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ steps.nvm.outputs.NODE_VERSION }}
+          node-version: ${{ steps.get_node_version.outputs.NODE_VERSION }}
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
