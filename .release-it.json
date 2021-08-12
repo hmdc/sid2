@@ -1,0 +1,22 @@
+{
+  "plugins": {
+    "@csmith/release-it-calver-plugin": {
+      "format": "YYYY.MM.MICRO"
+    },
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md",
+      "ignoreRecommendedBump": true
+    }
+  },
+  "git": {
+    "requireCleanWorkingDir": false,
+    "preRelease": true
+  },
+  "github": {
+    "release": true,
+    "assets": [
+      "./target/**/**"
+    ]
+  }
+}

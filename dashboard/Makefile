@@ -26,11 +26,10 @@ test:
 release:
 
 	echo "Creating build release"
-	rm -rf ./deployment/sid_passenger/files/application
 	SLURM_TAG=slurm-20-11-4-1 OOD_TAG=1.8-1 OOD_UID=$(OOD_UID) OOD_GID=$(OOD_GID) docker-compose run --no-deps --entrypoint="" ood su - ood bash -c "export PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$$PATH; export RAILS_ENV=production; cd /home/ood/ondemand/dev/dashboard; scl enable rh-ruby25 rh-nodejs10 'gem install --user-install bundler -v 1.17.3 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
-	cp -r ./application ./deployment/sid_passenger/files/application
-
 	PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$PATH scl enable rh-ruby25 rh-nodejs10 -- bundle exec rake test
+	mkdir -p ./target
+	tar -czvf ./target/sid2-dashboard.tar.gz ./application
 
 down:
 
