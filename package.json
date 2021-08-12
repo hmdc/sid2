@@ -4,7 +4,8 @@
   "description": "sid2 monorepo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "release-it --npm.skipChecks=true --no-npm.publish"
   },
   "repository": {
     "type": "git",
