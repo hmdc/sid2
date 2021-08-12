@@ -1,4 +1,4 @@
-name: keycloak-spi-ci
+name: build-and-test
 
 on:
   workflow_dispatch:
@@ -6,11 +6,17 @@ on:
     branches:
       - canary
       - stable
-    paths:
-      - 'keycloak-radius-spi/**'
 
 jobs:
-  build-and-test:
+  build-and-test-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Build and test
+        working-directory: ./dashboard
+        run: make test
+  build-and-test-keycloak:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ${{ github.sha }}
@@ -22,6 +28,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Build and Tests
+      - name: Build and test
         working-directory: ./keycloak-radius-spi
         run: make ci
