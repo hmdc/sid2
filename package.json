@@ -1,12 +1,10 @@
 {
   "name": "sid2",
-  "version": "0.0.0",
+  "version": "2021.8.1",
   "description": "sid2 monorepo",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky install",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "release-it"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -27,9 +25,6 @@
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@csmith/release-it-calver-plugin": "^2021.5.7",
-    "@release-it/bumper": "^3.0.1",
-    "@release-it/conventional-changelog": "^3.1.0",
-    "current-git-branch": "^1.1.0",
     "husky": "^7.0.1",
     "release-it": "^14.11.3"
   }

@@ -3,7 +3,7 @@ name: release
 on:
   workflow_run:
     workflows: ["build-and-test"]
-    branches: [canary, stable]
+    branches: [stable]
     types:
       - completed
 
@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout ${{ github.sha }}
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
       - name: Creates build
         working-directory: ./dashboard
         run: make release
@@ -34,8 +32,6 @@ jobs:
     steps:
       - name: Checkout ${{ github.sha }}
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
@@ -59,7 +55,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
           fetch-depth: 0
       - name: Read .node_version
         run: echo ::set-output name=NODE_VERSION::$(cat .node-version)
@@ -80,5 +75,4 @@ jobs:
           path: ./target
       - run: npm run release -- --ci
         env:
-          HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

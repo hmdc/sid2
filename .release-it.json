@@ -1,21 +1,7 @@
 {
   "plugins": {
-    "@release-it/bumper": {
-      "in": {
-        "file": "VERSION",
-        "type": "text/plain"
-      },
-      "out": {
-        "file": "VERSION",
-        "type": "text/plain"
-      }
-    },
-    "./calver-bump-patch.js": {
-      "format": "yyyy.mm.micro.modifier",
-      "branches": {
-        "*": "calendar>micro",
-        "canary": "calendar>micro>dev"
-      }
+    "@csmith/release-it-calver-plugin": {
+      "format": "YYYY.MM.MICRO"
     },
     "@release-it/conventional-changelog": {
       "preset": "angular",
@@ -23,14 +9,12 @@
       "ignoreRecommendedBump": true
     }
   },
-  "npm": false,
   "git": {
     "requireCleanWorkingDir": false,
-    "tagName": "${version}"
+    "preRelease": true
   },
   "github": {
     "release": true,
-    "preRelease": true,
     "assets": [
       "./target/**/**"
     ]
