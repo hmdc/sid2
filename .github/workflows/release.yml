@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Checkout ${{ github.sha }}
         uses: actions/checkout@v2
+        ref: ${{ github.event.workflow_run.head_branch }}
       - name: Creates build
         working-directory: ./dashboard
         run: make release
@@ -32,6 +33,7 @@ jobs:
     steps:
       - name: Checkout ${{ github.sha }}
         uses: actions/checkout@v2
+        ref: ${{ github.event.workflow_run.head_branch }}
       - name: Cache local Maven repository
         uses: actions/cache@v2
         with:
@@ -54,6 +56,7 @@ jobs:
     name: Making release
     steps:
       - uses: actions/checkout@v2
+        ref: ${{ github.event.workflow_run.head_branch }}
         with:
           fetch-depth: 0
       - name: Read .node_version
