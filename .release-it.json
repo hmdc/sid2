@@ -10,11 +10,11 @@
     }
   },
   "git": {
-    "requireCleanWorkingDir": false,
-    "preRelease": true
+    "requireCleanWorkingDir": false
   },
   "github": {
     "release": true,
+    "preRelease": true,
     "assets": [
       "./target/**/**"
     ]
