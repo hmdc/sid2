@@ -4,6 +4,7 @@
   "description": "sid2 monorepo",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "release-it --npm.skipChecks=true --no-npm.publish"
   },
