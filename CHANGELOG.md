@@ -1,3 +1,20 @@
+## [2021.8.3](https://github.com/hmdc/sid2/compare/v0.9.0...v2021.8.3) (2021-08-18)
+
+
+### Bug Fixes
+
+* **build:** added automatic installation of husky following npm install ([1c4871e](https://github.com/hmdc/sid2/commit/1c4871e32b5b8dd5aefbc1f2505ccec64faf2c31))
+* **build:** disable husky for stable ([4b6eadc](https://github.com/hmdc/sid2/commit/4b6eadc7a8be30cafa5ead1a14ae5cf5cf0fdadd))
+* **build:** forgot conventional changelog module ([827814a](https://github.com/hmdc/sid2/commit/827814a7f6943a6aebe498f5d0a9a1e128d05e83))
+* **build:** forgot to add release npm script ([7e46eeb](https://github.com/hmdc/sid2/commit/7e46eeb0cde297e6448f7247ca226751d871a829))
+* **build:** no need for double-testing on dashboard ([cafc025](https://github.com/hmdc/sid2/commit/cafc025186c0c92395c6eb5eaa2a4bdee9ebe6d3))
+* **build:** workflow puts ref under with ([e7496e9](https://github.com/hmdc/sid2/commit/e7496e92ee8ac1ac7f2c2565d012af973ae95df0))
+
+
+### Features
+
+* **build:** monorepo build ([d3d9127](https://github.com/hmdc/sid2/commit/d3d91271f46bbc4a315251ce22785acd8fd14e1e))
+
 ## [2021.8.2](https://github.com/hmdc/sid2/compare/v0.9.0...v2021.8.2) (2021-08-12)
 
 
