@@ -80,4 +80,5 @@ jobs:
           path: ./target
       - run: npm run release -- --ci
         env:
+          HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
