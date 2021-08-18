@@ -1,6 +1,6 @@
 {
   "name": "sid2",
-  "version": "2021.8.2",
+  "version": "2021.8.3",
   "description": "sid2 monorepo",
   "main": "index.js",
   "scripts": {
