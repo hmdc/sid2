@@ -1,3 +1,10 @@
+## [2021.8.4](https://github.com/hmdc/sid2/compare/v2021.8.3...v2021.8.4) (2021-08-18)
+
+
+### Bug Fixes
+
+* **build:** set preRelease to true for releases in stable ([567f02a](https://github.com/hmdc/sid2/commit/567f02a8c4162e75c17816f6655da59f12dd58f3))
+
 ## [2021.8.3](https://github.com/hmdc/sid2/compare/v0.9.0...v2021.8.3) (2021-08-18)
 
 
