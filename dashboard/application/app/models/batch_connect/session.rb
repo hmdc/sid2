@@ -25,6 +25,10 @@ module BatchConnect
     # @return [String] job id
     attr_accessor :job_id
 
+    # Additional information about the job. Requested using sacct command in Slurm
+    # Populated when the job is completed
+    attr_accessor :completion_info
+
     # When this session was created at as a unix timestamp
     # @return [Integer] created at
     attr_accessor :created_at
@@ -65,7 +69,7 @@ module BatchConnect
     # Attributes used for serialization
     # @return [Hash] attributes to be serialized
     def attributes
-      %w(id cluster_id job_id created_at token title view info_view script_type cache_completed).map do |attribute|
+      %w(id cluster_id job_id completion_info created_at token title view info_view script_type cache_completed).map do |attribute|
         [ attribute, nil ]
       end.to_h
     end
@@ -348,6 +352,7 @@ module BatchConnect
 
     def update_cache_completed!
       if (! cache_completed) && completed?
+        self.completion_info = adapter.completion_info(job_id)
         self.cache_completed = true
         db_file.write(to_json)
       end
