@@ -176,7 +176,7 @@ module BatchConnect::SessionsHelper
     password = view_only ? connect.spassword : connect.password
     resize   = view_only ? "downscale" : "remote"
     path = asset_path("noVNC-#{version}/vnc.html?autoconnect=true&password=#{password}&path=rnode/#{connect.host}/#{connect.websocket}/websockify&resize=#{resize}", skip_pipeline: true)
-    path.gsub("/pun/dev", "/pun/sys")
+    sys_url(path)
   end
 
   def connection_tabs(id, tabs)

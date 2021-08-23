@@ -8,10 +8,10 @@ ARG OOD_TAG
 
 # Install Open On Demand, Singularity
 RUN yum install -y net-tools openssh-clients && \
-    yum install -y https://yum.osc.edu/ondemand/1.8/ondemand-release-web-${OOD_TAG}.noarch.rpm && \
+    yum install -y https://yum.osc.edu/ondemand/2.0/ondemand-release-web-2.0-1.noarch.rpm && \
     yum install -y epel-release centos-release-scl lsof sudo httpd24-mod_ssl httpd24-mod_ldap && \
     yum -y update && \
-    yum -y install --nogpgcheck ondemand && \
+    yum -y install --nogpgcheck ondemand-${OOD_TAG} && \
     mkdir -p /etc/ood/config/clusters.d && \
     mkdir -p /etc/ood/config/apps/shell
 

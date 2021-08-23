@@ -8,14 +8,14 @@ if [ -f "/home/ood/ondemand/dev/dashboard/Gemfile" ]; then
 	echo "<<SID2>> Dashboard app detected, running bundle."
 	cd /home/ood/ondemand/dev/dashboard
 	PATH=/home/ood/bin:$PATH
-	env PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$PATH su ood bash -c "scl enable rh-ruby25 rh-nodejs10 'gem install --user-install bundler -v 1.17.3 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
+	env PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$PATH su ood bash -c "scl enable rh-ruby27 rh-nodejs12 'gem install --user-install bundler -v 2.1.4 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
 fi
 
 if [ -f "/var/www/ood/apps/sys/sid/Gemfile" ]; then
 	echo "<<SID2>> SID app detected, running bundle."
 	cd /var/www/ood/apps/sys/sid
 	PATH=/home/ood/bin:$PATH
-	env PATH=/home/ood/bin:/var/www/ood/apps/sys/sid/node_modules/.bin:$PATH RAILS_ENV=production su ood bash -c "scl enable rh-ruby25 rh-nodejs10 'gem install --user-install bundler -v 1.17.3 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
+	env PATH=/home/ood/bin:/var/www/ood/apps/sys/sid/node_modules/.bin:$PATH RAILS_ENV=production su ood bash -c "scl enable rh-ruby27 rh-nodejs12 'gem install --user-install bundler -v 2.1.4 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
 fi
 
 # Support changing environment variable options via docker run -e
