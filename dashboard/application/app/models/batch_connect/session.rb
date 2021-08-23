@@ -486,6 +486,7 @@ module BatchConnect
       hsh = {
         id: id,
         status: status.to_sym,
+        start_time: info.native ? info.native[:start_time] : nil,
         connect: running? ? connect.to_h : nil,
         time: info.wallclock_time.to_i / 60     # only update every minute
       }
