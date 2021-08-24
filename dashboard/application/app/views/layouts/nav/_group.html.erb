@@ -9,7 +9,7 @@
           <li>
             <%=
               link_to(
-                map_nav_link?(app.name) ? sys_url(link.url.to_s) : link.url.to_s,
+                link.url.to_s,
                 title: map_nav_item(link.title),
                 target: link.new_tab? ? "_blank" : nil
               ) do

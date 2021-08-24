@@ -13,7 +13,7 @@ form:
   bc_email_on_started: "0"
   custom_reservation: ""
   bc_vnc_resolution: "1024x768"
-  matlab_version: "matlab/R2021a-fasrc01"
+  matlab_version: "/n/singularity_images/OOD/matlab/current/Matlab2020a_standard-xfce-el7-7.6.1810.sif"
 
 view:
   logo: "matlab_logo.png"

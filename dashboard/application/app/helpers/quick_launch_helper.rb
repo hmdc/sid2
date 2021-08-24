@@ -1,6 +1,6 @@
 module QuickLaunchHelper
   def button_column_classes
-    "launch-button-flex"
+    "col-xs-12 col-sm-6 col-md-4 col-lg-3"
   end
 
   def quick_launch_max_sessions
@@ -22,7 +22,7 @@ module QuickLaunchHelper
   end
 
   def sys_url(from_url)
-    from_url ? from_url.sub(root_path, '/pun/sys/dashboard/') : from_url
+    from_url ? from_url.gsub(root_path, '/pun/sys/dashboard/') : from_url
   end
 
   def terminal_url

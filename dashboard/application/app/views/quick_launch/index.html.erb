@@ -34,7 +34,7 @@
     <div class="quick-launch-buttons-title">
       <h3>Start an interactive job</h3>
     </div>
-    <div class="launch-button-container-flex">
+    <div class="row row-eq-height">
       <% @launchers.each do | launcher | %>
       <%= render partial: "launch_button", locals: { launcher_button_id: launcher[:metadata][:id], launcher_button: launcher[:view] } %>
       <% end %>
@@ -43,7 +43,7 @@
     <div class="quick-launch-buttons-title">
       <h3>Quick links</h3>
     </div>
-    <div class="launch-button-container-flex">
+    <div class="row row-eq-height">
       <% @quick_links.each do | template | %>
         <%= render partial: "widgets/#{template}" %>
       <% end %>

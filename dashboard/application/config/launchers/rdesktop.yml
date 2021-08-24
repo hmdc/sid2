@@ -1,7 +1,7 @@
 ---
 order: 20
 form:
-  token: "sys/NativeRD"
+  token: "sys/OdysseyRD"
   bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
