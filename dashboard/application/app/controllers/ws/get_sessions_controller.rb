@@ -36,7 +36,7 @@ class Ws::GetSessionsController < ApplicationController
       clusterId: session.cluster_id,
       jobId: session.job_id,
       completionInfo: session.completion_info,
-      createdAt: session.created_at,
+      createdAt: Time.at(session.created_at).iso8601,
       token: session.token,
       title: session.title,
       info: session.info.to_h,

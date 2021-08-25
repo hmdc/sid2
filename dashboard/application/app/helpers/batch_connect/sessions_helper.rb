@@ -21,6 +21,7 @@ module BatchConnect::SessionsHelper
                 if session.queued?
                   status << content_tag(:span, "Expected Start: #{session.info.native[:start_time]}", class: "badge")
                 end
+                status << copy_session_info_button(session)
                 status.join(" | ").html_safe
               end
             )
@@ -110,6 +111,10 @@ module BatchConnect::SessionsHelper
     else
       ""
     end
+  end
+
+  def copy_session_info_button(session)
+    return %{<span class="session-copy-data success" title="Copy session information into the clipboard" onclick="CopySessionDataService.sessionDataCopyHandler(event)" data-id="#{session.id}" data-url="#{ws_path(session.id)}"><i class="far fa-clipboard"></i></span>}.html_safe
   end
 
   def time(session)

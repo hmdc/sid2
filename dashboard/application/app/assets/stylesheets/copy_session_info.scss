@@ -1,0 +1,18 @@
+.session-copy-data {
+  display: inline-block;
+  position: relative;
+  padding: 4px 6px;
+  margin: -4px 0;
+  border: 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.session-copy-data:hover {
+  transform: scale(0.90);
+}
+
+#session-data-payload-collapse-trigger {
+  display: inline-block;
+  padding-bottom: 10px;
+}
