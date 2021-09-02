@@ -1,3 +1,10 @@
+## [2021.9.1-dev.1](https://github.com/hmdc/sid2/compare/v2021.9.0...2021.9.1-dev.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** fix calver with a patch ([5d2b104](https://github.com/hmdc/sid2/commit/5d2b104adfebf42c4773959cc34def61ab3dffc0))
+
 # [2021.9.0](https://github.com/hmdc/sid2/compare/v2021.8.2...v2021.9.0) (2021-09-02)
 
 
