@@ -1,3 +1,22 @@
+# [2021.9.0](https://github.com/hmdc/sid2/compare/v2021.8.2...v2021.9.0) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** added automatic installation of husky following npm install ([c52c26b](https://github.com/hmdc/sid2/commit/c52c26b0f6a3026637e109680429e0dfdbd01a11))
+* **build:** disable husky for stable ([fec3836](https://github.com/hmdc/sid2/commit/fec3836709a0991accfa36f93305843c30d384d5))
+* **build:** set preRelease to true for releases in stable ([65f4a4b](https://github.com/hmdc/sid2/commit/65f4a4bf236c82f9d157cd85e8f43999f2a359b4))
+* **build:** workflow puts ref under with ([44ace09](https://github.com/hmdc/sid2/commit/44ace09dc376fe4150f62a256740dfd427b776c1))
+* **build:** workflow_run loses the ref. thanks Aday for pointing that out. i can find the original ref using the paren. sub. for workflow original triggering git sha ([a144873](https://github.com/hmdc/sid2/commit/a144873522983589f34df8fe0344082ddd7c72ce))
+* **husky:** Add husky ([d899db0](https://github.com/hmdc/sid2/commit/d899db077405ace215a42664d71241868d3c2096))
+* **sid-dashboard:** GH[#487](https://github.com/hmdc/sid2/issues/487) Fixed Makefile after merge from canary ([a8ef121](https://github.com/hmdc/sid2/commit/a8ef12175108aa6ece2abbdb81272982923f6b59))
+
+
+### Features
+
+* **build:** build canary releases and migrate version file ([0aa71c9](https://github.com/hmdc/sid2/commit/0aa71c980e7065a1cf6c689fd6a48ca5d317fc9b))
+* **sid-dashboard:** GH [#514](https://github.com/hmdc/sid2/issues/514) Updated Matlab version to match FASRC codebase ([d446a08](https://github.com/hmdc/sid2/commit/d446a089dd393d89c065a0d2cea595e3cc85d72e))
+
 ## [2021.8.2](https://github.com/hmdc/sid2/compare/v0.9.0...v2021.8.2) (2021-08-12)
 
 
