@@ -10,8 +10,8 @@
         "type": "text/plain"
       }
     },
-    "@csmith/release-it-calver-plugin": {
-      "format": "YYYY.MM.MICRO"
+    "./calver-bump-patch.js": {
+      "format": "YYYY.MM.MICRO.MODIFIER"
     },
     "@release-it/conventional-changelog": {
       "preset": "angular",
@@ -20,7 +20,8 @@
     }
   },
   "git": {
-    "requireCleanWorkingDir": false
+    "requireCleanWorkingDir": false,
+    "tagName": "${version}"
   },
   "github": {
     "release": true,
