@@ -3,7 +3,7 @@ name: release
 on:
   workflow_run:
     workflows: ["build-and-test"]
-    branches: [stable]
+    branches: [canary, stable]
     types:
       - completed
 
