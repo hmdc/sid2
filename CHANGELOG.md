@@ -1,3 +1,10 @@
+## [2021.9.1-dev.2](https://github.com/hmdc/sid2/compare/2021.9.1-dev.1...2021.9.1-dev.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** do not change package.json version, set back to 0.0.0 ([e0ec65e](https://github.com/hmdc/sid2/commit/e0ec65e42d2fd8f24a080ed28d9c1ee03616b982))
+
 ## [2021.9.1-dev.1](https://github.com/hmdc/sid2/compare/v2021.9.0...2021.9.1-dev.1) (2021-09-02)
 
 
