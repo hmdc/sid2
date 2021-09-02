@@ -11,7 +11,11 @@
       }
     },
     "./calver-bump-patch.js": {
-      "format": "YYYY.MM.MICRO.MODIFIER"
+      "format": "yyyy.mm.micro.modifier",
+      "branches": {
+        "canary": "calendar.dev",
+        "stable": "calendar.micro"
+      }
     },
     "@release-it/conventional-changelog": {
       "preset": "angular",
