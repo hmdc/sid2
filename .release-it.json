@@ -19,6 +19,7 @@
       "ignoreRecommendedBump": true
     }
   },
+  "npm": false,
   "git": {
     "requireCleanWorkingDir": false,
     "tagName": "${version}"
