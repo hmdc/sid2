@@ -1,3 +1,10 @@
+## [2021.9.2](https://github.com/hmdc/sid2/compare/2021.9.0-dev.2...2021.9.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** versioning now makes more sense given that I have fixed the calver plugin ([bb045f6](https://github.com/hmdc/sid2/commit/bb045f6648c002c8d7b8b28909b7b228df3329f5))
+
 # [2021.9.0-dev.2](https://github.com/hmdc/sid2/compare/2021.9.1-dev.2...2021.9.0-dev.2) (2021-09-02)
 
 
