@@ -1,3 +1,10 @@
+## [2021.9.5-dev.1](https://github.com/hmdc/sid2/compare/2021.9.4-dev.1...2021.9.5-dev.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** not sure what happened to README.md but its back ([4819960](https://github.com/hmdc/sid2/commit/4819960c5beda387dba7b20e56f00b974501cb51))
+
 ## [2021.9.4-dev.1](https://github.com/hmdc/sid2/compare/2021.9.3-dev.1...2021.9.4-dev.1) (2021-09-03)
 
 
