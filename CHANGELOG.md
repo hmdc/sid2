@@ -1,3 +1,10 @@
+# [2021.9.0-dev.2](https://github.com/hmdc/sid2/compare/2021.9.1-dev.2...2021.9.0-dev.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** ensure that multileveled version increments work by stepping-over bug in node-calver ([f3c897e](https://github.com/hmdc/sid2/commit/f3c897e61644cdbfc5d60d0541965aa78472bbc4))
+
 ## [2021.9.1-dev.2](https://github.com/hmdc/sid2/compare/2021.9.1-dev.1...2021.9.1-dev.2) (2021-09-02)
 
 
