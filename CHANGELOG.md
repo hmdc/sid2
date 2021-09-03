@@ -1,3 +1,10 @@
+## [2021.9.4-dev.1](https://github.com/hmdc/sid2/compare/2021.9.3-dev.1...2021.9.4-dev.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** truncate CHANGELOG and fix versioning ([47497aa](https://github.com/hmdc/sid2/commit/47497aaedc310a1ee4659cc58099e05678706f69))
+
 ## [2021.9.2](https://github.com/hmdc/sid2/compare/2021.9.0-dev.2...2021.9.2) (2021-09-03)
 
 
