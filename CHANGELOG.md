@@ -1,3 +1,11 @@
+## [2021.9.6-dev.1](https://github.com/hmdc/sid2/compare/2021.9.5-dev.1...2021.9.6-dev.1) (2021-09-07)
+
+
+### Features
+
+* **sid-dashboard:** GH [#467](https://github.com/hmdc/sid2/issues/467) Updated navigation links for Sid documentation ([27069a6](https://github.com/hmdc/sid2/commit/27069a6523aca8a6615bc176f6ddd690aa0cf246))
+* **sid-dashboard:** GH [#514](https://github.com/hmdc/sid2/issues/514) Updated RStudio version + added location for RStudio libraries for quick launchers ([c30d584](https://github.com/hmdc/sid2/commit/c30d5844ece5abf43b1cd0b662e87b1b121a71ba))
+
 ## [2021.9.5-dev.1](https://github.com/hmdc/sid2/compare/2021.9.4-dev.1...2021.9.5-dev.1) (2021-09-03)
 
 
