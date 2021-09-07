@@ -17,9 +17,9 @@ form:
   bc_vnc_resolution: "1024x768"
   custom_desktop: "1"
   matlab_version: "NULL"
-  rstudio_version: "NULL"
-  r_version: "R/3.3.3-fasrc01"
-  rlibs: ""
+  rstudio_version: "rstudio/1.1.453-fasrc01"
+  r_version: "R/4.1.0-fasrc01"
+  rlibs: "~/apps/R_4.1.0_fasrc01"
 
 view:
   logo: "desktop_logo.svg"
