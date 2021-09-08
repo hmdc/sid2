@@ -1,3 +1,5 @@
+## [2021.9.8-dev.1](https://github.com/hmdc/sid2/compare/2021.9.7-dev.1...2021.9.8-dev.1) (2021-09-08)
+
 ## [2021.9.7-dev.1](https://github.com/hmdc/sid2/compare/2021.9.6-dev.1...2021.9.7-dev.1) (2021-09-07)
 
 ## [2021.9.6-dev.1](https://github.com/hmdc/sid2/compare/2021.9.5-dev.1...2021.9.6-dev.1) (2021-09-07)
