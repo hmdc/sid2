@@ -65,10 +65,10 @@ class DashboardControllerTest < ActionController::TestCase
 
     dditemurls = dropdown_list_items_urls(dropdown_list('Files'))
     assert_equal [
-      "/pun/sys/files/fs" + Dir.home,
-      "/pun/sys/files/fs" + scratch_path,
-      "/pun/sys/files/fs" + project_path,
-      "/pun/sys/files/fs" + project_path2.to_s
+      "/pun/sys/dashboard/files/fs" + Dir.home,
+      "/pun/sys/dashboard/files/fs" + scratch_path,
+      "/pun/sys/dashboard/files/fs" + project_path,
+      "/pun/sys/dashboard/files/fs" + project_path2.to_s
     ], dditemurls, "Files dropdown URLs are incorrect"
   end
 

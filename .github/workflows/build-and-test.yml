@@ -1,0 +1,33 @@
+name: build-and-test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - canary
+      - stable
+
+jobs:
+  build-and-test-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Build and test
+        working-directory: ./dashboard
+        run: make test
+  build-and-test-keycloak:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ./main/keycloak-radius-spi/maven-local-repo
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build and test
+        working-directory: ./keycloak-radius-spi
+        run: make ci

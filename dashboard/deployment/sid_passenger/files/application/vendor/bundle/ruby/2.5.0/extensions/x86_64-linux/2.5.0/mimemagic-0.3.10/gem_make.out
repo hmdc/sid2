@@ -1,3 +1,0 @@
-current directory: /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/mimemagic-0.3.10/ext/mimemagic
-/opt/rh/rh-ruby25/root/usr/bin/ruby -rrubygems /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/gems/rake-13.0.3/exe/rake RUBYARCHDIR=/home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/mimemagic-0.3.10 RUBYLIBDIR=/home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/mimemagic-0.3.10
-mkdir -p /home/ood/ondemand/dev/dashboard/vendor/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/mimemagic-0.3.10/mimemagic

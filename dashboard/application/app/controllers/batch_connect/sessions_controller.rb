@@ -20,19 +20,9 @@ class BatchConnect::SessionsController < ApplicationController
     @sessions = BatchConnect::Session.all
   end
 
-  # GET /batch_connect/sessions/1
-  # GET /batch_connect/sessions/1.json
   def show
-    set_session
-    respond_to do |format|
-      format.json { render json: {
-	      "status": @session.status,
-        "id": @session.id,
-        "created_at": @session.created_at,
-        "title": @session.title,
-        "connect": @session.connect 
-      }}
-    end
+    redirect = get_redirect || batch_connect_sessions_url
+    redirect_to redirect, alert: "Unknown error, please try again. "
   end
 
   # DELETE /batch_connect/sessions/1
