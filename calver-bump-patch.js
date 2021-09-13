@@ -9,7 +9,8 @@ class VersionAppendModifier extends CalverPlugin {
   getIncrementedVersion({ latestVersion }) {
     const { branches } = this.getContext();
     const format = this.getFormat();
-    const incFormat = branches?.[`${branchName()}`]?.split(".");
+    const globalIncFormat = branches?.["*"];
+    const incFormat = branches?.[`${branchName()}`]?.split(">") || [globalIncFormat];
     var version = latestVersion;
 
     calver.init(format);
@@ -24,13 +25,7 @@ class VersionAppendModifier extends CalverPlugin {
       return version;
     }
 
-    for (const f of incFormat) return calver.inc(format, latestVersion, f);
-
-    try {
-      return calver.inc(format, latestVersion, 'calendar');
-    } catch (e) {
-      return calver.inc(format, latestVersion, 'micro');
-    }
+    return calver.inc(format, latestVersion, 'micro');
   }
 
 

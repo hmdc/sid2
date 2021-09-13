@@ -13,8 +13,8 @@
     "./calver-bump-patch.js": {
       "format": "yyyy.mm.micro.modifier",
       "branches": {
-        "canary": "calendar.micro.dev",
-        "stable": "calendar.micro"
+        "*": "calendar.micro",
+        "canary": "calendar>micro>dev"
       }
     },
     "@release-it/conventional-changelog": {
