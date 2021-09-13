@@ -1,3 +1,10 @@
+## [2021.9.9-dev.1](https://github.com/hmdc/sid2/compare/2021.9.8-dev.1...2021.9.9-dev.1) (2021-09-13)
+
+
+### Bug Fixes
+
+* **build:** fix versioning so canary is always ahead. stable action only strips dev appendix ([d851df2](https://github.com/hmdc/sid2/commit/d851df2d91ea7908afbcc94e86ffd3aee99920c4))
+
 ## [2021.9.8-dev.1](https://github.com/hmdc/sid2/compare/2021.9.7-dev.1...2021.9.8-dev.1) (2021-09-08)
 
 ## [2021.9.7-dev.1](https://github.com/hmdc/sid2/compare/2021.9.6-dev.1...2021.9.7-dev.1) (2021-09-07)
