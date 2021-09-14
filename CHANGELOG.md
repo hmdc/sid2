@@ -1,3 +1,10 @@
+## [2021.9.10-dev.1](https://github.com/hmdc/sid2/compare/2021.9.9-dev.1...2021.9.10-dev.1) (2021-09-14)
+
+
+### Features
+
+* **build:** rebuild staging server ([41a786c](https://github.com/hmdc/sid2/commit/41a786cd45d5e92471db3536fa9ed7db5042837a))
+
 ## [2021.9.9-dev.1](https://github.com/hmdc/sid2/compare/2021.9.8-dev.1...2021.9.9-dev.1) (2021-09-13)
 
 
