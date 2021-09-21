@@ -1,3 +1,10 @@
+## [2021.9.11-dev.1](https://github.com/hmdc/sid2/compare/2021.9.10-dev.1...2021.9.11-dev.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* **build:** version increment works properly ([4bdf32c](https://github.com/hmdc/sid2/commit/4bdf32c085dcc8d38ad405ef8dc7f36d11901c13))
+
 ## [2021.9.10-dev.1](https://github.com/hmdc/sid2/compare/2021.9.9-dev.1...2021.9.10-dev.1) (2021-09-14)
 
 
