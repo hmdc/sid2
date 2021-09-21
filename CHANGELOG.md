@@ -1,26 +1,89 @@
-## [2021.8.4](https://github.com/hmdc/sid2/compare/v2021.8.3...v2021.8.4) (2021-08-18)
-
-
-### Bug Fixes
-
-* **build:** set preRelease to true for releases in stable ([567f02a](https://github.com/hmdc/sid2/commit/567f02a8c4162e75c17816f6655da59f12dd58f3))
-
-## [2021.8.3](https://github.com/hmdc/sid2/compare/v0.9.0...v2021.8.3) (2021-08-18)
-
-
-### Bug Fixes
-
-* **build:** added automatic installation of husky following npm install ([1c4871e](https://github.com/hmdc/sid2/commit/1c4871e32b5b8dd5aefbc1f2505ccec64faf2c31))
-* **build:** disable husky for stable ([4b6eadc](https://github.com/hmdc/sid2/commit/4b6eadc7a8be30cafa5ead1a14ae5cf5cf0fdadd))
-* **build:** forgot conventional changelog module ([827814a](https://github.com/hmdc/sid2/commit/827814a7f6943a6aebe498f5d0a9a1e128d05e83))
-* **build:** forgot to add release npm script ([7e46eeb](https://github.com/hmdc/sid2/commit/7e46eeb0cde297e6448f7247ca226751d871a829))
-* **build:** no need for double-testing on dashboard ([cafc025](https://github.com/hmdc/sid2/commit/cafc025186c0c92395c6eb5eaa2a4bdee9ebe6d3))
-* **build:** workflow puts ref under with ([e7496e9](https://github.com/hmdc/sid2/commit/e7496e92ee8ac1ac7f2c2565d012af973ae95df0))
+## [2021.9.10-dev.1](https://github.com/hmdc/sid2/compare/2021.9.9-dev.1...2021.9.10-dev.1) (2021-09-14)
 
 
 ### Features
 
-* **build:** monorepo build ([d3d9127](https://github.com/hmdc/sid2/commit/d3d91271f46bbc4a315251ce22785acd8fd14e1e))
+* **build:** rebuild staging server ([41a786c](https://github.com/hmdc/sid2/commit/41a786cd45d5e92471db3536fa9ed7db5042837a))
+
+## [2021.9.9-dev.1](https://github.com/hmdc/sid2/compare/2021.9.8-dev.1...2021.9.9-dev.1) (2021-09-13)
+
+
+### Bug Fixes
+
+* **build:** fix versioning so canary is always ahead. stable action only strips dev appendix ([d851df2](https://github.com/hmdc/sid2/commit/d851df2d91ea7908afbcc94e86ffd3aee99920c4))
+
+## [2021.9.8-dev.1](https://github.com/hmdc/sid2/compare/2021.9.7-dev.1...2021.9.8-dev.1) (2021-09-08)
+
+## [2021.9.7-dev.1](https://github.com/hmdc/sid2/compare/2021.9.6-dev.1...2021.9.7-dev.1) (2021-09-07)
+
+## [2021.9.6-dev.1](https://github.com/hmdc/sid2/compare/2021.9.5-dev.1...2021.9.6-dev.1) (2021-09-07)
+
+
+### Features
+
+* **sid-dashboard:** GH [#467](https://github.com/hmdc/sid2/issues/467) Updated navigation links for Sid documentation ([27069a6](https://github.com/hmdc/sid2/commit/27069a6523aca8a6615bc176f6ddd690aa0cf246))
+* **sid-dashboard:** GH [#514](https://github.com/hmdc/sid2/issues/514) Updated RStudio version + added location for RStudio libraries for quick launchers ([c30d584](https://github.com/hmdc/sid2/commit/c30d5844ece5abf43b1cd0b662e87b1b121a71ba))
+
+## [2021.9.5-dev.1](https://github.com/hmdc/sid2/compare/2021.9.4-dev.1...2021.9.5-dev.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** not sure what happened to README.md but its back ([4819960](https://github.com/hmdc/sid2/commit/4819960c5beda387dba7b20e56f00b974501cb51))
+
+## [2021.9.4-dev.1](https://github.com/hmdc/sid2/compare/2021.9.3-dev.1...2021.9.4-dev.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** truncate CHANGELOG and fix versioning ([47497aa](https://github.com/hmdc/sid2/commit/47497aaedc310a1ee4659cc58099e05678706f69))
+
+## [2021.9.2](https://github.com/hmdc/sid2/compare/2021.9.0-dev.2...2021.9.2) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** versioning now makes more sense given that I have fixed the calver plugin ([bb045f6](https://github.com/hmdc/sid2/commit/bb045f6648c002c8d7b8b28909b7b228df3329f5))
+
+# [2021.9.0-dev.2](https://github.com/hmdc/sid2/compare/2021.9.1-dev.2...2021.9.0-dev.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** ensure that multileveled version increments work by stepping-over bug in node-calver ([f3c897e](https://github.com/hmdc/sid2/commit/f3c897e61644cdbfc5d60d0541965aa78472bbc4))
+
+## [2021.9.1-dev.2](https://github.com/hmdc/sid2/compare/2021.9.1-dev.1...2021.9.1-dev.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** do not change package.json version, set back to 0.0.0 ([e0ec65e](https://github.com/hmdc/sid2/commit/e0ec65e42d2fd8f24a080ed28d9c1ee03616b982))
+
+## [2021.9.1-dev.1](https://github.com/hmdc/sid2/compare/v2021.9.0...2021.9.1-dev.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** fix calver with a patch ([5d2b104](https://github.com/hmdc/sid2/commit/5d2b104adfebf42c4773959cc34def61ab3dffc0))
+
+# [2021.9.0](https://github.com/hmdc/sid2/compare/v2021.8.2...v2021.9.0) (2021-09-02)
+
+
+### Bug Fixes
+
+* **build:** added automatic installation of husky following npm install ([c52c26b](https://github.com/hmdc/sid2/commit/c52c26b0f6a3026637e109680429e0dfdbd01a11))
+* **build:** disable husky for stable ([fec3836](https://github.com/hmdc/sid2/commit/fec3836709a0991accfa36f93305843c30d384d5))
+* **build:** set preRelease to true for releases in stable ([65f4a4b](https://github.com/hmdc/sid2/commit/65f4a4bf236c82f9d157cd85e8f43999f2a359b4))
+* **build:** workflow puts ref under with ([44ace09](https://github.com/hmdc/sid2/commit/44ace09dc376fe4150f62a256740dfd427b776c1))
+* **build:** workflow_run loses the ref. thanks Aday for pointing that out. i can find the original ref using the paren. sub. for workflow original triggering git sha ([a144873](https://github.com/hmdc/sid2/commit/a144873522983589f34df8fe0344082ddd7c72ce))
+* **husky:** Add husky ([d899db0](https://github.com/hmdc/sid2/commit/d899db077405ace215a42664d71241868d3c2096))
+* **sid-dashboard:** GH[#487](https://github.com/hmdc/sid2/issues/487) Fixed Makefile after merge from canary ([a8ef121](https://github.com/hmdc/sid2/commit/a8ef12175108aa6ece2abbdb81272982923f6b59))
+
+
+### Features
+
+* **build:** build canary releases and migrate version file ([0aa71c9](https://github.com/hmdc/sid2/commit/0aa71c980e7065a1cf6c689fd6a48ca5d317fc9b))
+* **sid-dashboard:** GH [#514](https://github.com/hmdc/sid2/issues/514) Updated Matlab version to match FASRC codebase ([d446a08](https://github.com/hmdc/sid2/commit/d446a089dd393d89c065a0d2cea595e3cc85d72e))
 
 ## [2021.8.2](https://github.com/hmdc/sid2/compare/v0.9.0...v2021.8.2) (2021-08-12)
 
