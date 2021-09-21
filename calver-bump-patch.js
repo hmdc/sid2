@@ -9,8 +9,8 @@ class VersionAppendModifier extends CalverPlugin {
   getIncrementedVersion({ latestVersion }) {
     const { branches } = this.getContext();
     const format = this.getFormat();
-    const globalIncFormat = branches?.["*"]?.split(">");
-    const incFormat = branches?.[`${branchName()}`]?.split(">") || globalIncFormat;
+    const globalIncFormat = branches?.["*"];
+    const incFormat = branches?.[`${branchName()}`]?.split(">") || [globalIncFormat];
     var version = latestVersion;
 
     calver.init(format);
