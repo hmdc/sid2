@@ -1,3 +1,10 @@
+## [2021.9.1](https://github.com/hmdc/sid2/compare/v2021.8.4...2021.9.1) (2021-09-21)
+
+
+### Features
+
+* **build:** added disjointed continuous delivery process via Puppet ([6fab5cb](https://github.com/hmdc/sid2/commit/6fab5cbf011a56020b0cfdf39df6c0785db96054))
+
 ## [2021.9.10-dev.1](https://github.com/hmdc/sid2/compare/2021.9.9-dev.1...2021.9.10-dev.1) (2021-09-14)
 
 
