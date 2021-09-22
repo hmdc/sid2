@@ -12,7 +12,7 @@ Before building/modifying any of the projects contained within, please run the f
 
 ## installing node
 
-The following tools all track the `.node-version` file within the checkout, 
+The following tools all track the `.node-version` file within the repository
 
 ### os x
 
