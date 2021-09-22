@@ -1,3 +1,10 @@
+## [2021.9.13-dev.1](https://github.com/hmdc/sid2/compare/2021.9.12-dev.1...2021.9.13-dev.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* **documentation:** change wording ([#25](https://github.com/hmdc/sid2/issues/25)) ([93b2414](https://github.com/hmdc/sid2/commit/93b2414fb884216e756bc4495e4fa2bbf1b4d33d))
+
 ## [2021.9.12-dev.1](https://github.com/hmdc/sid2/compare/2021.9.11-dev.1...2021.9.12-dev.1) (2021-09-22)
 
 
