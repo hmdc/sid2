@@ -1,3 +1,11 @@
+## [2021.9.13](https://github.com/hmdc/sid2/compare/2021.9.1...2021.9.13) (2021-09-22)
+
+
+### Bug Fixes
+
+* **build:** properly increment version in stable ([ce62a50](https://github.com/hmdc/sid2/commit/ce62a508cd6225aba2fb7623e37e9fc794014ff1))
+* **build:** version increment works properly ([2635d8d](https://github.com/hmdc/sid2/commit/2635d8d1d057ad903a1ce115e220edc91541696f))
+
 ## [2021.9.12-dev.1](https://github.com/hmdc/sid2/compare/2021.9.11-dev.1...2021.9.12-dev.1) (2021-09-22)
 
 
