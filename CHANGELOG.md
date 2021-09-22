@@ -1,3 +1,10 @@
+## [2021.9.12-dev.1](https://github.com/hmdc/sid2/compare/2021.9.11-dev.1...2021.9.12-dev.1) (2021-09-22)
+
+
+### Bug Fixes
+
+* **build:** version increment works properly in stable but we need carrotization of the entire seq ([04bc854](https://github.com/hmdc/sid2/commit/04bc8546bf9c776c5879c0b938accfec12535af6))
+
 ## [2021.9.11-dev.1](https://github.com/hmdc/sid2/compare/2021.9.10-dev.1...2021.9.11-dev.1) (2021-09-21)
 
 
