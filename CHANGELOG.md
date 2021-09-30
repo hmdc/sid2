@@ -1,3 +1,20 @@
+## [2021.9.15](https://github.com/hmdc/sid2/compare/2021.9.13-dev.1...2021.9.15) (2021-09-30)
+
+
+### Bug Fixes
+
+* **build:** added automatic installation of husky following npm install ([4c420d5](https://github.com/hmdc/sid2/commit/4c420d54b0102803a5adf9501173626072898974))
+* **build:** completing merge by integrating canary branch ([0dd7a23](https://github.com/hmdc/sid2/commit/0dd7a23b37cc6b4feebab18ae2835b00bd69c8a9))
+* **build:** properly increment version in stable ([0ceada9](https://github.com/hmdc/sid2/commit/0ceada9c00fdc05dc1619fa662cbd0f8d9f74472))
+* **build:** version increment works properly ([0796514](https://github.com/hmdc/sid2/commit/079651496dcf6a2589bf3bac02d74eb9a37ede52))
+* **documentation:** change wording ([#25](https://github.com/hmdc/sid2/issues/25)) ([762f0dd](https://github.com/hmdc/sid2/commit/762f0dd475ca0151b04346eff88bbcc5ce06ab41))
+
+
+### Features
+
+* **build:** added disjointed continuous delivery process via Puppet ([ef9b008](https://github.com/hmdc/sid2/commit/ef9b008fd4945ab20954f9b2fdc9211821520cc1))
+* **build:** monorepo build ([ad7c7e8](https://github.com/hmdc/sid2/commit/ad7c7e811c337b67e441d90b2e0194451d56de63))
+
 ## [2021.9.13-dev.1](https://github.com/hmdc/sid2/compare/2021.9.12-dev.1...2021.9.13-dev.1) (2021-09-22)
 
 
