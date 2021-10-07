@@ -1,3 +1,10 @@
+## [2021.10.1-dev.1](https://github.com/hmdc/sid2/compare/2021.9.15...2021.10.1-dev.1) (2021-10-07)
+
+
+### Features
+
+* **dashboard:** gh [#572](https://github.com/hmdc/sid2/issues/572) Removed Sid form FASRC navigation ([74ea007](https://github.com/hmdc/sid2/commit/74ea00728a57470eed55c35620a281035c986142))
+
 ## [2021.9.15](https://github.com/hmdc/sid2/compare/2021.9.13-dev.1...2021.9.15) (2021-09-30)
 
 
