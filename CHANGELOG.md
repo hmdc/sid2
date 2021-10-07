@@ -1,3 +1,5 @@
+## [2021.10.2](https://github.com/hmdc/sid2/compare/2021.10.1-dev.1...2021.10.2) (2021-10-07)
+
 ## [2021.10.1-dev.1](https://github.com/hmdc/sid2/compare/2021.9.15...2021.10.1-dev.1) (2021-10-07)
 
 
