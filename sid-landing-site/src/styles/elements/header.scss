@@ -27,7 +27,7 @@
     }
 
     h1 a::after {
-        background-image: url('../assets/sid_logo.png');
+        background-image: url('../../assets/sid_logo.png');
         background-size: 117px 65px;
         display: inline-block;
         width: 117px;
@@ -37,7 +37,9 @@
         transform: translate(0, 10px);
     }
 
-    @media (max-width: 780px) {
+    @media (max-width: 880px) {
+        padding: 2rem 1rem 1rem 4rem;
+
         h1 {
             font-size: 4rem;
         }
