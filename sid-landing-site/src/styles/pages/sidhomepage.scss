@@ -4,10 +4,6 @@
   letter-spacing: normal;
   background-color: var(--color-secondary-background);
 
-  @media (max-width: 600px) {
-    font-size: .7rem;
-  }
-
   .description {
     padding: 3em 6em 2em 6em;
     background-color: var(--color-main-brown);
@@ -30,6 +26,22 @@
     }
   }
 
+  @media (max-width: $screen-lg) {
+    font-size: .9rem;
+  }
+
+  @media (max-width: $screen-md) {
+    font-size: .7rem;
+
+    .description {
+      padding: 3em 3em 2em 3em;
+    }
+
+    .description-text {
+      font-size: 2.5em;
+    }
+  }
+
   .description-actions {
     display: flex;
     justify-content: space-between;
@@ -39,7 +51,7 @@
     margin: 0 auto;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: $screen-md) {
     .description-actions {
       display: block;
     }
@@ -95,7 +107,7 @@
     gap: 3em;
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: $screen-xl) {
     .section-container {
       flex-direction: column;
       gap: 0;
