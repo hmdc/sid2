@@ -1,3 +1,11 @@
+## [2021.10.2-dev.1](https://github.com/hmdc/sid2/compare/2021.10.1-dev.1...2021.10.2-dev.1) (2021-10-19)
+
+
+### Bug Fixes
+
+* **build:** changelog should generate properly ([bbe560a](https://github.com/hmdc/sid2/commit/bbe560ae98c7e437e8cc69db7a9533d14b26950a))
+* **build:** i forgot fi ([bed1477](https://github.com/hmdc/sid2/commit/bed14778dac99f98fff2382ce132852818572a81))
+
 ## [2021.10.1-dev.1](https://github.com/hmdc/sid2/compare/2021.9.15...2021.10.1-dev.1) (2021-10-07)
 
 
