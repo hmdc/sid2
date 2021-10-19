@@ -78,7 +78,15 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: ./target
-      - run: npm run release -- --ci
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+      - name: Run release
+        run: |
+          if [ "${{ env.GITHUB_REF_SLUG }}" = "canary" ]; then
+            npm run release -- --git.tagMatch='[0-9][0-9][0-9][0-9].[0-9]*.[0-9]*-dev.1' --ci
+          else
+            npm run release -- --git.tagMatch='[0-9][0-9][0-9][0-9].[0-9]*.[0-9]*[!dev.1]' --ci
+          fi
         env:
           HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
