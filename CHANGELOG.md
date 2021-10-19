@@ -1,3 +1,10 @@
+## [2021.10.3](https://github.com/hmdc/sid2/compare/2021.10.2...2021.10.3) (2021-10-19)
+
+
+### Bug Fixes
+
+* **build:** address changelog generation bug ([43104d2](https://github.com/hmdc/sid2/commit/43104d28d16138fc53dd026f7f06507b3d1c6159))
+
 ## [2021.10.2-dev.1](https://github.com/hmdc/sid2/compare/2021.10.1-dev.1...2021.10.2-dev.1) (2021-10-19)
 
 
