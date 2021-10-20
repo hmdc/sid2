@@ -1,3 +1,10 @@
+## [2021.10.4-dev.1](https://github.com/hmdc/sid2/compare/2021.10.2-dev.1...2021.10.4-dev.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** QA CHANGELOG generation ([bea3b4d](https://github.com/hmdc/sid2/commit/bea3b4d5abb3e4e5cc01c9e46df4cf06b2c397d5))
+
 ## [2021.10.3](https://github.com/hmdc/sid2/compare/2021.10.2...2021.10.3) (2021-10-19)
 
 
