@@ -1,3 +1,10 @@
+## [2021.10.7](https://github.com/hmdc/sid2/compare/2021.10.6...2021.10.7) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** QA CHANGELOG ([847756d](https://github.com/hmdc/sid2/commit/847756d5b79e74a091a21a23c1d93d9d7449f256))
+
 ## [2021.10.6](https://github.com/hmdc/sid2/compare/2021.10.5...2021.10.6) (2021-10-20)
 
 
