@@ -1,3 +1,10 @@
+## [2021.10.8](https://github.com/hmdc/sid2/compare/2021.10.7...2021.10.8) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** gh [#575](https://github.com/hmdc/sid2/issues/575) - QA cleanup ([9374136](https://github.com/hmdc/sid2/commit/9374136171fb5adb83d5bf78073412324a441610))
+
 ## [2021.10.7](https://github.com/hmdc/sid2/compare/2021.10.6...2021.10.7) (2021-10-20)
 
 
