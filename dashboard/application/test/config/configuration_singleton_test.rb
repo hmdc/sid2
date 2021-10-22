@@ -152,8 +152,8 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     assert_equal "https://www.example.com", ConfigurationSingleton.new.developer_docs_url
   end
 
-  test "should not have default brand bg color" do
-    assert_nil ConfigurationSingleton.new.brand_bg_color
+  test "Sid should set brand bg color" do
+    assert_equal "#F0F0F0", ConfigurationSingleton.new.brand_bg_color
   end
 
   test "can configure brand bg color" do
@@ -161,8 +161,8 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     assert_equal "MY_COLOR", ConfigurationSingleton.new.brand_bg_color
   end
 
-  test "should not have default brand link active bg color" do
-    assert_nil ConfigurationSingleton.new.brand_link_active_bg_color
+  test "SID should set default brand link active bg color" do
+    assert_equal "#3B3D3F", ConfigurationSingleton.new.brand_link_active_bg_color
   end
 
   test "can configure brand link active bg color" do
@@ -175,7 +175,7 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
   end
 
   test "can configure logo img" do
-    ENV["OOD_DASHBOARD_LOGO"] = "MY_LOGO"
+    ENV["SID2__OOD_DASHBOARD_LOGO"] = "MY_LOGO"
     assert_equal "MY_LOGO", ConfigurationSingleton.new.logo_img
   end
 
@@ -242,5 +242,44 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
   test "can set native vnc login host" do
     ENV["OOD_NATIVE_VNC_LOGIN_HOST"] = "owens.osc.edu"
     assert_equal ENV["OOD_NATIVE_VNC_LOGIN_HOST"], ConfigurationSingleton.new.native_vnc_login_host
+  end
+
+  test "should load rt configuration from environment variables" do
+    ENV["RT_SERVER"] = "http://test.com"
+    ENV["RT_USER"] = "username"
+    ENV["RT_PASSWORD"] = "secret-password"
+    ENV["RT_AUTH_TOKEN"] = "some-auth-token"
+    ENV["RT_TIMEOUT"] = "100"
+    ENV["RT_VERIFY_SSL"] = "false"
+    ENV["RT_QUEUE"] = "test-queue"
+    ENV["RT_PRIORITY"] = "10"
+
+    #ENSURE rt_config FILES IS NOT FOUND
+    rt_config_not_found = Rails.root.join("test", "notfound")
+    Rails.stubs(:root).returns(rt_config_not_found)
+    rtc = ConfigurationSingleton.new.request_tracker_config
+    assert_equal "http://test.com", rtc[:server]
+    assert_equal "username", rtc[:user]
+    assert_equal "secret-password", rtc[:pass]
+    assert_equal "some-auth-token", rtc[:auth_token]
+    assert_equal 100, rtc[:timeout]
+    assert_equal false, rtc[:verify_ssl]
+    assert_equal "test-queue", rtc[:queue_name]
+    assert_equal "10", rtc[:priority]
+  end
+
+  test "should load rt configuration from config file if available" do
+    rt_config_path = Rails.root.join("test", "fixtures")
+    Rails.stubs(:root).returns(rt_config_path)
+
+    rtc = ConfigurationSingleton.new.request_tracker_config
+    assert_equal "https://fileconfig.com", rtc[:server]
+    assert_equal "file", rtc[:user]
+    assert_equal "file-password", rtc[:pass]
+    assert_equal "file-auth-token", rtc[:auth_token]
+    assert_equal 1022, rtc[:timeout]
+    assert_equal true, rtc[:verify_ssl]
+    assert_equal "General", rtc[:queue_name]
+    assert_equal "99", rtc[:priority]
   end
 end

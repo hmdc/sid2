@@ -1,0 +1,71 @@
+.support-ticket-content-container {
+  margin-bottom: 30px;
+}
+
+.form-container {
+  margin-bottom: 40px;
+}
+
+input[type="file"] {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+ }
+
+.attachments-add {
+  display: flex;
+  gap: 10px;
+  max-width: 150px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.attachments-add:hover > * {
+  color: #cccccc;
+}
+
+.attachments-add i {
+  font-size: 22px;
+  color: #767676;
+}
+
+.attachments-add span {
+  margin-top: 1px ;
+}
+
+.attachment-input {
+  margin-bottom: 10px;
+}
+
+.attachment-input-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+.attachment-input-content > *:nth-child(1) {
+  flex: 1 1 70%;
+}
+
+.attachment-input-content:hover {
+  border-color: black;
+}
+.attachment-file-label {
+  margin: 0;
+  padding: 6px 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.attachment-delete {
+  font-size: 18px;
+  padding: 6px 5px;
+  margin-top: -2px;
+  color: #a94442;
+  cursor: pointer;
+}
+
+.attachment-delete:hover {
+  color: #e5c7c6;
+}

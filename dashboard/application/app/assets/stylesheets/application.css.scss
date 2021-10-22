@@ -61,6 +61,7 @@ $ood-blue: rgb(0, 95, 133);
 // See: https://css-tricks.com/couple-takes-sticky-footer/
 html, body {
   height: 100%;
+  overscroll-behavior: none
 }
 body {
   display: flex;
@@ -220,6 +221,7 @@ pre.motd-monospaced {
 @import "batch_connect/sessions";
 @import "batch_connect/session_contexts";
 @import "spinner";
+@import "support_ticket";
 @import "quick_launch";
 @import "insufficient_quota";
 @import "insufficient_balance";

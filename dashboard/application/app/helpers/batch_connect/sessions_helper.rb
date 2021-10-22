@@ -48,6 +48,7 @@ module BatchConnect::SessionsHelper
           concat queued_reason(session)
           concat time(session)
           concat id(session)
+          concat support(session)
           concat tag.hr                         if session.info_view
           safe_concat custom_info_view(session) if session.info_view
         end
@@ -109,6 +110,19 @@ module BatchConnect::SessionsHelper
       end
     else
       ""
+    end
+  end
+
+  def support(session)
+    content_tag(:p) do
+      concat content_tag(:strong, "Problems with this session?")
+      concat " "
+      concat(
+        link_to(
+          "Submit support ticket",
+          support_path(session_id: session.id)
+        )
+      )
     end
   end
 

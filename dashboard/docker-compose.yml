@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  rt:
+    image: netsandbox/request-tracker:4.4
+    hostname: rt
+    container_name: rt
+    environment:
+      RT_WEB_PORT: "34000"
+    ports:
+      - "34000:34000"
+    expose:
+      - "34000"
+
   mysql:
     image: mariadb:10.4.18
     hostname: mysql
@@ -23,6 +34,7 @@ services:
         OOD_UID: ${OOD_UID}
         OOD_GID: ${OOD_GID}
     hostname: ood
+    container_name: ood
     volumes:
       - etc_munge:/etc/munge
       - etc_slurm:/etc/slurm
