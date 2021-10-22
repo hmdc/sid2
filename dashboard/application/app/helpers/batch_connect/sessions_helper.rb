@@ -18,6 +18,9 @@ module BatchConnect::SessionsHelper
                   status << content_tag(:span, pluralize(num_cores, "core"), class: "badge") unless num_cores.zero?
                 end
                 status << "#{status session}"
+                if session.queued?
+                  status << content_tag(:span, "Expected Start: #{session.info.native[:start_time]}", class: "badge")
+                end
                 status.join(" | ").html_safe
               end
             )
@@ -42,6 +45,7 @@ module BatchConnect::SessionsHelper
           concat created(session)
           concat requested_parameters(session)
           concat exit_status(session)
+          concat queued_reason(session)
           concat time(session)
           concat id(session)
           concat tag.hr                         if session.info_view
@@ -91,6 +95,17 @@ module BatchConnect::SessionsHelper
         concat content_tag(:strong, "Exit Status:")
         concat " "
         concat "#{session.completion_info["state"]} | #{session.completion_info["reason"]} | #{session.completion_info["exit_code"]} Exit code"
+      end
+    else
+      ""
+    end
+  end
+
+  def queued_reason(session)
+    if session.queued?
+      content_tag(:p) do
+        concat content_tag(:strong, "Queued Reason:")
+        concat " #{session.info.native[:reason]}"
       end
     else
       ""
