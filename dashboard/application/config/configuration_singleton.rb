@@ -32,7 +32,7 @@ class ConfigurationSingleton
 
   # @return [String] memoized version string
   def app_version
-    @app_version ||= (version_from_file(Rails.root) || version_from_git(Rails.root) || "Unknown").strip
+    @app_version ||= (version_from_file(Rails.root) || "Unknown").strip
   end
 
   # @return [String] memoized version string
@@ -82,6 +82,10 @@ end
 
   def load_external_bc_config?
     to_bool(ENV["OOD_LOAD_EXTERNAL_BC_CONFIG"] || (rails_env == "production"))
+  end
+
+  def request_tracker_config
+    @rt_config ||= load_request_tracker_config
   end
 
   # The file system path to the announcements
@@ -281,6 +285,38 @@ end
       app_root.join(".env.#{rails_env}"),
       app_root.join(".env")
     ].compact
+  end
+
+  def load_request_tracker_config
+      #USE RT CONFIG FILE IF AVAILABLE
+    rt_config_file = Rails.root.join("config", "rt_config.yml")
+    if rt_config_file.readable?
+      rt_config = YAML.safe_load(rt_config_file.read).to_h.deep_symbolize_keys
+      Rails.logger.info "Loaded RT config from: #{rt_config_file}"
+    else
+      #USE ENV IF NO RT CONFIG FILE
+      rt_config = {
+        server:      ENV["RT_SERVER"],
+        user:        ENV["RT_USER"],
+        pass:        ENV["RT_PASSWORD"],
+        auth_token:  ENV["RT_AUTH_TOKEN"],
+
+        queue_name:  ENV["RT_QUEUE"],
+        priority:    ENV["RT_PRIORITY"],
+      }
+
+      rt_config[:timeout] = ENV['RT_TIMEOUT'].to_i if ENV['RT_TIMEOUT']
+      rt_config[:verify_ssl] = to_bool(ENV['rt_ssl']) if ENV['RT_VERIFY_SSL']
+
+      Rails.logger.info "Loaded RT config from environment"
+    end
+    #DEFAULTS
+    rt_config[:timeout] ||= 10
+    rt_config[:verify_ssl] ||= false
+    rt_config[:queue_name] ||= "General"
+    rt_config[:priority] ||= 4
+
+    return rt_config
   end
 
   FALSE_VALUES=[nil, false, '', 0, '0', 'f', 'F', 'false', 'FALSE', 'off', 'OFF', 'no', 'NO']

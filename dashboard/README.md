@@ -8,6 +8,7 @@ The following will launch a Sid Dashboard development environment with:
 - Slurmdbd - Slurm database
 - C1, C2 - Slurm execute nodes.
 - OOD - OpenOnDemand node with Sid2 installed as as a [development-mode](https://osc.github.io/ood-documentation/master/app-development/enabling-development-mode.html) app.
+- RT - Request tracker system
 
 ### Pre-requisites
 
@@ -28,13 +29,15 @@ The following will launch a Sid Dashboard development environment with:
 
 ### Launching
 
-- Run `make` from checkout. The build process is finished when the `ood_1` container stops generating output, and the `slurmctld` container goes into an output loop.
+- Run `make` from checkout. The build process is finished when the `ood` container stops generating output, and the `slurmctld` container goes into an output loop.
 - The entire directory/checkout is mapped into the OOD and slurm containers. Changes made to code will immediately reflect within OOD (with the exception of CSS/JS changes which requires a rake, see Caveats.)
 
 ### Connecting
 
-- After the containers have started, connect to [http://localhost:33000](http://localhost:33000)
+- After the containers have started, connect to OOD dashboard application: [http://localhost:33000](http://localhost:33000)
 - Login with username `ood`, password `ood`.
+- To connect to RT, use: [http://localhost:34000](http://localhost:34000)
+- Login with username `root`, password `password`
 
 ### Validation
 
@@ -57,6 +60,62 @@ The following will launch a Sid Dashboard development environment with:
   https://vdi.rc.fas.harvard.edu
 
   and go through the same Validation process as for the development environment.
+
+## Support ticket attachments
+There are restrictions in place for the attachments. There is client side validation:
+ * Attachment files cannot be bigger than 5MB
+ * Number of attachment files cannot be bigger than 5
+ * To update: [application/app/assets/javascripts/support_ticket.js#L6](application/app/assets/javascripts/support_ticket.js#L6)
+
+And there is back-end validation:
+ * Attachment files cannot be bigger than 6MB
+ * Number of attachment files cannot be bigger than 8
+ * To update: [application/app/models/attachments_validator.rb#L7](application/app/models/attachments_validator.rb#L7)
+
+## RT server configuration
+
+RT is deployed locally using a Docker image. The version of RT is controlled by the version of the Docker image. The versions supported can be found: [https://hub.docker.com/r/netsandbox/request-tracker/](https://hub.docker.com/r/netsandbox/request-tracker/)  
+To upgrade the RT version, simple update the version in the Docker compose file: [docker-compose.yml](docker-compose.yml)
+
+```
+services:
+  rt:
+    image: netsandbox/request-tracker:4.4
+```
+Configuration file: `config/rt_config.yml`, eg:
+```
+server: "https://rt.iqss.com"
+user: "test"
+pass: "password"
+auth_token:
+timeout: 99
+verify_ssl: true
+priority: "4"
+queue_name: "General"
+```
+
+Configuration environment variables:
+
+```
+RT_SERVER: URL for the RT server, eg: https://rt.iqss.com.
+RT_USER: API username.
+RT_PASSWORD: API password.
+RT_AUTH_TOKEN: API auth token, use instead of username and password.
+RT_TIMEOUT: Connection and read timeout in seconds. Defaults to 30
+RT_VERIFY_SSL: Whether or not the client should validate SSL certificates. Defaults to false
+RT_QUEUE: The name of the queue where tickets will be added to. Defaults to General
+RT_PRIORITY: The priority for the ticket. Defaults to 4
+```
+### RT configuration for remote-dev
+To test the support ticket creation in `remote-dev`, we need to configure the RT client. We need to manually add the RT configuration before executing the `remote-dev` deployment.  
+Create the configuration file `config/rt_config.yml` with the following contents below.  
+username and password are available in Lastpass
+```
+server: "https://help.hmdc.harvard.edu"
+user: "username"
+pass: "password"
+queue_name: "IQSS_FASRC_support"
+```
 
 ## Launcher button configuration
 

@@ -1,3 +1,15 @@
+## [2021.10.9-dev.1](https://github.com/hmdc/sid2/compare/2021.10.6-dev.1...2021.10.9-dev.1) (2021-10-28)
+
+
+### Bug Fixes
+
+* **build:** fixed JS syntax to pass Rails FE assessts minification and obfuscation process ([832c56c](https://github.com/hmdc/sid2/commit/832c56cb368872e5210047e441dad169d6eaa4fe))
+
+
+### Features
+
+* **dashboard:** gh [#525](https://github.com/hmdc/sid2/issues/525), [#528](https://github.com/hmdc/sid2/issues/528), [#438](https://github.com/hmdc/sid2/issues/438) Added enhanced information + new flow to create support ticket ([3a79cd1](https://github.com/hmdc/sid2/commit/3a79cd1e34a542d315a039ef7d1709ae2a33d480))
+
 ## [2021.10.8](https://github.com/hmdc/sid2/compare/2021.10.7...2021.10.8) (2021-10-20)
 
 
@@ -33,6 +45,12 @@
 * **build:** changelog should generate properly ([bbe560a](https://github.com/hmdc/sid2/commit/bbe560ae98c7e437e8cc69db7a9533d14b26950a))
 * **build:** i forgot fi ([bed1477](https://github.com/hmdc/sid2/commit/bed14778dac99f98fff2382ce132852818572a81))
 
+<<<<<<< HEAD
+=======
+## [2021.10.6-dev.1](https://github.com/hmdc/sid2/compare/2021.10.4-dev.1...2021.10.6-dev.1) (2021-10-20)
+
+
+>>>>>>> canary
 ## [2021.10.5](https://github.com/hmdc/sid2/compare/2021.10.3...2021.10.5) (2021-10-20)
 
 

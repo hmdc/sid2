@@ -18,6 +18,9 @@ module BatchConnect::SessionsHelper
                   status << content_tag(:span, pluralize(num_cores, "core"), class: "badge") unless num_cores.zero?
                 end
                 status << "#{status session}"
+                if session.queued?
+                  status << content_tag(:span, "Expected Start: #{session.info.native[:start_time]}", class: "badge")
+                end
                 status.join(" | ").html_safe
               end
             )
@@ -40,8 +43,12 @@ module BatchConnect::SessionsHelper
           concat content_tag(:div, delete(session))
           concat host(session)
           concat created(session)
+          concat requested_parameters(session)
+          concat exit_status(session)
+          concat queued_reason(session)
           concat time(session)
           concat id(session)
+          concat support(session)
           concat tag.hr                         if session.info_view
           safe_concat custom_info_view(session) if session.info_view
         end
@@ -61,6 +68,61 @@ module BatchConnect::SessionsHelper
       concat content_tag(:strong, t('dashboard.batch_connect_sessions_stats_created_at'))
       concat " "
       concat Time.at(session.created_at).localtime.strftime("%Y-%m-%d %H:%M:%S %Z")
+    end
+  end
+
+
+  def requested_parameters(session)
+    if session.completion_info
+      memory = session.completion_info["memory"]
+      cores = session.completion_info["cpu"]
+      runtime = distance_of_time_in_words(session.completion_info["runtime"], 0, false, :only => [:minutes, :hours], :accumulate_on => :hours)
+    elsif session.info.native
+      memory = session.info.native[:min_memory]
+      cores = session.info.native[:min_cpus]
+      runtime = distance_of_time_in_words(session.info.wallclock_limit, 0, false, :only => [:minutes, :hours], :accumulate_on => :hours)
+    end
+
+    content_tag(:p) do
+      concat content_tag(:strong, "Basic Parameters:")
+      concat " "
+      concat "#{memory || "N/A"} Memory | #{cores ? pluralize(cores, "Core") : "N/A Core"} | #{runtime || "N/A"} Runtime"
+    end
+  end
+
+  def exit_status(session)
+    if session.completed? && session.completion_info
+      content_tag(:p) do
+        concat content_tag(:strong, "Exit Status:")
+        concat " "
+        concat "#{session.completion_info["state"]} | #{session.completion_info["reason"]} | #{session.completion_info["exit_code"]} Exit code"
+      end
+    else
+      ""
+    end
+  end
+
+  def queued_reason(session)
+    if session.queued?
+      content_tag(:p) do
+        concat content_tag(:strong, "Queued Reason:")
+        concat " #{session.info.native[:reason]}"
+      end
+    else
+      ""
+    end
+  end
+
+  def support(session)
+    content_tag(:p) do
+      concat content_tag(:strong, "Problems with this session?")
+      concat " "
+      concat(
+        link_to(
+          "Submit support ticket",
+          support_path(session_id: session.id)
+        )
+      )
     end
   end
 
