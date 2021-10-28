@@ -77,7 +77,7 @@ const SupportTicketService = (function (){
             const validator = validators[inputFieldId] || noopValidator
             const errorMessage = validator($inputFieldElement)
             if (errorMessage) {
-                $errorElement ||= $inputFieldElement
+                $errorElement = $errorElement || $inputFieldElement
                 showValidationError($inputFieldElement, inputFieldErrorId, errorMessage)
             }
         })
