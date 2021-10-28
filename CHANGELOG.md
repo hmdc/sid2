@@ -1,3 +1,49 @@
+## [2021.10.10](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-28)
+
+
+
+## [2021.10.8](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** gh [#575](https://github.com/hmdc/sid2/issues/575) - QA cleanup ([9374136](https://github.com/hmdc/sid2/commit/9374136171fb5adb83d5bf78073412324a441610))
+
+
+
+## [2021.10.7](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** QA CHANGELOG ([847756d](https://github.com/hmdc/sid2/commit/847756d5b79e74a091a21a23c1d93d9d7449f256))
+
+
+
+## [2021.10.6](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-20)
+
+
+
+## [2021.10.5](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** QA CHANGELOG generation ([3ad40e5](https://github.com/hmdc/sid2/commit/3ad40e5c2aed86b66e923efb6cfafefd035fd019))
+
+
+
+## [2021.10.3](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-19)
+
+
+### Bug Fixes
+
+* **build:** address changelog generation bug ([43104d2](https://github.com/hmdc/sid2/commit/43104d28d16138fc53dd026f7f06507b3d1c6159))
+
+
+
+## [2021.10.2](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-07)
+
 ## [2021.10.9-dev.1](https://github.com/hmdc/sid2/compare/2021.10.6-dev.1...2021.10.9-dev.1) (2021-10-28)
 
 
