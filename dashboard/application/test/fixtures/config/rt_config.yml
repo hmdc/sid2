@@ -1,0 +1,8 @@
+server: "https://fileconfig.com"
+user: "file"
+pass: "file-password"
+auth_token: "file-auth-token"
+timeout: 1022
+verify_ssl: true
+priority: "99"
+queue_name: "General"

@@ -1,4 +1,40 @@
+## [2021.10.8](https://github.com/hmdc/sid2/compare/2021.10.7...2021.10.8) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** gh [#575](https://github.com/hmdc/sid2/issues/575) - QA cleanup ([9374136](https://github.com/hmdc/sid2/commit/9374136171fb5adb83d5bf78073412324a441610))
+
+## [2021.10.7](https://github.com/hmdc/sid2/compare/2021.10.6...2021.10.7) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** QA CHANGELOG ([847756d](https://github.com/hmdc/sid2/commit/847756d5b79e74a091a21a23c1d93d9d7449f256))
+
+## [2021.10.6](https://github.com/hmdc/sid2/compare/2021.10.5...2021.10.6) (2021-10-20)
+
+
+
+## [2021.10.4-dev.1](https://github.com/hmdc/sid2/compare/2021.10.5...2021.10.6) (2021-10-20)
+
+
+### Bug Fixes
+
+* **build:** QA CHANGELOG generation ([bea3b4d](https://github.com/hmdc/sid2/commit/bea3b4d5abb3e4e5cc01c9e46df4cf06b2c397d5))
+
+
+
+## [2021.10.2-dev.1](https://github.com/hmdc/sid2/compare/2021.10.5...2021.10.6) (2021-10-19)
+
+
+### Bug Fixes
+
+* **build:** changelog should generate properly ([bbe560a](https://github.com/hmdc/sid2/commit/bbe560ae98c7e437e8cc69db7a9533d14b26950a))
+* **build:** i forgot fi ([bed1477](https://github.com/hmdc/sid2/commit/bed14778dac99f98fff2382ce132852818572a81))
+
 ## [2021.10.6-dev.1](https://github.com/hmdc/sid2/compare/2021.10.4-dev.1...2021.10.6-dev.1) (2021-10-20)
+
 
 ## [2021.10.5](https://github.com/hmdc/sid2/compare/2021.10.3...2021.10.5) (2021-10-20)
 

@@ -206,6 +206,7 @@ class BatchConnect::SessionTest < ActiveSupport::TestCase
     #
     adapter = mock()
     adapter.stubs(:info).returns(OodCore::Job::Info.new(id: "123", status: :completed))
+    adapter.stubs(:completion_info).returns({ })
     BatchConnect::Session.any_instance.stubs(:adapter).returns(adapter)
 
     Dir.mktmpdir("dbroot") do |dir|

@@ -1,0 +1,74 @@
+<div>
+  <ol class="breadcrumb">
+    <li><%= link_to t('dashboard.breadcrumbs_home'), root_path %></li>
+    <li class="active">Submit support ticket</li>
+  </ol>
+
+  <div class="support-ticket-content-container">
+    <h2>Sid Support Ticket</h2>
+    <p>
+      If you select an interactive session, the system will add information about the session automatically to the support ticket.
+    </p>
+
+    <p>
+      If you think it might be useful, use the attachment section to include an image or another file that can help us troubleshoot your problem.
+    </p>
+  </div>
+
+
+  <div class="form-container">
+    <form id="new_support_ticket" role="form" action="<%= support_path %>" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="<%= request_forgery_protection_token %>" value="<%= form_authenticity_token %>" />
+
+      <div class="form-group">
+        <label class="control-label" for="username">User name</label>
+        <input value="<%= @user.name %>" class="form-control" type="text" name="support_ticket[username]" id="username" readonly />
+      </div>
+      <div class="form-group <%= support_ticket_add_error_class(:email) %>">
+        <label class="control-label" for="email">Your email <span class="compulsory">*</span></label>
+        <input data-toggle="form-validate" class="form-control" type="text" name="support_ticket[email]" id="email" placeholder="The email address you want this response to go to" value="<%= @support_ticket.email %>" />
+        <%= support_ticket_add_error_message(:email) %>
+      </div>
+      <div class="form-group <%= support_ticket_add_error_class(:cc) %>">
+        <label class="control-label" for="cc">Cc</label>
+        <input data-toggle="form-validate" class="form-control" type="text" name="support_ticket[cc]" id="cc" value="<%= @support_ticket.cc %>" />
+        <%= support_ticket_add_error_message(:cc) %>
+      </div>
+      <div class="form-group <%= support_ticket_add_error_class(:subject) %>">
+        <label class="control-label" for="subject">Subject <span class="compulsory">*</span></label>
+        <input data-toggle="form-validate" class="form-control" type="text" name="support_ticket[subject]" id="subject" value="<%= @support_ticket.subject %>" />
+        <%= support_ticket_add_error_message(:subject) %>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="session">Session</label>
+        <select class="form-control" name="support_ticket[session_id]" id="session_id">
+          <option value="">Select an interactive session if the problem relates to one</option>
+          <% @sessions.first(support_ticket_max_sessions).each do | session_data | %>
+            <option value="<%= session_data.id %>" <%= "selected" if session_data.id == @support_ticket.session_id %>><%= "#{session_data.token} - #{session_data.status} - #{Time.at(session_data.created_at).iso8601} - #{session_data.id}" %></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="form-group <%= support_ticket_add_error_class(:attachments) %>" id="form-files">
+        <label class="control-label">Attachments</label>
+        <p data-toggle="form-validate" id="attachments">Click the box to attach a file. Screenshots or other files can help troubleshoot your problem.</p>
+        <%= support_ticket_add_error_message(:attachments) %>
+        <div id="attachments-container">
+
+        </div>
+        <p class="attachments-add" data-toggle="attachments-add"><i class="far fa-plus-square" title="Add attachment"></i> <span>Add attachment</span></p>
+      </div>
+
+      <div class="form-group <%= support_ticket_add_error_class(:description) %>">
+        <label class="control-label" for="description">Description <span class="compulsory">*</span></label>
+        <%= support_ticket_add_error_message(:description) %>
+        <textarea data-toggle="form-validate" data-validation-location="before" class="form-control" name="support_ticket[description]" id="description" rows="20"><%= @support_ticket.description %></textarea>
+      </div>
+
+      <input type="submit" name="commit" value="Submit support ticket" class="btn btn-primary btn-block" />
+
+    </form>
+  </div>
+
+</div>
+<%= render partial: "shared/full_page_spinner" %>
+
