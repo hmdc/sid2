@@ -1,3 +1,15 @@
+## [2021.10.9-dev.1](https://github.com/hmdc/sid2/compare/2021.10.6-dev.1...2021.10.9-dev.1) (2021-10-28)
+
+
+### Bug Fixes
+
+* **build:** fixed JS syntax to pass Rails FE assessts minification and obfuscation process ([832c56c](https://github.com/hmdc/sid2/commit/832c56cb368872e5210047e441dad169d6eaa4fe))
+
+
+### Features
+
+* **dashboard:** gh [#525](https://github.com/hmdc/sid2/issues/525), [#528](https://github.com/hmdc/sid2/issues/528), [#438](https://github.com/hmdc/sid2/issues/438) Added enhanced information + new flow to create support ticket ([3a79cd1](https://github.com/hmdc/sid2/commit/3a79cd1e34a542d315a039ef7d1709ae2a33d480))
+
 ## [2021.10.8](https://github.com/hmdc/sid2/compare/2021.10.7...2021.10.8) (2021-10-20)
 
 
