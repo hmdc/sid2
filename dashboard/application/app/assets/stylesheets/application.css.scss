@@ -213,6 +213,15 @@ pre.motd-monospaced {
   border-width: 0 0 3px;
   border-color: transparent;
 }
+
+.footer_version {
+  display: block;
+  min-height: 40px;
+  margin: 10px auto;
+  text-align: center;
+  white-space: nowrap;
+}
+
 // $fa-font-path: "fontawesome/fonts";
 @import "dashboard";
 @import "navbar";
