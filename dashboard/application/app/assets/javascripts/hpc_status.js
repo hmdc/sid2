@@ -22,7 +22,8 @@ const HPCStatusService = (function (){
             url: 'https://fasrc.instatus.com/summary.json',
         })
             .done(data => {
-                const status = CLUSTER_STATUS_MAP[data?.page?.status?.toLowerCase()] || CLUSTER_STATUS_MAP['unknown']
+                const statusCode = data && data.page && data.page.status ? data.page.status.toLowerCase() : 'unknown'
+                const status = CLUSTER_STATUS_MAP[statusCode]
                 addStatusWidget($statusContainer, status)
             })
             .fail(( jqxhr, settings, exception ) => {
