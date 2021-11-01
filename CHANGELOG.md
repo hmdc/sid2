@@ -1,3 +1,15 @@
+## [2021.11.2-dev.1](https://github.com/hmdc/sid2/compare/2021.11.1-dev.1...2021.11.2-dev.1) (2021-11-01)
+
+
+### Bug Fixes
+
+* **build:** fixed JS syntax to conform with Rails asset minification and obfuscation process ([69ecd8b](https://github.com/hmdc/sid2/commit/69ecd8b117679cf541313e12b186102664686439))
+
+
+### Features
+
+* **dashboard:** gh [#450](https://github.com/hmdc/sid2/issues/450) Added FASRC cluster status to Sid homepage ([#32](https://github.com/hmdc/sid2/issues/32)) ([f8ea4ab](https://github.com/hmdc/sid2/commit/f8ea4ab11a77aabcd1285cf5e1620a744d8b4142))
+
 ## [2021.11.1-dev.1](https://github.com/hmdc/sid2/compare/2021.10.9-dev.1...2021.11.1-dev.1) (2021-11-01)
 
 
