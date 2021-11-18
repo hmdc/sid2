@@ -8,8 +8,8 @@ OOD_UID := $(shell id -u)
 OOD_GID := $(shell id -g)
 OOD_TAG := 2.0.16-1.el7
 SLURM_TAG := slurm-20-11-4-1
-SID_SLURM_IMAGE := abujeda/slurm:$(SLURM_TAG)
-SID_ONDEMAND_IMAGE := abujeda/ondemand:$(OOD_TAG)
+SID_SLURM_IMAGE := hmdc/sid-slurm:$(SLURM_TAG)
+SID_ONDEMAND_IMAGE := hmdc/sid-ood:$(OOD_TAG)
 FASRC_USERNAME := $(if $(SSH_USERNAME),$(SSH_USERNAME),$(USER))
 FASRC_LOGIN_HOST := login.rc.fas.harvard.edu
 
