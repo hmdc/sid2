@@ -1,0 +1,66 @@
+code {
+  font-family:
+    source-code-pro,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Courier New',
+    monospace;
+}
+
+.content-hide {
+  position: absolute;
+  left: -1000px
+}
+
+.btn-hover-effect:hover {
+  transform: scale(0.96);
+}
+
+.link-effect::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  background-color: currentColor;
+  width: 100%;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+}
+
+.link-effect:hover::before {
+  display: none;
+}
+
+.link-hover-effect::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  background-color: currentColor;
+  width: 100%;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  transform: scale(0, 1);
+  transition: transform 0.3s ease;
+}
+
+.link-hover-effect:hover::after {
+  transform: scale(1, 1)
+}
+
+h2.page-title {
+  padding: 4rem 0;
+  font-size: 4.5rem;
+  font-weight: normal;
+  color: var(--color-main-brown);
+  white-space: nowrap;
+}
+
+h3.section-title {
+  padding: 4rem 0;
+  font-size: 3.5rem;
+  font-weight: normal;
+  color: var(--color-feature-title);
+  white-space: nowrap;
+}

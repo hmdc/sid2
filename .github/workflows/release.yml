@@ -52,6 +52,23 @@ jobs:
           name: spi-release-artifact
           retention-days: 1
           path: ./keycloak-radius-spi/target/keycloak-radius-spi-jar-with-dependencies.jar
+  create-release-landing-page:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+      - name: Creates build
+        working-directory: ./sid-landing-site
+        run: make release
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: landing-page-release-artifact
+          retention-days: 1
+          path: ./sid-landing-site/target/sid2-landing-site.tar.gz
   make-logical-release:
     runs-on: ubuntu-latest
     needs: [create-release-keycloak-spi, create-release-dashboard]

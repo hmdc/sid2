@@ -3,9 +3,8 @@ React application to server content for sid.harvard.edu
 
 ## Local environment
 The service has been developed using:
-* `node/15.7.0`
+* `node/16.4.0`
 * `npm/7.4.3`
-* `yarn/1.22.10`
 * `React@17.0.1`
 
 ## Prerequisites
@@ -18,52 +17,45 @@ cd sid2/sid-landing-site
 Install Homebrew:  
 `which brew || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-Install/Upgrade Node.js
+Install/Upgrade Node.js. The following tools all track the `../.node-version` file within the parent parent project
 ```
-node --version |grep -q "^v15\." || brew unlink node
-node --version |grep -q "^v15\." || brew install node@15
-brew upgrade node@15
-brew link --overwrite --force node@15
+node --version |grep -q "^v16\." || brew unlink node
+node --version |grep -q "^v16\." || brew install node@16
+brew upgrade node@16
+brew link --overwrite --force node@16
 ```
 If you need to manage multiple version of Node, use [n](https://github.com/tj/n)
 
 ## Building and testing
-Install yarn:  
-`npm install yarn`
-
 Install all the libraries needed for the project:  
-`npx yarn install`
+`npm install`
 
 Build the app. The `build` directory will contain all generated files:  
-`npx yarn build`
+`npm build`
 
 Run the tests:  
-`npx yarn test`
+`npm test`
 
 ## Running the service locally
 Running using react-scripts:  
-`npx yarn start`
+`npm start`
 
 [http://localhost:3000](http://localhost:3000) to view the site.
 
 ### Docker
-The docker configuration uses the `node` image to build the project and the `nginx` image to run the site.
+The docker configuration uses a `node` image to build the project and the `nginx` image to run the site.
 
 Install Docker:  
 [https://docs.docker.com/docker-for-mac/install/](https://docs.docker.com/docker-for-mac/install/)  
 This requires creating a (free) Docker Hub account.
 
-Run these commands from the `sid-landing-site` project root folder.  
-Build docker image:  
-`docker build -t sid-landing-site:latest .`
+Run this command from the `sid-landing-site` project root folder.  
+This command will build the Docker image and run it:  
+`make docker`
 
-Run the image:   
-`docker run --name sid -d -p 8080:80 sid-landing-site`
+[http://localhost:3000](http://localhost:3000) to view the site.
 
-[http://localhost:8080](http://localhost:8080) to view the site.
-
-Stop the image and clean up:  
-`docker rm -f sid`
+To stop it, press <ctrl+c>. It will cleanup the container as well.
 
 ## Deploy to AWS using serverless framework
 Serverless framework is installed as a dev dependency. There is a deployment script under `preview` folder.  
