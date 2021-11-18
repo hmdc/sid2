@@ -1,12 +1,10 @@
 import React from 'react'
-import FooterFeatures from './FooterFeatures'
 
 const currentYear = new Date().getFullYear()
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
     return (
         <footer>
-            <FooterFeatures />
             <nav className="footer-copy">
                 <ul>
                     <li className="copyright">Copyright © {currentYear} The President and Fellows of Harvard College</li>

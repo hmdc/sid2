@@ -1,7 +1,7 @@
 import React from 'react'
 import { UrlConstants } from '../../utils/UrlUtils'
 
-const NotFound = () => {
+const NotFound = (): JSX.Element => {
   return (
     <div id="notfound">
         <h2 className="content-hide">Not Found</h2>

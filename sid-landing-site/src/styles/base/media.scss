@@ -1,0 +1,26 @@
+$screen-sm: 450px;
+$screen-md: 700px;
+$screen-lg: 880px;
+$screen-xl: 1000px;
+
+.all-hide {
+  display: none;
+}
+
+.mobile-hide {
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.tablet-hide {
+  @media (min-width: 701px) and (max-width: 1150px) {
+    display: none;
+  }
+}
+
+.desktop-hide {
+  @media (min-width: 1151px) {
+    display: none;
+  }
+}

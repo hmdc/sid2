@@ -1,0 +1,170 @@
+#sid {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  background-color: var(--color-secondary-background);
+
+  .description {
+    padding: 3em 6em 2em 6em;
+    background-color: var(--color-main-brown);
+    text-align: center;
+    color: #fff;
+  }
+
+  .description-text {
+    font-size: 3em;
+    font-weight: 250;
+    padding: .5em 0;
+    margin-bottom: 1em;
+
+    a {
+      display: inline-block;
+      position: relative;
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: $screen-lg) {
+    font-size: .9rem;
+  }
+
+  @media (max-width: $screen-md) {
+    font-size: .7rem;
+
+    .description {
+      padding: 3em 3em 2em 3em;
+    }
+
+    .description-text {
+      font-size: 2.5em;
+    }
+  }
+
+  .description-actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: $screen-md) {
+    .description-actions {
+      display: block;
+    }
+  }
+
+  .action span {
+    display: inline-block;
+    font-size: 1.2em;
+    margin-bottom: .4em;
+  }
+
+  a.btn-description {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 1.5em;
+    padding: .6em 5em;
+    color: var(--color-section-title);
+    background-color: #fff;
+    border: 1px solid var(--color-main-brown);
+    border-radius: 5px;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+    width: max-content;
+}
+
+  .content {
+    font-size: 1.6em;
+    padding: 0 3em;
+    padding-bottom: 4em;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  h3.section-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 3em 0 1em 0;
+    color: var(--color-section-title);
+    white-space: initial;
+  }
+
+  h4 {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 1em 0;
+    color: var(--color-main-brown);
+  }
+
+  .section-container {
+    display: flex;
+    gap: 3em;
+  }
+
+  @media (max-width: $screen-xl) {
+    .section-container {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+
+  section {
+    padding-bottom: 3em;
+    width: 100%;
+
+    a {
+      display: inline-block;
+      position: relative;
+      color: currentColor;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    a:hover {
+      color: var(--color-section-title-hover);
+    }
+  }
+
+  section p {
+    padding-bottom: 1em;
+  }
+
+  section {
+    .list-title {
+      padding-bottom: .5em;
+    }
+
+    ul, ol {
+      padding-left: 2.5em;
+      padding-bottom: 1em;
+
+      li {
+        margin-bottom: .2em;
+      }
+    }
+  }
+
+  .help p {
+    font-style: italic;
+  }
+
+  section .link-effect::before, section .link-hover-effect::after {
+    height: 1px;
+  }
+
+  section p .link-hover-effect:hover::after {
+    height: 1px;
+  }
+
+  .link-hover-effect::after {
+    transition: transform .5s ease;
+  }
+
+}
+

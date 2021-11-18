@@ -6,7 +6,8 @@
   "scripts": {
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "release-it"
+    "release": "release-it",
+    "version": "release-it --release-version"
   },
   "repository": {
     "type": "git",
