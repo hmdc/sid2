@@ -1,3 +1,10 @@
+## [2021.11.3-dev.1](https://github.com/hmdc/sid2/compare/2021.11.2-dev.1...2021.11.3-dev.1) (2021-11-18)
+
+
+### Features
+
+* **landing-page:** gh [#328](https://github.com/hmdc/sid2/issues/328) Added new homepage for sid.harvard.edu site ([#29](https://github.com/hmdc/sid2/issues/29)) ([7c82e6a](https://github.com/hmdc/sid2/commit/7c82e6ac5d0258032118c7811924997b06499748))
+
 ## [2021.11.2-dev.1](https://github.com/hmdc/sid2/compare/2021.11.1-dev.1...2021.11.2-dev.1) (2021-11-01)
 
 
