@@ -1,3 +1,10 @@
+## [2021.11.4-dev.1](https://github.com/hmdc/sid2/compare/2021.11.3-dev.1...2021.11.4-dev.1) (2021-11-18)
+
+
+### Features
+
+* **landing-page:** gh [#328](https://github.com/hmdc/sid2/issues/328) Fixed github actions script for test and build ([8002031](https://github.com/hmdc/sid2/commit/80020314ebe3d2d034009fdf77a217edaf111874))
+
 ## [2021.11.3-dev.1](https://github.com/hmdc/sid2/compare/2021.11.2-dev.1...2021.11.3-dev.1) (2021-11-18)
 
 
