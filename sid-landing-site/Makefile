@@ -6,8 +6,8 @@ all:: dev
 
 DOCKER_NODE_IMAGE := node:$(shell cat ../.node-version)
 WORKING_DIR := $(shell pwd)
-BUILD_COMMAND := npm install && npm run build
-TEST_COMMAND := npm install && npm run test:ci
+BUILD_COMMAND := npm install && ./node_modules/.bin/react-scripts build
+TEST_COMMAND := npm install && CI=true ./node_modules/.bin/react-scripts test -w 1
 
 dev:
 	npm install

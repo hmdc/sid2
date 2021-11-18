@@ -71,7 +71,7 @@ jobs:
           path: ./sid-landing-site/target/sid2-landing-site.tar.gz
   make-logical-release:
     runs-on: ubuntu-latest
-    needs: [create-release-keycloak-spi, create-release-dashboard]
+    needs: [create-release-keycloak-spi, create-release-dashboard, create-release-landing-page]
     name: Making release
     steps:
       - uses: actions/checkout@v2
