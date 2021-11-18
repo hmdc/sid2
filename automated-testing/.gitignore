@@ -1,0 +1,4 @@
+credentials.json
+credentials.json.*
+cypress.env.json
+node_modules

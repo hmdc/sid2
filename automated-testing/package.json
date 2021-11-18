@@ -1,0 +1,11 @@
+{
+  "name": "sid2-automated-testing",
+  "version": "1.0.0",
+  "description": "Automated testing tools and scripts for Sid2",
+  "scripts": {
+    "cypress": "cypress"
+  },
+  "dependencies": {
+    "cypress": "^8.6.0"
+  }
+}

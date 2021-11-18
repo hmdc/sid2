@@ -20,6 +20,20 @@ The following will launch a Sid Dashboard development environment with:
 
 **This dev environment does not build properly/entirely on M1 (non-x86) Macs, just x86! CentOS7 does not have an M1 image nor does x86 emulation properly start Slurm as of now.**
 
+### Building the Docker images
+
+To improve the runtime of the automated tests, we are pre-building the Sid images for `Slurm` and `Open OnDemand`.  
+We have created two new tasks to help with the process:
+ - `make docker-build`
+ - `make docker-push`
+
+New images are only necessary when we want to use new versions of `Slurm` or `OnDemand`. The version configuration is in the [Makefile](Makefile)
+To create the new images and upload to the main Docker Hub:
+  - Update `Slurm` or `OnDemand` version
+  - `make docker-build`
+  - `make docker-push`
+Docker push requires login into our Docker account to store then new images.
+
 ### Caveats, oddities.
 
 - Due to OOD's requirement of running as **you**, the `Makefile` in this repository uses _your_ UID and GID as the UID and GID of the `ood` user. If you are running OS X and have a UID of < 1000, which is non-standard for Linux, this will still work - I've added a workaround, but, it's still preferable to stick with the constrained requirements if you can.

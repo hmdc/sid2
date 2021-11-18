@@ -1,0 +1,14 @@
+name: automated-tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Build and test
+        working-directory: ./automated-testing
+        run: make test
