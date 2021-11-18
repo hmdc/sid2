@@ -27,10 +27,9 @@ services:
   ood:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile.node
       args:
-        SLURM_TAG: ${SLURM_TAG}
-        OOD_TAG: ${OOD_TAG}
+        DOCKER_IMAGE: ${SID_ONDEMAND_IMAGE}
         OOD_UID: ${OOD_UID}
         OOD_GID: ${OOD_GID}
     hostname: ood
@@ -40,6 +39,7 @@ services:
       - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
+      - ./dashboard.conf:/var/lib/ondemand-nginx/config/apps/dev/ood/dashboard.conf
       - ./application/launchers/Rstudio:/var/www/ood/apps/sys/Rstudio
       - ./application/launchers/OdysseyRD:/var/www/ood/apps/sys/OdysseyRD
       - ./application/config/initializers/session_store.rb:/var/www/ood/apps/sys/dashboard/config/initializers/session_store.rb
@@ -76,9 +76,9 @@ services:
   slurmctld:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: docker/Dockerfile.node
       args:
-        SLURM_TAG: ${SLURM_TAG}
+        DOCKER_IMAGE: ${SID_SLURM_IMAGE}
         OOD_UID: ${OOD_UID}
         OOD_GID: ${OOD_GID}
     entrypoint: /usr/local/bin/with-ssh.sh
@@ -97,9 +97,9 @@ services:
   c1:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: docker/Dockerfile.node
       args:
-        SLURM_TAG: ${SLURM_TAG}
+        DOCKER_IMAGE: ${SID_SLURM_IMAGE}
         OOD_UID: ${OOD_UID}
         OOD_GID: ${OOD_GID}
     entrypoint: /usr/local/bin/with-ssh.sh
@@ -123,9 +123,9 @@ services:
   c2:
     build:
       context: .
-      dockerfile: Dockerfile.node
+      dockerfile: docker/Dockerfile.node
       args:
-        SLURM_TAG: ${SLURM_TAG}
+        DOCKER_IMAGE: ${SID_SLURM_IMAGE}
         OOD_UID: ${OOD_UID}
         OOD_GID: ${OOD_GID}
     entrypoint: /usr/local/bin/with-ssh.sh

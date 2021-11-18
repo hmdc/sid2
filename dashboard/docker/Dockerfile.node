@@ -1,0 +1,10 @@
+ARG DOCKER_IMAGE
+
+FROM ${DOCKER_IMAGE}
+
+ARG OOD_UID=3210
+ARG OOD_GID=3210
+
+RUN groupmod -g ${OOD_GID} ood || :
+RUN usermod -u ${OOD_UID} ood
+RUN usermod -G ${OOD_GID} ood

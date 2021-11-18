@@ -1,0 +1,67 @@
+describe('FASRC Dashboard - Smoke test', () => {
+  const baseUrl = Cypress.env('dashboard_baseUrl')
+  const rootPath = "/pun/sys/dashboard"
+  const auth = cy.sid.auth
+  const navigationItems = Cypress.env('dashboard_fasrc_navigation')
+  Cypress.config('baseUrl', baseUrl);
+
+  beforeEach(() => {
+    //DEFAULT SIZE FOR THESE TESTS
+    cy.viewport(cy.sid.screen.largeWidth, cy.sid.screen.height)
+  })
+
+  it('Navigation', () => {
+    cy.visit(rootPath, { auth })
+    cy.get('nav a.navbar-brand').should($logoElement => {
+      expect($logoElement).to.have.length(1)
+      expect($logoElement.attr('href')).to.match(new RegExp(rootPath))
+    })
+
+    cy.wrap(navigationItems).each(navItem => {
+      cy.get(`nav li[title="${navItem}"]`).invoke('text').should('match', new RegExp(navItem, "i"))
+    })
+  })
+
+  it('Interactive Apps', () => {
+    cy.visit(rootPath, { auth })
+    cy.get('nav li[title="Interactive Apps"]').as('interactiveAppsMenu').click()
+    const interactiveApps = []
+    cy.get('@interactiveAppsMenu').find('a[title]').each($interactiveApp => {
+      expect($interactiveApp).to.have.length(1)
+      $interactiveApp.is(':visible')
+      interactiveApps.push($interactiveApp.attr('title'))
+    })
+    cy.get('@interactiveAppsMenu').click()
+
+    cy.wrap(interactiveApps).each(appTitle => {
+      cy.task('log', `Checking interactive app: ${appTitle}`)
+      cy.get('@interactiveAppsMenu').click()
+      cy.get('@interactiveAppsMenu').find(`a[title="${appTitle}"]`).click()
+      cy.title().should($title => {
+        expect($title).to.contain(appTitle)
+      })
+      cy.get('div h3').should($title => {
+        expect($title.text().trim()).to.contain(appTitle)
+      })
+      //BREADCRUMBS
+      cy.get('ol.breadcrumb li').eq(0).invoke('text').should('match', /home/i)
+      cy.get('ol.breadcrumb li').eq(0).find('a').invoke('attr', 'href').should('match', new RegExp(rootPath, 'i'))
+      cy.get('ol.breadcrumb li').eq(1).invoke('text').should('match', /my interactive sessions/i)
+      cy.get('ol.breadcrumb li').eq(1).find('a').invoke('attr', 'href').should('match', new RegExp(`${rootPath}/batch_connect/sessions`, 'i'))
+      cy.get('ol.breadcrumb li').eq(2).invoke('text').invoke('trim').should('match', new RegExp(cy.sid.regexEscape(appTitle), 'i'))
+    })
+
+  })
+
+  it('Interactive Sessions', () => {
+    cy.visit(`${rootPath}/batch_connect/sessions`, { auth })
+    cy.title().should($title => {
+      expect($title).to.match(/my interactive sessions/i)
+    })
+    //BREADCRUMBS
+    cy.get('ol.breadcrumb li').eq(0).invoke('text').should('match', /home/i)
+    cy.get('ol.breadcrumb li').eq(0).find('a').invoke('attr', 'href').should('match', new RegExp(rootPath, 'i'))
+    cy.get('ol.breadcrumb li').eq(1).invoke('text').should('match', /my interactive sessions/i)
+  })
+
+})
