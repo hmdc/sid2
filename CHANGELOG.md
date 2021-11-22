@@ -1,3 +1,15 @@
+## [2021.11.5](https://github.com/hmdc/sid2/compare/2021.10.10...2021.11.5) (2021-11-22)
+
+
+### Bug Fixes
+
+* **build:** trigger release after QA passed ([4046d2f](https://github.com/hmdc/sid2/commit/4046d2f48192159e6307fbf9ecd2b1e04b0571f5))
+
+
+### Features
+
+* **landing-page:** gh [#328](https://github.com/hmdc/sid2/issues/328) Added new homepage for sid.harvard.edu site ([46191f1](https://github.com/hmdc/sid2/commit/46191f166380be09c187e760852a4bddc89554c7))
+
 ## [2021.11.4-dev.1](https://github.com/hmdc/sid2/compare/2021.11.3-dev.1...2021.11.4-dev.1) (2021-11-18)
 
 
