@@ -7,7 +7,7 @@ all:: dev
 OOD_UID := $(shell id -u)
 OOD_GID := $(shell id -g)
 OOD_TAG := 2.0.13-1.el7
-SLURM_TAG := slurm-20-11-4-1
+SLURM_TAG := slurm-21-08-2-1
 FASRC_USERNAME := $(if $(SSH_USERNAME),$(SSH_USERNAME),$(USER))
 FASRC_LOGIN_HOST := login.rc.fas.harvard.edu
 
