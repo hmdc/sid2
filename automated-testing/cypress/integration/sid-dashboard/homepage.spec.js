@@ -3,7 +3,7 @@ describe('Sid Dashboard - Homepage', () => {
   const baseUrl = Cypress.env('dashboard_baseUrl')
   const rootPath = Cypress.env('dashboard_rootPath')
   const auth = cy.sid.auth
-  const quickLaunchButtons = Cypress.env('dashboard_applications')
+  const activeLaunchers = cy.sid.launchers.filter(l => Cypress.env('active_launchers').includes(l.id))
   Cypress.config('baseUrl', baseUrl);
   
   const deleteSession = sessionId => {
@@ -36,7 +36,7 @@ describe('Sid Dashboard - Homepage', () => {
     cy.visit(rootPath, { auth })
   })
 
-  quickLaunchButtons.forEach( app => {
+  activeLaunchers.forEach( app => {
     it(`Quick launch button: ${app.id}`, () => {
       cleanupSessions()
       let currentSessionData = { sessionId: null }
