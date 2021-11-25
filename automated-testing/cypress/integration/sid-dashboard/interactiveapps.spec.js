@@ -35,14 +35,14 @@ describe('Sid Dashboard - Interactive Apps', () => {
   })
 
   it('Should display restricted interactive apps left menu', () => {
-    cy.wrap(interactiveApps).each( (app) => {
-      cy.task('log', `Checking interactive app menu: ${app.id}`)
+    cy.wrap(interactiveApps).each( app => {
+      cy.task('log', `Checking interactive app menu: ${app.token}`)
       cy.visit(`${rootPath}/batch_connect/sys/${app.token}/session_contexts/new`, { auth })
       cy.get('div.panel-heading').should($heading => {
         expect($heading.text()).to.match(/interactive apps/i)
       })
 
-      interactiveApps.forEach( (app) => {
+      interactiveApps.forEach( app => {
         cy.get('div.panel-heading ~ div.list-group a').filter(`a[data-title="${app.name}"]`).should($appElement => {
           $appElement.is(':visible')
           expect($appElement.text().trim()).to.equal(app.name)
@@ -53,7 +53,7 @@ describe('Sid Dashboard - Interactive Apps', () => {
   })
 
   interactiveApps.forEach( app => {
-    it(`Should launch interactive application: ${app.id}`, () => {
+    it(`Should launch interactive application: ${app.token}`, () => {
       cleanupSessions()
 
       cy.visit(`${rootPath}/batch_connect/sys/${app.token}/session_contexts/new`, { auth })
