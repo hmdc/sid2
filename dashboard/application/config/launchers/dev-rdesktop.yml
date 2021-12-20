@@ -1,0 +1,18 @@
+---
+order: 20
+cluster: "dev-cluster"
+form:
+  token: "sys/OdysseyRD"
+  bc_account: ""
+  bc_num_slots: "1"
+  bc_num_hours: "1"
+  bc_vnc_resolution: "1024x768"
+
+view:
+  logo: "desktop_logo.svg"
+  logoWidth: "100"
+  style: "margin-top: 10px;"
+  p1: "Run Remote Desktop"
+  p2: "1 CPU cores and 4GB RAM"
+  p3: "1 hours job run time"
+  p4: "Dev cluster"

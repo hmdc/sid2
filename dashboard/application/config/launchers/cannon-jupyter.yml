@@ -1,5 +1,6 @@
 ---
 order: 30
+cluster: "odyssey3"
 form:
   token: "sys/Jupyter"
   bc_queue: "test"
@@ -24,3 +25,4 @@ view:
   p1: "Run Jupyter notebook / Jupyterlab"
   p2: "1 CPU core and 8GB RAM"
   p3: "8 hours job run time"
+  p4: "Cannon cluster"

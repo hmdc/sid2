@@ -41,6 +41,8 @@ class QuickLaunchController < ApplicationController
     links_template_path = Rails.root.join("app", "views", "widgets", "config.yml")
     contents = links_template_path.read
     config = YAML.safe_load(contents).to_h.deep_symbolize_keys
-    @quick_links = config[:quick_links] || []
+    system_cluster_ids = ::Configuration.cluster_metadata.map{|metadata| metadata.cluster_id}
+    # SELECT THE QUICK LINKS FOR THE CURRENT CLUSTERS AS A SINGLE ARRAY
+    @quick_links = config[:clusters].select{|cluster_links| system_cluster_ids.include?(cluster_links[:cluster_id])}.flat_map{|cluster_links| cluster_links[:links]} || []
   end
 end

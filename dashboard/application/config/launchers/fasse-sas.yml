@@ -1,12 +1,13 @@
 ---
-order: 40
+order: 50
+cluster: "fasse"
 form:
-  token: "sys/Stata"
+  token: "sys/SAS"
   bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
   bc_num_hours: "1"
-  custom_memory_per_node: "8"
+  custom_memory_per_node: "4"
   custom_num_cores: "1"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
@@ -15,12 +16,12 @@ form:
   bc_email_on_started: "0"
   custom_reservation: ""
   bc_vnc_resolution: "1024x768"
-  stata_version: "stata/16.0-fasrc01"
 
 view:
-  logo: "stata_logo.svg"
-  logoWidth: "200"
-  style: "margin-top: 20px;"
-  p1: "Run Stata"
-  p2: "1 CPU core and 8GB RAM"
+  logo: "sas_logo.png"
+  logoWidth: "180"
+  style: "margin-top: 13px"
+  p1: "Run SAS"
+  p2: "1 CPU core and 4GB RAM"
   p3: "8 hours job run time"
+  p4: "FASSE cluster"
