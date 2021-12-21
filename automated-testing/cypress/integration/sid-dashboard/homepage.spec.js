@@ -36,6 +36,14 @@ describe('Sid Dashboard - Homepage', () => {
     cy.visit(rootPath, { auth })
   })
 
+  it('Welcome message', () => {
+    cleanupSessions()
+    cy.get('div.app-launcher-title h2').should($homepageTitle => {
+      const welcomeText = Cypress.env('dashboard_welcome_text')
+      expect(cy.sid.normalize($homepageTitle.text())).to.match(new RegExp(welcomeText, 'i'))
+    })
+  })
+
   activeLaunchers.forEach( app => {
     it(`Quick launch button: ${app.id}`, () => {
       cleanupSessions()
@@ -73,27 +81,42 @@ describe('Sid Dashboard - Homepage', () => {
     })
   })
 
+  const QUICK_LINKS_ASSERTS = {
+    terminal: () => {
+      cy.get('#link-terminal-button').find('a').should($quickLinkElement => {
+        expect($quickLinkElement.attr('href')).to.match(/.pun.sys.shell.ssh./i)
+        expect(cy.sid.normalize($quickLinkElement.text())).to.match(/start a web based terminal session/i)
+      })
+    },
+    sessions: () => {
+      cy.get('#link-all-sessions-button').find('a').should($quickLinkElement => {
+        expect($quickLinkElement.attr('href')).to.match(/.batch_connect.sessions/i)
+        expect(cy.sid.normalize($quickLinkElement.text())).to.match(/view all interactive apps/i)
+      })
+    },
+    fasse: () => {
+      cy.get('#link-fasse-button').find('a').should($quickLinkElement => {
+        expect($quickLinkElement.attr('href')).to.equal('https://fasseood.rc.fas.harvard.edu/')
+        expect($quickLinkElement.attr('target')).to.equal('_blank')
+        expect(cy.sid.normalize($quickLinkElement.text())).to.match(/medium risk data .* connect to fasse/i)
+      })
+    },
+    cannon: () => {
+      cy.get('#link-cannon-button').find('a').should($quickLinkElement => {
+        expect($quickLinkElement.attr('href')).to.equal('https://vdi.rc.fas.harvard.edu/')
+        expect($quickLinkElement.attr('target')).to.equal('_blank')
+        expect(cy.sid.normalize($quickLinkElement.text())).to.match(/low risk data .* connect to cannon/i)
+      })
+    }
+  }
+
   it('Quick link buttons', () => {
+    const quickLinks = Cypress.env('quick_links')
     cy.get('div.launch-button-container-flex').eq(1).find('div.launch-button-container').as('quickLinks')
-    cy.get('@quickLinks').should('have.length', 3)
+    cy.get('@quickLinks').should('have.length', quickLinks.length)
 
-    //LAUNCH TERMINAL LINK
-    cy.get('@quickLinks').eq(0).find('a').should($quickLinkElement => {
-      expect($quickLinkElement.attr('href')).to.match(/.pun.sys.shell.ssh./i)
-      expect(cy.sid.normalize($quickLinkElement.text())).to.match(/start a web based terminal session/i)
-    })
-
-    //INTERACTIVE SESSIONS LINK
-    cy.get('@quickLinks').eq(1).find('a').should($quickLinkElement => {
-      expect($quickLinkElement.attr('href')).to.match(/.batch_connect.sessions/i)
-      expect(cy.sid.normalize($quickLinkElement.text())).to.match(/view all interactive apps/i)
-    })
-
-    //CONNECT TO FASSE LINK
-    cy.get('@quickLinks').eq(2).find('a').should($quickLinkElement => {
-      expect($quickLinkElement.attr('href')).to.equal('https://fasseood.rc.fas.harvard.edu/')
-      expect($quickLinkElement.attr('target')).to.equal('_blank')
-      expect(cy.sid.normalize($quickLinkElement.text())).to.match(/medium risk data .* connect to fasse/i)
+    quickLinks.forEach(linkId => {
+      QUICK_LINKS_ASSERTS[linkId]()
     })
   })
 

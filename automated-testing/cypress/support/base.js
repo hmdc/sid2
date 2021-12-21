@@ -9,12 +9,21 @@ cy.sid = {
   },
   // CONFIGURED LAUNCHERS
   launchers: [
-    {"id": "rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
-    {"id": "rdesktop", "token": "sys/NativeRD", "name": "FAS-RC Remote Desktop"},
-    {"id": "jupyter", "token": "sys/Jupyter", "name": "Jupyter notebook / Jupyterlab"},
-    {"id": "stata", "token": "sys/Stata", "name": "Stata"},
-    {"id": "sas", "token": "sys/SAS", "name": "SAS"},
-    {"id": "matlab", "token": "sys/Matlab", "name": "Matlab"}
+    {"id": "dev-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
+    {"id": "dev-rdesktop", "token": "sys/OdysseyRD", "name": "Remote Desktop"},
+
+    {"id": "cannon-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
+    {"id": "cannon-rdesktop", "token": "sys/NativeRD", "name": "FAS-RC Remote Desktop"},
+    {"id": "cannon-jupyter", "token": "sys/Jupyter", "name": "Jupyter notebook / Jupyterlab"},
+    {"id": "cannon-stata", "token": "sys/Stata", "name": "Stata"},
+    {"id": "cannon-sas", "token": "sys/SAS", "name": "SAS"},
+    {"id": "cannon-matlab", "token": "sys/Matlab", "name": "Matlab"},
+
+    {"id": "fasse-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
+    {"id": "fasse-rdesktop", "token": "sys/RemoteDesktop", "name": "FAS-RC Remote Desktop"},
+    {"id": "fasse-jupyter", "token": "sys/Jupyter", "name": "Jupyter notebook / Jupyterlab"},
+    {"id": "fasse-stata", "token": "sys/Stata", "name": "Stata"},
+    {"id": "fasse-sas", "token": "sys/SAS", "name": "SAS"}
   ],
 
   // SCREEN RESOLUTIONS => TO TEST IN DIFFERENT SCREEN SIZES

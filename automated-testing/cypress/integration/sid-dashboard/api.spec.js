@@ -40,6 +40,7 @@ describe('Sid Dashboard - API', () => {
       expect(apiLauncher[0].view).to.have.property('p1')
       expect(apiLauncher[0].view).to.have.property('p2')
       expect(apiLauncher[0].view).to.have.property('p3')
+      expect(apiLauncher[0].view).to.have.property('p4')
 
       expect(apiLauncher[0].metadata.id).to.equal(launcher.id)
       expect(apiLauncher[0].metadata.status).to.match(/active/i)
