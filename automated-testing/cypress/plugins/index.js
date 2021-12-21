@@ -38,7 +38,7 @@ module.exports = (on, config) => {
     console.log(`Credentials loaded from: ${credentialsPath}`)
   }
 
-  config.baseUrl = config.env['dashboard_baseUrl']
+  config.baseUrl = config.env['baseUrl']
 
   if (process.env['OOD_USERNAME']) {
     config.env['dashboard_username'] = process.env['OOD_USERNAME']
