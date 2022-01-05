@@ -60,7 +60,13 @@ services:
 
 
   slurmdbd:
-    image: snkattck/slurm-docker-cluster:${SLURM_TAG}
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.node
+      args:
+        DOCKER_IMAGE: ${SID_SLURM_IMAGE}
+        OOD_UID: ${OOD_UID}
+        OOD_GID: ${OOD_GID}
     command: ["slurmdbd"]
     container_name: slurmdbd
     hostname: slurmdbd
