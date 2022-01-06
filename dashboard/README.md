@@ -41,7 +41,7 @@ The following will launch a Sid Dashboard development environment with:
 
 ### Validation
 
-- Can you run and connect to RStudio through the original OpenOnDemand dashboard? **FIXME** This is currently [broken](https://github.com/hmdc/sid2/pull/35#issuecomment-1006009493) in Local Development environments.
+- Can you run and connect to RStudio through the original OpenOnDemand dashboard?
 - Is the Develop menu on the top-bar visible?
 - Can you get into the Develop menu, select My SandBox Apps, and launch the Sid2 Ood Dashboard?
 - Does OOD prompt you to "initialize" the app after launching Sid2 from the developer menu? (It should..)

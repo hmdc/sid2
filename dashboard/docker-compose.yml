@@ -42,6 +42,7 @@ services:
       - var_log_slurm:/var/log/slurm
       - ./application/launchers/Rstudio:/var/www/ood/apps/sys/Rstudio
       - ./application/launchers/OdysseyRD:/var/www/ood/apps/sys/OdysseyRD
+      - ./application/config/initializers/session_store.rb:/var/www/ood/apps/sys/dashboard/config/initializers/session_store.rb
       - ./data:/home/ood/ondemand/data:rw
       - ./application:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
