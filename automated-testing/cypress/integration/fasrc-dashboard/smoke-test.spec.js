@@ -64,4 +64,17 @@ describe('FASRC Dashboard - Smoke test', () => {
     cy.get('ol.breadcrumb li').eq(1).invoke('text').should('match', /my interactive sessions/i)
   })
 
+  it('Launch Interactive Application', () => {
+
+    const fasrcApplication = Cypress.env('dashboard_fasrc_application')
+
+    cy.visit(`${rootPath}/batch_connect/sys/${fasrcApplication.token}/session_contexts/new`, { auth })
+
+    cy.get('div[role="main"] h3').should('contain.text', fasrcApplication.name)
+
+    cy.get('form#new_batch_connect_session_context input[type="submit"]').click()
+    //CHECK LAUNCHED APP IN SESSIONS PAGE IS RUNNING
+    cy.get('div.alert-success').should('contain.text', 'Session was successfully created')
+  })
+
 })
