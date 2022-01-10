@@ -56,4 +56,20 @@ class RequestTrackerClientTest < ActiveSupport::TestCase
     assert_equal("payload_password", payload["pass"])
   end
 
+  test "should set RestClient options when provided" do
+    config = {
+      server: "http://server.com",
+      user: "payload_username",
+      pass: "payload_password",
+      timeout: 90,
+      verify_ssl: true,
+      proxy: "proxy.com:8888",
+    }
+
+    target = RequestTrackerClient.new(config)
+    assert_equal(90, target.rt_client.options[:timeout])
+    assert_equal(true, target.rt_client.options[:verify_ssl])
+    assert_equal("proxy.com:8888", target.rt_client.options[:proxy])
+  end
+
 end

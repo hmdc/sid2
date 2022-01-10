@@ -301,6 +301,7 @@ end
       #USE ENV IF NO RT CONFIG FILE
       rt_config = {
         server:      ENV["RT_SERVER"],
+        proxy:       ENV["RT_PROXY"],
         user:        ENV["RT_USER"],
         pass:        ENV["RT_PASSWORD"],
         auth_token:  ENV["RT_AUTH_TOKEN"],
@@ -320,6 +321,7 @@ end
     rt_config[:queue_name] ||= "General"
     rt_config[:priority] ||= 4
 
+    Rails.logger.info "RT config - server=#{rt_config[:server]} proxy=#{rt_config[:proxy]} queue=#{rt_config[:queue_name]}"
     return rt_config
   end
 
