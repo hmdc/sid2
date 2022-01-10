@@ -13,11 +13,12 @@ class RequestTrackerClient
           auth_token: rt_config[:auth_token],
           timeout: rt_config[:timeout],
           verify_ssl: rt_config[:verify_ssl],
+          proxy: rt_config[:proxy],
         })
   end
 
   UA = "IQSS ruby RT Client"
-  attr_reader :server, :resource, :timeout, :verify_ssl
+  attr_reader :server, :rt_client, :resource, :timeout, :verify_ssl
 
   def initialize(config)
     #DEFAULTS
@@ -52,7 +53,14 @@ class RequestTrackerClient
                 'Cookie'       => "" }
     headers['Authorization'] = "Token #{@auth_token}" if @auth_token
 
-    @rt_client = RestClient::Resource.new(@resource, :headers => headers, :timeout => @timeout, :verify_ssl => @verify_ssl)
+    options = {
+      headers: headers,
+      timeout: @timeout,
+      verify_ssl: @verify_ssl,
+    }
+    options[:proxy] = config[:proxy] if config[:proxy]
+
+    @rt_client = RestClient::Resource.new(@resource, options)
     self.untaint
   end
 

@@ -1,14 +1,14 @@
-## [2021.11.5](https://github.com/hmdc/sid2/compare/2021.10.10...2021.11.5) (2021-11-22)
+## [2022.1.1-dev.1](https://github.com/hmdc/sid2/compare/2021.11.4-dev.1...2022.1.1-dev.1) (2022-01-10)
 
 
 ### Bug Fixes
 
-* **build:** trigger release after QA passed ([4046d2f](https://github.com/hmdc/sid2/commit/4046d2f48192159e6307fbf9ecd2b1e04b0571f5))
+* **build:** sync CHANGELOG with stable after merge [skip actions] ([dc1ca05](https://github.com/hmdc/sid2/commit/dc1ca05a226bda548f87c8b4ccc52ec297f1fb88))
 
 
 ### Features
 
-* **landing-page:** gh [#328](https://github.com/hmdc/sid2/issues/328) Added new homepage for sid.harvard.edu site ([46191f1](https://github.com/hmdc/sid2/commit/46191f166380be09c187e760852a4bddc89554c7))
+* **dashboard:** gh [#565](https://github.com/hmdc/sid2/issues/565) Added proxy support for RT client ([#38](https://github.com/hmdc/sid2/issues/38)) ([fffeb01](https://github.com/hmdc/sid2/commit/fffeb015361859a21774dde88d10e22c7d9a5d5a))
 
 ## [2021.11.4-dev.1](https://github.com/hmdc/sid2/compare/2021.11.3-dev.1...2021.11.4-dev.1) (2021-11-18)
 
