@@ -1,3 +1,10 @@
+## [2022.1.2](https://github.com/hmdc/sid2/compare/2021.11.5...2022.1.2) (2022-01-10)
+
+
+### Features
+
+* **dashboard:** gh [#565](https://github.com/hmdc/sid2/issues/565) Added proxy support for RT client ([#38](https://github.com/hmdc/sid2/issues/38)) ([cfaf868](https://github.com/hmdc/sid2/commit/cfaf868c33928f9dd5a094c2ba3043f46128f491))
+
 ## [2022.1.1-dev.1](https://github.com/hmdc/sid2/compare/2021.11.4-dev.1...2022.1.1-dev.1) (2022-01-10)
 
 
