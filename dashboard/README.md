@@ -90,6 +90,7 @@ pass: "password"
 auth_token:
 timeout: 99
 verify_ssl: true
+proxy: "http://proxy.server.com:8080"
 priority: "4"
 queue_name: "General"
 ```
@@ -103,6 +104,7 @@ RT_PASSWORD: API password.
 RT_AUTH_TOKEN: API auth token, use instead of username and password.
 RT_TIMEOUT: Connection and read timeout in seconds. Defaults to 30
 RT_VERIFY_SSL: Whether or not the client should validate SSL certificates. Defaults to false
+RT_PROXY: Proxy server URL, eg: http://rt.proxy.com:8080
 RT_QUEUE: The name of the queue where tickets will be added to. Defaults to General
 RT_PRIORITY: The priority for the ticket. Defaults to 4
 ```
