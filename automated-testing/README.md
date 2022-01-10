@@ -11,7 +11,7 @@ To install the dependencies and run the tests locally run:
 `npm install`
 
 ## Running tests
-To run tests against `remote-dev`, `staging`, `FASSE`, and `FASRC`, you need to connect to the VPN.
+To run tests against `remote-dev`, `staging`, `FASSE`, and `Cannon`, you need to connect to the VPN.
 
 Cypress can be configured using environment variables. We use a feature of Cypress to setup and environment file: `cypress.env.json` with environment specific configuration. In order to support the multiple Sid2 environments, we have created several configuration files for each one of them:
  * `cypress.env.json.local`
@@ -36,7 +36,7 @@ In order to connect to the Sid dashboard, we need to provide the automated tests
  * `OOD_USERNAME`
  * `OOD_PASSWORD`
 
- example: `env OOD_USERNAME=ood OOD_PASSWORD=ood make fasse`
+ example: `env OOD_USERNAME=ood OOD_PASSWORD=ood make prod-fasse`
 
  The credentials file can be droped at the root of the project: `credentials.json`. This is a JSON format file with the username and password, example:
 ```
@@ -77,7 +77,7 @@ Information about Cypress and Docker can be found [here](https://docs.cypress.io
 We use `cypress/base` to run the automated tests within Docker. The image is configured in the [Makefile](Makefile)
 
 ## Cypress console errors
-When running throw Docker, Cypress prints some error messages:
+When running through Docker, Cypress prints some error messages:
 ```
 [226:1117/145128.491783:ERROR:bus.cc(392)] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are "tcp" and on UNIX "unix")
 ```
