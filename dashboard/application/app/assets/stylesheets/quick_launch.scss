@@ -34,6 +34,29 @@ $launcher-color-brown: #DA6027;
     width: 120px;
     margin-top: -25px;
   }
+
+  span {
+    font-size: 20px;
+    font-weight: normal;
+    vertical-align: 2px;
+  }
+
+  @media (max-width: 1100px) {
+    span {
+      display: block;
+      padding-top: 5px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    h2 {
+      font-size: 40px;
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
 }
 
 .quick-launch-buttons-title {

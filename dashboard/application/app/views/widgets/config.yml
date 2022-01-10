@@ -1,7 +1,10 @@
 clusters:
   - cluster_id: "dev-cluster"
     links: ["terminal_button", "all_sessions_button", "fasse_button", "cannon_button"]
+    message: "welcome_message"
   - cluster_id: "odyssey3"
     links: ["terminal_button", "all_sessions_button", "fasse_button"]
+    message: "cannon_welcome_message"
   - cluster_id: "fasse"
     links: ["terminal_button", "all_sessions_button", "cannon_button"]
+    message: "fasse_welcome_message"

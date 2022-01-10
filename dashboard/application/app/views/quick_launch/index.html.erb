@@ -16,7 +16,7 @@
   </div>
 
   <div data-selector="no-active-sessions" class="app-launcher-title" style="<%= has_active_sessions?(@sessions) ? "display:none" : "" %>">
-    <h2>Welcome to <img src="<%= asset_url "sid_logo.png" %>"></h2>
+    <%= render partial: "widgets/#{@welcome_message}" %>
   </div>
 
   <div data-selector="active-sessions" class="quick-launch-buttons-title" style="<%= has_active_sessions?(@sessions) ? "" : "display:none" %>">
