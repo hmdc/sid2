@@ -1,3 +1,15 @@
+## [2022.1.1-dev.1](https://github.com/hmdc/sid2/compare/2021.11.4-dev.1...2022.1.1-dev.1) (2022-01-10)
+
+
+### Bug Fixes
+
+* **build:** sync CHANGELOG with stable after merge [skip actions] ([dc1ca05](https://github.com/hmdc/sid2/commit/dc1ca05a226bda548f87c8b4ccc52ec297f1fb88))
+
+
+### Features
+
+* **dashboard:** gh [#565](https://github.com/hmdc/sid2/issues/565) Added proxy support for RT client ([#38](https://github.com/hmdc/sid2/issues/38)) ([fffeb01](https://github.com/hmdc/sid2/commit/fffeb015361859a21774dde88d10e22c7d9a5d5a))
+
 ## [2021.11.4-dev.1](https://github.com/hmdc/sid2/compare/2021.11.3-dev.1...2021.11.4-dev.1) (2021-11-18)
 
 
