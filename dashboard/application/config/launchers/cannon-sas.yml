@@ -18,6 +18,7 @@ form:
   bc_vnc_resolution: "1024x768"
 
 view:
+  color: "#2D9BF0"
   logo: "sas_logo.png"
   logoWidth: "180"
   style: "margin-top: 13px"

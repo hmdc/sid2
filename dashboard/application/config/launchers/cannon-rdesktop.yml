@@ -23,6 +23,7 @@ form:
   rlibs: "~/apps/R_4.1.0_fasrc01"
 
 view:
+  color: "#2D9BF0"
   logo: "desktop_logo.svg"
   logoWidth: "100"
   style: "margin-top: 10px;"

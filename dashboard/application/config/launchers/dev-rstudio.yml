@@ -8,6 +8,7 @@ form:
   bc_num_hours: "1"
 
 view:
+  color: "#255A8E"
   logo: "rstudio_logo.png"
   logoWidth: "200"
   style: "margin-top: 10px;"

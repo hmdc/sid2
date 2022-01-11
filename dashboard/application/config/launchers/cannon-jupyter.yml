@@ -19,6 +19,7 @@ form:
   custom_reservation: ""
 
 view:
+  color: "#2D9BF0"
   logo: "jupyter_logo.svg"
   logoWidth: "85"
   style: "margin-top: -5px;"

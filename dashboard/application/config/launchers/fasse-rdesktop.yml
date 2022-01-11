@@ -19,6 +19,7 @@ form:
   custom_desktop: "1"
 
 view:
+  color: "#DA6027"
   logo: "desktop_logo.svg"
   logoWidth: "100"
   style: "margin-top: 10px;"

@@ -19,6 +19,7 @@ form:
   stata_version: "stata/16.0-fasrc01"
 
 view:
+  color: "#2D9BF0"
   logo: "stata_logo.svg"
   logoWidth: "200"
   style: "margin-top: 20px;"

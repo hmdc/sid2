@@ -20,6 +20,7 @@ form:
   custom_vanillaconf: "1"
 
 view:
+  color: "#DA6027"
   logo: "rstudio_logo.png"
   logoWidth: "200"
   style: "margin-top: 10px;"

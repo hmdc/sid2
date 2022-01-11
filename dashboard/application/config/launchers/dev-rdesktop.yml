@@ -9,6 +9,7 @@ form:
   bc_vnc_resolution: "1024x768"
 
 view:
+  color: "#255A8E"
   logo: "desktop_logo.svg"
   logoWidth: "100"
   style: "margin-top: 10px;"

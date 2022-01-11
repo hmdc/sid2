@@ -18,6 +18,7 @@ form:
   matlab_version: "matlab/R2021a-fasrc01"
 
 view:
+  color: "#2D9BF0"
   logo: "matlab_logo.png"
   logoWidth: "230"
   style: "margin-top: -15px;"
