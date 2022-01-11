@@ -30,6 +30,7 @@ Configuration section for the display options for the launcher button
 * `logo:` optional path to the image to display in the launcher. If not value is set, the default will be used: `iqss_logo.png`. The field takes a path relative from the application assets folder: `application/app/assets/images`, eg: `rstudio_logo.png`. It supports all image types.
 * `logoWidth:` integer value used to adjust the logo width to the space in the launcher button. The height will adjust automatically keeping the logo aspect ratio.
 * `style:` optional css style added to the logo HTML mainly to adjust the top margin. eg: `margin-top: 10px;`
+* `color:` optional border color.
 * `p1`, `p2`, and `p3` are used to display text within the launcher. Each `p` represents a line of text. Set to `nil` to display an empty line.
 
 ### Showing/Hiding Launchers on the Sid Dashboard index page
