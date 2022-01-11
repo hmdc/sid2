@@ -1,7 +1,7 @@
 class QuickLaunchController < ApplicationController
   def index
     set_sessions
-    set_quick_links
+    set_page_configuration
 
     launcher_buttons_configuration = { maxSessions: helpers.quick_launch_max_sessions }
 
@@ -37,12 +37,17 @@ class QuickLaunchController < ApplicationController
     @sessions = @sessions.reject { |s| s.completed? }
   end
 
-  def set_quick_links
-    links_template_path = Rails.root.join("app", "views", "widgets", "config.yml")
-    contents = links_template_path.read
-    config = YAML.safe_load(contents).to_h.deep_symbolize_keys
-    system_cluster_ids = ::Configuration.cluster_metadata.map{|metadata| metadata.cluster_id}
+  def set_page_configuration
+    page_configuration_path = Rails.root.join("app", "views", "widgets", "config.yml")
+    page_config_for_cluster = []
+    if page_configuration_path.file? && page_configuration_path.readable?
+      config = YAML.safe_load(page_configuration_path.read).to_h.deep_symbolize_keys
+      system_cluster_ids = ::Configuration.cluster_metadata.map{|metadata| metadata.cluster_id}
+      page_config_for_cluster = config[:clusters].select{|page_configuration| system_cluster_ids.include?(page_configuration[:cluster_id])}
+    end
     # SELECT THE QUICK LINKS FOR THE CURRENT CLUSTERS AS A SINGLE ARRAY
-    @quick_links = config[:clusters].select{|cluster_links| system_cluster_ids.include?(cluster_links[:cluster_id])}.flat_map{|cluster_links| cluster_links[:links]} || []
+    @quick_links = page_config_for_cluster.flat_map{|data| data[:links]}.compact || []
+    # SELECT THE WELCOME MESSAGE FOR THE CURRENT CLUSTER
+    @welcome_message_template = page_config_for_cluster.map{|data| data[:welcome_message]}.first || "welcome_message"
   end
 end
