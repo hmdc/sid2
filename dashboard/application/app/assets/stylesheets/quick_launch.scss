@@ -79,10 +79,9 @@ $launcher-color-brown: #DA6027;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-
 }
 
-.launch-button-spinner {
+.launch-button-overlay {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,10 +89,18 @@ $launcher-color-brown: #DA6027;
   width: 100%;
   height: 100%;
   border-radius: 30px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
   z-index: 1;
 }
+
+.launch-button-spinner {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.launch-button-disabled {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
 .launch-button-spinner .spinner-border{
   width: 60px;
   height: 60px;
