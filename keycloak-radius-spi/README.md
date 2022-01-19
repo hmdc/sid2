@@ -87,7 +87,7 @@ Local Radius users are configured using the [./raddb/authorize file](./raddb/aut
 - [Copy the "browser" authentication flow](https://www.keycloak.org/docs/latest/server_admin/index.html#built-in-flows)
 - [Update authentication flow to add the custom SPI](https://www.keycloak.org/docs/latest/server_admin/index.html#creating-flows)
 - Click `Actions > Config` to configure the SPI
-- The `hostnamev for the local Radius server is: `radius:1812`
+- The `hostname` for the local Radius server is: `radius:1812`
 - The `shared secret` for the local environment is: `testing123`
 - Assign the flow as the default browser flow for the Realm (under the Realm config Bindings tab) or a Client (under the Client config Settings tab)
 
