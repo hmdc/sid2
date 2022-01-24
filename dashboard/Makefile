@@ -2,7 +2,7 @@
 all::
 
 all:: dev
-.PHONY: dev remote-dev remote-fasse test release down up clean clean-remote-dev clean-remote-fasse version next-version docker-build docker-push
+.PHONY: dev remote-dev remote-fasse test release down up clean clean-remote-dev clean-remote-fasse version next-version docker-build docker-build-slurm docker-build-ood docker-push
 
 OOD_UID := $(shell id -u)
 OOD_GID := $(shell id -g)
@@ -60,11 +60,17 @@ version:
 next-version:
 	docker run --rm -v $(PWD)/..:/usr/app -w /usr/app node:$(NODE_VERSION) /bin/bash -c "npm install && npm run version | tail -n 1 > dashboard/application/VERSION"
 
-docker-build:
-	docker build --build-arg SLURM_TAG=$(SLURM_TAG) -t $(SID_SLURM_IMAGE) -f docker/Dockerfile.slurm .
-	docker build --build-arg OOD_TAG=$(OOD_TAG) --build-arg SLURM_TAG=$(SLURM_TAG) -t $(SID_ONDEMAND_IMAGE) -f docker/Dockerfile.ondemand .
+docker-build: docker-build-slurm docker-build-ood
 
 docker-push:
-	docker login
 	docker push $(SID_SLURM_IMAGE)
+	docker push $(SID_ONDEMAND_IMAGE)
+
+docker-build-slurm:
+	docker build --build-arg SLURM_TAG=$(SLURM_TAG) -t $(SID_SLURM_IMAGE) -f docker/Dockerfile.slurm .
+
+docker-build-ood:
+	docker build --build-arg OOD_TAG=$(OOD_TAG) --build-arg SLURM_TAG=$(SLURM_TAG) -t $(SID_ONDEMAND_IMAGE) -f docker/Dockerfile.ondemand .
+
+docker-push-ood:
 	docker push $(SID_ONDEMAND_IMAGE)
