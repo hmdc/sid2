@@ -2,11 +2,13 @@
 
 Docker images are used to create the local development environment. We use three images:
 - Slurm - `slurm-docker-cluster` - https://hub.docker.com/r/hmdc/slurm-docker-cluster/tags
-  - The `slurm-docker-cluster` Docker image contains a Slurm installation with Sid specific features.
+  - The `slurm-docker-cluster` image contains a multi-container Slurm cluster. It is the base image for the Sid development environment.
 - Sid Slurm - `sid-slurm` - https://hub.docker.com/r/hmdc/sid-slurm/tags
-  - The `sid-slurm` Docker image contains a Slurm installation with Sid specific features.
+  - The `sid-slurm` image contains a Slurm installation based on the `slurm-docker-cluster` with Sid specific features like Rstudio, MATE desktop environment, and TurboVNC.
+    It is used to create the slurm controller and compute nodes.
 - Sid OnDemand - `sid-ood` - https://hub.docker.com/r/hmdc/sid-ood/tags
-  - The `sid-ood` Docker image contains an Open OnDemand installation with Slurm and Sid specific features.
+  - The `sid-ood` image contains an Open OnDemand installation with Slurm. This image is based on the `slurm-docker-cluster`.
+    It is used to create the Open OnDemand node.
 
 ## Component versions
 
@@ -42,6 +44,9 @@ Set the Slurm version in the [GitHub Actions configuration](https://github.com/h
 
 Update the versions that you want to build and commit the changes. The images will be built automatically by GitHub.
 Verify the new images are in the Docker Hub: https://hub.docker.com/r/hmdc/slurm-docker-cluster/tags
+
+The GitHub action requires DockerHub credentials to be added to the project as secrets.
+DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets need to be added to the repo under `Settings > Secrets`. We have currently configured the `hmdcbuildsvc` account credentials.
 
 If you need to build the images locally, follow the instructions from that repo's [README](https://github.com/hmdc/slurm-docker-cluster/blob/master/README.md). Here is a summary for the Sid2 use case:
 ```
