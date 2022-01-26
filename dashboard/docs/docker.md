@@ -46,7 +46,7 @@ Update the versions that you want to build and commit the changes. The images wi
 Verify the new images are in the Docker Hub: https://hub.docker.com/r/hmdc/slurm-docker-cluster/tags
 
 The GitHub action requires DockerHub credentials to be added to the project as secrets.
-DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets need to be added to the repo under `Settings > Secrets`. We have currently configured the `hmdcbuildsvc` account credentials.
+DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets need to be added to the repo under `Settings > Secrets`.
 
 If you need to build the images locally, follow the instructions from that repo's [README](https://github.com/hmdc/slurm-docker-cluster/blob/master/README.md). Here is a summary for the Sid2 use case:
 ```
