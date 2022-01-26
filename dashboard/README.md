@@ -45,7 +45,8 @@ The following will launch a Sid Dashboard development environment with:
 - Is the Develop menu on the top-bar visible?
 - Can you get into the Develop menu, select My SandBox Apps, and launch the Sid2 Ood Dashboard?
 - Does OOD prompt you to "initialize" the app after launching Sid2 from the developer menu? (It should..)
-- After application is initialized, does it show Sid2? Note that at this point Sid2 does not function properly as @adaybujeda is re-writing the frontend code and API routes. Proving that the dev environment works only requires that you can at least initialize the app and install its libraries.
+- After application is initialized, does it show Sid2?
+- For further validation tests see https://wiki.harvard.edu/confluence/display/HMDC/Testing+Sid2
 
 ### Stopping
 

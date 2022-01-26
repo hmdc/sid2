@@ -16,7 +16,8 @@ Configuration section at the root of the file to set the following keys:
 * `id` is a unique identifier for each launcher. External Launchers with the same `id` as Internal Launchers will override their configuration.
 Default `id` value is taken from the filename without the extension.
 * `order` is an integer value used to order the list of launchers. Smallest value goes first. Negative values are allowed.
-* `status:` optional string property, defaults to `active`. It is used to disable a launcher without deleting the configuration file. If status!=`active`, the launcher will not appear in the Sid dashboard.
+* `cluster` optional string property, defaults to the main cluster. It is used to specify the cluster the launcher is operational for.
+* `status` optional string property, defaults to `active`. It is used to disable a launcher without deleting the configuration file. If status!=`active`, the launcher will not appear in the Sid dashboard.
 
 #### Form
 Configuration section to set the runtime options for the application. The options follow the same naming as those in the form that OOD uses to launch interactive applications.
@@ -29,12 +30,14 @@ Configuration section for the display options for the launcher button
 * `logo:` optional path to the image to display in the launcher. If not value is set, the default will be used: `iqss_logo.png`. The field takes a path relative from the application assets folder: `application/app/assets/images`, eg: `rstudio_logo.png`. It supports all image types.
 * `logoWidth:` integer value used to adjust the logo width to the space in the launcher button. The height will adjust automatically keeping the logo aspect ratio.
 * `style:` optional css style added to the logo HTML mainly to adjust the top margin. eg: `margin-top: 10px;`
+* `color:` optional border color.
 * `p1`, `p2`, and `p3` are used to display text within the launcher. Each `p` represents a line of text. Set to `nil` to display an empty line.
 
 ### Showing/Hiding Launchers on the Sid Dashboard index page
 The index page that displays all the launcher buttons has some safeguards. It will not show a launcher button in any of the following conditions:
-* `status:` if the status value is not `active`
-* `token:` the value is for an application that is not installed or is invalid
+* `cluster:` will only show the launcher in the specified cluster.
+* `status:` if the status value is not `active`.
+* `token:` the value is for an application that is not installed or is invalid.
 * `bc_queue:` the partition is not accessible for the current user or is invalid.
 
 ## External Launcher Files

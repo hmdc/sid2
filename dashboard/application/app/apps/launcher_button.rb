@@ -46,13 +46,16 @@ class LauncherButton
 
     @metadata[:id] = config[:id] ? config[:id].downcase : @metadata[:id]&.downcase
 
-    raise ArgumentError, "launch button config must defined an id metadata=#{metadata}" unless @metadata[:id]
-    raise ArgumentError, "launch button config must defined a form section field id=#{id} metadata=#{metadata}" unless @form
-    raise ArgumentError, "launch button config must defined a form.token field id=#{id} metadata=#{metadata}" unless @form[:token]
-    raise ArgumentError, "launch button config must defined a view section field id=#{id} metadata=#{metadata}" unless @view
+    raise ArgumentError, "launch button config must defined an id - metadata=#{metadata}" unless @metadata[:id]
+    raise ArgumentError, "launch button config must defined a form section field - id=#{id} metadata=#{metadata}" unless @form
+    raise ArgumentError, "launch button config must defined a form.token field - id=#{id} metadata=#{metadata}" unless @form[:token]
+    raise ArgumentError, "launch button config must defined a view section field - id=#{id} metadata=#{metadata}" unless @view
 
-    set_cluster
+    set_cluster(config[:cluster])
     set_partition
+
+    @metadata[:cluster] = config[:cluster]
+    @metadata[:partition] = config[:bc_queue]
     @metadata[:order] = config[:order]
     @metadata[:status] = config[:status] ? config[:status].downcase : "active"
     @view[:logo] =  "iqss_logo.png" unless @view[:logo]
@@ -94,9 +97,15 @@ class LauncherButton
     YAML.safe_load(contents).to_h.deep_symbolize_keys
   end
 
-  def set_cluster
+  def set_cluster(configured_cluster_id)
     ood_app = BatchConnect::App.from_token @form[:token]
-    @cluster = ood_app.clusters.first.id.to_s if ood_app.clusters.any?
+    if configured_cluster_id
+      # SELECT THE CLUSTER THAT MATCHES THE CONFIGURATION OR NULL
+      @cluster = ood_app.clusters.map{ |c| c.id.to_s }.select{|id| id.casecmp?(configured_cluster_id) }.first
+    else
+      # SELECT DEFAULT CLUSTER
+      @cluster = ood_app.clusters.first.id.to_s if ood_app.clusters.any?
+    end
   end
 
   def set_partition
@@ -106,7 +115,7 @@ class LauncherButton
     end
 
     if(@form[:bc_queue])
-      user_groups = User.new.groups.map { |g| g.name}
+      user_groups = User.new.groups.map{ |g| g.name }
       @launcher_partition = cluster_metadata.partitions(user_groups).include?(@form[:bc_queue]) ? @form[:bc_queue] : nil
     else
       @launcher_partition = cluster_metadata.default_partition

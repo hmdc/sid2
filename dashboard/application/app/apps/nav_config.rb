@@ -7,7 +7,7 @@ class NavConfig
     self.categories_whitelist = false
     self.apps_whitelist = true
 
-    App_whitelist_by_category = {"Interactive Apps" => ["arcgis", "jupyter", "matlab", "mathematica", "nativerd", "rstudio", "stata", "sas"]}
+    App_whitelist_by_category = {"Interactive Apps" => ["arcgis", "jupyter", "matlab", "mathematica", "nativerd", "remotedesktop", "rstudio", "stata", "sas"]}
 
     def self.select_interactive_apps(app)
       if apps_whitelist && App_whitelist_by_category[app.category]

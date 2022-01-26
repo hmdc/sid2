@@ -1,7 +1,8 @@
 ---
-order: 20
+order: 10
+cluster: "fasse"
 form:
-  token: "sys/NativeRD"
+  token: "sys/Rstudio"
   bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
@@ -14,17 +15,16 @@ form:
   custom_email_address: ""
   bc_email_on_started: "0"
   custom_reservation: ""
-  bc_vnc_resolution: "1024x768"
-  custom_desktop: "1"
-  matlab_version: "NULL"
-  rstudio_version: "rstudio/1.1.453-fasrc01"
   r_version: "R/4.1.0-fasrc01"
   rlibs: "~/apps/R_4.1.0_fasrc01"
+  custom_vanillaconf: "1"
 
 view:
-  logo: "desktop_logo.svg"
-  logoWidth: "100"
+  color: "#DA6027"
+  logo: "rstudio_logo.png"
+  logoWidth: "200"
   style: "margin-top: 10px;"
-  p1: "Run FAS-RC Remote Desktop"
+  p1: "Run Rstudio Server"
   p2: "2 CPU cores and 4GB RAM"
   p3: "8 hours job run time"
+  p4: "FASSE cluster"

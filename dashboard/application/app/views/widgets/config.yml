@@ -1,4 +1,10 @@
-quick_links:
-  - terminal_button
-  - all_sessions_button
-  - fasse_button
+clusters:
+  - cluster_id: "dev-cluster"
+    links: ["terminal_button", "all_sessions_button", "fasse_button", "cannon_button"]
+    welcome_message: "welcome_message"
+  - cluster_id: "odyssey3"
+    links: ["terminal_button", "all_sessions_button", "fasse_button"]
+    welcome_message: "cannon_welcome_message"
+  - cluster_id: "fasse"
+    links: ["terminal_button", "all_sessions_button", "cannon_button"]
+    welcome_message: "fasse_welcome_message"

@@ -1,5 +1,6 @@
 ---
 order: 50
+cluster: "fasse"
 form:
   token: "sys/SAS"
   bc_queue: "test"
@@ -17,9 +18,11 @@ form:
   bc_vnc_resolution: "1024x768"
 
 view:
+  color: "#DA6027"
   logo: "sas_logo.png"
   logoWidth: "180"
   style: "margin-top: 13px"
   p1: "Run SAS"
   p2: "1 CPU core and 4GB RAM"
   p3: "8 hours job run time"
+  p4: "FASSE cluster"
