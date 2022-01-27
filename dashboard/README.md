@@ -34,7 +34,11 @@ The following will launch a Sid Dashboard development environment with:
 
 ### Connecting
 
-- After the containers have started, connect to OOD dashboard application: [http://localhost:33000](http://localhost:33000)
+- After the containers have started, connect to OOD dashboard application (HTTPS): [https://localhost:33000](https://localhost:33000)
+- We are using a self-signed certificate, we must configure our browser to allow unsecure connections to the Sid Dashboard
+   - Firefox, "Warning potential security risk ahead". Select `Advanced > Accept the risk and continue`
+   - Chrome, we must enable insecure localhost flag: `chrome://flags/#allow-insecure-localhost`
+   - Safari, "This connection is not private". Select `Show Details > Visit the website`. Accept changes to the `Certificate Trust Settings`
 - Login with username `ood`, password `ood`.
 - To connect to RT, use: [http://localhost:34000](http://localhost:34000)
 - Login with username `root`, password `password`
