@@ -1,0 +1,12 @@
+---
+order: 200
+form:
+  token: "sys/bc_desktop"
+  bc_account: ""
+  bc_num_slots: "1"
+  bc_num_hours: "1"
+view:
+  color: "#18b316"
+  p1: "Run RDesktop"
+  p2: "1 CPU cores and 4GB RAM"
+  p3: "1 hour job run time"

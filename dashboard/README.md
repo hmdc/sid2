@@ -128,3 +128,9 @@ To add or update launcher buttons, follow the instructions [here](launchers.md)
 
 To add or update quick link buttons, follow the instructions [here](quick_links.md)
 
+## Open OnDemand Widgets
+
+We have created widgets compatible with Open OnDemand to customize your dashboard. More information [here](widgets/README.md)
+
+
+

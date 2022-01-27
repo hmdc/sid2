@@ -42,11 +42,15 @@ services:
       - var_log_slurm:/var/log/slurm
       - ./application/launchers/Rstudio:/var/www/ood/apps/sys/Rstudio
       - ./application/launchers/OdysseyRD:/var/www/ood/apps/sys/OdysseyRD
+      - ./application/launchers/bc_desktop/form.yml:/var/www/ood/apps/sys/bc_desktop/form.yml
       - ./application/config/initializers/session_store.rb:/var/www/ood/apps/sys/dashboard/config/initializers/session_store.rb
       - ./data:/home/ood/ondemand/data:rw
       - ./application:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
       - ./status.md:/etc/ood/config/announcements.d/01_status.md
+      - ./ondemand.d:/etc/ood/config/ondemand.d
+      - ./application/app/assets/images:/var/www/ood/public/images
+      - ./widgets/launchers:/var/www/ood/apps/sys/dashboard/app/views/widgets/launchers
     ports:
       - "33000:80"
     expose:

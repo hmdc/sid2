@@ -1,0 +1,37 @@
+<%-
+  launchers = []
+  launchers_path = Rails.root.join("app", "views", "widgets", "launchers")
+  if launchers_path.directory? && launchers_path.readable?
+    # LOAD LAUNCHER YAML CONFIG FILES
+    launchers_path.children.select{|p| p.to_s.end_with? '.yml' }.each do |launcher_file|
+      launcher_config = YAML.safe_load(launcher_file.read).to_h.deep_symbolize_keys
+      launcher_config[:id] = launcher_file.basename(launcher_file.extname).to_s
+      launcher_config[:form] = {} if !launcher_config[:form]
+      launcher_config[:view] = {} if !launcher_config[:view]
+
+      # A VALID TOKEN IS REQUIRED
+      ood_app = BatchConnect::App.from_token(launcher_config[:form][:token] || "")
+      next if !ood_app.valid?
+      # ADD DEFAULT CLUSTER IF NOT PROVIDED
+      launcher_config[:form][:cluster] = ood_app.clusters.first.id.to_s if !launcher_config[:form][:cluster] && ood_app.clusters.any?
+      launcher_config[:view][:default_logo] = ood_app.link.icon_uri
+
+      launchers.push launcher_config
+    end
+  end
+
+  launchers = launchers.sort_by { |l| l[:order] ||  999999 }
+  auth_token = form_authenticity_token
+-%>
+
+
+<%- if launchers.length > 0 -%>
+  <%= render partial: "/widgets/launchers/launcher_assets" %>
+
+  <h3>Quick Launchers</h3>
+  <div class="row">
+    <%- launchers.each do |launcher| -%>
+      <%= render partial: "/widgets/launchers/launcher_button", locals: { launcher_button_id: launcher[:id], launcher_button: launcher, auth_token:  auth_token} %>
+    <%- end -%>
+  </div>
+<%- end -%>

@@ -1,0 +1,9 @@
+pinned_apps:
+  - sys/Rstudio
+
+dashboard_layout:
+  rows:
+    - columns:
+        - width: 12
+          widgets:
+            - "launchers/launchers_widget"
