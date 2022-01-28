@@ -8,7 +8,7 @@
   <div class="launch-button-spinner" style="display: none;">
     <div class="spinner-border" role="status"></div>
   </div>
-  <div class="launch-button">
+  <div class="launch-button" style="border-color: <%= launcher_button[:color] || "#2D9BF0" %>;">
     <div class="panel-body panel-image">
       <img src="<%= asset_url launcher_button[:logo] %>" alt="Application logo" width="<%= launcher_button[:logoWidth] || 200 %>" class="center-block"  style="<%= launcher_button[:style] || '' %>"/>
     </div>
@@ -16,7 +16,7 @@
       <p class="title-text"><%= launcher_button[:p1].html_safe || "&nbsp;".html_safe %></p>
       <p class="small-text"><%= launcher_button[:p2] || "&nbsp;".html_safe %></p>
       <p class="small-text"><%= launcher_button[:p3] || "&nbsp;".html_safe %></p>
-      <p class="small-text">Cannon cluster</p>
+      <p class="small-text"><%= launcher_button[:p4] || "&nbsp;".html_safe %></p>
     </div>
   </div>
 </div>

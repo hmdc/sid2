@@ -1,0 +1,28 @@
+---
+order: 50
+cluster: "odyssey3"
+form:
+  token: "sys/SAS"
+  bc_queue: "test"
+  bc_account: ""
+  bc_num_slots: "1"
+  bc_num_hours: "1"
+  custom_memory_per_node: "4"
+  custom_num_cores: "1"
+  custom_num_gpus: "0"
+  custom_time: "08:00:00"
+  envscript: ""
+  custom_email_address: ""
+  bc_email_on_started: "0"
+  custom_reservation: ""
+  bc_vnc_resolution: "1024x768"
+
+view:
+  color: "#2D9BF0"
+  logo: "sas_logo.png"
+  logoWidth: "180"
+  style: "margin-top: 13px"
+  p1: "Run SAS"
+  p2: "1 CPU core and 4GB RAM"
+  p3: "8 hours job run time"
+  p4: "Cannon cluster"

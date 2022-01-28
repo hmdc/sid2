@@ -1,3 +1,5 @@
+## [2022.1.2-dev.1](https://github.com/hmdc/sid2/compare/2022.1.1-dev.1...2022.1.2-dev.1) (2022-01-26)
+
 ## [2022.1.2](https://github.com/hmdc/sid2/compare/2021.11.5...2022.1.2) (2022-01-10)
 
 
@@ -51,6 +53,11 @@
 
 ## [2021.10.10](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-28)
 
+### Features
+
+* **dashboard:** gh [#568](https://github.com/hmdc/sid2/issues/568) Added OOD and Sid version numbers to sid dashboard footer ([#27](https://github.com/hmdc/sid2/issues/27)) ([48b277c](https://github.com/hmdc/sid2/commit/48b277c4f4cf3c0ff5493f21e03dcbd697317479))
+
+## [2021.10.10](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-28)
 
 ## [2021.10.9-dev.1](https://github.com/hmdc/sid2/compare/2021.10.6-dev.1...2021.10.9-dev.1) (2021-10-28)
 

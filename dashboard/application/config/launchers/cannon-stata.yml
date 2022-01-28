@@ -1,6 +1,8 @@
 ---
+order: 40
+cluster: "odyssey3"
 form:
-  token: "sys/Matlab"
+  token: "sys/Stata"
   bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
@@ -9,16 +11,19 @@ form:
   custom_num_cores: "1"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
+  envscript: ""
   custom_email_address: ""
   bc_email_on_started: "0"
   custom_reservation: ""
   bc_vnc_resolution: "1024x768"
-  matlab_version: "matlab/R2021a-fasrc01"
+  stata_version: "stata/16.0-fasrc01"
 
 view:
-  logo: "matlab_logo.png"
-  logoWidth: "230"
-  style: "margin-top: -15px;"
-  p1: "Run Matlab"
+  color: "#2D9BF0"
+  logo: "stata_logo.svg"
+  logoWidth: "200"
+  style: "margin-top: 20px;"
+  p1: "Run Stata"
   p2: "1 CPU core and 8GB RAM"
   p3: "8 hours job run time"
+  p4: "Cannon cluster"

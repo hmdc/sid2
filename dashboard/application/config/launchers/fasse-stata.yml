@@ -1,5 +1,6 @@
 ---
 order: 40
+cluster: "fasse"
 form:
   token: "sys/Stata"
   bc_queue: "test"
@@ -18,9 +19,11 @@ form:
   stata_version: "stata/16.0-fasrc01"
 
 view:
+  color: "#DA6027"
   logo: "stata_logo.svg"
   logoWidth: "200"
   style: "margin-top: 20px;"
   p1: "Run Stata"
   p2: "1 CPU core and 8GB RAM"
   p3: "8 hours job run time"
+  p4: "FASSE cluster"
