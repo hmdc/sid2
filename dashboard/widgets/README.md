@@ -56,7 +56,7 @@ Configuration example with context information:
         p2:
         p3: "1 hour job run time"
       # Form component configures the data that will be submitted.
-      # These ca be taken from the application form batch_connect_session_context field.
+      # These can be taken from the application form batch_connect_session_context field.
       form:
         # the application that we want to launch.
         token: "sys/rstudio"
