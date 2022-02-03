@@ -51,6 +51,7 @@ services:
       - ./ondemand.d:/etc/ood/config/ondemand.d
       - ./application/app/assets/images:/var/www/ood/public/images
       - ./widgets/launchers:/var/www/ood/apps/sys/dashboard/app/views/widgets/launchers
+      - ./widgets/sessions:/var/www/ood/apps/sys/dashboard/app/views/widgets/sessions
     ports:
       - "33000:80"
     expose:

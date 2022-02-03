@@ -1,0 +1,58 @@
+
+<%-
+
+  if !BatchConnect::SessionsHelper.method_defined?(:session_widget_config)
+    # SESSION HELPER PATCH TO UPDATE RENDERING OF SESSION INFORMATION
+    # THIS PATCH IS NEEDED TO REUSE THE SESSION INFORMATION RENDERING AND JAVASCRIPT SESSION INFORMATION REFRESH
+    Rails.logger.info "Patching BatchConnect::SessionsHelper for Sessions Widget"
+    BatchConnect::SessionsHelper.module_eval do
+      def load_session_widget_config
+        sessions_widget_config = {}
+        sessions_widget_config_file = Rails.root.join("app", "views", "widgets", "sessions", "sessions_widget_config.yml")
+        if sessions_widget_config_file.readable?
+          sessions_widget_config = YAML.safe_load(sessions_widget_config_file.read).to_h.deep_symbolize_keys
+          Rails.logger.info "Loaded sessions widget config from: #{sessions_widget_config_file}"
+        end
+        return sessions_widget_config
+      end
+
+      def session_widget_config
+        @@session_widget_config ||= load_session_widget_config
+      end
+
+      def display_native_scheduler_item(session, item)
+        default_value = session_widget_config[:value_when_missing] || "N/A"
+        content = session.info.native && item[:value] ? session.info.native[item[:value].to_sym] : default_value
+        content = session.info.native if session.info.native && item[:value] == "_all"
+        return "" if content == "_skip"
+
+        content_tag(:p) do
+          concat content_tag(:strong, item[:label])
+          concat " "
+          concat content
+        end
+      end
+
+      def session_view(session)
+        capture do
+          concat(
+            content_tag(:div) do
+              concat content_tag(:div, delete(session), class: 'float-right')
+              concat host(session)
+              concat created(session)
+              concat time(session)
+              concat id(session)
+              (session_widget_config[:native_items] || []).each do |item|
+                concat display_native_scheduler_item(session, item)
+              end
+              safe_concat custom_info_view(session) if session.app.session_info_view
+            end
+          )
+          concat content_tag(:div) { yield }
+        end
+      end
+    end
+
+  end
+
+-%>

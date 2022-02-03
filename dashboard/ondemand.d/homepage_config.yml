@@ -7,3 +7,5 @@ dashboard_layout:
         - width: 12
           widgets:
             - "launchers/launchers_widget"
+            - "sessions/sessions_widget"
+

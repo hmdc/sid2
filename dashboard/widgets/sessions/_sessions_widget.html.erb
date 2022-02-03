@@ -1,0 +1,24 @@
+
+<%= render partial: "/widgets/sessions/sessions_helper_patch" %>
+
+<%-
+  number_sessions_show = 3
+  data_poll_refresh_milliseconds = 10000
+
+  @sessions = BatchConnect::Session.all.reject { |s| s.completed? }
+-%>
+
+<style>
+    .sessions-header h3 {
+        display: inline-block;
+    }
+</style>
+<div class="sessions-header">
+  <h3>Active interactive sessions</h3>
+  <a href="<%= batch_connect_sessions_path %>"> view all <span>(<%= @sessions.length %>)</span></a>
+</div>
+<div class="row" data-toggle="poll" data-url="<%= batch_connect_sessions_path(format: :js) %>" data-delay="<%= data_poll_refresh_milliseconds %>">
+  <div class="col-md-12">
+    <%= render partial: "/batch_connect/sessions/panel", collection: @sessions.first(number_sessions_show), as: :session %>
+  </div>
+</div>

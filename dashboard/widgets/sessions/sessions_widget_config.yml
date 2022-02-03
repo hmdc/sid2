@@ -1,0 +1,7 @@
+native_items:
+  - label: "Memory:"
+    value: "min_memory"
+  - label: "Priority:"
+    value: "priority"
+  - label: "All:"
+    value: "_all"
