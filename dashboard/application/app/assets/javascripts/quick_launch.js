@@ -1,17 +1,26 @@
 const LaunchButtonService = (function (){
-    let buttonEnabled = true
+    let buttonsEnabled = true
+    const DISABLE_BUTTON_HTML =`<div class="launch-button-overlay launch-button-disabled"></div>`
+    const SPINNER_HTML =`<div class="launch-button-overlay launch-button-spinner"><div class="spinner-border" role="status"></div></div>`
 
     function showError() {
         $("#launch-button-error").fadeOut(1000).fadeIn(1000)
     }
 
-    function showSpinner(launchButtonId) {
-        buttonEnabled = false
-        $(`#${launchButtonId} .launch-button-spinner`).show()
+    function showWaitingFeedback(activeButtonId) {
+        buttonsEnabled = false
+        $("[data-toggle='launch-button']").not(`#${activeButtonId}`).prepend(DISABLE_BUTTON_HTML)
+        $(`#${activeButtonId}`).prepend(SPINNER_HTML)
     }
-    function hideSpinner(launchButtonId) {
-        $(`#${launchButtonId} .launch-button-spinner`).delay(1000).fadeOut(200)
-        buttonEnabled = true
+
+    function hideWaitingFeedback(activeButtonId) {
+        $('.launch-button-spinner').delay(1000).fadeOut(300)
+        $('.launch-button-disabled').delay(1000).fadeOut(300)
+        setTimeout(() => {
+            buttonsEnabled = true
+            $('.launch-button-spinner').remove()
+            $('.launch-button-disabled').remove()
+        }, 1300)
     }
 
     function reloadSessions(sessionId, reloadSessionsUrl) {
@@ -21,13 +30,13 @@ const LaunchButtonService = (function (){
 
     function submitJobToCluster(event) {
         const launchButtonId = event.currentTarget.id
-        if(!buttonEnabled) {
+        if(!buttonsEnabled) {
             console.log(`QuickLaunchButton is not enabled: ${launchButtonId}`)
             return
         }
         const submitJobUrl = event.currentTarget.getAttribute("data-url")
         const reloadSessionsUrl = event.currentTarget.getAttribute("data-reload-url")
-        showSpinner(launchButtonId)
+        showWaitingFeedback(launchButtonId)
         const payload = launchButtons[launchButtonId]
         $.ajax({
             dataType: 'json',
@@ -45,12 +54,12 @@ const LaunchButtonService = (function (){
                     //ONLY SHOW THE FIRST launchButtons['maxSessions'] SESSIONS
                     const maxSessions = launchButtons['maxSessions']
                     $(`#sessions-container > div:nth-child(${maxSessions})`).nextAll().fadeOut(1000, function() { $(this).remove(); })
-                    hideSpinner(launchButtonId)
+                    hideWaitingFeedback(launchButtonId)
                 });
         })
         .fail(( jqxhr, settings, exception ) => {
             console.log(`Error submitting job exception=${exception}`);
-            hideSpinner(launchButtonId)
+            hideWaitingFeedback(launchButtonId)
             showError()
         })
     }
@@ -64,5 +73,5 @@ const LaunchButtonService = (function (){
         })
     });
 
-    return {showError, showSpinner, hideSpinner, reloadSessions, submitJobToCluster}
+    return {showError, showWaitingFeedback, hideWaitingFeedback, reloadSessions, submitJobToCluster}
 })()
