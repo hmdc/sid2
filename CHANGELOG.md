@@ -1,3 +1,10 @@
+## [2022.2.3-dev.1](https://github.com/hmdc/sid2/compare/2022.2.2-dev.1...2022.2.3-dev.1) (2022-02-04)
+
+
+### Bug Fixes
+
+* **test:** GH [#643](https://github.com/hmdc/sid2/issues/643) test changelog message syntax ([#48](https://github.com/hmdc/sid2/issues/48)) ([e67b94a](https://github.com/hmdc/sid2/commit/e67b94aed03b3a032ec8c15b72b59edaebf99483))
+
 ## [2022.2.2-dev.1](https://github.com/hmdc/sid2/compare/2022.2.1-dev.1...2022.2.2-dev.1) (2022-02-04)
 
 
