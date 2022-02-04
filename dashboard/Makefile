@@ -31,6 +31,7 @@ release: next-version
 	SLURM_TAG=$(SLURM_TAG) OOD_TAG=$(OOD_TAG) OOD_UID=$(OOD_UID) OOD_GID=$(OOD_GID) docker-compose run --no-deps --entrypoint="" ood su - ood bash -c "export PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$$PATH; export RAILS_ENV=production; cd /home/ood/ondemand/dev/dashboard; scl enable rh-ruby27 rh-nodejs12 'gem install --user-install bundler -v 2.1.4 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
 	mkdir -p ./target
 	tar -czvf ./target/sid2-dashboard.tar.gz ./application
+	tar -czvf ./target/sid2-widgets.tar.gz ./widgets
 
 down:
 	env SLURM_TAG=$(SLURM_TAG) OOD_TAG=$(OOD_TAG) OOD_UID=$(OOD_UID) OOD_GID=$(OOD_GID) docker-compose down -v || :

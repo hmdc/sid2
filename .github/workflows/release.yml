@@ -27,7 +27,9 @@ jobs:
         with:
           name: dashboard-release-artifact
           retention-days: 1
-          path: ./dashboard/target/sid2-dashboard.tar.gz
+          path: |
+            ./dashboard/target/sid2-dashboard.tar.gz
+            ./dashboard/target/sid2-widgets.tar.gz
   create-release-keycloak-spi:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
