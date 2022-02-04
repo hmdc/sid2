@@ -1,3 +1,15 @@
+## [2022.2.2-dev.1](https://github.com/hmdc/sid2/compare/2022.2.1-dev.1...2022.2.2-dev.1) (2022-02-04)
+
+
+### Bug Fixes
+
+* **test:** GH [#643](https://github.com/hmdc/sid2/issues/643) [#644](https://github.com/hmdc/sid2/issues/644) test multi-commit PR -- first line of squash merge ([e7fd0e3](https://github.com/hmdc/sid2/commit/e7fd0e39e3dd4894999c34d54974c394de7ba9a6))
+
+
+### BREAKING CHANGES
+
+* **test:** GH #643 this will require another update to workflow doc
+
 ## [2022.2.1-dev.1](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.2.1-dev.1) (2022-02-04)
 
 
