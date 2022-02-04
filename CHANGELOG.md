@@ -1,3 +1,10 @@
+## [2022.2.4-dev.1](https://github.com/hmdc/sid2/compare/2022.2.3-dev.1...2022.2.4-dev.1) (2022-02-04)
+
+
+### Features
+
+* **dashboard:** gh [#492](https://github.com/hmdc/sid2/issues/492) Added visual feedback when launchers are disabled ([#41](https://github.com/hmdc/sid2/issues/41)) ([d023c5e](https://github.com/hmdc/sid2/commit/d023c5e294171f4a5d608190eea3f2667b9861ec))
+
 ## [2022.2.3-dev.1](https://github.com/hmdc/sid2/compare/2022.2.2-dev.1...2022.2.3-dev.1) (2022-02-04)
 
 
