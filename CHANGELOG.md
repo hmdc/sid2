@@ -1,84 +1,42 @@
-## [2022.1.3](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2022-01-28)
-
-
-
-## [2022.1.2](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2022-01-10)
+## [2022.2.4-dev.1](https://github.com/hmdc/sid2/compare/2022.2.3-dev.1...2022.2.4-dev.1) (2022-02-04)
 
 
 ### Features
 
-* **dashboard:** gh [#565](https://github.com/hmdc/sid2/issues/565) Added proxy support for RT client ([#38](https://github.com/hmdc/sid2/issues/38)) ([cfaf868](https://github.com/hmdc/sid2/commit/cfaf868c33928f9dd5a094c2ba3043f46128f491))
+* **dashboard:** gh [#492](https://github.com/hmdc/sid2/issues/492) Added visual feedback when launchers are disabled ([#41](https://github.com/hmdc/sid2/issues/41)) ([d023c5e](https://github.com/hmdc/sid2/commit/d023c5e294171f4a5d608190eea3f2667b9861ec))
 
-
-
-## [2021.11.5](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-11-22)
-
-
-### Bug Fixes
-
-* **build:** trigger release after QA passed ([4046d2f](https://github.com/hmdc/sid2/commit/4046d2f48192159e6307fbf9ecd2b1e04b0571f5))
-
-
-### Features
-
-* **landing-page:** gh [#328](https://github.com/hmdc/sid2/issues/328) Added new homepage for sid.harvard.edu site ([46191f1](https://github.com/hmdc/sid2/commit/46191f166380be09c187e760852a4bddc89554c7))
-
-
-
-## [2021.10.10](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-10-28)
-
-
-
-## [2021.10.8](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-10-20)
+## [2022.2.3-dev.1](https://github.com/hmdc/sid2/compare/2022.2.2-dev.1...2022.2.3-dev.1) (2022-02-04)
 
 
 ### Bug Fixes
 
-* **build:** gh [#575](https://github.com/hmdc/sid2/issues/575) - QA cleanup ([9374136](https://github.com/hmdc/sid2/commit/9374136171fb5adb83d5bf78073412324a441610))
+* **test:** GH [#643](https://github.com/hmdc/sid2/issues/643) test changelog message syntax ([#48](https://github.com/hmdc/sid2/issues/48)) ([e67b94a](https://github.com/hmdc/sid2/commit/e67b94aed03b3a032ec8c15b72b59edaebf99483))
 
-
-
-## [2021.10.7](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-10-20)
-
-
-### Bug Fixes
-
-* **build:** QA CHANGELOG ([847756d](https://github.com/hmdc/sid2/commit/847756d5b79e74a091a21a23c1d93d9d7449f256))
-
-
-
-## [2021.10.6](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-10-20)
-
-
-
-## [2021.10.5](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-10-20)
+## [2022.2.2-dev.1](https://github.com/hmdc/sid2/compare/2022.2.1-dev.1...2022.2.2-dev.1) (2022-02-04)
 
 
 ### Bug Fixes
 
-* **build:** QA CHANGELOG generation ([3ad40e5](https://github.com/hmdc/sid2/commit/3ad40e5c2aed86b66e923efb6cfafefd035fd019))
+* **test:** GH [#643](https://github.com/hmdc/sid2/issues/643) [#644](https://github.com/hmdc/sid2/issues/644) test multi-commit PR -- first line of squash merge ([e7fd0e3](https://github.com/hmdc/sid2/commit/e7fd0e39e3dd4894999c34d54974c394de7ba9a6))
 
 
+### BREAKING CHANGES
 
-## [2021.10.3](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-10-19)
+* **test:** GH #643 this will require another update to workflow doc
+
+## [2022.2.1-dev.1](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.2.1-dev.1) (2022-02-04)
 
 
 ### Bug Fixes
 
-* **build:** address changelog generation bug ([43104d2](https://github.com/hmdc/sid2/commit/43104d28d16138fc53dd026f7f06507b3d1c6159))
+* **test:** GH [#643](https://github.com/hmdc/sid2/issues/643) test single-commit PR ([#46](https://github.com/hmdc/sid2/issues/46)) -- first line of squash merge ([7d3891f](https://github.com/hmdc/sid2/commit/7d3891ffef150f89b76a86ab3e5931a221003d9d))
 
 
+### BREAKING CHANGES
 
-## [2021.10.2](https://github.com/hmdc/sid2/compare/2022.1.2-dev.1...2022.1.3) (2021-10-07)
+* **test:** GH #643 this will require an update to workflow doc
 
 ## [2022.1.2-dev.1](https://github.com/hmdc/sid2/compare/2022.1.1-dev.1...2022.1.2-dev.1) (2022-01-26)
-
-## [2022.1.2](https://github.com/hmdc/sid2/compare/2021.11.5...2022.1.2) (2022-01-10)
-
-
-### Features
-
-* **dashboard:** gh [#565](https://github.com/hmdc/sid2/issues/565) Added proxy support for RT client ([#38](https://github.com/hmdc/sid2/issues/38)) ([cfaf868](https://github.com/hmdc/sid2/commit/cfaf868c33928f9dd5a094c2ba3043f46128f491))
 
 ## [2022.1.1-dev.1](https://github.com/hmdc/sid2/compare/2021.11.4-dev.1...2022.1.1-dev.1) (2022-01-10)
 
@@ -126,11 +84,6 @@
 
 ## [2021.10.10](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-28)
 
-### Features
-
-* **dashboard:** gh [#568](https://github.com/hmdc/sid2/issues/568) Added OOD and Sid version numbers to sid dashboard footer ([#27](https://github.com/hmdc/sid2/issues/27)) ([48b277c](https://github.com/hmdc/sid2/commit/48b277c4f4cf3c0ff5493f21e03dcbd697317479))
-
-## [2021.10.10](https://github.com/hmdc/sid2/compare/2021.10.8...2021.10.10) (2021-10-28)
 
 ## [2021.10.9-dev.1](https://github.com/hmdc/sid2/compare/2021.10.6-dev.1...2021.10.9-dev.1) (2021-10-28)
 
