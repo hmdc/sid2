@@ -1,6 +1,6 @@
 ---
 order: 20
-cluster: "fasse"
+cluster: "removed"
 form:
   token: "sys/RemoteDesktop"
   bc_queue: "test"
