@@ -2,7 +2,7 @@
 order: 20
 cluster: "fasse"
 form:
-  token: "sys/RemoteDesktop"
+  token: "sys/NativeRD"
   bc_queue: "test"
   bc_account: ""
   bc_num_slots: "1"
@@ -17,6 +17,10 @@ form:
   custom_reservation: ""
   bc_vnc_resolution: "1024x768"
   custom_desktop: "1"
+  matlab_version: "NULL"
+  rstudio_version: "NULL"
+  r_version: "R/3.3.3-fasrc01"
+  rlibs: ""
 
 view:
   color: "#DA6027"
