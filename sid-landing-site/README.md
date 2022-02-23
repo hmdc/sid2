@@ -31,7 +31,7 @@ Install all the libraries needed for the project:
 `npm install`
 
 Build the app. The `build` directory will contain all generated files:  
-`npm build`
+`npm run build`
 
 Run the tests:  
 `npm test`
