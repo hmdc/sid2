@@ -1,3 +1,10 @@
+## [2022.2.5-dev.1](https://github.com/hmdc/sid2/compare/2022.2.4-dev.1...2022.2.5-dev.1) (2022-02-23)
+
+
+### Bug Fixes
+
+* **dashboard:** gh [#647](https://github.com/hmdc/sid2/issues/647) Fixed FASSE remote desktop configuration ([#49](https://github.com/hmdc/sid2/issues/49)) ([70f0f67](https://github.com/hmdc/sid2/commit/70f0f67368bd63e095fc9ee3c8175e630a12e88d))
+
 ## [2022.2.4-dev.1](https://github.com/hmdc/sid2/compare/2022.2.3-dev.1...2022.2.4-dev.1) (2022-02-04)
 
 
