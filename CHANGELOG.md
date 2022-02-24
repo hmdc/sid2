@@ -1,3 +1,10 @@
+## [2022.2.7](https://github.com/hmdc/sid2/compare/2022.2.5...2022.2.7) (2022-02-24)
+
+
+### Bug Fixes
+
+* **dashboard:** gh [#647](https://github.com/hmdc/sid2/issues/647) Fixed FASSE remote desktop configuration ([#49](https://github.com/hmdc/sid2/issues/49)) ([eeb3387](https://github.com/hmdc/sid2/commit/eeb338756dd6094c761907649ff0dfdcce041e79)), closes [#594](https://github.com/hmdc/sid2/issues/594) [#43](https://github.com/hmdc/sid2/issues/43)
+
 ## [2022.2.6-dev.1](https://github.com/hmdc/sid2/compare/2022.2.5-dev.1...2022.2.6-dev.1) (2022-02-24)
 
 
