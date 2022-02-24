@@ -1,3 +1,10 @@
+## [2022.2.6-dev.1](https://github.com/hmdc/sid2/compare/2022.2.5-dev.1...2022.2.6-dev.1) (2022-02-24)
+
+
+### Features
+
+* **Documentation updates:** gh [#594](https://github.com/hmdc/sid2/issues/594) added documentation on how to update the Slurm and OOD version ([#43](https://github.com/hmdc/sid2/issues/43)) ([f93a44b](https://github.com/hmdc/sid2/commit/f93a44bdd55606e1f2a2cafdd131fd1ab61078a3))
+
 ## [2022.2.5-dev.1](https://github.com/hmdc/sid2/compare/2022.2.4-dev.1...2022.2.5-dev.1) (2022-02-23)
 
 
