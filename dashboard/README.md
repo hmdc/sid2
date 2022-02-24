@@ -20,6 +20,10 @@ The following will launch a Sid Dashboard development environment with:
 
 **This dev environment does not build properly/entirely on M1 (non-x86) Macs, just x86! CentOS7 does not have an M1 image nor does x86 emulation properly start Slurm as of now.**
 
+### Development environment and Docker images
+
+Docker images are used to create the local development environment. Information on how to build and upgrade these images is [here](docs/docker.md)
+
 ### Caveats, oddities.
 
 - Due to OOD's requirement of running as **you**, the `Makefile` in this repository uses _your_ UID and GID as the UID and GID of the `ood` user. If you are running OS X and have a UID of < 1000, which is non-standard for Linux, this will still work - I've added a workaround, but, it's still preferable to stick with the constrained requirements if you can.
@@ -122,9 +126,9 @@ queue_name: "IQSS_FASRC_support"
 
 ## Launcher button configuration
 
-To add or update launcher buttons, follow the instructions [here](launchers.md)
+To add or update launcher buttons, follow the instructions [here](docs/launchers.md)
 
 ## Quick links configuration
 
-To add or update quick link buttons, follow the instructions [here](quick_links.md)
+To add or update quick link buttons, follow the instructions [here](docs/quick_links.md)
 
