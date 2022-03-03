@@ -1,3 +1,10 @@
+## [2022.3.2](https://github.com/hmdc/sid2/compare/2022.2.7...2022.3.2) (2022-03-03)
+
+
+### Bug Fixes
+
+* **landing-page:** gh [#573](https://github.com/hmdc/sid2/issues/573) Fixes to build command and login URL ([#52](https://github.com/hmdc/sid2/issues/52)) ([dbd7745](https://github.com/hmdc/sid2/commit/dbd77451acfa3bc7fd0eabae464e872e2dc0d7be))
+
 ## [2022.3.1-dev.1](https://github.com/hmdc/sid2/compare/2022.2.6-dev.1...2022.3.1-dev.1) (2022-03-03)
 
 
