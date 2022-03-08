@@ -7,7 +7,7 @@ all:: dev
 OOD_UID := $(shell id -u)
 OOD_GID := $(shell id -g)
 OOD_TAG := 2.0.16-1.el7
-SLURM_TAG := slurm-20-11-4-1
+SLURM_TAG := slurm-21-08-2-1
 REMOTE_USERNAME := $(if $(SSH_USERNAME),$(SSH_USERNAME),$(USER))
 SID_SLURM_IMAGE := hmdc/sid-slurm:$(SLURM_TAG)
 SID_ONDEMAND_IMAGE := hmdc/sid-ood:$(SLURM_TAG)-ood-$(OOD_TAG)
