@@ -76,7 +76,7 @@ module BatchConnect::SessionsHelper
     if session.completion_info
       memory = session.completion_info["memory"]
       cores = session.completion_info["cpu"]
-      runtime = distance_of_time_in_words(session.completion_info["runtime"], 0, false, :only => [:minutes, :hours], :accumulate_on => :hours)
+      runtime = distance_of_time_in_words(session.completion_info["runtime"], 0, false, :only => [:minutes, :hours], :accumulate_on => :hours) if session.completion_info["runtime"]
     elsif session.info.native
       memory = session.info.native[:min_memory]
       cores = session.info.native[:min_cpus]
@@ -95,7 +95,7 @@ module BatchConnect::SessionsHelper
       content_tag(:p) do
         concat content_tag(:strong, "Exit Status:")
         concat " "
-        concat "#{session.completion_info["state"]} | #{session.completion_info["reason"]} | #{session.completion_info["exit_code"]} Exit code"
+        concat "#{session.completion_info["state"] || "N/A"} | #{session.completion_info["reason"] || "N/A"} | #{session.completion_info["exit_code"] || "N/A"} Exit code"
       end
     else
       ""
