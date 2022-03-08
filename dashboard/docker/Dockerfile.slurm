@@ -1,6 +1,6 @@
 ARG SLURM_TAG
 
-FROM snkattck/slurm-docker-cluster:${SLURM_TAG}
+FROM hmdc/slurm-docker-cluster:${SLURM_TAG}
 
 ARG OOD_UID=3210
 ARG OOD_GID=3210

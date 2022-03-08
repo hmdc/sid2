@@ -1,9 +1,4 @@
-## [2022.3.2](https://github.com/hmdc/sid2/compare/2022.2.7...2022.3.2) (2022-03-03)
-
-
-### Bug Fixes
-
-* **landing-page:** gh [#573](https://github.com/hmdc/sid2/issues/573) Fixes to build command and login URL ([#52](https://github.com/hmdc/sid2/issues/52)) ([dbd7745](https://github.com/hmdc/sid2/commit/dbd77451acfa3bc7fd0eabae464e872e2dc0d7be))
+## [2022.3.2-dev.1](https://github.com/hmdc/sid2/compare/2022.3.1-dev.1...2022.3.2-dev.1) (2022-03-08)
 
 ## [2022.3.1-dev.1](https://github.com/hmdc/sid2/compare/2022.2.6-dev.1...2022.3.1-dev.1) (2022-03-03)
 
@@ -11,13 +6,6 @@
 ### Bug Fixes
 
 * **landing-page:** GH [#573](https://github.com/hmdc/sid2/issues/573) Fixes to build command and login URL ([#52](https://github.com/hmdc/sid2/issues/52)) ([be91273](https://github.com/hmdc/sid2/commit/be912739fbace84ea833528e9f91d60eaa42fe9f))
-
-## [2022.2.7](https://github.com/hmdc/sid2/compare/2022.2.5...2022.2.7) (2022-02-24)
-
-
-### Bug Fixes
-
-* **dashboard:** gh [#647](https://github.com/hmdc/sid2/issues/647) Fixed FASSE remote desktop configuration ([#49](https://github.com/hmdc/sid2/issues/49)) ([eeb3387](https://github.com/hmdc/sid2/commit/eeb338756dd6094c761907649ff0dfdcce041e79)), closes [#594](https://github.com/hmdc/sid2/issues/594) [#43](https://github.com/hmdc/sid2/issues/43)
 
 ## [2022.2.6-dev.1](https://github.com/hmdc/sid2/compare/2022.2.5-dev.1...2022.2.6-dev.1) (2022-02-24)
 
