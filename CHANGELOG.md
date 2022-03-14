@@ -1,3 +1,10 @@
+## [2022.3.5](https://github.com/hmdc/sid2/compare/2022.3.4...2022.3.5) (2022-03-14)
+
+
+### Features
+
+* **keycloak:** gh [#609](https://github.com/hmdc/sid2/issues/609) Removed log4j dependency from final SPI jar ([#42](https://github.com/hmdc/sid2/issues/42)) ([b624a8c](https://github.com/hmdc/sid2/commit/b624a8c38176c6d859df73048f105305cf6ae196))
+
 ## [2022.3.4-dev.1](https://github.com/hmdc/sid2/compare/2022.3.3-dev.1...2022.3.4-dev.1) (2022-03-14)
 
 
