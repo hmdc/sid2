@@ -59,6 +59,12 @@
             <groupId>org.tinyradius</groupId>
             <artifactId>tinyradius</artifactId>
             <version>1.1.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- TEST DEPENDENCIES -->
         <dependency>
@@ -77,6 +83,12 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>3.6.28</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.12</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

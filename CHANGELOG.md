@@ -1,9 +1,9 @@
-## [2022.3.4](https://github.com/hmdc/sid2/compare/2022.3.3...2022.3.4) (2022-03-14)
+## [2022.3.4-dev.1](https://github.com/hmdc/sid2/compare/2022.3.3-dev.1...2022.3.4-dev.1) (2022-03-14)
 
 
 ### Features
 
-* **dashboard:** gh [#605](https://github.com/hmdc/sid2/issues/605) added HTTPS support + increased Apache timeout ([#40](https://github.com/hmdc/sid2/issues/40)) ([c7f40b8](https://github.com/hmdc/sid2/commit/c7f40b8702f56a22b95f5ca22d49a038261ace4c))
+* **keycloak:** gh [#609](https://github.com/hmdc/sid2/issues/609) Removed log4j dependency from final SPI jar ([#42](https://github.com/hmdc/sid2/issues/42)) ([374e8cc](https://github.com/hmdc/sid2/commit/374e8cc7030e323f3db9083cb91a77e2c9cb95e4))
 
 ## [2022.3.3-dev.1](https://github.com/hmdc/sid2/compare/2022.3.2-dev.1...2022.3.3-dev.1) (2022-03-14)
 
