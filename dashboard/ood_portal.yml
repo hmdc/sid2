@@ -234,6 +234,9 @@
 #     register_root: '/var/www/ood/register'
 # Default: null (display error to user if mapping fails)
 #register_root: null
+ssl:
+ - 'SSLCertificateFile "/opt/ood/tls/sid_development.crt"'
+ - 'SSLCertificateKeyFile "/opt/ood/tls/sid_development.key"'
 
 host_regex: 'slurmctld|c(1|2)'
 node_uri: '/node'
