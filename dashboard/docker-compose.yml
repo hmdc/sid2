@@ -42,17 +42,20 @@ services:
       - ./dashboard.conf:/var/lib/ondemand-nginx/config/apps/dev/ood/dashboard.conf
       - ./application/launchers/Rstudio:/var/www/ood/apps/sys/Rstudio
       - ./application/launchers/OdysseyRD:/var/www/ood/apps/sys/OdysseyRD
-      - ./application/config/initializers/session_store.rb:/var/www/ood/apps/sys/dashboard/config/initializers/session_store.rb
       - ./data:/home/ood/ondemand/data:rw
       - ./application:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
       - ./status.md:/etc/ood/config/announcements.d/01_status.md
+      - ./apache/sid_development.key:/opt/ood/tls/sid_development.key
+      - ./apache/sid_development.crt:/opt/ood/tls/sid_development.crt
+      - ./apache/timeout.conf:/opt/rh/httpd24/root/etc/httpd/conf.d/timeout.conf
     ports:
-      - "33000:80"
+      - "33000:443"
     expose:
       - "6817"
       - "8080"
       - "80"
+      - "443"
     depends_on:
       - "slurmctld"
     links:

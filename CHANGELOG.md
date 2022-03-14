@@ -1,4 +1,9 @@
-## [2022.3.3](https://github.com/hmdc/sid2/compare/2022.3.2...2022.3.3) (2022-03-08)
+## [2022.3.3-dev.1](https://github.com/hmdc/sid2/compare/2022.3.2-dev.1...2022.3.3-dev.1) (2022-03-14)
+
+
+### Features
+
+* **dashboard:** gh [#605](https://github.com/hmdc/sid2/issues/605) added HTTPS support + increased Apache timeout ([#40](https://github.com/hmdc/sid2/issues/40)) ([387a2e7](https://github.com/hmdc/sid2/commit/387a2e793419a5d1f68764f18149c0e28f2b39c8))
 
 ## [2022.3.2-dev.1](https://github.com/hmdc/sid2/compare/2022.3.1-dev.1...2022.3.2-dev.1) (2022-03-08)
 
