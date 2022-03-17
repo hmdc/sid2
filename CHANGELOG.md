@@ -1,3 +1,10 @@
+## [2022.3.5-dev.1](https://github.com/hmdc/sid2/compare/2022.3.4-dev.1...2022.3.5-dev.1) (2022-03-17)
+
+
+### Features
+
+* **dashboard:** gh [#662](https://github.com/hmdc/sid2/issues/662) Upgraded slurm to version 21-08-6-1 ([#54](https://github.com/hmdc/sid2/issues/54)) ([f4f8acb](https://github.com/hmdc/sid2/commit/f4f8acb94355929a4c7d9ba855c1d61ba9f25151))
+
 ## [2022.3.4-dev.1](https://github.com/hmdc/sid2/compare/2022.3.3-dev.1...2022.3.4-dev.1) (2022-03-14)
 
 
