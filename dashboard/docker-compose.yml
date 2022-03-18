@@ -46,8 +46,6 @@ services:
       - ./application:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
       - ./status.md:/etc/ood/config/announcements.d/01_status.md
-      - ./apache/sid_development.key:/opt/ood/tls/sid_development.key
-      - ./apache/sid_development.crt:/opt/ood/tls/sid_development.crt
       - ./apache/timeout.conf:/opt/rh/httpd24/root/etc/httpd/conf.d/timeout.conf
     ports:
       - "33000:443"

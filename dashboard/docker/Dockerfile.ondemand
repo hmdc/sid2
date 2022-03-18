@@ -15,6 +15,8 @@ RUN yum install -y net-tools openssh-clients && \
     mkdir -p /etc/ood/config/clusters.d && \
     mkdir -p /etc/ood/config/apps/shell
 
+RUN mkdir -p /etc/ood/config/tls
+COPY ./apache/sid_development.crt ./apache/sid_development.key /etc/ood/config/tls/
 COPY ./ood_portal.yml ./nginx_stage.yml /etc/ood/config/
 RUN /opt/ood/ood-portal-generator/sbin/update_ood_portal && \
     systemctl enable httpd24-httpd && \

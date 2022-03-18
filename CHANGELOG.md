@@ -1,9 +1,9 @@
-## [2022.3.6](https://github.com/hmdc/sid2/compare/2022.3.5...2022.3.6) (2022-03-18)
+## [2022.3.6-dev.1](https://github.com/hmdc/sid2/compare/2022.3.5-dev.1...2022.3.6-dev.1) (2022-03-18)
 
 
-### Features
+### Bug Fixes
 
-* **dashboard:** gh [#662](https://github.com/hmdc/sid2/issues/662) Upgraded slurm to version 21-08-6-1 ([#54](https://github.com/hmdc/sid2/issues/54)) ([9f7918b](https://github.com/hmdc/sid2/commit/9f7918b886a277eccb14f3121f9862d67ef0e016))
+* **dashboard:** gh [#678](https://github.com/hmdc/sid2/issues/678) Created new sid-ood Docker image to fix HTTPs error ([#55](https://github.com/hmdc/sid2/issues/55)) ([249e5a1](https://github.com/hmdc/sid2/commit/249e5a16432f7f5e0788cf7cb2ddcda923afed7a))
 
 ## [2022.3.5-dev.1](https://github.com/hmdc/sid2/compare/2022.3.4-dev.1...2022.3.5-dev.1) (2022-03-17)
 
