@@ -1,9 +1,9 @@
-## [2022.3.5](https://github.com/hmdc/sid2/compare/2022.3.4...2022.3.5) (2022-03-14)
+## [2022.3.5-dev.1](https://github.com/hmdc/sid2/compare/2022.3.4-dev.1...2022.3.5-dev.1) (2022-03-17)
 
 
 ### Features
 
-* **keycloak:** gh [#609](https://github.com/hmdc/sid2/issues/609) Removed log4j dependency from final SPI jar ([#42](https://github.com/hmdc/sid2/issues/42)) ([b624a8c](https://github.com/hmdc/sid2/commit/b624a8c38176c6d859df73048f105305cf6ae196))
+* **dashboard:** gh [#662](https://github.com/hmdc/sid2/issues/662) Upgraded slurm to version 21-08-6-1 ([#54](https://github.com/hmdc/sid2/issues/54)) ([f4f8acb](https://github.com/hmdc/sid2/commit/f4f8acb94355929a4c7d9ba855c1d61ba9f25151))
 
 ## [2022.3.4-dev.1](https://github.com/hmdc/sid2/compare/2022.3.3-dev.1...2022.3.4-dev.1) (2022-03-14)
 
