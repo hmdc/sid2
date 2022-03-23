@@ -1,9 +1,9 @@
-## [2022.3.7](https://github.com/hmdc/sid2/compare/2022.3.6...2022.3.7) (2022-03-18)
+## [2022.3.7-dev.1](https://github.com/hmdc/sid2/compare/2022.3.6-dev.1...2022.3.7-dev.1) (2022-03-23)
 
 
 ### Bug Fixes
 
-* **dashboard:** gh [#678](https://github.com/hmdc/sid2/issues/678) Created new sid-ood Docker image to fix HTTPs error ([#55](https://github.com/hmdc/sid2/issues/55)) ([9fefca7](https://github.com/hmdc/sid2/commit/9fefca7414165ad910558d5c1c83fb34fb543a9f))
+* **dashboard:** gh [#650](https://github.com/hmdc/sid2/issues/650) Fixed missing data error on interactive session panels ([#53](https://github.com/hmdc/sid2/issues/53)) ([af91a73](https://github.com/hmdc/sid2/commit/af91a7347ffbc704d1764aa30ee5da457a75848a))
 
 ## [2022.3.6-dev.1](https://github.com/hmdc/sid2/compare/2022.3.5-dev.1...2022.3.6-dev.1) (2022-03-18)
 
