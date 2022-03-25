@@ -1,3 +1,92 @@
+## [2022.3.8-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-25)
+
+
+### Bug Fixes
+
+* **build:** GH [#585](https://github.com/hmdc/sid2/issues/585) Change release-it arg syntax ([6c5a607](https://github.com/hmdc/sid2/commit/6c5a6073e0278e25c19ee8d57155649ccc14ae21))
+* **build:** GH [#585](https://github.com/hmdc/sid2/issues/585) Intialize CHANGELOG-dev.md and VERSION-dev files ([4b5bcd8](https://github.com/hmdc/sid2/commit/4b5bcd8030fa43846e071acd1556c04d3f986a28))
+
+
+### Features
+
+* **build:** GH [#585](https://github.com/hmdc/sid2/issues/585) Add separate dev (canary) release-it config, CHANGELOG, and VERSION files ([e57ea63](https://github.com/hmdc/sid2/commit/e57ea63d15c4f78799796de5e8987ecc9e6bb678))
+
+
+
+## [2022.3.7-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-23)
+
+
+### Bug Fixes
+
+* **dashboard:** gh [#650](https://github.com/hmdc/sid2/issues/650) Fixed missing data error on interactive session panels ([#53](https://github.com/hmdc/sid2/issues/53)) ([af91a73](https://github.com/hmdc/sid2/commit/af91a7347ffbc704d1764aa30ee5da457a75848a))
+
+
+
+## [2022.3.6-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-18)
+
+
+### Bug Fixes
+
+* **dashboard:** gh [#678](https://github.com/hmdc/sid2/issues/678) Created new sid-ood Docker image to fix HTTPs error ([#55](https://github.com/hmdc/sid2/issues/55)) ([249e5a1](https://github.com/hmdc/sid2/commit/249e5a16432f7f5e0788cf7cb2ddcda923afed7a))
+
+
+
+## [2022.3.5-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-17)
+
+
+### Features
+
+* **dashboard:** gh [#662](https://github.com/hmdc/sid2/issues/662) Upgraded slurm to version 21-08-6-1 ([#54](https://github.com/hmdc/sid2/issues/54)) ([f4f8acb](https://github.com/hmdc/sid2/commit/f4f8acb94355929a4c7d9ba855c1d61ba9f25151))
+
+
+
+## [2022.3.4-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-14)
+
+
+### Features
+
+* **keycloak:** gh [#609](https://github.com/hmdc/sid2/issues/609) Removed log4j dependency from final SPI jar ([#42](https://github.com/hmdc/sid2/issues/42)) ([374e8cc](https://github.com/hmdc/sid2/commit/374e8cc7030e323f3db9083cb91a77e2c9cb95e4))
+
+
+
+## [2022.3.3-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-14)
+
+
+### Features
+
+* **dashboard:** gh [#605](https://github.com/hmdc/sid2/issues/605) added HTTPS support + increased Apache timeout ([#40](https://github.com/hmdc/sid2/issues/40)) ([387a2e7](https://github.com/hmdc/sid2/commit/387a2e793419a5d1f68764f18149c0e28f2b39c8))
+
+
+
+## [2022.3.2-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-08)
+
+
+
+## [2022.3.1-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-03-03)
+
+
+### Bug Fixes
+
+* **landing-page:** GH [#573](https://github.com/hmdc/sid2/issues/573) Fixes to build command and login URL ([#52](https://github.com/hmdc/sid2/issues/52)) ([be91273](https://github.com/hmdc/sid2/commit/be912739fbace84ea833528e9f91d60eaa42fe9f))
+
+
+
+## [2022.2.6-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-02-24)
+
+
+### Features
+
+* **Documentation updates:** gh [#594](https://github.com/hmdc/sid2/issues/594) added documentation on how to update the Slurm and OOD version ([#43](https://github.com/hmdc/sid2/issues/43)) ([f93a44b](https://github.com/hmdc/sid2/commit/f93a44bdd55606e1f2a2cafdd131fd1ab61078a3))
+
+
+
+## [2022.2.5-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8...2022.3.8-dev.1) (2022-02-23)
+
+
+### Bug Fixes
+
+* **dashboard:** gh [#647](https://github.com/hmdc/sid2/issues/647) Fixed FASSE remote desktop configuration ([#49](https://github.com/hmdc/sid2/issues/49)) ([70f0f67](https://github.com/hmdc/sid2/commit/70f0f67368bd63e095fc9ee3c8175e630a12e88d))
+
 ## [2022.3.7-dev.1](https://github.com/hmdc/sid2/compare/2022.3.6-dev.1...2022.3.7-dev.1) (2022-03-23)
 
 
