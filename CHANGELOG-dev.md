@@ -1,3 +1,10 @@
+## [2022.3.10-dev.1](https://github.com/hmdc/sid2/compare/2022.3.9-dev.1...2022.3.10-dev.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) increase max length of commit message header to 150 characters ([b45c9d6](https://github.com/hmdc/sid2/commit/b45c9d6048c520505937368daeee573259ea8d67))
+
 ## [2022.3.9-dev.1](https://github.com/hmdc/sid2/compare/2022.3.8-dev.1...2022.3.9-dev.1) (2022-03-29)
 
 
