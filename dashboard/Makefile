@@ -19,6 +19,12 @@ DETACHED_MODE := $(if $(DETACHED),-d,)
 NODE_VERSION :=`cat ../.node-version`
 PWD := $(shell pwd)
 
+ifeq ($(git branch --show-current),stable)
+	undefine NPM_RUN_VERSION_ARGS
+else
+	NPM_RUN_VERSION_ARGS := --config='.release-it-dev.json'
+endif
+
 remote-dev clean-remote-dev:     LOGIN_HOST   := login.rc.fas.harvard.edu
 remote-dev clean-remote-dev:     APP_FOLDER   := ./fasrc/dev/dashboard
 remote-fasse clean-remote-fasse: LOGIN_HOST   := fasselogin.rc.fas.harvard.edu
@@ -58,7 +64,7 @@ version:
 	cp ../VERSION application/VERSION
 
 next-version:
-	docker run --rm -v $(PWD)/..:/usr/app -w /usr/app node:$(NODE_VERSION) /bin/bash -c "npm install && npm run version | tail -n 1 > dashboard/application/VERSION"
+	docker run --rm -v $(PWD)/..:/usr/app -w /usr/app node:$(NODE_VERSION) /bin/bash -c "npm install && npm run version -- $(NPM_RUN_VERSION_ARGS) | tail -n 1 > dashboard/application/VERSION"
 
 docker-build: docker-build-slurm docker-build-ood
 
