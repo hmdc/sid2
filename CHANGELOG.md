@@ -1,10 +1,3 @@
-## [2022.3.8](https://github.com/hmdc/sid2/compare/2022.3.7...2022.3.8) (2022-03-23)
-
-
-### Bug Fixes
-
-* **dashboard:** gh [#650](https://github.com/hmdc/sid2/issues/650) Fixed missing data error on interactive session panels ([#53](https://github.com/hmdc/sid2/issues/53)) ([5cca44d](https://github.com/hmdc/sid2/commit/5cca44d7e7578965804236d43702e36b601ac1e8))
-
 ## [2022.3.7-dev.1](https://github.com/hmdc/sid2/compare/2022.3.6-dev.1...2022.3.7-dev.1) (2022-03-23)
 
 
