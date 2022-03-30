@@ -97,7 +97,7 @@ jobs:
           path: ./target
       - name: Run release
         run: |
-          if [ ${{ github.event.workflow_run.head_branch }} = "stable" ]; then
+          if [ "${{ github.event.workflow_run.head_branch }}" = "stable" ]; then
             npm run release -- --git.tagMatch='[0-9][0-9][0-9][0-9].[0-9]*.[0-9]*[!dev.1]' --ci
           else
             npm run release -- --config='.release-it-dev.json' --git.tagMatch='[0-9][0-9][0-9][0-9].[0-9]*.[0-9]*-dev.1' --ci
