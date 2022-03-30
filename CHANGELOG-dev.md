@@ -1,3 +1,11 @@
+## [2022.3.13-dev.1](https://github.com/hmdc/sid2/compare/2022.3.12-dev.1...2022.3.13-dev.1) (2022-03-30)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) fix typo in Makefile ([91fc09d](https://github.com/hmdc/sid2/commit/91fc09d7007dde79f1d2264ce7095cde47232412))
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) switch conditional logic for calver-bump-patch.js so that canary build is the default ([c7c5a89](https://github.com/hmdc/sid2/commit/c7c5a89695fb0e7e1732218f53d5605b886e530e))
+
 ## [2022.3.12-dev.1](https://github.com/hmdc/sid2/compare/2022.3.11-dev.1...2022.3.12-dev.1) (2022-03-30)
 
 
