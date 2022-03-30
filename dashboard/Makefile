@@ -19,10 +19,8 @@ DETACHED_MODE := $(if $(DETACHED),-d,)
 NODE_VERSION :=`cat ../.node-version`
 PWD := $(shell pwd)
 
-ifeq ($(git branch --show-current),stable)
-	undefine NPM_RUN_VERSION_ARGS
-else
-	NPM_RUN_VERSION_ARGS := --config='.release-it-dev.json'
+ifneq ($(shell git branch --show-current),stable)
+NPM_RUN_VERSION_ARGS := --config='.release-it-dev.json'
 endif
 
 remote-dev clean-remote-dev:     LOGIN_HOST   := login.rc.fas.harvard.edu
