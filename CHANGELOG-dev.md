@@ -1,3 +1,10 @@
+## [2022.3.11-dev.1](https://github.com/hmdc/sid2/compare/2022.3.10-dev.1...2022.3.11-dev.1) (2022-03-30)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) use github.event.workflow_run.head_branch in second-level workflow instead of env.GITHUB_REF_SLUG ([47007f9](https://github.com/hmdc/sid2/commit/47007f9a326f816758f2f534ae8f6d73908f7c64))
+
 ## [2022.3.10-dev.1](https://github.com/hmdc/sid2/compare/2022.3.9-dev.1...2022.3.10-dev.1) (2022-03-29)
 
 
