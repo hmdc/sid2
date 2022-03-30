@@ -1,3 +1,10 @@
+## [2022.3.12-dev.1](https://github.com/hmdc/sid2/compare/2022.3.11-dev.1...2022.3.12-dev.1) (2022-03-30)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) fix quotes ([cfab9da](https://github.com/hmdc/sid2/commit/cfab9da0ad2c0d1f644f76e37b20831479c104c5))
+
 ## [2022.3.11-dev.1](https://github.com/hmdc/sid2/compare/2022.3.10-dev.1...2022.3.11-dev.1) (2022-03-30)
 
 
