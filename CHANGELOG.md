@@ -1,3 +1,18 @@
+## [2022.3.13](https://github.com/hmdc/sid2/compare/2022.3.12...2022.3.13) (2022-03-31)
+
+
+
+## [2022.3.12](https://github.com/hmdc/sid2/compare/2022.3.12...2022.3.13) (2022-03-30)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) fixed latest stable version ([879bdac](https://github.com/hmdc/sid2/commit/879bdacfd6dd6786b9f7c99d9a1a7b51d9c8e03a))
+
+
+
+## [2022.3.11](https://github.com/hmdc/sid2/compare/2022.3.12...2022.3.13) (2022-03-30)
+
 ## [2022.3.12](https://github.com/hmdc/sid2/compare/2022.3.12-dev.1...2022.3.12) (2022-03-30)
 
 
