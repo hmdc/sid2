@@ -1,5 +1,5 @@
 <div class="cluster-status-component">
-  <% if ::Configuration.hpc_status_custom_enabled? %>
+  <% if display_custom_hpc_status %>
   <%# CUSTOM HPC STATUS IMPLEMENTATION %>
     <div id="hpc-status-content" class="status-container" data-toggle="hpc-status">
       <p class="hpc-status ok">

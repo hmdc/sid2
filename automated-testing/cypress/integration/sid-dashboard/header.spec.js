@@ -3,13 +3,14 @@ describe('Sid Dashboard - Header', () => {
   const baseUrl = Cypress.env('dashboard_baseUrl')
   const rootPath = Cypress.env('dashboard_rootPath')
   const auth = cy.sid.auth
+  const qs = cy.sid.query_params
   const interactiveApps = Cypress.env('dashboard_applications')
   Cypress.config('baseUrl', baseUrl);
 
   beforeEach(() => {
     //DEFAULT SIZE FOR THESE TESTS
     cy.viewport(cy.sid.screen.largeWidth, cy.sid.screen.height)
-    cy.visit(rootPath, { auth })
+    cy.visit(rootPath, { auth, qs })
   })
 
   it('Should display Sid logo with homepage link', () => {

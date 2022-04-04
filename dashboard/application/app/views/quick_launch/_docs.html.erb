@@ -51,7 +51,7 @@
           You can find information on our <a href="https://www.rc.fas.harvard.edu/maintenance" target="_blank">monthly planned maintenance window at this page.</a>
         </p>
 
-        <%= render partial: "shared/hpc_status" %>
+        <%= render partial: "shared/hpc_status", locals: { display_custom_hpc_status: @display_custom_hpc_status } %>
 
       </section>
     </div>
