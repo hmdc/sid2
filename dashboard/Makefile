@@ -52,7 +52,8 @@ up:
 	$(ENV) docker-compose up --build $(DETACHED_MODE)
 
 clean:
-	$(ENV) docker-compose down --rmi all
+	rm -rf application/.bundle application/VERSION application/log application/node_modules application/public/assets application/tmp application/vendor/bundle data/*
+	$(ENV) docker-compose down --rmi all --volumes
 
 clean-remote-dev clean-remote-fasse:
 	echo "For FASSE, you need to be connected to the VPN"
