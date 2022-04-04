@@ -1,3 +1,10 @@
+## [2022.4.1-dev.1](https://github.com/hmdc/sid2/compare/2022.3.13...2022.4.1-dev.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) Doing QA ([d29d68b](https://github.com/hmdc/sid2/commit/d29d68bf1f6bb93047bb411f5a425d37bda45c0d))
+
 ## [2022.3.13-dev.1](https://github.com/hmdc/sid2/compare/2022.3.12-dev.1...2022.3.13-dev.1) (2022-03-30)
 
 
