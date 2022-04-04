@@ -1,3 +1,10 @@
+## [2022.4.2-dev.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.2-dev.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* **dashboard:** gh [#649](https://github.com/hmdc/sid2/issues/649) improve the cleaning power of make clean ([#57](https://github.com/hmdc/sid2/issues/57)) ([56a439e](https://github.com/hmdc/sid2/commit/56a439e6a2fb733f52be74cd006459cec064b19a))
+
 ## [2022.4.1-dev.1](https://github.com/hmdc/sid2/compare/2022.3.13...2022.4.1-dev.1) (2022-04-04)
 
 

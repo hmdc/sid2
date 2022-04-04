@@ -60,6 +60,12 @@ Docker images are used to create the local development environment. Information 
 
 - Run `make down`
 
+### Cleaning up
+
+- Run `make clean`
+
+To thoroughly purge your Docker environment, also run `docker volume prune; docker system prune -a` and restart Docker.
+
 ## Deploying to remote development (your FASRC account)
 
 - Run `make remote-dev`. `make remote-dev` builds all required OOD/Ruby libs locally and exports built artifacts to FASRC. This task will prompt you for your FASRC SSH credentials (password and pin) twice as it creates/validates the pre-requisite directory structure as setup in your home directory.
