@@ -99,11 +99,13 @@ jobs:
         run: |
           if [ "${{ github.event.workflow_run.head_branch }}" = "stable" ]; then
             PREVIOUS_TAG="$(git tag --list --merged |egrep '^[0-9]{4}\.[0-1]?[0-9]\.[0-9]+$' |tail -n 1)"
+            CONFIG_ARG="--config='.release-it.json'"
           else
             PREVIOUS_TAG="$(git tag --list --merged |egrep '^[0-9]{4}\.[0-1]?[0-9]\.[0-9]+-dev\.1$' |tail -n 1)"
+            CONFIG_ARG="--config='.release-it-dev.json'"
           fi
           # we have to pass plugins.@release-it/conventional-changelog.gitRawCommitOpts because https://github.com/release-it/conventional-changelog/pull/47
-          npm run release -- --git.tagMatch="${PREVIOUS_TAG}" --github.tagMatch="${PREVIOUS_TAG}" --'plugins.@release-it/conventional-changelog.gitRawCommitsOpts.from'="${PREVIOUS_TAG}" --ci
+          npm run release -- ${CONFIG_ARG} --git.tagMatch="${PREVIOUS_TAG}" --github.tagMatch="${PREVIOUS_TAG}" --'plugins.@release-it/conventional-changelog.gitRawCommitsOpts.from'="${PREVIOUS_TAG}" --ci
         env:
           HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
