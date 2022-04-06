@@ -1,3 +1,11 @@
+## [2022.4.4-dev.1](https://github.com/hmdc/sid2/compare/2022.4.3-dev.1...2022.4.4-dev.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump build version ([3e536be](https://github.com/hmdc/sid2/commit/3e536be457678d191a65c9d6a2007d868152e94c))
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update release workflow with release-it config args ([ebdeb03](https://github.com/hmdc/sid2/commit/ebdeb038fc28f3588738652b360623c6150139de))
+
 
 
 ## [2022.4.2-dev.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.2-dev.1) (2022-04-04)
