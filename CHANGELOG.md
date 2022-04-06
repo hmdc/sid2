@@ -1,3 +1,5 @@
+## [2022.4.4](https://github.com/hmdc/sid2/compare/2022.4.2...2022.4.4) (2022-04-06)
+
 ## [2022.4.3-dev.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.3-dev.1) (2022-04-06)
 
 
