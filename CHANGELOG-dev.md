@@ -5,17 +5,23 @@
 
 ### Bug Fixes
 
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version again for testing ([45770f4](https://github.com/hmdc/sid2/commit/45770f4646c8d712d82b51d97955613c0a76d343))## [2022.4.6-dev.1](https://github.com/hmdc/sid2/compare/2022.4.5-dev.1...2022.4.6-dev.1) (2022-04-07)
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version again for testing ([45770f4](https://github.com/hmdc/sid2/commit/45770f4646c8d712d82b51d97955613c0a76d343))
+
+## [2022.4.6-dev.1](https://github.com/hmdc/sid2/compare/2022.4.5-dev.1...2022.4.6-dev.1) (2022-04-07)
 
 
 ### Bug Fixes
 
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([0281cc6](https://github.com/hmdc/sid2/commit/0281cc6415a433079b021b95cc536c071125cbd4))## [2022.4.5-dev.1](https://github.com/hmdc/sid2/compare/2022.4.4-dev.1...2022.4.5-dev.1) (2022-04-06)
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([0281cc6](https://github.com/hmdc/sid2/commit/0281cc6415a433079b021b95cc536c071125cbd4))
+
+## [2022.4.5-dev.1](https://github.com/hmdc/sid2/compare/2022.4.4-dev.1...2022.4.5-dev.1) (2022-04-06)
 
 
 ### Bug Fixes
 
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) also bump versions of release-it and release-it/conventional-changelog ([3e88b7a](https://github.com/hmdc/sid2/commit/3e88b7acc6af7a177475b4d7ddbedd3bbdfd115f))## [2022.4.4-dev.1](https://github.com/hmdc/sid2/compare/2022.4.3-dev.1...2022.4.4-dev.1) (2022-04-06)
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) also bump versions of release-it and release-it/conventional-changelog ([3e88b7a](https://github.com/hmdc/sid2/commit/3e88b7acc6af7a177475b4d7ddbedd3bbdfd115f))
+
+## [2022.4.4-dev.1](https://github.com/hmdc/sid2/compare/2022.4.3-dev.1...2022.4.4-dev.1) (2022-04-06)
 
 
 ### Bug Fixes
