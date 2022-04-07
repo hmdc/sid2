@@ -66,18 +66,6 @@
 
 
 
-## [2022.4.6](https://github.com/hmdc/sid2/compare/2022.4.5...2022.4.6) (2022-04-06)
-
-
-
-## [2022.4.5](https://github.com/hmdc/sid2/compare/2022.4.5...2022.4.6) (2022-04-06)
-
-
-
-## [2022.4.4](https://github.com/hmdc/sid2/compare/2022.4.5...2022.4.6) (2022-04-06)
-
-
-
 ## [2022.4.5-dev.1](https://github.com/hmdc/sid2/compare/2022.4.5...2022.4.6) (2022-04-06)
 
 
@@ -86,10 +74,6 @@
 * **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) also bump versions of release-it and release-it/conventional-changelog ([3e88b7a](https://github.com/hmdc/sid2/commit/3e88b7acc6af7a177475b4d7ddbedd3bbdfd115f))## [2022.4.5](https://github.com/hmdc/sid2/compare/2022.4.4...2022.4.5) (2022-04-06)
 
 
-
-## [2022.4.4](https://github.com/hmdc/sid2/compare/2022.4.4...2022.4.5) (2022-04-06)
-
-## [2022.4.4](https://github.com/hmdc/sid2/compare/2022.4.2...2022.4.4) (2022-04-06)
 
 ## [2022.4.3-dev.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.3-dev.1) (2022-04-06)
 
