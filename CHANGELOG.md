@@ -1,3 +1,19 @@
+## [2022.4.8](https://github.com/hmdc/sid2/compare/2022.4.7...2022.4.8) (2022-04-07)
+
+
+
+## [2022.4.11-dev.1](https://github.com/hmdc/sid2/compare/2022.4.7...2022.4.8) (2022-04-07)
+
+
+
+## [2022.4.10-dev.1](https://github.com/hmdc/sid2/compare/2022.4.7...2022.4.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([f4a04da](https://github.com/hmdc/sid2/commit/f4a04daf0cadb84fa46a03efaf275ef8ef6b61cd))
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) fix release-it arg quoting in workflow ([2f11445](https://github.com/hmdc/sid2/commit/2f11445dc9e7c70d83ab9ba0b343bf943569b021))
+
 ## [2022.4.7](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
 
 
