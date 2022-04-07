@@ -1,3 +1,10 @@
+## [2022.4.16-dev.1](https://github.com/hmdc/sid2/compare/2022.4.15-dev.1...2022.4.16-dev.1) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) use sort -V to sort versions with GNU sort ([9bca79b](https://github.com/hmdc/sid2/commit/9bca79b59a4069803c1c88ae66f1b88aca84722f))
+
 ## [2022.4.15-dev.1](https://github.com/hmdc/sid2/compare/2022.4.9-dev.1...2022.4.15-dev.1) (2022-04-07)
 
 
