@@ -33,48 +33,6 @@
 
 * **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) fix release-it arg quoting in workflow ([2f11445](https://github.com/hmdc/sid2/commit/2f11445dc9e7c70d83ab9ba0b343bf943569b021))
 
-## [2022.4.12-dev.1](https://github.com/hmdc/sid2/compare/2022.4.9-dev.1...2022.4.12-dev.1) (2022-04-07)
-
-
-### Bug Fixes
-
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version again for testing ([b942329](https://github.com/hmdc/sid2/commit/b942329c7f31d1728b7597ca134e6edbf934634e))
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG-dev.md ([97d3287](https://github.com/hmdc/sid2/commit/97d3287b02e831b115b11962a0c7fe2f8fe4d74f))
-
-
-
-## [2022.4.11-dev.1](https://github.com/hmdc/sid2/compare/2022.4.9-dev.1...2022.4.12-dev.1) (2022-04-07)
-
-
-### Bug Fixes
-
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([f4a04da](https://github.com/hmdc/sid2/commit/f4a04daf0cadb84fa46a03efaf275ef8ef6b61cd))
-
-
-
-## [2022.4.10-dev.1](https://github.com/hmdc/sid2/compare/2022.4.9-dev.1...2022.4.12-dev.1) (2022-04-07)
-
-
-### Bug Fixes
-
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) fix release-it arg quoting in workflow ([2f11445](https://github.com/hmdc/sid2/commit/2f11445dc9e7c70d83ab9ba0b343bf943569b021))
-
-## [2022.4.11-dev.1](https://github.com/hmdc/sid2/compare/2022.4.9-dev.1...2022.4.11-dev.1) (2022-04-07)
-
-
-### Bug Fixes
-
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([f4a04da](https://github.com/hmdc/sid2/commit/f4a04daf0cadb84fa46a03efaf275ef8ef6b61cd))
-
-
-
-## [2022.4.10-dev.1](https://github.com/hmdc/sid2/compare/2022.4.9-dev.1...2022.4.11-dev.1) (2022-04-07)
-
-
-### Bug Fixes
-
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) fix release-it arg quoting in workflow ([2f11445](https://github.com/hmdc/sid2/commit/2f11445dc9e7c70d83ab9ba0b343bf943569b021))
-
 ## [2022.4.9-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8-dev.1...2022.4.9-dev.1) (2022-04-07)
 
 
