@@ -98,12 +98,13 @@ jobs:
       - name: Run release
         run: |
           if [ "${{ github.event.workflow_run.head_branch }}" = "stable" ]; then
-            PREVIOUS_TAG="$(git tag --list --merged |egrep '^[0-9]{4}\.[0-1]?[0-9]\.[0-9]+$' |tail -n 1)"
+            # note that BSD sort -n sorts integers but GNU sort -n sorts dotted decimals, so use -V
+            PREVIOUS_TAG="$(git tag --list --merged |egrep '^[0-9]{4}\.[0-1]?[0-9]\.[0-9]+$' |sort -t. -V -k1 -k2 -k3 |tail -n 1)"
             CONFIG_ARG="--config=.release-it.json"
             # we have to pass skipUnstable on stable builds because dev build tags do not follow the same versioning as stable build tags and this causes commit messages to be formatted out of order
             SKIP_UNSTABLE_ARG="--plugins.@release-it/conventional-changelog.skipUnstable=true"
           else
-            PREVIOUS_TAG="$(git tag --list --merged |egrep '^[0-9]{4}\.[0-1]?[0-9]\.[0-9]+-dev\.1$' |tail -n 1)"
+            PREVIOUS_TAG="$(git tag --list --merged |egrep '^[0-9]{4}\.[0-1]?[0-9]\.[0-9]+-dev\.1$' |sort -t. -V -k1 -k2 -k3 |tail -n 1)"
             CONFIG_ARG="--config=.release-it-dev.json"
             SKIP_UNSTABLE_ARG=''
           fi
