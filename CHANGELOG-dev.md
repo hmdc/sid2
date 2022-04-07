@@ -1,3 +1,10 @@
+## [2022.4.9-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8-dev.1...2022.4.9-dev.1) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) pass skipUnstable to conventional-changelog on stable builds ([d9fddb0](https://github.com/hmdc/sid2/commit/d9fddb01738aa640a1134d3cab5095b0eb9e96b9))
+
 ## [2022.4.8-dev.1](https://github.com/hmdc/sid2/compare/2022.4.7-dev.1...2022.4.8-dev.1) (2022-04-07)
 
 
