@@ -14,13 +14,6 @@
 
 * **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) fix release-it arg quoting in workflow ([2f11445](https://github.com/hmdc/sid2/commit/2f11445dc9e7c70d83ab9ba0b343bf943569b021))
 
-## [2022.4.10-dev.1](https://github.com/hmdc/sid2/compare/2022.4.9-dev.1...2022.4.10-dev.1) (2022-04-07)
-
-
-### Bug Fixes
-
-* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) fix release-it arg quoting in workflow ([2f11445](https://github.com/hmdc/sid2/commit/2f11445dc9e7c70d83ab9ba0b343bf943569b021))
-
 ## [2022.4.9-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8-dev.1...2022.4.9-dev.1) (2022-04-07)
 
 
