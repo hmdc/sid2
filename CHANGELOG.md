@@ -1,3 +1,53 @@
+## [2022.4.7](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+
+## [2022.4.6](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-06)
+
+
+
+## [2022.4.5](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-06)
+
+
+
+## [2022.4.4](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-06)
+
+
+
+## [2022.4.9-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) pass skipUnstable to conventional-changelog on stable builds ([d9fddb0](https://github.com/hmdc/sid2/commit/d9fddb01738aa640a1134d3cab5095b0eb9e96b9))
+
+
+
+## [2022.4.8-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) roll back to @release-it/conventional-changelog 4.1.0 since ^4.2.0 breaks changelog headers ([cb36b48](https://github.com/hmdc/sid2/commit/cb36b486240b964386ac5c21f4559f4f0a1c50c9))
+
+
+
+## [2022.4.7-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version again for testing ([45770f4](https://github.com/hmdc/sid2/commit/45770f4646c8d712d82b51d97955613c0a76d343))
+
+
+
+## [2022.4.6-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([0281cc6](https://github.com/hmdc/sid2/commit/0281cc6415a433079b021b95cc536c071125cbd4))
+
 
 
 ## [2022.4.6](https://github.com/hmdc/sid2/compare/2022.4.5...2022.4.6) (2022-04-06)
