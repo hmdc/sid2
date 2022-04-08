@@ -1,3 +1,10 @@
+## [2022.4.10](https://github.com/hmdc/sid2/compare/2022.4.9...2022.4.10) (2022-04-08)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG.md ([4f7b0e8](https://github.com/hmdc/sid2/commit/4f7b0e8c911f8d7c40e17e5f018a8fe549f2e621))
+
 ## [2022.4.9](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
 
 
