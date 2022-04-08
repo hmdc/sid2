@@ -1,3 +1,10 @@
+## [2022.4.19-dev.1](https://github.com/hmdc/sid2/compare/2022.4.18-dev.1...2022.4.19-dev.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG-dev.md ([22a12d5](https://github.com/hmdc/sid2/commit/22a12d5d1c9865284563046f655c09f800da2b0e))
+
 ## [2022.4.18-dev.1](https://github.com/hmdc/sid2/compare/2022.4.17-dev.1...2022.4.18-dev.1) (2022-04-08)
 
 
