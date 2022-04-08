@@ -1,3 +1,10 @@
+## [2022.4.18-dev.1](https://github.com/hmdc/sid2/compare/2022.4.17-dev.1...2022.4.18-dev.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* **testing:** gh [#669](https://github.com/hmdc/sid2/issues/669) Fixed failing automated tests + Added to github release process ([#58](https://github.com/hmdc/sid2/issues/58)) ([d5c920c](https://github.com/hmdc/sid2/commit/d5c920cfc998e164fc7239a1ec777444224fbd77))
+
 ## [2022.4.17-dev.1](https://github.com/hmdc/sid2/compare/2022.4.16-dev.1...2022.4.17-dev.1) (2022-04-07)
 
 
