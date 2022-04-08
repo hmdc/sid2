@@ -2,6 +2,7 @@ class QuickLaunchController < ApplicationController
   def index
     set_sessions
     set_page_configuration
+    set_display_custom_hpc_status
 
     launcher_buttons_configuration = { maxSessions: helpers.quick_launch_max_sessions }
 
@@ -49,5 +50,9 @@ class QuickLaunchController < ApplicationController
     @quick_links = page_config_for_cluster.flat_map{|data| data[:links]}.compact || []
     # SELECT THE WELCOME MESSAGE FOR THE CURRENT CLUSTER
     @welcome_message_template = page_config_for_cluster.map{|data| data[:welcome_message]}.first || "welcome_message"
+  end
+
+  def set_display_custom_hpc_status
+    @display_custom_hpc_status =  params[:hpc_custom_enabled] ? params[:hpc_custom_enabled] == 'true' : ::Configuration.hpc_status_custom_enabled?
   end
 end

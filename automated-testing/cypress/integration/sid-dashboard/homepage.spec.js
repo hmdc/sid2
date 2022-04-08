@@ -3,6 +3,7 @@ describe('Sid Dashboard - Homepage', () => {
   const baseUrl = Cypress.env('dashboard_baseUrl')
   const rootPath = Cypress.env('dashboard_rootPath')
   const auth = cy.sid.auth
+  const qs = cy.sid.query_params
   const activeLaunchers = cy.sid.launchers.filter(l => Cypress.env('active_launchers').includes(l.id))
   Cypress.config('baseUrl', baseUrl);
   
@@ -33,7 +34,7 @@ describe('Sid Dashboard - Homepage', () => {
   beforeEach(() => {
     //DEFAULT SIZE FOR THESE TESTS
     cy.viewport(cy.sid.screen.largeWidth, cy.sid.screen.height)
-    cy.visit(rootPath, { auth })
+    cy.visit(rootPath, { auth, qs })
   })
 
   it('Welcome message', () => {
@@ -62,7 +63,7 @@ describe('Sid Dashboard - Homepage', () => {
       cy.get(`div#${app.id.toLowerCase()}`).click()
       cy.wait('@postSession')
       cy.wrap(currentSessionData).then(session => {
-        cy.get(`div#${session.sessionId}`).as('currentSession').should('be.visible')
+        cy.get(`div#${session.sessionId}`, { timeout: longRunningTimeout }).as('currentSession').should('be.visible')
         //WAIT UNTIL RUNNING
         cy.get(`div#${session.sessionId} .panel-title > .pull-right`, { timeout: longRunningTimeout }).should('contain.text', 'Running')
         cy.get(`div#${session.sessionId} .panel-title a`).invoke('text').should('match', new RegExp(app.name, 'i'))

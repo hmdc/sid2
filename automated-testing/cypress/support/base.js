@@ -1,11 +1,15 @@
 // COMMMON CONSTANTS / FUNCTIONS
 cy.sid = {
-  // FOR LONG RUNNING CHECKS
-  timeout: 60000,
+  // FOR LONG RUNNING CHECKS. IN MILLISECONDS
+  timeout: 120000,
   // SID DASHBOARD CREDENTIALS
   auth: {
     username: Cypress.env('dashboard_username'),
     password: Cypress.env('dashboard_password')
+  },
+  //QUERY PARAMS TO ENABLED CUSTOM HPC STATUS VIEW IN HOMEPAGE
+  query_params: {
+    hpc_custom_enabled: "true"
   },
   // CONFIGURED LAUNCHERS
   launchers: [
@@ -20,11 +24,17 @@ cy.sid = {
     {"id": "cannon-matlab", "token": "sys/Matlab", "name": "Matlab"},
 
     {"id": "fasse-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
-    {"id": "fasse-rdesktop", "token": "sys/RemoteDesktop", "name": "FAS-RC Remote Desktop"},
+    {"id": "fasse-rdesktop", "token": "sys/NativeRD", "name": "FAS-RC Remote Desktop"},
     {"id": "fasse-jupyter", "token": "sys/Jupyter", "name": "Jupyter notebook / Jupyterlab"},
     {"id": "fasse-stata", "token": "sys/Stata", "name": "Stata"},
     {"id": "fasse-sas", "token": "sys/SAS", "name": "SAS"}
   ],
+
+  // SPECIFIC CONFIG FOR SUPPORT TICKET FEATURE
+  supportTicket: {
+    //NOT ALL ENVIRONMENTS SUPPORT TICKET CREATION
+    creationEnabled: true
+  },
 
   // SCREEN RESOLUTIONS => TO TEST IN DIFFERENT SCREEN SIZES
   screen: {
