@@ -120,6 +120,15 @@
 
 
 
+## [2022.4.3-dev.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.3-dev.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update workflow to specify plugins.@release-it/conventional-changelog.gitRawCommitsOpts ([57b904c](https://github.com/hmdc/sid2/commit/57b904c53817c4419a473d61158e045a619ffd96))
+* **dashboard:** gh [#698](https://github.com/hmdc/sid2/issues/698) remove obsolete dashboard/application/CHANGELOG.md ([62da039](https://github.com/hmdc/sid2/commit/62da0391b54428c08cd141884574392aa3365b87))
+
+
 ## [2022.4.2-dev.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.2-dev.1) (2022-04-04)
 
 
