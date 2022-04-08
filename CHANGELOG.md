@@ -138,6 +138,15 @@
 
 
 
+## [2022.4.4-dev.1](https://github.com/hmdc/sid2/compare/2022.4.3-dev.1...2022.4.4-dev.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump build version ([3e536be](https://github.com/hmdc/sid2/commit/3e536be457678d191a65c9d6a2007d868152e94c))
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update release workflow with release-it config args ([ebdeb03](https://github.com/hmdc/sid2/commit/ebdeb038fc28f3588738652b360623c6150139de))
+
+
 ## [2022.4.3-dev.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.3-dev.1) (2022-04-06)
 
 
@@ -146,13 +155,25 @@
 * **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update workflow to specify plugins.@release-it/conventional-changelog.gitRawCommitsOpts ([57b904c](https://github.com/hmdc/sid2/commit/57b904c53817c4419a473d61158e045a619ffd96))
 * **dashboard:** gh [#698](https://github.com/hmdc/sid2/issues/698) remove obsolete dashboard/application/CHANGELOG.md ([62da039](https://github.com/hmdc/sid2/commit/62da0391b54428c08cd141884574392aa3365b87))
 
+
 ## [2022.4.2](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.2) (2022-04-04)
 
+## [2022.4.2-dev.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.2-dev.1) (2022-04-04)
 
 
-## [2022.4.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.2) (2022-04-04)
+### Bug Fixes
+
+* **dashboard:** gh [#649](https://github.com/hmdc/sid2/issues/649) improve the cleaning power of make clean ([#57](https://github.com/hmdc/sid2/issues/57)) ([56a439e](https://github.com/hmdc/sid2/commit/56a439e6a2fb733f52be74cd006459cec064b19a))
 
 ## [2022.4.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.1) (2022-04-04)
+
+## [2022.4.1-dev.1](https://github.com/hmdc/sid2/compare/2022.3.13...2022.4.1-dev.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) Doing QA ([d29d68b](https://github.com/hmdc/sid2/commit/d29d68bf1f6bb93047bb411f5a425d37bda45c0d))
+
 
 ## [2022.3.13](https://github.com/hmdc/sid2/compare/2022.3.12...2022.3.13) (2022-03-31)
 
