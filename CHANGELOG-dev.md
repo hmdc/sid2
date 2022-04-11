@@ -1,3 +1,10 @@
+## [2022.4.20-dev.1](https://github.com/hmdc/sid2/compare/2022.4.19-dev.1...2022.4.20-dev.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **build:** gh [#669](https://github.com/hmdc/sid2/issues/669) Fixed typo on automated tests GitHub action yaml ([e7524ab](https://github.com/hmdc/sid2/commit/e7524ab5e2f97b7ee9281db4a7e6ead5785c64c9))
+
 ## [2022.4.19-dev.1](https://github.com/hmdc/sid2/compare/2022.4.18-dev.1...2022.4.19-dev.1) (2022-04-08)
 
 
