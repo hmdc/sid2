@@ -1,3 +1,10 @@
+## [2022.4.21-dev.1](https://github.com/hmdc/sid2/compare/2022.4.20-dev.1...2022.4.21-dev.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **build:** gh [#669](https://github.com/hmdc/sid2/issues/669) empty commit to test ci ([00b0e8d](https://github.com/hmdc/sid2/commit/00b0e8d950d220d5ed636a95a7209260a5038123))
+
 ## [2022.4.20-dev.1](https://github.com/hmdc/sid2/compare/2022.4.19-dev.1...2022.4.20-dev.1) (2022-04-11)
 
 
