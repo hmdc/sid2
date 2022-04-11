@@ -1,3 +1,10 @@
+## [2022.4.22-dev.1](https://github.com/hmdc/sid2/compare/2022.4.21-dev.1...2022.4.22-dev.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **build:** gh [#669](https://github.com/hmdc/sid2/issues/669) Added check to run automated tests only when previous build succeeds ([d1b3e87](https://github.com/hmdc/sid2/commit/d1b3e874f89ca193a94c91b791d8bd8827a2823e))
+
 ## [2022.4.21-dev.1](https://github.com/hmdc/sid2/compare/2022.4.20-dev.1...2022.4.21-dev.1) (2022-04-11)
 
 
