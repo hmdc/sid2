@@ -6,7 +6,7 @@ on:
     workflows: [ "build-and-test" ]
     branches: [ canary, stable ]
     types:
-      - complete
+      - completed
 
 jobs:
   test-all:
