@@ -40,7 +40,7 @@ module BatchConnect::SessionsHelper
     capture do
       concat(
         content_tag(:div) do
-          concat content_tag(:div, delete(session))
+          concat content_tag(:div, delete_terminate_buttons(session))
           concat host(session)
           concat created(session)
           concat requested_parameters(session)
@@ -222,15 +222,26 @@ module BatchConnect::SessionsHelper
     end
   end
 
-  def delete(session)
-    link_to(
-      icon("fas", "trash-alt", t('dashboard.batch_connect_sessions_delete_title'), class: "fa-fw"),
-      batch_connect_session_path(session, r: session.redirect),
-      method: :delete,
-      class: "btn btn-sid-delete pull-right btn-delete",
-      title: t('dashboard.batch_connect_sessions_delete_hover'),
-      data: { confirm: t('dashboard.batch_connect_sessions_delete_confirm'), toggle: "tooltip", placement: "bottom"}
-    )
+  def delete_terminate_buttons(session)
+    if session.completed?
+      link_to(
+        icon("fas", "trash-alt", t('dashboard.batch_connect_sessions_delete_title'), class: "fa-fw"),
+        batch_connect_session_path(session, r: session.redirect),
+        method: :delete,
+        class: "btn btn-sid-delete pull-right btn-delete",
+        title: t('dashboard.batch_connect_sessions_delete_hover'),
+        data: { confirm: t('dashboard.batch_connect_sessions_delete_confirm'), cancel: 'Close', toggle: "tooltip", placement: "bottom"}
+      )
+    else
+      link_to(
+        icon("fas", "times-circle", t('dashboard.batch_connect_sessions_terminate_title'), class: "fa-fw"),
+        batch_connect_session_path(session, r: session.redirect, delete: 'false'),
+        method: :delete,
+        class: "btn btn-sid-terminate pull-right btn-terminate",
+        title: t('dashboard.batch_connect_sessions_terminate_hover'),
+        data: { confirm: t('dashboard.batch_connect_sessions_terminate_confirm'), cancel: 'Close', toggle: "tooltip", placement: "bottom"}
+      )
+    end
   end
 
   def novnc_link(connect, view_only: false)

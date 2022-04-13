@@ -314,9 +314,9 @@ module BatchConnect
 
     # Delete this session's job and database record
     # @return [Boolean] whether successfully deleted
-    def destroy
+    def destroy(delete_data = true)
       adapter.delete(job_id) unless completed?
-      db_file.delete
+      db_file.delete if delete_data
       true
     rescue ClusterNotFound, AdapterNotAllowed, OodCore::JobAdapterError => e
       errors.add(:delete, e.message)
