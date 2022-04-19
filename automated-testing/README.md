@@ -15,7 +15,7 @@ To run tests against `remote-dev`, `staging`, `FASSE`, and `Cannon`, you need to
 
 Cypress can be configured using environment variables. We use a feature of Cypress to setup and environment file: `cypress.env.json` with environment specific configuration. In order to support the multiple Sid2 environments, we have created several configuration files for each one of them:
  * `cypress.env.json.local`
- * `cypress.env.json.remotedev`
+ * `cypress.env.json.remote-dev`
  * `cypress.env.json.staging-cannon`
  * `cypress.env.json.prod-fasse`
  * `cypress.env.json.prod-cannon`
@@ -23,7 +23,7 @@ Cypress can be configured using environment variables. We use a feature of Cypre
  Each `make` task that executes a test will create a copy of the enviroment specific file as `cypress.env.json`
  The following `make` tasks will execute the tests locally against each environment using a Docker image to run the tests:
   * `make local`
-  * `make remotedev`
+  * `make remote-dev`
   * `make staging-cannon`
   * `make prod-fasse`
   * `make prod-cannon`

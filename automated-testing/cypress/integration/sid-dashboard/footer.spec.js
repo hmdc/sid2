@@ -3,12 +3,13 @@ describe('Sid Dashboard - Footer', () => {
   const baseUrl = Cypress.env('dashboard_baseUrl')
   const rootPath = Cypress.env('dashboard_rootPath')
   const auth = cy.sid.auth
+  const qs = cy.sid.query_params
   Cypress.config('baseUrl', baseUrl);
 
   beforeEach(() => {
     //DEFAULT SIZE FOR THESE TESTS
     cy.viewport(cy.sid.screen.largeWidth, cy.sid.screen.height)
-    cy.visit(rootPath, { auth })
+    cy.visit(rootPath, { auth, qs })
   })
 
   it('Should display footer logos with link', () => {

@@ -2,6 +2,7 @@ describe('Sid Dashboard - Support Ticket', () => {
 
   const baseUrl = Cypress.env('dashboard_baseUrl')
   const rootPath = Cypress.env('dashboard_rootPath')
+  const supportTicket = Cypress.env('support_ticket') || cy.sid.supportTicket
   const auth = cy.sid.auth
   Cypress.config('baseUrl', baseUrl);
 
@@ -67,13 +68,17 @@ describe('Sid Dashboard - Support Ticket', () => {
     cy.get('form#new_support_ticket input#email').type('sid_automated_test@example.com')
     cy.get('form#new_support_ticket input#subject').type('TEST: Sid automated test')
     cy.get('form#new_support_ticket input[type="submit"]').click()
+    cy.log(`Support Ticket creationEnabled=${supportTicket.creationEnabled}`)
 
-    cy.get('div.alert-success').should($messageElement => {
-      //GENERIC MESSAGE IS DISPLAYED
-      expect($messageElement.text()).to.match(/support ticket created/i)
-      //TICKET ID IS DISPLAYED
-      expect($messageElement.text()).to.match(/ticket id: \d+/i)
-    })
+    if (supportTicket.creationEnabled) {
+      cy.get('div.alert-success').should($messageElement => {
+        //GENERIC MESSAGE IS DISPLAYED
+        expect($messageElement.text()).to.match(/support ticket created/i)
+        //TICKET ID IS DISPLAYED
+        expect($messageElement.text()).to.match(/ticket id: \d+/i)
+      })
+    }
+    
   })
 
 })

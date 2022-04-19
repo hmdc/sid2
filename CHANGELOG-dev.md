@@ -1,3 +1,45 @@
+## [2022.4.23-dev.1](https://github.com/hmdc/sid2/compare/2022.4.22-dev.1...2022.4.23-dev.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) empty commit for QA ([#61](https://github.com/hmdc/sid2/issues/61)) ([76474f0](https://github.com/hmdc/sid2/commit/76474f085c4adf3e18da1d332e5d118a4302f1d6))
+
+## [2022.4.22-dev.1](https://github.com/hmdc/sid2/compare/2022.4.21-dev.1...2022.4.22-dev.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **build:** gh [#669](https://github.com/hmdc/sid2/issues/669) Added check to run automated tests only when previous build succeeds ([d1b3e87](https://github.com/hmdc/sid2/commit/d1b3e874f89ca193a94c91b791d8bd8827a2823e))
+
+## [2022.4.21-dev.1](https://github.com/hmdc/sid2/compare/2022.4.20-dev.1...2022.4.21-dev.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **build:** gh [#669](https://github.com/hmdc/sid2/issues/669) empty commit to test ci ([00b0e8d](https://github.com/hmdc/sid2/commit/00b0e8d950d220d5ed636a95a7209260a5038123))
+
+## [2022.4.20-dev.1](https://github.com/hmdc/sid2/compare/2022.4.19-dev.1...2022.4.20-dev.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **build:** gh [#669](https://github.com/hmdc/sid2/issues/669) Fixed typo on automated tests GitHub action yaml ([e7524ab](https://github.com/hmdc/sid2/commit/e7524ab5e2f97b7ee9281db4a7e6ead5785c64c9))
+
+## [2022.4.19-dev.1](https://github.com/hmdc/sid2/compare/2022.4.18-dev.1...2022.4.19-dev.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG-dev.md ([22a12d5](https://github.com/hmdc/sid2/commit/22a12d5d1c9865284563046f655c09f800da2b0e))
+
+## [2022.4.18-dev.1](https://github.com/hmdc/sid2/compare/2022.4.17-dev.1...2022.4.18-dev.1) (2022-04-08)
+
+
+### Bug Fixes
+
+* **testing:** gh [#669](https://github.com/hmdc/sid2/issues/669) Fixed failing automated tests + Added to github release process ([#58](https://github.com/hmdc/sid2/issues/58)) ([d5c920c](https://github.com/hmdc/sid2/commit/d5c920cfc998e164fc7239a1ec777444224fbd77))
+
 ## [2022.4.17-dev.1](https://github.com/hmdc/sid2/compare/2022.4.16-dev.1...2022.4.17-dev.1) (2022-04-07)
 
 
@@ -111,6 +153,15 @@
 * **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump build version ([3e536be](https://github.com/hmdc/sid2/commit/3e536be457678d191a65c9d6a2007d868152e94c))
 * **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update release workflow with release-it config args ([ebdeb03](https://github.com/hmdc/sid2/commit/ebdeb038fc28f3588738652b360623c6150139de))
 
+
+
+## [2022.4.3-dev.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.3-dev.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update workflow to specify plugins.@release-it/conventional-changelog.gitRawCommitsOpts ([57b904c](https://github.com/hmdc/sid2/commit/57b904c53817c4419a473d61158e045a619ffd96))
+* **dashboard:** gh [#698](https://github.com/hmdc/sid2/issues/698) remove obsolete dashboard/application/CHANGELOG.md ([62da039](https://github.com/hmdc/sid2/commit/62da0391b54428c08cd141884574392aa3365b87))
 
 
 ## [2022.4.2-dev.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.2-dev.1) (2022-04-04)
