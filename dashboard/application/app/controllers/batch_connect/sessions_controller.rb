@@ -31,15 +31,16 @@ class BatchConnect::SessionsController < ApplicationController
     set_session
 
     redirect = get_redirect || batch_connect_sessions_url
+    message_key = delete_session_panel? ? 'delete' : 'terminate'
 
-    if @session.destroy
+    if @session.destroy(delete_session_panel?)
       respond_to do |format|
-        format.html { redirect_to redirect, notice: t('dashboard.batch_connect_sessions_status_blurb_delete_success') }
+        format.html { redirect_to redirect, notice: t("dashboard.batch_connect_sessions_status_blurb_#{message_key}_success") }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to redirect, alert: t('dashboard.batch_connect_sessions_status_blurb_delete_failure') }
+        format.html { redirect_to redirect, alert: t("dashboard.batch_connect_sessions_status_blurb_#{message_key}_failure") }
         format.json { render json: @session.errors, status: :unprocessable_entity }
       end
     end
@@ -61,5 +62,9 @@ class BatchConnect::SessionsController < ApplicationController
 
   def get_redirect
     params[:r] ? params[:r] : nil
+  end
+
+  def delete_session_panel?
+    params[:delete] ? params[:delete] == 'true' : true
   end
 end
