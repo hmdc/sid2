@@ -1,3 +1,10 @@
+## [2022.4.24-dev.1](https://github.com/hmdc/sid2/compare/2022.4.23-dev.1...2022.4.24-dev.1) (2022-04-19)
+
+
+### Features
+
+* **dashboard:** gh [#660](https://github.com/hmdc/sid2/issues/660) Added terminate session feature ([#60](https://github.com/hmdc/sid2/issues/60)) ([4bfa1ed](https://github.com/hmdc/sid2/commit/4bfa1ed3ba57645a8b344384e5334a1d4abe77c6))
+
 ## [2022.4.23-dev.1](https://github.com/hmdc/sid2/compare/2022.4.22-dev.1...2022.4.23-dev.1) (2022-04-19)
 
 
