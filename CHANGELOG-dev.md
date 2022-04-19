@@ -1,3 +1,10 @@
+## [2022.4.23-dev.1](https://github.com/hmdc/sid2/compare/2022.4.22-dev.1...2022.4.23-dev.1) (2022-04-19)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) empty commit for QA ([#61](https://github.com/hmdc/sid2/issues/61)) ([76474f0](https://github.com/hmdc/sid2/commit/76474f085c4adf3e18da1d332e5d118a4302f1d6))
+
 ## [2022.4.22-dev.1](https://github.com/hmdc/sid2/compare/2022.4.21-dev.1...2022.4.22-dev.1) (2022-04-11)
 
 
