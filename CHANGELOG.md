@@ -1,3 +1,159 @@
+## [2022.4.10](https://github.com/hmdc/sid2/compare/2022.4.9...2022.4.10) (2022-04-08)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG.md ([4f7b0e8](https://github.com/hmdc/sid2/commit/4f7b0e8c911f8d7c40e17e5f018a8fe549f2e621))
+
+## [2022.4.9](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG.md ([8c3224e](https://github.com/hmdc/sid2/commit/8c3224e99049307b7b9282f229a7d6f11d58d8ca))
+
+
+
+## [2022.4.17-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG-dev.md ([196fd95](https://github.com/hmdc/sid2/commit/196fd95434b48bd1163237a08859616786e6955b))
+
+
+
+## [2022.4.16-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) use sort -V to sort versions with GNU sort ([9bca79b](https://github.com/hmdc/sid2/commit/9bca79b59a4069803c1c88ae66f1b88aca84722f))
+
+
+
+## [2022.4.15-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) something is still not right with the tag selection ([9c30bca](https://github.com/hmdc/sid2/commit/9c30bca9a13fbe169ba474eb64e5103aac93798f))
+
+
+
+## [2022.4.14-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG-dev.md again ([5998638](https://github.com/hmdc/sid2/commit/599863831b9fb0db4562201d01db3ef1e48dbdd7))
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) sort tags properly in release workflow ([08a5f4e](https://github.com/hmdc/sid2/commit/08a5f4ef846b5f31ee2ceaaa271fda63542e9241))
+
+
+
+## [2022.4.13-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version one more time for testing ([a12e998](https://github.com/hmdc/sid2/commit/a12e998e1d01f60aa983551e42cb942e59ae93ed))
+
+
+
+## [2022.4.12-dev.1](https://github.com/hmdc/sid2/compare/2022.4.8...2022.4.9) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version again for testing ([b942329](https://github.com/hmdc/sid2/commit/b942329c7f31d1728b7597ca134e6edbf934634e))
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) manually clean up CHANGELOG-dev.md ([97d3287](https://github.com/hmdc/sid2/commit/97d3287b02e831b115b11962a0c7fe2f8fe4d74f))
+
+## [2022.4.8](https://github.com/hmdc/sid2/compare/2022.4.7...2022.4.8) (2022-04-07)
+
+
+
+## [2022.4.11-dev.1](https://github.com/hmdc/sid2/compare/2022.4.7...2022.4.8) (2022-04-07)
+
+
+
+## [2022.4.10-dev.1](https://github.com/hmdc/sid2/compare/2022.4.7...2022.4.8) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([f4a04da](https://github.com/hmdc/sid2/commit/f4a04daf0cadb84fa46a03efaf275ef8ef6b61cd))
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) fix release-it arg quoting in workflow ([2f11445](https://github.com/hmdc/sid2/commit/2f11445dc9e7c70d83ab9ba0b343bf943569b021))
+
+## [2022.4.7](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+
+## [2022.4.6](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-06)
+
+
+
+## [2022.4.5](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-06)
+
+
+
+## [2022.4.4](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-06)
+
+
+
+## [2022.4.9-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) pass skipUnstable to conventional-changelog on stable builds ([d9fddb0](https://github.com/hmdc/sid2/commit/d9fddb01738aa640a1134d3cab5095b0eb9e96b9))
+
+
+
+## [2022.4.8-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) roll back to @release-it/conventional-changelog 4.1.0 since ^4.2.0 breaks changelog headers ([cb36b48](https://github.com/hmdc/sid2/commit/cb36b486240b964386ac5c21f4559f4f0a1c50c9))
+
+
+
+## [2022.4.7-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version again for testing ([45770f4](https://github.com/hmdc/sid2/commit/45770f4646c8d712d82b51d97955613c0a76d343))
+
+
+
+## [2022.4.6-dev.1](https://github.com/hmdc/sid2/compare/2022.4.6...2022.4.7) (2022-04-07)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump canary release version for testing ([0281cc6](https://github.com/hmdc/sid2/commit/0281cc6415a433079b021b95cc536c071125cbd4))
+
+
+
+## [2022.4.5-dev.1](https://github.com/hmdc/sid2/compare/2022.4.5...2022.4.6) (2022-04-06)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) also bump versions of release-it and release-it/conventional-changelog ([3e88b7a](https://github.com/hmdc/sid2/commit/3e88b7acc6af7a177475b4d7ddbedd3bbdfd115f))## [2022.4.5](https://github.com/hmdc/sid2/compare/2022.4.4...2022.4.5) (2022-04-06)
+
+
+
+## [2022.4.4-dev.1](https://github.com/hmdc/sid2/compare/2022.4.3-dev.1...2022.4.4-dev.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) bump build version ([3e536be](https://github.com/hmdc/sid2/commit/3e536be457678d191a65c9d6a2007d868152e94c))
+* **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update release workflow with release-it config args ([ebdeb03](https://github.com/hmdc/sid2/commit/ebdeb038fc28f3588738652b360623c6150139de))
+
+
 ## [2022.4.3-dev.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.3-dev.1) (2022-04-06)
 
 
@@ -6,13 +162,25 @@
 * **build:** gh [#698](https://github.com/hmdc/sid2/issues/698) update workflow to specify plugins.@release-it/conventional-changelog.gitRawCommitsOpts ([57b904c](https://github.com/hmdc/sid2/commit/57b904c53817c4419a473d61158e045a619ffd96))
 * **dashboard:** gh [#698](https://github.com/hmdc/sid2/issues/698) remove obsolete dashboard/application/CHANGELOG.md ([62da039](https://github.com/hmdc/sid2/commit/62da0391b54428c08cd141884574392aa3365b87))
 
+
 ## [2022.4.2](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.2) (2022-04-04)
 
+## [2022.4.2-dev.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.2-dev.1) (2022-04-04)
 
 
-## [2022.4.1](https://github.com/hmdc/sid2/compare/2022.4.2-dev.1...2022.4.2) (2022-04-04)
+### Bug Fixes
+
+* **dashboard:** gh [#649](https://github.com/hmdc/sid2/issues/649) improve the cleaning power of make clean ([#57](https://github.com/hmdc/sid2/issues/57)) ([56a439e](https://github.com/hmdc/sid2/commit/56a439e6a2fb733f52be74cd006459cec064b19a))
 
 ## [2022.4.1](https://github.com/hmdc/sid2/compare/2022.4.1-dev.1...2022.4.1) (2022-04-04)
+
+## [2022.4.1-dev.1](https://github.com/hmdc/sid2/compare/2022.3.13...2022.4.1-dev.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* **build:** gh [#585](https://github.com/hmdc/sid2/issues/585) Doing QA ([d29d68b](https://github.com/hmdc/sid2/commit/d29d68bf1f6bb93047bb411f5a425d37bda45c0d))
+
 
 ## [2022.3.13](https://github.com/hmdc/sid2/compare/2022.3.12...2022.3.13) (2022-03-31)
 
@@ -409,4 +577,3 @@
 
 
 # [0.9.0](https://github.com/hmdc/sid2/compare/v0.9.0...v2021.8.2) (2021-05-12)
-
