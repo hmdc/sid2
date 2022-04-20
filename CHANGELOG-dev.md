@@ -1,3 +1,10 @@
+## [2022.4.26-dev.1](https://github.com/hmdc/sid2/compare/2022.4.25-dev.1...2022.4.26-dev.1) (2022-04-20)
+
+
+### Features
+
+* **dashboard:** gh [#660](https://github.com/hmdc/sid2/issues/660) Re-add session terminate session feature with race condition fix ([#64](https://github.com/hmdc/sid2/issues/64)) ([264bbb2](https://github.com/hmdc/sid2/commit/264bbb24371da4da1d8d5ce840712dd4599af856))
+
 ## [2022.4.25-dev.1](https://github.com/hmdc/sid2/compare/2022.4.24-dev.1...2022.4.25-dev.1) (2022-04-20)
 
 
