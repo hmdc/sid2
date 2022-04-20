@@ -7,9 +7,8 @@ cy.sid = {
     username: Cypress.env('dashboard_username'),
     password: Cypress.env('dashboard_password')
   },
-  //QUERY PARAMS TO ENABLED CUSTOM HPC STATUS VIEW IN HOMEPAGE
+  //QUERY PARAMS TO ENABLE/DISABLE FEATURES WHEN NEEDED
   query_params: {
-    hpc_custom_enabled: "true"
   },
   // CONFIGURED LAUNCHERS
   launchers: [
