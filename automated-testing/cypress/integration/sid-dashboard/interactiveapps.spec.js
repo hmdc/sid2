@@ -6,13 +6,13 @@ describe('Sid Dashboard - Interactive Apps', () => {
   const interactiveApps = Cypress.env('dashboard_applications')
   Cypress.config('baseUrl', baseUrl);
 
-  const deleteSession = sessionId => {
+  const cancelSession = sessionId => {
     cy.log(`Deleting session: ${sessionId}`)
     cy.get(`div[data-toggle="poll"].sessions > div#${sessionId}`).should('be.visible')
-    cy.get(`div[data-toggle="poll"].sessions > div#${sessionId}`).find('div a.btn-delete').click()
-    cy.get('div.modal-dialog div.modal-body').should('have.text', 'Are you sure?')
+    cy.get(`div[data-toggle="poll"].sessions > div#${sessionId}`).find('div a.btn-terminate').click()
+    cy.get('div.modal-dialog div.modal-body').should('contain.text', 'Are you sure')
     cy.get('div.modal-dialog button.commit').click()
-    cy.get('div.alert-success').should('contain.text', 'Session was successfully deleted')
+    cy.get('div.alert-success').should('contain.text', 'Session was successfully')
   }
 
   const cleanupSessions = () => {
@@ -24,7 +24,7 @@ describe('Sid Dashboard - Interactive Apps', () => {
       }
       const completedSession = $item.find('div.pull-right:contains("Completed")').length != 0
       if(!completedSession) {
-        deleteSession($item.attr('id'))
+        cancelSession($item.attr('id'))
       }
     })
   }
@@ -74,9 +74,9 @@ describe('Sid Dashboard - Interactive Apps', () => {
         expect(titlesArray).to.contain('basic parameters:')
         expect(titlesArray).to.contain('problems with this session?')
       })
-      //DELETE SESSION
+      //CANCEL SESSION
       cy.get('div[data-toggle="poll"].sessions > div').first().then(sessionElement => {
-        deleteSession(sessionElement.attr('id'))
+        cancelSession(sessionElement.attr('id'))
       })
     })
   })
