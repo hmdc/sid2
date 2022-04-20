@@ -1,3 +1,10 @@
+## [2022.4.25-dev.1](https://github.com/hmdc/sid2/compare/2022.4.24-dev.1...2022.4.25-dev.1) (2022-04-20)
+
+
+### Reverts
+
+* Revert "feat(dashboard): gh #660 Added terminate session feature (#60)" (#63) ([aa8f4c9](https://github.com/hmdc/sid2/commit/aa8f4c901ff1f8a39b135d8b3dccdf4caf75cecf)), closes [#660](https://github.com/hmdc/sid2/issues/660) [#60](https://github.com/hmdc/sid2/issues/60) [#63](https://github.com/hmdc/sid2/issues/63)
+
 ## [2022.4.24-dev.1](https://github.com/hmdc/sid2/compare/2022.4.23-dev.1...2022.4.24-dev.1) (2022-04-19)
 
 
