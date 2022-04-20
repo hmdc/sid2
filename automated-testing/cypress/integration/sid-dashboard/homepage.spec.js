@@ -7,14 +7,13 @@ describe('Sid Dashboard - Homepage', () => {
   const activeLaunchers = cy.sid.launchers.filter(l => Cypress.env('active_launchers').includes(l.id))
   Cypress.config('baseUrl', baseUrl);
   
-  const cancelSession = sessionId => {
+  const deleteSession = sessionId => {
     cy.log(`Deleting session: ${sessionId}`)
     cy.get(`div#sessions-container > div#${sessionId}`).should('be.visible')
-    cy.get(`div#sessions-container > div#${sessionId}`).find('div a.btn-terminate').click()
-    cy.get('div.modal-dialog div.modal-body').should('contain.text', 'Are you sure')
+    cy.get(`div#sessions-container > div#${sessionId}`).find('div a.btn-delete').click()
+    cy.get('div.modal-dialog div.modal-body').should('have.text', 'Are you sure?')
     cy.get('div.modal-dialog button.commit').click()
-    //PARTIAL TEXT CHECK => BETTER RESILIENCE
-    cy.get('div.alert-success').should('contain.text', 'Session was successfully')
+    cy.get('div.alert-success').should('contain.text', 'Session was successfully deleted')
   }
 
   const cleanupSessions = () => {
@@ -24,9 +23,9 @@ describe('Sid Dashboard - Homepage', () => {
         return
       }
 
-      cy.log(`sessions to cancel: ${numberOfSessions}`)
+      cy.log(`sessions to delete: ${numberOfSessions}`)
       const sessionId = $sessionsContainer.children().first().attr('id')
-      cancelSession(sessionId)
+      deleteSession(sessionId)
 
       cleanupSessions()
     })
@@ -78,7 +77,7 @@ describe('Sid Dashboard - Homepage', () => {
         })
   
         //CLEANUP
-        cancelSession(session.sessionId)
+        deleteSession(session.sessionId)
       })
     })
   })

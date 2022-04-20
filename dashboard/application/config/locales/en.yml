@@ -86,12 +86,9 @@ en:
       If this job failed to submit because of an invalid job name
       please ask your administrator to configure OnDemand to set the
       environment variable OOD_JOB_NAME_ILLEGAL_CHARS.
-    batch_connect_sessions_delete_confirm: "Are you sure you want to delete the session?<br />Deleting is permanent, and will delete all session details."
+    batch_connect_sessions_delete_confirm: "Are you sure?"
     batch_connect_sessions_delete_hover: "Delete Session"
     batch_connect_sessions_delete_title: "Delete"
-    batch_connect_sessions_terminate_confirm: "Are you sure you want to end the session?<br />Session details are saved for reference and reuse until you delete them.<br /> Any unsaved work in this session will be lost."
-    batch_connect_sessions_terminate_hover: "Cancel Session"
-    batch_connect_sessions_terminate_title: "Cancel"
     batch_connect_sessions_errors_staging: "Failed to stage the template with the following error:"
     batch_connect_sessions_errors_submission: "Failed to submit session with the following error:"
     batch_connect_sessions_novnc_launch: "Launch %{app_title}"
@@ -107,8 +104,6 @@ en:
     batch_connect_sessions_status_blurb_create_success: "Session was successfully created."
     batch_connect_sessions_status_blurb_delete_failure: "Failed to delete session."
     batch_connect_sessions_status_blurb_delete_success: "Session was successfully deleted."
-    batch_connect_sessions_status_blurb_terminate_failure: "Failed to cancel session."
-    batch_connect_sessions_status_blurb_terminate_success: "Session was successfully cancelled."
     batch_connect_sessions_status_starting: |
       Your session is currently starting... Please be patient as this process can
       take a few minutes.

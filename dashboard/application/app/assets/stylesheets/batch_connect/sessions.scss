@@ -23,36 +23,11 @@
 }
 
 .btn-sid-delete {
-  color: #90100C;
+  color: #dd6561;
 }
 
 .btn-sid-delete:hover {
   color: #fff;
-  background-color: #90100C;
-  border-color: #90100C;
-}
-
-.btn-sid-terminate {
-  color: #dd6561;
-}
-
-.btn-sid-terminate:hover {
-  color: #fff;
   background-color: #dd6561;
   border-color: #dd6561;
-}
-
-/* OVERRIDE CONFIRM BUTTON FOR MODAL DIALOG */
-.modal-dialog {
-  .btn.commit.btn-danger {
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-  }
-
-  .btn.commit.btn-danger:hover {
-    color: #fff;
-    background-color: #286090;
-    border-color: #204d74;
-  }
 }
