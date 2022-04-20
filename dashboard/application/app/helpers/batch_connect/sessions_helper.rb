@@ -76,7 +76,7 @@ module BatchConnect::SessionsHelper
     if session.completion_info
       memory = session.completion_info["memory"]
       cores = session.completion_info["cpu"]
-      runtime = distance_of_time_in_words(session.completion_info["runtime"], 0, false, :only => [:minutes, :hours], :accumulate_on => :hours) if session.completion_info["runtime"]
+      runtime = distance_of_time_in_words(session.completion_info["runtime"].to_i, 0, false, :only => [:minutes, :hours], :accumulate_on => :hours) if session.completion_info["runtime"].to_i != 0
     elsif session.info.native
       memory = session.info.native[:min_memory]
       cores = session.info.native[:min_cpus]

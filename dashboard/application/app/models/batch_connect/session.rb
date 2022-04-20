@@ -60,7 +60,10 @@ module BatchConnect
     # @return [Boolean] true if job is completed
     attr_accessor :cache_completed
 
-    #Used to redirect to a different view on delete
+    # Used to flag if a session was cancelled
+    attr_accessor :cancelled
+
+    # Used to redirect to a different view on delete
     attr_accessor :redirect
 
     # How many days before a Session record is considered old and ready to delete
@@ -69,7 +72,7 @@ module BatchConnect
     # Attributes used for serialization
     # @return [Hash] attributes to be serialized
     def attributes
-      %w(id cluster_id job_id completion_info created_at token title view info_view script_type cache_completed).map do |attribute|
+      %w(id cluster_id job_id completion_info created_at token title view info_view script_type cache_completed cancelled).map do |attribute|
         [ attribute, nil ]
       end.to_h
     end
@@ -316,7 +319,12 @@ module BatchConnect
     # @return [Boolean] whether successfully deleted
     def destroy(delete_data = true)
       adapter.delete(job_id) unless completed?
-      db_file.delete if delete_data
+      if delete_data
+        db_file.delete
+      else
+        self.cancelled = true
+        db_file.write(to_json)
+      end
       true
     rescue ClusterNotFound, AdapterNotAllowed, OodCore::JobAdapterError => e
       errors.add(:delete, e.message)
@@ -339,7 +347,7 @@ module BatchConnect
     # Force update the job's info
     # @return [OodCore::Job::Info] info object
     def update_info
-      if cache_completed
+      if cache_completed || cancelled
         @info = OodCore::Job::Info.new(id: job_id, status: :completed)
       else
         @info = adapter.info(job_id)
