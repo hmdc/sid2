@@ -1,3 +1,24 @@
+## [2022.4.26-dev.1](https://github.com/hmdc/sid2/compare/2022.4.25-dev.1...2022.4.26-dev.1) (2022-04-20)
+
+
+### Features
+
+* **dashboard:** gh [#660](https://github.com/hmdc/sid2/issues/660) Re-add session terminate session feature with race condition fix ([#64](https://github.com/hmdc/sid2/issues/64)) ([264bbb2](https://github.com/hmdc/sid2/commit/264bbb24371da4da1d8d5ce840712dd4599af856))
+
+## [2022.4.25-dev.1](https://github.com/hmdc/sid2/compare/2022.4.24-dev.1...2022.4.25-dev.1) (2022-04-20)
+
+
+### Reverts
+
+* Revert "feat(dashboard): gh #660 Added terminate session feature (#60)" (#63) ([aa8f4c9](https://github.com/hmdc/sid2/commit/aa8f4c901ff1f8a39b135d8b3dccdf4caf75cecf)), closes [#660](https://github.com/hmdc/sid2/issues/660) [#60](https://github.com/hmdc/sid2/issues/60) [#63](https://github.com/hmdc/sid2/issues/63)
+
+## [2022.4.24-dev.1](https://github.com/hmdc/sid2/compare/2022.4.23-dev.1...2022.4.24-dev.1) (2022-04-19)
+
+
+### Features
+
+* **dashboard:** gh [#660](https://github.com/hmdc/sid2/issues/660) Added terminate session feature ([#60](https://github.com/hmdc/sid2/issues/60)) ([4bfa1ed](https://github.com/hmdc/sid2/commit/4bfa1ed3ba57645a8b344384e5334a1d4abe77c6))
+
 ## [2022.4.23-dev.1](https://github.com/hmdc/sid2/compare/2022.4.22-dev.1...2022.4.23-dev.1) (2022-04-19)
 
 
