@@ -226,10 +226,6 @@ end
     to_bool(ENV['OOD_TURBOLINKS_ENABLED'])
   end
 
-  def hpc_status_custom_enabled?
-    to_bool(ENV['OOD_HPC_STATUS_CUSTOM_ENABLED'] || false)
-  end
-
   def dataroot
     # copied from OodAppkit::AppConfig#set_default_configuration
     # then modified to ensure dataroot is never nil

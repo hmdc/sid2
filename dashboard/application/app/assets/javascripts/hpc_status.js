@@ -1,43 +1,58 @@
 const HPCStatusService = (function (){
 
+    const STATUS_CONTAINER_SELECTOR = "[data-toggle='hpc-status'], [data-toggle='hpc-issues']"
+
     const CLUSTER_STATUS_MAP = {
-        "up": { css: "ok", text: "No known issues" },
-        "hasissues":  { css: "issues", text: "Experiencing issues" },
-        "undermaintenance":  { css: "maintenance", text: "Under maintenance" },
-        "unknown":  { css: "unknown", text: "Unknown" },
+        "up": { css: "ok", text: "No known issues", dataToggle: ['hpc-status'] },
+        "hasissues":  { css: "issues", text: "Experiencing issues", dataToggle: ['hpc-status', 'hpc-issues']  },
+        "undermaintenance":  { css: "maintenance", text: "Under maintenance", dataToggle: ['hpc-status', 'hpc-issues'] },
+        "unknown":  { css: "unknown", text: "Unknown", dataToggle: ['hpc-status'] },
     }
 
     function addStatusWidget($statusContainer, status) {
         const statusElement =
-            `<p class="hpc-status ${status.css}">
-                Current status: <span>${status.text}</span>
-             </p>`
+            `<div className="status-container">
+                <p class="hpc-status ${status.css}">
+                   Current status: <span>${status.text}</span>
+                </p>
+             </div>`
 
         $statusContainer.html(statusElement)
     }
 
-    function getStatus($statusContainer) {
+    function addStatusToContainers(status) {
+        $(STATUS_CONTAINER_SELECTOR).each((index, element) => {
+            const $statusContainer = $(element)
+            const dataToggle = $statusContainer.attr("data-toggle")
+            if (status.dataToggle.includes(dataToggle)) {
+                addStatusWidget($statusContainer, status)
+            }
+        })
+    }
+
+    function getStatus() {
         $.ajax({
             type: 'GET',
             url: 'https://fasrc.instatus.com/summary.json',
         })
-            .done(data => {
-                const statusCode = data && data.page && data.page.status ? data.page.status.toLowerCase() : 'unknown'
-                const status = CLUSTER_STATUS_MAP[statusCode]
-                addStatusWidget($statusContainer, status)
-            })
-            .fail(( jqxhr, settings, exception ) => {
-                console.log(`Error getting FASRC cluster status. Exception=${exception}`)
-                addStatusWidget($statusContainer, CLUSTER_STATUS_MAP['unknown'])
-            })
+        .done(data => {
+            let statusCode = data && data.page && data.page.status ? data.page.status.toLowerCase() : 'unknown'
+            statusCode = 'undermaintenance'
+            const status = CLUSTER_STATUS_MAP[statusCode] || CLUSTER_STATUS_MAP['unknown']
+            addStatusToContainers(status)
+        })
+        .fail(( jqxhr, settings, exception ) => {
+            console.log(`Error getting FASRC cluster status. Exception=${exception}`)
+            addStatusToContainers(CLUSTER_STATUS_MAP['unknown'])
+        })
     }
 
     $(function() {
-        $("[data-toggle='hpc-status']").each((index, element) => {
-            const $statusContainer = $(element)
-            getStatus($statusContainer)
-            console.log(`HPC Status attached to: ${$statusContainer.attr("id")}`)
-        })
+        const statusContainers = $(STATUS_CONTAINER_SELECTOR).length
+        if(statusContainers) {
+            getStatus()
+            console.log(`HPC Status executed. items=${statusContainers}`)
+        }
     });
 
     return { getStatus }
