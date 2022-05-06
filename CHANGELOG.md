@@ -1,3 +1,14 @@
+## [2022.5.1](https://github.com/hmdc/sid2/compare/2022.4.12...2022.5.1) (2022-05-06)
+
+
+
+## [2022.5.1-dev.1](https://github.com/hmdc/sid2/compare/2022.4.12...2022.5.1) (2022-05-06)
+
+
+### Bug Fixes
+
+* **testing:** gh [#706](https://github.com/hmdc/sid2/issues/706) Run Cypress tests using command line tool ([#65](https://github.com/hmdc/sid2/issues/65)) ([d49b400](https://github.com/hmdc/sid2/commit/d49b400ebe6e689a37514e0dfec83335e25ccf0d))
+
 ## [2022.4.12](https://github.com/hmdc/sid2/compare/2022.4.11...2022.4.12) (2022-04-27)
 
 
