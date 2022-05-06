@@ -68,7 +68,7 @@ describe('Sid Dashboard - Support Ticket', () => {
     cy.get('form#new_support_ticket input#email').type('sid_automated_test@example.com')
     cy.get('form#new_support_ticket input#subject').type('TEST: Sid automated test')
     cy.get('form#new_support_ticket input[type="submit"]').click()
-    cy.log(`Support Ticket creationEnabled=${supportTicket.creationEnabled}`)
+    cy.task('log', `Support Ticket creationEnabled=${supportTicket.creationEnabled}`)
 
     if (supportTicket.creationEnabled) {
       cy.get('div.alert-success').should($messageElement => {
