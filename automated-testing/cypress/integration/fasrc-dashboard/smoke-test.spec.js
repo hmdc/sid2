@@ -29,26 +29,29 @@ describe('FASRC Dashboard - Smoke test', () => {
     cy.get('@interactiveAppsMenu').find('a[title]').each($interactiveApp => {
       expect($interactiveApp).to.have.length(1)
       $interactiveApp.is(':visible')
-      interactiveApps.push($interactiveApp.attr('title'))
+      interactiveApps.push({
+        title: $interactiveApp.attr('title'),
+        href: $interactiveApp.attr('href')
+      })
     })
     cy.get('@interactiveAppsMenu').click()
 
-    cy.wrap(interactiveApps).each(appTitle => {
-      cy.task('log', `Checking interactive app: ${appTitle}`)
+    cy.wrap(interactiveApps).each(appInfo => {
+      cy.task('log', `Checking interactive app: ${appInfo.title}`)
       cy.get('@interactiveAppsMenu').click()
-      cy.get('@interactiveAppsMenu').find(`a[title="${appTitle}"]`).click()
+      cy.get('@interactiveAppsMenu').find(`a[href="${appInfo.href}"]`).click()
       cy.title().should($title => {
-        expect($title).to.contain(appTitle)
+        expect($title).to.contain(appInfo.title)
       })
       cy.get('div h3').should($title => {
-        expect($title.text().trim()).to.contain(appTitle)
+        expect($title.text().trim()).to.contain(appInfo.title)
       })
       //BREADCRUMBS
       cy.get('ol.breadcrumb li').eq(0).invoke('text').should('match', /home/i)
       cy.get('ol.breadcrumb li').eq(0).find('a').invoke('attr', 'href').should('match', new RegExp(rootPath, 'i'))
       cy.get('ol.breadcrumb li').eq(1).invoke('text').should('match', /my interactive sessions/i)
       cy.get('ol.breadcrumb li').eq(1).find('a').invoke('attr', 'href').should('match', new RegExp(`${rootPath}/batch_connect/sessions`, 'i'))
-      cy.get('ol.breadcrumb li').eq(2).invoke('text').invoke('trim').should('match', new RegExp(cy.sid.regexEscape(appTitle), 'i'))
+      cy.get('ol.breadcrumb li').eq(2).invoke('text').invoke('trim').should('match', new RegExp(cy.sid.regexEscape(appInfo.title), 'i'))
     })
 
   })

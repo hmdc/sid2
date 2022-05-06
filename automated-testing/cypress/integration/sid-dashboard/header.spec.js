@@ -25,11 +25,11 @@ describe('Sid Dashboard - Header', () => {
       })
   })
 
-  it('Should display Files navigation item', () => {
+  it('Should display Files navigation item with home directory link', () => {
     cy.get('nav li[title="Files"]').as('navItem')
     cy.get('@navItem').find('> a').invoke('text').should('match', /files/i)
     cy.get('@navItem').find('> a').click()
-    cy.get('@navItem').find('ul li').as('menu').should('have.length', 1)
+    cy.get('@navItem').find('ul li').as('menu').its('length').should('be.gte', 1)
 
     cy.get('@menu').first().should('be.visible')
     cy.get('@menu').first().find('a').should($submenuElement => {
