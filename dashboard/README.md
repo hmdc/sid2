@@ -125,7 +125,7 @@ As follows:
 - `server`: URL for the RT server (required)
 - `user`: RT API username
 - `pass`: RT API password
-- `auth_token`: RT API auth token, preferred instead of username and password.
+- `auth_token`: RT API [auth token](https://github.com/bestpractical/rt-authen-token), preferred instead of username and password.
 - `timeout`: Connection and read timeout in seconds. Defaults to 30.
 - `verify_ssl`: Whether or not the client should validate SSL certificates. Defaults to true.
 - `proxy`: Proxy server URL. Defaults to no proxy.

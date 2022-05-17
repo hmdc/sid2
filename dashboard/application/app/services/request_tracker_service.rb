@@ -1,11 +1,11 @@
 class RequestTrackerService
 
   def initialize(config)
-    @queue = config[:queue_name]
+    @queues = config[:queue_names]
     @priority = config[:priority]
 
-    if !@queue || !@priority
-      raise ArgumentError, "queue_name and priority are required options for RT service"
+    if !@queues || !@priority
+      raise ArgumentError, "queue_names and priority are required options for RT service"
     end
   end
 
@@ -29,7 +29,8 @@ class RequestTrackerService
 
   def create_payload(support_ticket_request, ticket_text)
     payload = {
-      Queue: @queue,
+      # FIXME: queue selection here
+      Queue: @queues[0],
       Requestor: support_ticket_request.email,
       Cc: support_ticket_request.cc,
       Priority: @priority,

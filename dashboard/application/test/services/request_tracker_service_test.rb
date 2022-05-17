@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RequestTrackerServiceTest < ActiveSupport::TestCase
 
-  test "should throw exception when queue_name is not provided" do
+  test "should throw exception when queue_names is not provided" do
     config = {
-      queue_name: nil,
+      queue_names: nil,
       priority: "33",
     }
 
@@ -13,7 +13,7 @@ class RequestTrackerServiceTest < ActiveSupport::TestCase
 
   test "should throw exception when priority is not provided" do
     config = {
-      queue_name: "Standard",
+      queue_names: [ "Standard" ],
       priority: nil,
     }
 
@@ -22,7 +22,7 @@ class RequestTrackerServiceTest < ActiveSupport::TestCase
 
   test "create_ticket should run with no errors" do
     service_config = {
-      queue_name: "Standard",
+      queue_names: [ "Standard" ],
       priority: "10",
     }
 
@@ -34,7 +34,7 @@ class RequestTrackerServiceTest < ActiveSupport::TestCase
       param_hash[:Requestor] == support_ticket.email &&
       param_hash[:Cc] == support_ticket.cc &&
       param_hash[:Subject] == support_ticket.subject &&
-      param_hash[:Queue] == service_config[:queue_name] &&
+      param_hash[:Queue] == service_config[:queue_names][0] &&
       param_hash[:Priority] == service_config[:priority]
     end
     .returns("support_ticket_id")
