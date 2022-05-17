@@ -1,4 +1,4 @@
-  # Sid2
+# Sid Dashboard for Open OnDemand
 
 ## Launching the Sid Dashboard development environment
 
@@ -34,7 +34,7 @@ Docker images are used to create the local development environment. Information 
 ### Launching
 
 - Run `make` from checkout. The build process is finished when the `ood` container stops generating output, and the `slurmctld` container goes into an output loop.
-- The entire directory/checkout is mapped into the OOD and slurm containers. Changes made to code will immediately reflect within OOD (with the exception of CSS/JS changes which requires a rake, see Caveats.)
+- The entire `application` build directory is mapped into the OOD and slurm containers. Changes made to code will immediately reflect within OOD (with the exception of CSS/JS changes which requires a rake, see Caveats.)
 
 ### Connecting
 
@@ -66,18 +66,23 @@ Docker images are used to create the local development environment. Information 
 
 To thoroughly purge your Docker environment, also run `docker volume prune; docker system prune -a` and restart Docker.
 
-## Deploying to remote development (your FASRC account)
+## Deploying to remote development
 
-- Run `make remote-dev`. `make remote-dev` builds all required OOD/Ruby libs locally and exports built artifacts to FASRC. This task will prompt you for your FASRC SSH credentials (password and pin) twice as it creates/validates the pre-requisite directory structure as setup in your home directory.
+The Sid Dashboard can be deployed to a "remote development" environment, i.e. a directory on an Open OnDemand server that has been [configured to support running development-mode apps](https://osc.github.io/ood-documentation/latest/app-development/enabling-development-mode.html).
+
+The default remote development deployment destination is your home directory on Harvard FASRC Cannon. For detailed deployment instructions see https://wiki.harvard.edu/confluence/display/HMDC/Deploying+Sid2+to+Remote+Dev . Deploying to other Open OnDemand installations will require editing the `Makefile`.
+
+- Run `make remote-dev`. `make remote-dev` builds all required OOD/Ruby libs locally and exports built artifacts to the remote development server. This task will prompt you for your SSH credentials (password and pin) twice as it creates/validates the pre-requisite directory structure as setup in your home directory.
   
-- Once completed, visit:
+## Support Ticket Feature
 
-  https://vdi.rc.fas.harvard.edu
+The Sid Dashboard supports creating tickets in Request Tracker using a simple point-and-click interface which collects contextual information about the relevant session and includes it in the ticket.
 
-  and go through the same Validation process as for the development environment.
+### Ticket attachment limitations
 
-## Support ticket attachments
-There are restrictions in place for the attachments. There is client side validation:
+There are restrictions in place for the attachments. These limits should be set lower than the limits configured in the Request Tracker server.
+
+There is client side validation:
  * Attachment files cannot be bigger than 5MB
  * Number of attachment files cannot be bigger than 5
  * To update: [application/app/assets/javascripts/support_ticket.js#L6](application/app/assets/javascripts/support_ticket.js#L6)
@@ -89,50 +94,51 @@ And there is back-end validation:
 
 ## RT server configuration
 
-RT is deployed locally using a Docker image. The version of RT is controlled by the version of the Docker image. The versions supported can be found: [https://hub.docker.com/r/netsandbox/request-tracker/](https://hub.docker.com/r/netsandbox/request-tracker/)  
-To upgrade the RT version, simple update the version in the Docker compose file: [docker-compose.yml](docker-compose.yml)
+In the local development environment, RT is deployed using a Docker image. The version of RT is controlled by the version of the Docker image. The versions supported can be found at [https://hub.docker.com/r/netsandbox/request-tracker/](https://hub.docker.com/r/netsandbox/request-tracker/) .
+
+To upgrade the RT version, simply update the version in the Docker compose file: [docker-compose.yml](docker-compose.yml)
 
 ```
 services:
   rt:
     image: netsandbox/request-tracker:4.4
 ```
-Configuration file: `config/rt_config.yml`, eg:
+
+Configure the RT client in the file: `application/config/rt_config.yml`, eg:
 ```
-server: "https://rt.iqss.com"
+server: "https://rt.example.com"
 user: "test"
 pass: "password"
-auth_token:
-timeout: 99
+auth_token: "secret"
+timeout: 30
 verify_ssl: true
-proxy: "http://proxy.server.com:8080"
-priority: "4"
-queue_name: "General"
+proxy: "http://proxy.example.com:8080"
+priority: 4
+queue_names:
+  - "General"
+  - "Incoming"
 ```
 
-Configuration environment variables:
+**WARNING**: The information in the RT client configuration file will be visible to all Sid Dashboard users, so be sure to use an account that does not have privileges to do anything more than what ticket requestors should be allowed to do in RT.
 
-```
-RT_SERVER: URL for the RT server, eg: https://rt.iqss.com.
-RT_USER: API username.
-RT_PASSWORD: API password.
-RT_AUTH_TOKEN: API auth token, use instead of username and password.
-RT_TIMEOUT: Connection and read timeout in seconds. Defaults to 30
-RT_VERIFY_SSL: Whether or not the client should validate SSL certificates. Defaults to false
-RT_PROXY: Proxy server URL, eg: http://rt.proxy.com:8080
-RT_QUEUE: The name of the queue where tickets will be added to. Defaults to General
-RT_PRIORITY: The priority for the ticket. Defaults to 4
-```
+As follows:
+- `server`: URL for the RT server (required)
+- `user`: RT API username
+- `pass`: RT API password
+- `auth_token`: RT API auth token, preferred instead of username and password.
+- `timeout`: Connection and read timeout in seconds. Defaults to 30.
+- `verify_ssl`: Whether or not the client should validate SSL certificates. Defaults to true.
+- `proxy`: Proxy server URL. Defaults to no proxy.
+- `priority`: The [priority](https://rt-wiki.bestpractical.com/wiki/Priority) for the ticket. Defaults to 4.
+- `queue_names`: The name of the queues from which the user can select to submit a ticket. The first item in the list will be the default selection. Defaults to [ "General" ].
+
 ### RT configuration for remote-dev
-To test the support ticket creation in `remote-dev`, we need to configure the RT client. We need to manually add the RT configuration before executing the `remote-dev` deployment.  
-Create the configuration file `config/rt_config.yml` with the following contents below.  
-username and password are available in Lastpass
-```
-server: "https://help.hmdc.harvard.edu"
-user: "username"
-pass: "password"
-queue_name: "IQSS_FASRC_support"
-```
+
+To test the support ticket creation in `remote-dev`, we need to manually add the configuration for the RT client before executing the `remote-dev` deployment.
+
+Create the configuration file `application/config/rt_config.yml` with the appropriate credentials for your remote development RT server.
+
+For detailed deployment instructions for Harvard FASRC Cannon, see https://wiki.harvard.edu/confluence/display/HMDC/Deploying+Sid2+to+Remote+Dev .
 
 ## Launcher button configuration
 

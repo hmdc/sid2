@@ -1,0 +1,4 @@
+server: "http://rt:34000"
+user: "root"
+pass: "password"
+queue_name: "General"
