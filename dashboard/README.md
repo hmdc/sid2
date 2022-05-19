@@ -114,7 +114,7 @@ timeout: 30
 verify_ssl: true
 proxy: "http://proxy.example.com:8080"
 priority: 4
-queue_names:
+queues:
   - "General"
   - "Incoming"
 ```
@@ -130,7 +130,7 @@ As follows:
 - `verify_ssl`: Whether or not the client should validate SSL certificates. Defaults to true.
 - `proxy`: Proxy server URL. Defaults to no proxy.
 - `priority`: The [priority](https://rt-wiki.bestpractical.com/wiki/Priority) for the ticket. Defaults to 4.
-- `queue_names`: The name of the queues from which the user can select to submit a ticket. The first item in the list will be the default selection. Defaults to [ "General" ].
+- `queues`: An array of the names of the queues from which the user can select to submit a ticket. The first item in the list will be the default selection. Defaults to [ "General" ].
 
 ### RT configuration for remote-dev
 

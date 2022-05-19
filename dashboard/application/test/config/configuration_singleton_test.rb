@@ -255,7 +255,7 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     assert_equal "file-auth-token", rtc[:auth_token]
     assert_equal 1022, rtc[:timeout]
     assert_equal true, rtc[:verify_ssl]
-    assert_equal "General", rtc[:queue_names][0]
+    assert_equal "General", rtc[:queues][0]
     assert_equal "99", rtc[:priority]
   end
 end

@@ -303,10 +303,10 @@ end
     #DEFAULTS
     rt_config[:timeout] ||= 10
     rt_config[:verify_ssl].nil? && rt_config[:verify_ssl] = true
-    rt_config[:queue_names] ||= [ "General" ]
+    rt_config[:queues] ||= [ "General" ]
     rt_config[:priority] ||= 4
 
-    Rails.logger.info "RT config - server=#{rt_config[:server]} proxy=#{rt_config[:proxy]} queues=#{rt_config[:queue_names]}"
+    Rails.logger.info "RT config - server=#{rt_config[:server]} proxy=#{rt_config[:proxy]} queues=#{rt_config[:queues]}"
     return rt_config
   end
 

@@ -14,6 +14,7 @@ class SupportTicketController < ApplicationController
   end
 
   def create
+    queue = params[:queue]
     create_support_ticket
 
     if !@support_ticket.valid?
@@ -30,8 +31,9 @@ class SupportTicketController < ApplicationController
     end
 
     rts = RequestTrackerService.new ::Configuration.request_tracker_config
+    rts.selected_queue = queue
     ticket_id = rts.create_ticket(@support_ticket)
-    logger.info "action=createSupportTicket result=success user=#{@user} subject=#{@support_ticket.subject} ticket=#{ticket_id}"
+    logger.info "action=createSupportTicket result=success user=#{@user} subject=#{@support_ticket.subject} ticket=#{ticket_id} queue=#{queue}"
     redirect_to root_url, :flash => { :notice => "Support ticket created - Ticket id: #{ticket_id}" }
 
     rescue => error

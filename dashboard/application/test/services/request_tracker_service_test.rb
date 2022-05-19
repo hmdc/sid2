@@ -2,9 +2,9 @@ require 'test_helper'
 
 class RequestTrackerServiceTest < ActiveSupport::TestCase
 
-  test "should throw exception when queue_names is not provided" do
+  test "should throw exception when queues is not provided" do
     config = {
-      queue_names: nil,
+      queues: nil,
       priority: "33",
     }
 
@@ -13,16 +13,37 @@ class RequestTrackerServiceTest < ActiveSupport::TestCase
 
   test "should throw exception when priority is not provided" do
     config = {
-      queue_names: [ "Standard" ],
+      queues: [ "Standard" ],
       priority: nil,
     }
 
     assert_raises(ArgumentError) { RequestTrackerService.new(config) }
   end
 
+  test "should permit the selection of an alternate queue" do
+    config = {
+      queues: [ "Standard", "Alternate" ],
+      priority: "33",
+    }
+
+    rts = RequestTrackerService.new(config)
+    rts.selected_queue = "Alternate"
+    assert_equal rts.selected_queue, "Alternate"
+  end
+
+  test "should throw exception when selecting an invalid queue" do
+    config = {
+      queues: [ "Standard", "Alternate" ],
+      priority: "33",
+    }
+
+    rts = RequestTrackerService.new(config)
+    assert_raises(ArgumentError) { rts.selected_queue = "Bogus" }
+  end
+
   test "create_ticket should run with no errors" do
     service_config = {
-      queue_names: [ "Standard" ],
+      queues: [ "Standard" ],
       priority: "10",
     }
 
@@ -34,7 +55,7 @@ class RequestTrackerServiceTest < ActiveSupport::TestCase
       param_hash[:Requestor] == support_ticket.email &&
       param_hash[:Cc] == support_ticket.cc &&
       param_hash[:Subject] == support_ticket.subject &&
-      param_hash[:Queue] == service_config[:queue_names][0] &&
+      param_hash[:Queue] == service_config[:queues][0] &&
       param_hash[:Priority] == service_config[:priority]
     end
     .returns("support_ticket_id")
