@@ -79,15 +79,15 @@ describe('Sid Dashboard - Support Ticket', () => {
   })
 
   it('Should create support ticket', () => {
-    cy.visit(`${rootPath}/support`, { auth })
-    cy.get('form#new_support_ticket input#email').type('sid_automated_test@example.com')
-    cy.get('form#new_support_ticket input#subject').type('TEST: Sid automated test')
-    cy.get('form#new_support_ticket input#queue').then(elem => {
-      elem.val(supportTicket.queue)
-    })
     cy.task('log', `Support Ticket creationEnabled=${supportTicket.creationEnabled}`)
 
     if (supportTicket.creationEnabled) {
+      cy.visit(`${rootPath}/support`, { auth })
+      cy.get('form#new_support_ticket input#email').type('sid_automated_test@example.com')
+      cy.get('form#new_support_ticket input#subject').type('TEST: Sid automated test')
+      cy.get('form#new_support_ticket input#queue').then(elem => {
+        elem.val(supportTicket.queue)
+      })
       cy.get('form#new_support_ticket input[type="submit"]').click()
       cy.get('div.alert-success').should($messageElement => {
         //GENERIC MESSAGE IS DISPLAYED
