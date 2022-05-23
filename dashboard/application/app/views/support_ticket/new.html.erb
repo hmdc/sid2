@@ -19,7 +19,7 @@
   <div class="form-container">
     <form id="new_support_ticket" role="form" action="<%= support_path %>" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
       <input type="hidden" name="<%= request_forgery_protection_token %>" value="<%= form_authenticity_token %>" />
-      <input type="hidden" id="queue" name="queue" value="" />
+      <input type="hidden" id="queue" name="support_ticket[queue]" value="" />
 
       <div class="form-group">
         <label class="control-label" for="username">User name</label>

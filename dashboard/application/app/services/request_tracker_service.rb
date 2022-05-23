@@ -1,17 +1,5 @@
 class RequestTrackerService
 
-  attr_reader :selected_queue
-
-  def selected_queue=(queue)
-    # no-op on null string (form default)
-    return if queue==""
-    if @queues.include?(queue)
-      @selected_queue = queue
-    else
-      raise ArgumentError, "invalid queue selection"
-    end
-  end
-
   def initialize(config)
     @queues = config[:queues]
     @priority = config[:priority]
@@ -19,7 +7,6 @@ class RequestTrackerService
     if !@queues || @queues.empty? || !@priority
       raise ArgumentError, "queues and priority are required options for RT service"
     end
-    @selected_queue = @queues[0]
   end
 
   def create_ticket(support_ticket_request)
@@ -41,8 +28,18 @@ class RequestTrackerService
   private
 
   def create_payload(support_ticket_request, ticket_text)
+    # default to first configured queue
+    queue = @queues[0]
+    if support_ticket_request.queue && support_ticket_request.queue!=""
+      if @queues.include?(support_ticket_request.queue)
+        queue = support_ticket_request.queue
+      else
+        raise ArgumentError, "invalid queue selection"
+      end
+    end
+
     payload = {
-      Queue: @selected_queue,
+      Queue: queue,
       Requestor: support_ticket_request.email,
       Cc: support_ticket_request.cc,
       Priority: @priority,
