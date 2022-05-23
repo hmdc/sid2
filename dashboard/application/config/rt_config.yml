@@ -3,4 +3,3 @@ user: "root"
 pass: "password"
 queues:
   - "General"
-  - "Alternate"
