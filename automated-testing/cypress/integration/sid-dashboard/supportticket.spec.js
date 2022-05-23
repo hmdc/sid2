@@ -79,7 +79,7 @@ describe('Sid Dashboard - Support Ticket', () => {
   })
 
   it('Should create support ticket', () => {
-    cy.task('log', `Support Ticket creationEnabled=${supportTicket.creationEnabled}`)
+    cy.task('log', `Support Ticket creationEnabled=${supportTicket.creationEnabled} queue=${supportTicket.queue}`)
 
     if (supportTicket.creationEnabled) {
       cy.visit(`${rootPath}/support`, { auth })

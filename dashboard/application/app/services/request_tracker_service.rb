@@ -16,7 +16,7 @@ class RequestTrackerService
     @queues = config[:queues]
     @priority = config[:priority]
 
-    if !@queues || !@priority
+    if !@queues || @queues.empty? || !@priority
       raise ArgumentError, "queues and priority are required options for RT service"
     end
     @selected_queue = @queues[0]
