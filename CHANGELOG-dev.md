@@ -1,3 +1,15 @@
+## [2022.5.2-dev.1](https://github.com/hmdc/sid2/compare/2022.5.1-dev.1...2022.5.2-dev.1) (2022-05-24)
+
+
+### Features
+
+* **dashboard:** gh [#731](https://github.com/hmdc/sid2/issues/731) support specifying more than one queue in RT client config ([#67](https://github.com/hmdc/sid2/issues/67)) ([13b67c2](https://github.com/hmdc/sid2/commit/13b67c2ee8c79d52dea88664a0087e71b3a65c9f))
+
+
+### BREAKING CHANGES
+
+* **dashboard:** Configuring the RT client through environment variables is no longer supported.
+
 ## [2022.5.1-dev.1](https://github.com/hmdc/sid2/compare/2022.4.26-dev.1...2022.5.1-dev.1) (2022-05-06)
 
 
