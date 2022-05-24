@@ -1,3 +1,7 @@
+ENV["RT_SERVER"] = "http://rt:34000"
+ENV["RT_USER"] = "root"
+ENV["RT_PASSWORD"] = "password"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

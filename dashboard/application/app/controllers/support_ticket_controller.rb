@@ -31,7 +31,7 @@ class SupportTicketController < ApplicationController
 
     rts = RequestTrackerService.new ::Configuration.request_tracker_config
     ticket_id = rts.create_ticket(@support_ticket)
-    logger.info "action=createSupportTicket result=success user=#{@user} subject=#{@support_ticket.subject} ticket=#{ticket_id} queue=#{@support_ticket.queue}"
+    logger.info "action=createSupportTicket result=success user=#{@user} subject=#{@support_ticket.subject} ticket=#{ticket_id}"
     redirect_to root_url, :flash => { :notice => "Support ticket created - Ticket id: #{ticket_id}" }
 
     rescue => error

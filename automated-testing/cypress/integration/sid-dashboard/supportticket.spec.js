@@ -63,32 +63,14 @@ describe('Sid Dashboard - Support Ticket', () => {
     cy.get('div#cc_error').invoke('text').should('match', /the cc format is invalid. expected a valid email/i)
   })
 
-  it('Should show queue field validation errors', () => {
+  it('Should create support ticket', () => {
     cy.visit(`${rootPath}/support`, { auth })
-    // Submit an otherwise-valid form
     cy.get('form#new_support_ticket input#email').type('sid_automated_test@example.com')
     cy.get('form#new_support_ticket input#subject').type('TEST: Sid automated test')
-    cy.get('form#new_support_ticket input#queue').then(elem => {
-      elem.val('Not_A_Queue')
-    })
     cy.get('form#new_support_ticket input[type="submit"]').click()
-
-    cy.get('div.alert-danger').contains(/invalid queue selection/i).should($messageElement => {
-      expect($messageElement.text()).to.match(/invalid queue selection/i)
-    })
-  })
-
-  it('Should create support ticket', () => {
-    cy.task('log', `Support Ticket creationEnabled=${supportTicket.creationEnabled} queue=${supportTicket.queue}`)
+    cy.task('log', `Support Ticket creationEnabled=${supportTicket.creationEnabled}`)
 
     if (supportTicket.creationEnabled) {
-      cy.visit(`${rootPath}/support`, { auth })
-      cy.get('form#new_support_ticket input#email').type('sid_automated_test@example.com')
-      cy.get('form#new_support_ticket input#subject').type('TEST: Sid automated test')
-      cy.get('form#new_support_ticket input#queue').then(elem => {
-        elem.val(supportTicket.queue)
-      })
-      cy.get('form#new_support_ticket input[type="submit"]').click()
       cy.get('div.alert-success').should($messageElement => {
         //GENERIC MESSAGE IS DISPLAYED
         expect($messageElement.text()).to.match(/support ticket created/i)

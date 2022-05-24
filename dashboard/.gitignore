@@ -5,4 +5,5 @@
 /application/public/assets
 
 /deployment/sid_passenger/files/application
+/application/config/rt_config.yml
 VERSION

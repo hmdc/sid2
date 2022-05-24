@@ -1,7 +1,7 @@
 class SupportTicket
   include ActiveModel::Model
 
-  attr_accessor :username, :email, :cc, :subject, :session_id, :description, :attachments, :queue
+  attr_accessor :username, :email, :cc, :subject, :session_id, :description, :attachments
   validates :username, :email, :subject, :description, presence: { message: 'is required' }
   validates :email, :cc, format: { with: URI::MailTo::EMAIL_REGEXP, allow_blank: true, message: 'format is invalid' }
   validates :attachments, attachments: true

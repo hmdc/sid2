@@ -298,15 +298,30 @@ end
       rt_config = YAML.safe_load(rt_config_file.read).to_h.deep_symbolize_keys
       Rails.logger.info "Loaded RT config from: #{rt_config_file}"
     else
-      Rails.logger.warn "Unable to load RT config"
+      #USE ENV IF NO RT CONFIG FILE
+      rt_config = {
+        server:      ENV["RT_SERVER"],
+        proxy:       ENV["RT_PROXY"],
+        user:        ENV["RT_USER"],
+        pass:        ENV["RT_PASSWORD"],
+        auth_token:  ENV["RT_AUTH_TOKEN"],
+
+        queue_name:  ENV["RT_QUEUE"],
+        priority:    ENV["RT_PRIORITY"],
+      }
+
+      rt_config[:timeout] = ENV['RT_TIMEOUT'].to_i if ENV['RT_TIMEOUT']
+      rt_config[:verify_ssl] = to_bool(ENV['rt_ssl']) if ENV['RT_VERIFY_SSL']
+
+      Rails.logger.info "Loaded RT config from environment"
     end
     #DEFAULTS
     rt_config[:timeout] ||= 10
-    rt_config[:verify_ssl].nil? && rt_config[:verify_ssl] = true
-    rt_config[:queues] ||= [ "General" ]
+    rt_config[:verify_ssl] ||= false
+    rt_config[:queue_name] ||= "General"
     rt_config[:priority] ||= 4
 
-    Rails.logger.info "RT config - server=#{rt_config[:server]} proxy=#{rt_config[:proxy]} queues=#{rt_config[:queues]}"
+    Rails.logger.info "RT config - server=#{rt_config[:server]} proxy=#{rt_config[:proxy]} queue=#{rt_config[:queue_name]}"
     return rt_config
   end
 

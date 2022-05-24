@@ -5,6 +5,4 @@ auth_token: "file-auth-token"
 timeout: 1022
 verify_ssl: true
 priority: "99"
-queues:
-  - "General"
-  - "Alternate"
+queue_name: "General"

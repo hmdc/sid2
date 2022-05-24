@@ -32,8 +32,7 @@ cy.sid = {
   // SPECIFIC CONFIG FOR SUPPORT TICKET FEATURE
   supportTicket: {
     //NOT ALL ENVIRONMENTS SUPPORT TICKET CREATION
-    creationEnabled: true,
-    queue: ""
+    creationEnabled: true
   },
 
   // SCREEN RESOLUTIONS => TO TEST IN DIFFERENT SCREEN SIZES

@@ -244,6 +244,30 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     assert_equal ENV["OOD_NATIVE_VNC_LOGIN_HOST"], ConfigurationSingleton.new.native_vnc_login_host
   end
 
+  test "should load rt configuration from environment variables" do
+    ENV["RT_SERVER"] = "http://test.com"
+    ENV["RT_USER"] = "username"
+    ENV["RT_PASSWORD"] = "secret-password"
+    ENV["RT_AUTH_TOKEN"] = "some-auth-token"
+    ENV["RT_TIMEOUT"] = "100"
+    ENV["RT_VERIFY_SSL"] = "false"
+    ENV["RT_QUEUE"] = "test-queue"
+    ENV["RT_PRIORITY"] = "10"
+
+    #ENSURE rt_config FILES IS NOT FOUND
+    rt_config_not_found = Rails.root.join("test", "notfound")
+    Rails.stubs(:root).returns(rt_config_not_found)
+    rtc = ConfigurationSingleton.new.request_tracker_config
+    assert_equal "http://test.com", rtc[:server]
+    assert_equal "username", rtc[:user]
+    assert_equal "secret-password", rtc[:pass]
+    assert_equal "some-auth-token", rtc[:auth_token]
+    assert_equal 100, rtc[:timeout]
+    assert_equal false, rtc[:verify_ssl]
+    assert_equal "test-queue", rtc[:queue_name]
+    assert_equal "10", rtc[:priority]
+  end
+
   test "should load rt configuration from config file if available" do
     rt_config_path = Rails.root.join("test", "fixtures")
     Rails.stubs(:root).returns(rt_config_path)
@@ -255,7 +279,7 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     assert_equal "file-auth-token", rtc[:auth_token]
     assert_equal 1022, rtc[:timeout]
     assert_equal true, rtc[:verify_ssl]
-    assert_equal "General", rtc[:queues][0]
+    assert_equal "General", rtc[:queue_name]
     assert_equal "99", rtc[:priority]
   end
 end
