@@ -1,3 +1,10 @@
+## [2022.5.3-dev.1](https://github.com/hmdc/sid2/compare/2022.5.2-dev.1...2022.5.3-dev.1) (2022-05-24)
+
+
+### Reverts
+
+* Revert "feat(dashboard): gh #731 support specifying more than one queue in RT client config (#67)" ([c3e3b56](https://github.com/hmdc/sid2/commit/c3e3b56547e5b0556f149747d712f2d8c1475257)), closes [#731](https://github.com/hmdc/sid2/issues/731) [#67](https://github.com/hmdc/sid2/issues/67)
+
 ## [2022.5.2-dev.1](https://github.com/hmdc/sid2/compare/2022.5.1-dev.1...2022.5.2-dev.1) (2022-05-24)
 
 
