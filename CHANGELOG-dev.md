@@ -1,3 +1,32 @@
+## [2022.5.4-dev.1](https://github.com/hmdc/sid2/compare/2022.5.3-dev.1...2022.5.4-dev.1) (2022-05-27)
+
+
+* feat(dashboard) gh #731 send automated test support tickets to an alternate queue (#68) ([a8dfa15](https://github.com/hmdc/sid2/commit/a8dfa1570bf450cf9936cacfa0ac2733b6678121)), closes [#731](https://github.com/hmdc/sid2/issues/731) [#68](https://github.com/hmdc/sid2/issues/68) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731)
+
+
+### BREAKING CHANGES
+
+* Configuring the RT client through environment variables is no longer supported.
+
+## [2022.5.3-dev.1](https://github.com/hmdc/sid2/compare/2022.5.2-dev.1...2022.5.3-dev.1) (2022-05-24)
+
+
+### Reverts
+
+* Revert "feat(dashboard): gh #731 support specifying more than one queue in RT client config (#67)" ([c3e3b56](https://github.com/hmdc/sid2/commit/c3e3b56547e5b0556f149747d712f2d8c1475257)), closes [#731](https://github.com/hmdc/sid2/issues/731) [#67](https://github.com/hmdc/sid2/issues/67)
+
+## [2022.5.2-dev.1](https://github.com/hmdc/sid2/compare/2022.5.1-dev.1...2022.5.2-dev.1) (2022-05-24)
+
+
+### Features
+
+* **dashboard:** gh [#731](https://github.com/hmdc/sid2/issues/731) support specifying more than one queue in RT client config ([#67](https://github.com/hmdc/sid2/issues/67)) ([13b67c2](https://github.com/hmdc/sid2/commit/13b67c2ee8c79d52dea88664a0087e71b3a65c9f))
+
+
+### BREAKING CHANGES
+
+* **dashboard:** Configuring the RT client through environment variables is no longer supported.
+
 ## [2022.5.1-dev.1](https://github.com/hmdc/sid2/compare/2022.4.26-dev.1...2022.5.1-dev.1) (2022-05-06)
 
 
