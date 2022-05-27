@@ -1,3 +1,13 @@
+## [2022.5.4-dev.1](https://github.com/hmdc/sid2/compare/2022.5.3-dev.1...2022.5.4-dev.1) (2022-05-27)
+
+
+* feat(dashboard) gh #731 send automated test support tickets to an alternate queue (#68) ([a8dfa15](https://github.com/hmdc/sid2/commit/a8dfa1570bf450cf9936cacfa0ac2733b6678121)), closes [#731](https://github.com/hmdc/sid2/issues/731) [#68](https://github.com/hmdc/sid2/issues/68) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731) [#731](https://github.com/hmdc/sid2/issues/731)
+
+
+### BREAKING CHANGES
+
+* Configuring the RT client through environment variables is no longer supported.
+
 ## [2022.5.3-dev.1](https://github.com/hmdc/sid2/compare/2022.5.2-dev.1...2022.5.3-dev.1) (2022-05-24)
 
 
