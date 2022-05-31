@@ -1,14 +1,14 @@
 # default build target
 all:: local
-.PHONY: test local remotedev staging-cannon prod-fasse prod-cannon landing
+.PHONY: test local remote-dev remote-fasse staging-cannon staging-fasse prod-cannon prod-fasse landing
 
 DOCKER_NODE_IMAGE := node:16
 DOCKER_CYPRESS_IMAGE := cypress/base:16.4.0
 WORKING_DIR := $(shell pwd)
 
-staging-fasse prod-fasse:  ENV := env no_proxy=.harvard.edu http_proxy=http://rcproxy.rc.fas.harvard.edu:3128 https_proxy=http://rcproxy.rc.fas.harvard.edu:3128
+remote-fasse staging-fasse prod-fasse:  ENV := env no_proxy=.harvard.edu http_proxy=http://rcproxy.rc.fas.harvard.edu:3128 https_proxy=http://rcproxy.rc.fas.harvard.edu:3128
 
-local remote-dev staging-fasse prod-fasse staging-cannon prod-cannon:
+local remote-dev remote-fasse staging-fasse prod-fasse staging-cannon prod-cannon:
 	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
 	cp -rf cypress.env.json.$(@) cypress.env.json
 	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec cypress/integration/fasrc-dashboard/*,cypress/integration/sid-dashboard/*
