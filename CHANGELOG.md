@@ -1,3 +1,10 @@
+## [2022.7.1](https://github.com/hmdc/sid2/compare/2022.5.2...2022.7.1) (2022-07-28)
+
+
+### Features
+
+* **dashboard:** gh [#775](https://github.com/hmdc/sid2/issues/775) document features in README.md ([#69](https://github.com/hmdc/sid2/issues/69)) ([2d7b3d3](https://github.com/hmdc/sid2/commit/2d7b3d3809cab36b042642d1ace8827d54e404c4)), closes [#698](https://github.com/hmdc/sid2/issues/698) [#698](https://github.com/hmdc/sid2/issues/698)
+
 ## [2022.5.2](https://github.com/hmdc/sid2/compare/2022.5.1...2022.5.2) (2022-05-27)
 
 
