@@ -1,5 +1,20 @@
 # Sid Dashboard for Open OnDemand
 
+## Features
+
+- **Navigation look and feel** - improved branding, styling, and menu text visibility
+- **Restricted applications** - limiting the visible items in the "Interactive Apps" menu
+- **Navigation** - customized menu items order and labels
+- **Custom navigation items** - additional top-level navigation menu items
+- **Quick launchers** - responsive, countoured, and informative quick launcher buttons
+- **Terminate job without removing session metadata** - to allow post-mortem job inspection
+- **Session panels on the dashboard home page** - quick access to launch and access jobs from the same page
+- **Enhanced session information** - additional details about job status and resources
+- **RT Ticket creation** - integration with Request Tracker for quick ticket creation, optionally with job context
+- **Custom welcome message per cluster** - to provide high-visibility information about the serivce
+- **Quick links** - responsive, countoured, and informative buttons linking to non-job resources and apps
+- **Homepage help text** - additional text to supplement or replace the MOTD and welcome message
+
 ## Launching the Sid Dashboard development environment
 
 The following will launch a Sid Dashboard development environment with:
