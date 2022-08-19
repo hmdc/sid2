@@ -1,3 +1,10 @@
+## [2022.8.1-dev.1](https://github.com/hmdc/sid2/compare/2022.7.1-dev.1...2022.8.1-dev.1) (2022-08-19)
+
+
+### Bug Fixes
+
+* **dashboard:** gh [#651](https://github.com/hmdc/sid2/issues/651) Fixed turbovnc version and template for local environment ([#56](https://github.com/hmdc/sid2/issues/56)) ([23c5a77](https://github.com/hmdc/sid2/commit/23c5a77fdde993e35e738aa2d4de148f54fa7230))
+
 ## [2022.7.1-dev.1](https://github.com/hmdc/sid2/compare/2022.5.4-dev.1...2022.7.1-dev.1) (2022-07-28)
 
 
