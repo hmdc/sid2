@@ -85,10 +85,22 @@ To thoroughly purge your Docker environment, also run `docker volume prune; dock
 
 The Sid Dashboard can be deployed to a "remote development" environment, i.e. a directory on an Open OnDemand server that has been [configured to support running development-mode apps](https://osc.github.io/ood-documentation/latest/app-development/enabling-development-mode.html).
 
-The default remote development deployment destination is your home directory on Harvard FASRC Cannon. For detailed deployment instructions see https://wiki.harvard.edu/confluence/display/HMDC/Deploying+Sid2+to+Remote+Dev . Deploying to other Open OnDemand installations will require editing the `Makefile`.
+### Cannon
+- Run `make remote-dev`. `make remote-dev` builds all required OOD/Ruby libs locally and exports built artifacts to FASRC. This task will prompt you for your FASRC credentials (password and pin) more than once as it retrieves files, creates/validates the pre-requisite directory structure, and deploys the app to your home directory. For detailed deployment instructions see https://wiki.harvard.edu/confluence/display/HMDC/Deploying+Sid2+to+Remote+Dev .
 
-- Run `make remote-dev`. `make remote-dev` builds all required OOD/Ruby libs locally and exports built artifacts to the remote development server. This task will prompt you for your SSH credentials (password and pin) twice as it creates/validates the pre-requisite directory structure as setup in your home directory.
+- This target does a verification of the local version of the `turbovnc` and `kvm` templates against Staging. If the files diverge, a warning message will be shown. If this is the case, raise an issue to update the templates with the latest version from production.
+
+- Once completed, visit:
+
+  https://vdi.rc.fas.harvard.edu/pun/dev/dashboard
+
+### FASSE
+- Run `make remote-fasse`. `make remote-fasse` builds as before and deploys to FASSE. This task will prompt you for your FASRC credentials (password and pin) more than once as it retrieves files, creates/validates the pre-requisite directory structure, and deploys the app to your home directory.
   
+- Once completed, visit:
+
+  https://fasseood.rc.fas.harvard.edu/pun/dev/dashboard
+
 ## Support Ticket Feature
 
 The Sid Dashboard supports creating tickets in Request Tracker using a simple point-and-click interface which collects contextual information about the relevant session and includes it in the ticket.
