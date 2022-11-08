@@ -6,7 +6,7 @@ profiles:
     navconfig_categories: ["Clusters", "Apps", "My Interactive Sessions", "Left Link", "Interactive Apps", "Files"]
 
     navbar_type: default
-    dashboard_header_img_logo: "/pun/dev/ood/sid_logo.png"
+    dashboard_header_img_logo: "/pun/dev/dashboard/sid_logo.png"
     brand_bg_color: "#F0F0F0"
     brand_link_active_bg_color: "#3B3D3F"
     disable_dashboard_logo: false
