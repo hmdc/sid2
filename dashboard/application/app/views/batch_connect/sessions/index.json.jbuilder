@@ -1,9 +1,1 @@
-#json.array! @sessions
-json.array!(@sessions) do |s|
-  json.connect s.connect if s.running? else { }
-  json.title s.title
-  json.job_id s.job_id
-  json.view s.view
-  json.status s.status
-  json.info s.info
-end
+json.array! @batch_connect_sessions, partial: 'batch_connect_sessions/batch_connect_session', as: :batch_connect_session

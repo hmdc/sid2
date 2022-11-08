@@ -1,40 +1,46 @@
 require "authz/app_developer_constraint"
 
 Rails.application.routes.draw do
+
+  if Configuration.jobs_app_alpha?
+    resources :projects do
+      root 'projects#index'
+      # resources :scripts
+    end
+  end
+
+  # in production, if the user doesn't have access to the files app directory, we hide the routes
+  if Configuration.can_access_files?
+    constraints filepath: /.+/, fs: /(?!(edit|api\/v1))[^\/]+/  do
+      get "files/:fs(/*filepath)" => "files#fs", :defaults => { :fs => 'fs', :format => 'html' }, :format => false, as: :files
+      put "files/:fs/*filepath" => "files#update", :format => false, :defaults => { :fs => 'fs', :format => 'json' }
+
+      # TODO: deprecate these routes after updating OodAppkit to use the new routes above
+      # backwards compatibility with the "api" routes that OodAppkit provides
+      # and are used by File Editor and Job Composer
+      get "files/api/v1/:fs(/*filepath)" => "files#fs", :defaults => { :fs => 'fs', :format => 'html' }, :format => false
+      put "files/api/v1/:fs/*filepath" => "files#update", :format => false, :defaults => { :fs => 'fs', :format => 'json' }
+    end
+    post "files/upload/:fs" => "files#upload", :defaults => { :fs => 'fs' }
+
+    get "files", to: redirect("files/fs#{Dir.home}")
+
+    resources :transfers, only: [:show, :create, :destroy]
+  end
+
+  if  Configuration.can_access_file_editor?
+    # App file editor
+    get "files/edit/:fs/*filepath" => "files#edit", defaults: { :fs => 'fs', :path => "/" , :format => 'html' }, format: false
+    get "files/edit/:fs" => "files#edit", :defaults => { :fs => 'fs', :path => "/", :format => 'html' }, format: false
+  end
+
   namespace :batch_connect do
-    resources :sessions, only: [:index, :destroy, :show]
+    resources :sessions, only: [:index, :destroy]
     scope "*token", constraints: { token: /((usr\/[^\/]+)|dev|sys)\/[^\/]+(\/[^\/]+)?/ } do
       resources :session_contexts, only: [:new, :create]
       root "session_contexts#new"
     end
   end
-  namespace :api do
-    resources :sessions, only: [:index, :destroy, :show]
-    scope "*token", constraints: { token: /((usr\/[^\/]+)|dev|sys)\/[^\/]+(\/[^\/]+)?/ } do
-      resources :session_contexts, only: [:new, :create]
-      root "session_contexts#new"
-    end
-  end
-
-  #NEW API ROUTES
-  namespace :ws do
-    get "/sessions", to: "get_sessions#get_all"
-    get "/sessions/:session_id", to: "get_sessions#get_session"
-    post "/sessions", to: "ws_sessions#create"
-    delete "/sessions/:session_id", to: "ws_sessions#delete_session"
-
-    get "/clusters", to: "ws_clusters#get"
-
-    get "/launchers", to: "ws_launchers#get"
-  end
-
-  #NEW SUPPORT ROUTES
-  get "/support", to: "support_ticket#new"
-  post "/support", to: "support_ticket#create"
-
-  get "/launchers", to: "quick_launch#index"
-  get "/launchers/sessions", to: "quick_launch#sessions_js"
-
   get "errors/not_found"
   get "errors/internal_server_error"
   get "dashboard/index"
@@ -46,17 +52,14 @@ Rails.application.routes.draw do
 
   get "apps/show/:name(/:type(/:owner))" => "apps#show", as: "app", defaults: { type: "sys" }
   get "apps/icon/:name(/:type(/:owner))" => "apps#icon", as: "app_icon", defaults: { type: "sys" }
-  get "apps/image/:name(/:type(/:owner))" => "apps#image", as: "app_image", defaults: { type: "sys" }
   get "apps/index" => "apps#index"
 
   if Configuration.app_sharing_enabled?
     get "apps/restart" => "apps#restart"
     get "apps/featured" => "apps#featured"
-
-    root "apps#featured"
-  else
-    root "quick_launch#index"
   end
+
+  root "dashboard#index"
 
   # App administration
   scope 'admin/:type', constraints: Authz::AppDeveloperConstraint do
@@ -75,6 +78,21 @@ Rails.application.routes.draw do
         post 'create_from_git_remote'
       end
     end
+  end
+
+  # ActiveJobs which can be disabled in production
+  if Configuration.can_access_activejobs?
+    get "/activejobs" => "active_jobs#index"
+    get "/activejobs/json" => "active_jobs#json", :defaults => { :format => 'json' }
+    delete "/activejobs" => "active_jobs#delete_job",  as: 'delete_job'
+  end
+
+  post "settings", :to => "settings#update"
+
+  # Support ticket routes
+  if Configuration.support_ticket_enabled?
+    get "/support", to: "support_ticket#new"
+    post "/support", to: "support_ticket#create"
   end
 
   match "/404", :to => "errors#not_found", :via => :all

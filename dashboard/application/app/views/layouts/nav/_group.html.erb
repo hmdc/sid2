@@ -1,24 +1,28 @@
-<li class="dropdown" title="<%= group.title %>" >
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= map_nav_item(group.title) %><span class="caret"></span></a>
+<li class="nav-item dropdown" title="<%= group.title %>">
+  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= group.title %><span class="caret"></span></a>
+
   <ul class="dropdown-menu">
-    <% OodAppGroup.groups_for(apps: group.apps, group_by: :subcategory).each_with_index do |g, index| %>
-      <%= content_tag "li", "", class: "divider", role: "separator" if index > 0 %>
-      <%= content_tag "li", g.title, class: "dropdown-header" unless g.title.empty? %>
+    <% OodAppGroup.groups_for(apps: group.apps, group_by: :subcategory, sort: group.sort).each_with_index do |g, index| %>
+      <%= content_tag(:li, nil, class: ["dropdown-divider"], role: "separator") if index > 0 %>
+      <%= content_tag(:li, g.title, class: ["dropdown-header"]) unless g.title.empty? %>
       <% g.apps.each do |app| %>
         <% app.links.each do |link| %>
           <li>
             <%=
               link_to(
-                map_nav_link?(app.name) ? sys_url(link.url.to_s) : link.url.to_s,
-                title: map_nav_item(link.title),
-                target: link.new_tab? ? "_blank" : nil
+                link.url.to_s,
+                title: link.title,
+                class: "dropdown-item",
+                target: link.new_tab? ? "_blank" : nil,
+                aria: ({ current: ('page' if (current_page?(link.url))) }),
+                data: link.data
               ) do
             %>
-              <%= icon_tag(link.icon_uri) %> <%= map_nav_item(link.title) %>
-              <% if link.subtitle.present? %>
-                <%= content_tag(:small, link.subtitle, style: "text-indent: 20px", class: 'visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline') %>
-              <% end %>
+            <%= icon_tag(link.icon_uri) %> <%= link.title %>
+            <% if link.subtitle.present? %>
+              <%= content_tag(:small, link.subtitle, style: "text-indent: 20px", class: 'visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline') %>
             <% end %>
+          <% end %>
           </li>
         <% end %>
       <% end %>

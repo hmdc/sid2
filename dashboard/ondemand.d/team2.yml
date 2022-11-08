@@ -1,0 +1,18 @@
+profiles:
+  team2: &team2_profile
+    show_all_apps_link: true
+    custom_css_files: []
+    navbar_type: dark
+    dashboard_header_img_logo: "/pun/dev/dashboard/fasrc_logo.png"
+    brand_bg_color: " rgb(157,47,60)"
+    brand_link_active_bg_color: "rgb(59, 61, 63)"
+    disable_dashboard_logo: false
+    pinned_apps_group_by:
+    pinned_apps:
+      - "*"
+    dashboard_layout:
+      rows:
+        - columns:
+            - width: 12
+              widgets:
+                - "pinned_apps"

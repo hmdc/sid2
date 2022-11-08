@@ -1,19 +1,17 @@
 require_relative 'boot'
 
-# require "rails"
-
-# This is not loaded in rails/all but inside active_record so add it if
-# you want your models work as expected
-require "active_model/railtie" 
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
 require "active_job/railtie"
-# require "active_record/railtie"  # Enable if we start using ActiveRecord
-
-# And now the rest
+# require "active_record/railtie"
+# require "active_storage/engine"
 require "action_controller/railtie"
 require "action_mailer/railtie"
+# require "action_mailbox/engine"
+# require "action_text/engine"
 require "action_view/railtie"
-# require "action_cable/engine"  # Enable if we start using ActionCable (websockets)
-# require "active_storage/engine"  # Enable if we start using ActiveRecord
+# require "action_cable/engine"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
 
@@ -23,22 +21,25 @@ Bundler.require(*Rails.groups)
 
 module Dashboard
   class Application < Rails::Application
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 6.1
 
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    # Locales are handled in config/initializers/locales.rb.
 
     # Custom error pages
     config.exceptions_app = self.routes
 
     if ::Configuration.load_external_config?
+      # Ensuring OOD initializers run last so that user's cannot override what we 
+      # specify unless we allow the override as well in our own initializers.
       config.paths["config/initializers"] << ::Configuration.config_root.join("initializers").to_s
       config.paths["app/views"].unshift ::Configuration.config_root.join("views").to_s
     end

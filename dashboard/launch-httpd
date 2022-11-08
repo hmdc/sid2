@@ -8,7 +8,7 @@ if [ -f "/home/ood/ondemand/dev/dashboard/Gemfile" ]; then
 	echo "<<SID2>> Dashboard app detected, running bundle."
 	cd /home/ood/ondemand/dev/dashboard
 	PATH=/home/ood/bin:$PATH
-	env PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$PATH su ood bash -c "scl enable rh-ruby27 rh-nodejs12 'gem install --user-install bundler -v 2.1.4 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
+	env PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$PATH su ood bash -c "scl enable rh-ruby27 rh-nodejs12 'bin/bundle config path --local vendor/bundle && env RAILS_RELATIVE_URL_ROOT=/pun/dev/dashboard bin/setup'"
 fi
 
 if [ -f "/var/www/ood/apps/sys/sid/Gemfile" ]; then

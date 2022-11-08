@@ -1,9 +1,12 @@
 require 'yaml'
 
+# Manifests provide metadata for applications (OodApps).
 class Manifest
 
   attr_reader :exception
 
+  # InvalidContentError is an error helper class to give users a nice
+  # error message when there are validation errors.
   class InvalidContentError < StandardError
     def initialize
       super %q(Manifest is not formatted correctly! 
@@ -32,7 +35,9 @@ category: OSC
 
   def self.load(yaml_path)
     if File.exist? yaml_path
-      Manifest.new(YAML.load_file yaml_path)
+      File.open(yaml_path) do |content|
+        Manifest.new(YAML.safe_load(content))
+      end
     else
       MissingManifest.new({})
     end
@@ -45,23 +50,26 @@ category: OSC
   end
 
   def self.load_from_string(yaml)
-    Manifest.new(YAML.load(yaml))
+    Manifest.new(YAML.safe_load(yaml))
   rescue Exception => e
     InvalidManifest.new(e)
   end
 
-  # @param [Hash, Manifest] opts A hash of the options in the manifest
-  # @option opts [String] :name The name of the application
-  # @option opts [String] :description The description of the application
-  # @option opts [String] :category The category of the application
-  # @option opts [String] :subcategory The subcategory of the application
-  # @option opts [String] :icon The icon used on the dashboard, optionally a Font Awesome tag
-  # @option opts [String] :role Dashboard categorization
-  # @option opts [String] :url An optional redirect URL
+  # @param [Hash, Manifest] opts A hash of the options in the manifest.
+  # @option opts [String] :name The name of the application.
+  # @option opts [String] :description The description of the application.
+  # @option opts [String] :category The category of the application.
+  # @option opts [String] :subcategory The subcategory of the application.
+  # @option opts [String] :icon The icon used on the dashboard, optionally a Font Awesome tag.
+  # @option opts [String] :role Dashboard categorization.
+  # @option opts [String] :url An optional redirect URL.
+  # @option opts [Hash]   :metadata An optional hash of key value pairs.
   def initialize(opts)
     raise InvalidContentError.new unless(opts && opts.respond_to?(:to_h))
 
-    @manifest_options = opts.to_h.with_indifferent_access
+    @manifest_options = opts.to_h.with_indifferent_access.select do |method, _val| 
+      respond_to?(method)
+    end
   end
 
   # The name of the application
@@ -113,6 +121,27 @@ category: OSC
     @manifest_options[:role] || ""
   end
 
+  # Return the app metadata
+  #
+  # @return [Hash] metadata as a hash
+  def metadata
+    @manifest_options[:metadata] || {}
+  end
+
+  # Return the app's hint of whether to open app in new window
+  #
+  # @return [Boolean, nil] if set, Boolean value, otherwise nil
+  def new_window
+    @manifest_options[:new_window]
+  end
+
+  # Return the app's caption
+  #
+  #  @return [String] caption as string
+  def caption
+    @manifest_options[:caption].to_s
+  end
+
   # Manifest objects are valid
   #
   # @return [true] Always return true
@@ -133,7 +162,6 @@ category: OSC
   #
   # @return [true, false] true if the file is saved successfully
   def save(path)
-
     Pathname.new(path).write(self.to_yaml)
 
     true
@@ -164,39 +192,37 @@ category: OSC
   #
   # @return [String] The populated contents of the object as YAML string.
   def to_yaml
-    self.to_h.compact.to_yaml
+    self.to_h.deep_stringify_keys.compact.to_yaml
   end
 
+  class InvalidManifest < Manifest
+
+    def initialize(exception)
+      super({})
+
+      @exception = exception
+    end
+
+    def valid?
+      false
+    end
+
+    def save(path)
+      false
+    end
+  end
+
+  class MissingManifest < Manifest
+    def valid?
+      false
+    end
+
+    def exist?
+      false
+    end
+
+    def save(path)
+      false
+    end
+  end
 end
-
-class InvalidManifest < Manifest
-
-  def initialize(exception)
-    super({})
-
-    @exception = exception
-  end
-
-  def valid?
-    false
-  end
-
-  def save(path)
-    false
-  end
-end
-
-class MissingManifest < Manifest
-  def valid?
-    false
-  end
-
-  def exist?
-    false
-  end
-
-  def save(path)
-    false
-  end
-end
-

@@ -39,14 +39,18 @@ services:
       - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
+      - ./launch-httpd:/usr/local/bin/launch-httpd
       - ./dashboard.conf:/var/lib/ondemand-nginx/config/apps/dev/ood/dashboard.conf
       - ./application/launchers/Rstudio:/var/www/ood/apps/sys/Rstudio
       - ./application/launchers/OdysseyRD:/var/www/ood/apps/sys/OdysseyRD
+      - ./application/launchers/RBigMemory:/var/www/ood/apps/sys/RBigMemory
+      - ./application/launchers/sas:/var/www/ood/apps/sys/sas
       - ./data:/home/ood/ondemand/data:rw
       - ./application:/home/ood/ondemand/dev/dashboard:rw
       - ./dev-cluster.yml:/etc/ood/config/clusters.d/dev-cluster.yml
-      - ./status.md:/etc/ood/config/announcements.d/01_status.md
       - ./apache/timeout.conf:/opt/rh/httpd24/root/etc/httpd/conf.d/timeout.conf
+      - ./ondemand.d:/etc/ood/config/ondemand.d
+      - ./application/app/assets/images:/var/www/ood/public/images
     ports:
       - "33000:443"
     expose:

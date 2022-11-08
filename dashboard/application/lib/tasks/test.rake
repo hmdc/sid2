@@ -1,4 +1,5 @@
 namespace :test do
+
   namespace :jobs do
     WORKDIR = Pathname.new(ENV["WORKDIR"] || "~/test_jobs").expand_path
 
@@ -58,4 +59,14 @@ namespace :test do
 
   desc "Test all clusters"
   task :jobs => "jobs:all"
+end
+
+# this is dangerous to run in production (/var/www/ood/apps/sys/dashboard)
+# because test:prepare downloads & compiles javascript & css assets.
+Rake::Task['test:prepare'].clear if ARGV.include?('test:jobs') && Rake::Task.task_defined?('test:prepare')
+
+
+# unit tests need the assets compiled too.
+if Rake::Task.task_defined?('test')
+  Rake::Task['test'].enhance(['assets:clobber', 'javascript:build', 'css:build'])
 end

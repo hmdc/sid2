@@ -1,6 +1,9 @@
- require "smart_attributes"
+require "smart_attributes"
 
 module BatchConnect
+  # This is the model representing a batch connect app. It's mostly a data object
+  # holding and interpreting the configurations (notable form.yml.erb) and rendering
+  # submit options based off of what's been chosen by the user.
   class App
     # Router for a deployed batch connect app
     # @return [DevRouter, UsrRouter, SysRouter] router for batch connect app
@@ -9,6 +12,8 @@ module BatchConnect
     # The sub app
     # @return [String, nil] sub app
     attr_accessor :sub_app
+
+    delegate :type, :category, :subcategory, :metadata, to: :ood_app
 
     # Raised when batch connect app components could not be found
     class AppNotFound < StandardError; end
@@ -102,15 +107,24 @@ module BatchConnect
       ood_app.manifest.description
     end
 
+    def icon_uri
+      form_config.fetch(:icon_uri, ood_app.icon_uri)
+    end
+
+    def caption
+      form_config.fetch(:caption, ood_app.caption)
+    end
+
     def link
       OodAppLink.new(
         # FIXME: better to use default_title and "" description
         title: title,
         description: description,
-        url: Rails.application.routes.url_helpers.new_batch_connect_session_context_path(token: token),
-        icon_uri: ood_app.icon_uri,
-        caption: ood_app.caption,
-        new_tab: false
+        url: url,
+        icon_uri: icon_uri,
+        caption: caption,
+        new_tab: false,
+        data: preset? ? { 'method': 'post' } : {}
       )
     end
 
@@ -122,29 +136,51 @@ module BatchConnect
         .map { |c| c.to_s.strip }
         .compact
     end
+    
+    # Read in context from cache file if cache is disabled and context.json exist
+    def update_session_with_cache(session_context, cache_file)
+      cache = cache_file.file? ? JSON.parse(cache_file.read) : {}
+      cache.delete('cluster') if delete_cached_cluster?(cache['cluster'].to_s)
 
-    # Wheter the cluster is allowed or not based on the configured
-    # clusters and if the cluster allows jobs (job_allow?)
-    #
-    # @return [Boolean] whether the cluster is allowed or not
-    def cluster_allowed(cluster)
-      cluster.job_allow? && configured_clusters.any? do |pattern|
-        File.fnmatch(pattern, cluster.id.to_s, File::FNM_EXTGLOB)
-      end
+      session_context.update_with_cache(cache)
+    end
+
+    def delete_cached_cluster?(cached_cluster)
+
+      # if you've cached a cluster that no longer exists
+      !OodAppkit.clusters.include?(cached_cluster) ||
+        # OR the app only has 1 cluster, and it's changed since the previous cluster was cached.
+        # I.e., admin wants to override what you've cached.
+        (self.clusters.size == 1 && self.clusters[0] != cached_cluster)
     end
 
     # The clusters that the batch connect app can use. It's a combination
     # of what the app is configured to use and what the user is allowed
-    # to use.
-    # @return [OodCore::Clusters] clusters available to the app user
+    # to use. If the app has clusters configured, it preserves the order
+    # when it can. glob configurations' order may be platform dependent.
+    #
+    # @return [Array<OodCore::Cluster>] clusters available to the app user
     def clusters
-      OodAppkit.clusters.select { |cluster| cluster_allowed(cluster) }
+      @clusters ||=
+        configured_clusters.map do |config|
+          cfg_to_clusters(config)
+        end.flatten.compact.select(&:job_allow?)
+    end
+
+    def preset?
+      valid? && attributes.all?(&:fixed?)
     end
 
     # Whether this is a valid app the user can use
     # @return [Boolean] whether valid app
     def valid?
       if form_config.empty?
+        false
+      elsif !form_config.fetch(:form, []).is_a?(Array)
+        @validation_reason = I18n.t('dashboard.batch_connect_invalid_form_array')
+        false
+      elsif !form_config.fetch(:attributes, {}).is_a?(Hash)
+        @validation_reason = I18n.t('dashboard.batch_connect_invalid_form_attributes')
         false
       elsif configured_clusters.any?
         clusters.any?
@@ -167,41 +203,62 @@ module BatchConnect
         ""
       end
     end
-    
+
+    def attributes
+      @attributes ||= begin
+        return [] unless valid?
+
+        local_attribs = form_config.fetch(:attributes, {})
+        attrib_list   = form_config.fetch(:form, [])
+        add_cluster_widget(local_attribs, attrib_list)
+
+        attrib_list.map do |attribute_id|
+          attribute_opts = local_attribs.fetch(attribute_id.to_sym, {})
+
+          # Developer wanted a fixed value
+          attribute_opts = { value: attribute_opts, fixed: true } unless attribute_opts.is_a?(Hash)
+
+          # Hide resolution if not using native vnc clients
+          attribute_opts = { value: nil, fixed: true } if attribute_id.to_s == "bc_vnc_resolution" && !ENV["ENABLE_NATIVE_VNC"]
+
+          SmartAttributes::AttributeFactory.build(attribute_id, attribute_opts)
+        end
+      end
+    end
+
     # The session context described by this batch connect app
     # @return [SessionContext] the session context
     def build_session_context
-
-      local_attribs = form_config.fetch(:attributes, {})
-      attrib_list   = form_config.fetch(:form, [])
-      add_cluster_widget(local_attribs, attrib_list)
-      attributes = attrib_list.map do |attribute_id|
-        attribute_opts = local_attribs.fetch(attribute_id.to_sym, {})
-
-        # Developer wanted a fixed value
-        attribute_opts = { value: attribute_opts, fixed: true } unless attribute_opts.is_a?(Hash)
-
-        # Hide resolution if not using native vnc clients
-        attribute_opts = { value: nil, fixed: true } if attribute_id.to_s == "bc_vnc_resolution" && !ENV["ENABLE_NATIVE_VNC"]
-
-        SmartAttributes::AttributeFactory.build(attribute_id, attribute_opts)
-      end
-
-     BatchConnect::SessionContext.new(attributes, form_config.fetch(:cacheable, nil)  ) #form_config.fetch(:cacheable, nil)  
-       
+      attributes.each(&:validate!)
+      BatchConnect::SessionContext.new(attributes, form_config.fetch(:cacheable, nil))
     end
 
     #
     # Generate a hash of the submission options
     # @param session_context [SessionContext] object with attributes
     # @param fmt [String, nil] formatting used for attributes in submit hash
+    # @param staged_root [String, nil] the staged_root you want to pass into the submit_opts
     # @return [Hash] hash of submission options
-    def submit_opts(session_context, fmt: nil)
+    def submit_opts(session_context, fmt: nil, staged_root: nil)
       hsh = {}
       session_context.each do |attribute|
         hsh = hsh.deep_merge attribute.submit(fmt: fmt)
       end
-      hsh = hsh.deep_merge submit_config(binding: session_context.get_binding)
+
+      struct = session_context.to_openstruct(addons: { staged_root: staged_root })
+      ctx_binding = struct.instance_eval { binding }
+      hsh.deep_merge(submit_config(binding: ctx_binding))
+
+    # let's write the file out if it's a submit.yml.erb that isn't valid yml
+    rescue Psych::SyntaxError => e
+      unless staged_root.nil?
+        yml = submit_file(root: root)
+        bad_content = render_erb_file(path: yml, contents: yml.read, binding: ctx_binding)
+        Pathname.new(staged_root).tap { |p| p.mkpath unless p.exist? }
+        File.open("#{staged_root}/submit.yml", 'w+') { |file| file.write(bad_content) }
+      end
+
+      raise e
     end
 
     # View used for session if it exists
@@ -214,14 +271,9 @@ module BatchConnect
     # View used for session info if it exists
     # @return [String, nil] session info
     def session_info_view
-      Pathname.new(root).glob("info.{md,html}.erb").find(&:file?).try(:read)
-    end
-
-    # View used for session if it exists
-    # @return [String, nil] session view
-    def launcher_button
-      file = root.join("launcher_button.yml")
-      read_yaml_erb(path: file) if file.file?
+      @session_info_view ||= Pathname.new(root).glob("info.{md,html}.erb").find(&:file?).try(:read)
+    rescue
+      nil
     end
 
     # Paths to custom javascript files
@@ -259,6 +311,27 @@ module BatchConnect
     end
 
     private
+
+      def url
+        helpers = Rails.application.routes.url_helpers
+
+        if preset?
+          helpers.batch_connect_session_contexts_path(token: token)
+        else
+          helpers.new_batch_connect_session_context_path(token: token)
+        end
+      end
+
+      def cfg_to_clusters(config)
+        c = OodAppkit.clusters[config.to_sym] || nil
+        return [c] unless c.nil?
+
+        # cluster may be a glob at this point
+        OodAppkit.clusters.select do |cluster|
+          File.fnmatch(config, cluster.id.to_s, File::FNM_EXTGLOB)
+        end
+      end
+
       def build_sub_app_list
         return [self] unless sub_app_root.directory? && sub_app_root.readable? && sub_app_root.executable?
         list = sub_app_root.children.select(&:file?).map do |f|
@@ -312,7 +385,7 @@ module BatchConnect
       rescue AppNotFound => e
         @validation_reason = e.message
         return {}
-      rescue => e
+      rescue StandardError, Exception => e
         @validation_reason = "#{e.class.name}: #{e.message}"
         return {}
       end
@@ -338,7 +411,7 @@ module BatchConnect
       # add a widget for choosing the cluster if one doesn't already exist
       # and if users aren't defining they're own form.cluster and attributes.cluster
       def add_cluster_widget(attributes, attribute_list)
-        return unless configured_clusters.any?
+        return unless clusters.any?
 
         attribute_list.prepend("cluster") unless attribute_list.include?("cluster")
 
@@ -346,12 +419,12 @@ module BatchConnect
           attributes[:cluster] = {
             widget: "select",
             label: "Cluster",
-            options: clusters.map { |cluster| cluster.id.to_s }
+            options: clusters.map(&:id)
           }
         else
           attributes[:cluster] = {
             value: clusters.first.id.to_s,
-            widget: "hidden_field"
+            fixed: true
           }
         end
       end

@@ -1,61 +1,73 @@
 <!DOCTYPE html>
 <html lang="<%= Configuration.locale %>">
 <head>
-  <title><%= content_for?(:title) ? yield(:title) : "Dashboard" %></title>
-  <%= favicon_link_tag 'favicon.ico', href: OodAppkit.public.url.join('favicon.ico'), skip_pipeline: true %>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= javascript_include_tag 'turbolinks' if Configuration.turbolinks_enabled? %>
+  <title><%= content_for?(:title) ? yield(:title) : "Dashboard - #{@user_configuration.dashboard_title}" %></title>
+  <%= favicon_link_tag 'favicon.ico', href: @user_configuration.public_url.join('favicon.ico'), skip_pipeline: true %>
+
+  <%= javascript_include_tag 'application', nonce: true %>
+  <%= stylesheet_link_tag 'application', nonce: content_security_policy_nonce, media: 'all' %>
+  <% custom_css_paths.each do |path| %>
+    <link rel="stylesheet" media="all" href="<%= path %>" nonce="<%= content_security_policy_nonce %>" />
+  <% end %>
+
   <%= csrf_meta_tags %>
 
   <%= yield :head %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <% if Configuration.turbolinks_enabled? %>
-    <meta name="turbolinks-root" content="<%= ENV['RAILS_RELATIVE_URL_ROOT'] || "/" %>">
-  <% end %>
-<%= render partial: '/layouts/nav/styles', locals: { bg_color: Configuration.brand_bg_color, link_active_color: Configuration.brand_link_active_bg_color } %>
+
+  <!-- configuration options exposed to javascript -->
+  <meta id="ood_config"
+    data-bg-color="<%= @user_configuration.brand_bg_color %>"
+    data-link-bg-color="<%= @user_configuration.brand_link_active_bg_color %>"
+  />
 </head>
 <body>
-  <header <%= 'data-turbolinks-permanent' if Configuration.turbolinks_enabled? %>>
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a class="navbar-brand navbar-brand-logo" href="<%= root_path %>">
-          <%= image_tag( "sid_logo.png", alt: "Sid Open OnDemand", height: "40") %>
-        </a>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
-        <ul class="nav navbar-nav">
-          <%= render partial: 'layouts/nav/group', collection: @nav_groups %>
-          <%= render partial: 'layouts/nav/sessions', nav_groups: @nav_groups if Configuration.app_development_enabled? || @nav_groups.any?(&:has_batch_connect_apps?) %>
-          <%= render partial: 'layouts/nav/all_apps' if Configuration.show_all_apps_link? %>
+  <header>
+    <nav class="navbar navbar-expand-md shadow-sm navbar-color navbar-<%= @user_configuration.navbar_type %>" aria-label="Navigation">
+    <% if @user_configuration.dashboard_header_img_logo %>
+      <a class="navbar-brand navbar-brand-logo" href="<%= root_path %>"><img class="img-fluid" src="<%= @user_configuration.dashboard_header_img_logo %>" alt="<%= @user_configuration.dashboard_title %>"></a>
+    <% else %>
+      <a class="navbar-brand" href="<%= root_path %>"><%= @user_configuration.dashboard_title %></a>
+    <% end %>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <% if @nav_bar.empty? %>
+            <%= render partial: 'layouts/nav/featured_apps' if @featured_group.present? %>
+            <%= render partial: 'layouts/nav/group', collection: @nav_groups %>
+            <%= render partial: 'layouts/nav/sessions', nav_groups: @nav_groups if Configuration.app_development_enabled? || @nav_groups.any?(&:has_batch_connect_apps?) %>
+            <%= render partial: 'layouts/nav/all_apps' if @user_configuration.show_all_apps_link %>
+          <% else %>
+            <%= render partial: "layouts/nav/custom_navigation", locals: { navigation: @nav_bar }%>
+          <% end %>
         </ul>
-        <div class="navbar-right">
-          <ul class="nav navbar-nav">
-            <%= render partial: 'layouts/nav/sid_menu' %>
-          </ul>
-          <ul class="nav navbar-nav">
+
+        <ul class="navbar-nav">
+          <% if @help_bar.empty? %>
             <%= render partial: 'layouts/nav/develop_dropdown' if Configuration.app_development_enabled? %>
             <%= render partial: "layouts/nav/help_dropdown" %>
-          </ul>
-          <p class="navbar-text" data-toggle="popover" data-content="<%= t('dashboard.nav_user', username: @user.name) %>" data-placement="bottom" >
-            <i class="fas fa-user" title="<%= t('dashboard.nav_user', username: @user.name) %>" aria-hidden="true"></i>
-            <span class="hidden-sm hidden-md"> <%= t('dashboard.nav_user', username: @user.name) %></span>
-          </p>
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="hidden-sm"> <%= t('dashboard.nav_logout') %></span></a>
-            </li>
-          </ul>
-        </div>
+            <%= render partial: "layouts/nav/user" %>
+            <%= render partial: "layouts/nav/log_out" %>
+          <% else %>
+            <%= render partial: "layouts/nav/custom_navigation", locals: { navigation: @help_bar }%>
+          <% end %>
+        </ul>
       </div>
-    </div>
-  </nav>
+    </nav>
   </header>
 
-  <div class="container content" role="main">
+  <div class="<%= local_assigns[:layout_container_class] || 'container-md' %> content mt-4" role="main">
+
+    <% @announcements.select(&:valid?).each do |announcement| %>
+      <div class="alert alert-<%= announcement.type %> announcement" role="alert">
+        <%= raw OodAppkit.markdown.render(announcement.msg) %>
+      </div>
+    <% end %>
 
     <%= render "layouts/browser_warning" %>
 
@@ -63,7 +75,7 @@
     <%= render partial: "shared/insufficient_balance", locals: { balances: @my_balances } if @my_balances && @my_balances.any? %>
     <%= render partial: "shared/bad_cluster_config" if invalid_clusters.any? %>
 
-    <script type="text/coffee-script-template" id="js-alert-danger-template">
+    <div id="js-alert-danger-template" class="d-none" aria-hidden="true">
       <div class="alert alert-danger alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert">
           <span aria-hidden="true">&times;</span>
@@ -71,7 +83,7 @@
         </button>
         ALERT_MSG
       </div>
-    </script>
+    </div>
 
     <% if alert %>
       <div class="alert alert-danger alert-dismissible" role="alert">

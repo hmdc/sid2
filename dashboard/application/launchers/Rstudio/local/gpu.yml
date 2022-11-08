@@ -1,0 +1,23 @@
+---
+cluster: "dev-cluster"
+title: "RStudio not in NAV"
+caption: "Caption override from form"
+icon_uri: fa://question-circle
+show_in_nav: false
+
+metadata:
+  pinned_app:
+    title: "Run Big NOT IN NAV"
+    icon_uri: fa://desktop
+    color: "#DA6027"
+    sub_title: |
+      1 CPU core and 8GB RAM
+      8 hours job run time
+      Dev cluster
+
+attributes:
+  bc_account: ""
+  bc_queue: ""
+  bc_num_hours: ""
+  bc_num_slots: ""
+  bc_email_on_started: ""

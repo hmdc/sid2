@@ -1,4 +1,6 @@
 module BatchConnect
+  # An active batch connect session. Once a batch connect app launches, we use
+  # this class to hold it's runtime attributes.
   class Session
     include ActiveModel::Model
     include ActiveModel::Serializers::JSON
@@ -25,10 +27,6 @@ module BatchConnect
     # @return [String] job id
     attr_accessor :job_id
 
-    # Additional information about the job. Requested using sacct command in Slurm
-    # Populated when the job is completed
-    attr_accessor :completion_info
-
     # When this session was created at as a unix timestamp
     # @return [Integer] created at
     attr_accessor :created_at
@@ -45,10 +43,6 @@ module BatchConnect
     # @return [String, nil] session view
     attr_accessor :view
 
-    # The view used to display custom info for this session
-    # @return [String, nil] session info
-    attr_accessor :info_view
-
     # Batch connect script type
     # @return [String] script type
     attr_accessor :script_type
@@ -60,19 +54,30 @@ module BatchConnect
     # @return [Boolean] true if job is completed
     attr_accessor :cache_completed
 
-    # Used to flag if a session was cancelled
-    attr_accessor :cancelled
+    # Error message about failing to parse info view ERB template.
+    # @return [String] error message
+    attr_reader :render_info_view_error_message
 
-    # Used to redirect to a different view on delete
-    attr_accessor :redirect
+    # Return parsed markdown from info.{md, html}.erb
+    # @return [String, nil] return HTML if no error while parsing, else return nil
+    def render_info_view
+      @render_info_view ||= OodAppkit.markdown.render(ERB.new(self.app.session_info_view, nil, "-").result(binding)).html_safe if self.app.session_info_view
+    rescue => e
+      @render_info_view_error_message = "Error when rendering info view: #{e.class} - #{e.message}"
+      Rails.logger.error(@render_info_view_error_message)
+      nil
+    end
 
-    # How many days before a Session record is considered old and ready to delete
-    OLD_IN_DAYS=7
+    # Return the Batch Connect app from the session token
+    # @return [BatchConnect::App]
+    def app
+      BatchConnect::App.from_token(self.token)
+    end
 
     # Attributes used for serialization
     # @return [Hash] attributes to be serialized
     def attributes
-      %w(id cluster_id job_id completion_info created_at token title view info_view script_type cache_completed cancelled).map do |attribute|
+      %w(id cluster_id job_id created_at token title view script_type cache_completed).map do |attribute|
         [ attribute, nil ]
       end.to_h
     end
@@ -83,12 +88,16 @@ module BatchConnect
       end if params
     end
 
+    def valid_session_fields?
+      !( created_at.nil? || cluster_id.nil? || job_id.nil? )
+    end
+
     class << self
       # The data root directory for this namespace
       # @param token [#to_s] The data root directory for a given app token
       # @return [Pathname] data root directory
-      def dataroot(token = "")
-        OodAppkit.dataroot.join("batch_connect", token.to_s)
+      def dataroot(token = "", cluster: nil)
+        OodAppkit.dataroot.join('batch_connect').join(cluster.to_s).join(token.to_s)
       end
 
       # Root directory for file system database
@@ -97,10 +106,18 @@ module BatchConnect
         dataroot.join("db").tap { |p| p.mkpath unless p.exist? }
       end
 
+      # Root directory for file system database
+      # @return [Pathname] the cache directory
+      def cache_root
+        dataroot.join('cache').tap { |p| p.mkpath unless p.exist? }
+      end
+
       # Find all active session jobs
       # @return [Array<Session>] list of sessions
       def all
-        db_root.children.select(&:file?).reject {|p| p.extname == ".bak"}.map { |f|
+        db_root.children.select(&:file?).reject do |p| 
+          p.extname == ".bak"
+        end.map do |f|
           begin
             new.from_json(f.read)
           rescue => e
@@ -108,13 +125,14 @@ module BatchConnect
             f.rename("#{f}.bak")
             nil
           end
-        }.compact.map { |s|
-          Rails.logger.info s
+        end.compact.select do |s| 
+          s.valid_session_fields? 
+        end.map do |s|
           (s.completed? && s.old? && s.destroy) ? nil : s
-        }.compact.sort_by {|s|
+        end.compact.sort_by do |s|
           # sort by completed status, then created_at date
           [s.completed? ? 0 : 1, s.created_at]
-        }.reverse
+        end.reverse
       end
 
       # Find requested session job
@@ -123,8 +141,15 @@ module BatchConnect
         new.from_json(db_root.join(id).read)
       end
 
-      def exist(id)
+      # Checks if a session exists
+      # @return [boolean]
+      def exist?(id)
         db_root.join(id).exist?
+      end
+
+      # How many days before a Session record is considered old and ready to delete
+      def old_in_days
+        Configuration.ood_bc_card_time
       end
     end
 
@@ -143,14 +168,14 @@ module BatchConnect
       nil
     end
 
-    # Return true if session record has not been modified in OLD_IN_DAYS days
+    # Return true if session record has not been modified in old_in_days days
     #
     # @return [Boolean] true if old, false otherwise
     def old?
       if modified_at.nil?
         false
       else
-        modified_at < self.class::OLD_IN_DAYS.days.ago.to_i
+        modified_at < self.class.old_in_days.days.ago.to_i
       end
     end
 
@@ -164,7 +189,7 @@ module BatchConnect
       if modified_at.nil? || old?
         0
       else
-        (modified_at - self.class::OLD_IN_DAYS.days.ago.to_i)/(1.day.to_i)
+        (modified_at - self.class.old_in_days.days.ago.to_i)/(1.day.to_i)
       end
     end
 
@@ -205,16 +230,15 @@ module BatchConnect
       self.token      = app.token
       self.title      = app.title
       self.view       = app.session_view
-      self.info_view  = app.session_info_view
       self.created_at = Time.now.to_i
+      self.cluster_id = context.try(:cluster).to_s
 
-      submit_script = app.submit_opts(context, fmt: format) # could raise an exception
+      submit_script = app.submit_opts(context, fmt: format, staged_root: staged_root) # could raise an exception
 
-      self.cluster_id = submit_script.fetch(:cluster, context.try(:cluster)).to_s
-      raise(ClusterNotFound, I18n.t('dashboard.batch_connect_missing_cluster')) unless self.cluster_id.present?
+      self.cluster_id = submit_script.fetch(:cluster, cluster_id).to_s
+      raise(ClusterNotFound, I18n.t('dashboard.batch_connect_missing_cluster')) unless cluster_id.present?
 
-      stage(app.root.join("template"), context: context) &&
-        submit(submit_script)
+      stage(app.root.join("template"), context: context) && submit(submit_script)
     rescue => e   # rescue from all standard exceptions (app never crashes)
       errors.add(:save, e.message)
       Rails.logger.error("ERROR: #{e.class} - #{e.message}")
@@ -226,6 +250,8 @@ module BatchConnect
     # @param context [Object] context available when rendering staged files
     # @return [Boolean] whether staged successfully
     def stage(root, context: nil)
+      staged_root.tap { |p| p.mkpath unless p.exist? }
+
       # Sync the template files over
       oe, s = Open3.capture2e("rsync", "-a", "#{root}/", "#{staged_root}")
       raise oe unless s.success?
@@ -259,7 +285,7 @@ module BatchConnect
 
       # Submit job script
       self.job_id = adapter.submit script(content: content, options: options)
-      db_file.write(to_json)
+      db_file.write(to_json, perm: 0o0600)
       true
     rescue => e   # rescue from all standard exceptions (app never crashes)
       errors.add(:submit, e.message)
@@ -277,7 +303,7 @@ module BatchConnect
       content = opts.fetch(:content, "")
       options = opts.fetch(:options, {})
 
-      OodCore::Job::Script.new(options.merge(content: content))
+      OodCore::Job::Script.new(**options.merge(content: content))
     end
 
     # The content of the batch script used for this session
@@ -315,16 +341,15 @@ module BatchConnect
       }.merge opts
     end
 
+    def vnc?
+      script_type == "vnc" || script_type == "vnc_container"
+    end
+
     # Delete this session's job and database record
     # @return [Boolean] whether successfully deleted
-    def destroy(delete_data = true)
+    def destroy
       adapter.delete(job_id) unless completed?
-      if delete_data
-        db_file.delete
-      else
-        self.cancelled = true
-        db_file.write(to_json)
-      end
+      db_file.delete
       true
     rescue ClusterNotFound, AdapterNotAllowed, OodCore::JobAdapterError => e
       errors.add(:delete, e.message)
@@ -347,7 +372,7 @@ module BatchConnect
     # Force update the job's info
     # @return [OodCore::Job::Info] info object
     def update_info
-      if cache_completed || cancelled
+      if cache_completed
         @info = OodCore::Job::Info.new(id: job_id, status: :completed)
       else
         @info = adapter.info(job_id)
@@ -360,7 +385,6 @@ module BatchConnect
 
     def update_cache_completed!
       if (! cache_completed) && completed?
-        self.completion_info = adapter.completion_info(job_id)
         self.cache_completed = true
         db_file.write(to_json)
       end
@@ -393,7 +417,11 @@ module BatchConnect
     # Whether job is running but still hasn't generated the connection file
     # @return [Boolean] whether starting
     def starting?
-      status.running? && !connect_file.file?
+      if connection_in_info?
+        status.queued? && !connect.to_h.compact.empty?
+      else
+        status.running? && !connect_file.file?
+      end
     end
 
     # Whether job is running and connection file is generated
@@ -411,7 +439,8 @@ module BatchConnect
     # Root directory where a job is staged and run in
     # @return [Pathname] staged root directory
     def staged_root
-      self.class.dataroot(token).join("output", id).tap { |p| p.mkpath unless p.exist? }
+      c = Configuration.per_cluster_dataroot? ? cluster_id : nil
+      self.class.dataroot(token, cluster: c).join("output", id)
     end
 
     # List of template files that need to be rendered
@@ -468,6 +497,10 @@ module BatchConnect
     def connect_file
       # flush nfs cache when checking for this file
       staged_root.join("connection.yml").tap { |f| Dir.open(f.dirname.to_s).close }
+
+    rescue StandardError => e
+      Rails.logger.error("can't read connection file because of error '#{e.message}'")
+      Pathname.new('/dev/null')
     end
 
     # Path to file that job pipes stdout/stderr to
@@ -485,7 +518,39 @@ module BatchConnect
     # The connection information for this session (job must be running)
     # @return [OpenStruct] connection information
     def connect
-      OpenStruct.new YAML.safe_load(connect_file.read)
+      if connection_in_info?
+        OpenStruct.new(info.ood_connection_info || {})
+      else
+        OpenStruct.new YAML.safe_load(connect_file.read)
+      end
+    end
+
+    # Whether the session info has connection information
+    # @return [Boolean] whether there is host and port information in this session.
+    def connection_in_info?
+      info.respond_to?(:ood_connection_info)
+    end
+
+    # Whether to allow SSH to node running the job
+    # @return [Boolean] whether to allow SSH to node running the job
+    def ssh_to_compute_node?
+      if !cluster_ssh_to_compute_node?.nil?
+        return cluster_ssh_to_compute_node?
+      else
+        return global_ssh_to_compute_node?
+      end
+    end
+
+    # @return [Boolean]
+    def cluster_ssh_to_compute_node?
+      cluster.batch_connect_ssh_allow?
+    rescue ClusterNotFound
+      return nil
+    end
+
+    # @return [Boolean]
+    def global_ssh_to_compute_node?
+      Configuration.ood_bc_ssh_to_compute_node
     end
 
     # A unique identifier that details the current state of a session
@@ -494,11 +559,10 @@ module BatchConnect
       hsh = {
         id: id,
         status: status.to_sym,
-        start_time: info.native ? info.native[:start_time] : nil,
         connect: running? ? connect.to_h : nil,
         time: info.wallclock_time.to_i / 60     # only update every minute
       }
-      Digest::MD5.hexdigest(hsh.to_json)
+      Digest::SHA1.hexdigest(hsh.to_json)
     end
 
     private
@@ -506,7 +570,7 @@ module BatchConnect
       def job_name
         [
           ENV["OOD_PORTAL"],    # the OOD portal id
-          ENV["RAILS_RELATIVE_URL_ROOT"].sub(/^\/[^\/]+\//, ""),  # the OOD app
+          ENV["RAILS_RELATIVE_URL_ROOT"].to_s.sub(/^\/[^\/]+\//, ""),  # the OOD app
           token                 # the Batch Connect app
         ].reject(&:blank?).join("/")
       end

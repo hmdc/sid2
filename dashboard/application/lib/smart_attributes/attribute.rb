@@ -21,19 +21,35 @@ module SmartAttributes
       !!opts[:fixed]
     end
 
-    # Value of attribute
+    def hide_when_empty?
+      !!opts[:hide_when_empty]
+    end
+
+    # Value of attribute. It is converted to String.
+    # To support HTML file inputs, if the attribute is detected as as file input, it is not converted.
     # @return [String] attribute value
     def value
-      if opts[:value].class.to_s.match(/UploadedFile/)
+      if %w[file_field file_attachments].include?(widget) || opts[:value].class.to_s.match(/UploadedFile/)
         opts[:value]
       else
         opts[:value].to_s
       end
     end
 
+    # Check select widget has options values provided
+    # @return [StandardError] if missing any values
+    def validate!
+      if widget == 'select' && (select_choices.size != select_choices.compact.size)
+        raise StandardError, I18n.t('dashboard.batch_connect_form_invalid', id: id)
+      end
+
+      self
+    end
+
     def value=(other)
       @opts[:value] = other
     end
+    
     def cacheable?(default_value) 
       if opts[:cacheable].nil?
         default_value
@@ -41,6 +57,7 @@ module SmartAttributes
         to_bool(opts[:cacheable])
       end
     end
+
     # Type of form widget used for this attribute
     # @return [String] widget type
     def widget
@@ -123,7 +140,8 @@ module SmartAttributes
     # Array of choices for select fields used to build <option> tags
     # @return [Array] choices in form [name, value], [name, value]
     def select_choices
-      opts.fetch(:options, [])
+      o = opts.fetch(:options, [])
+      o.nil? ? [] : o
     end
 
     # String value if this attribute is "checked" (relevant for checkboxes)
@@ -145,7 +163,7 @@ module SmartAttributes
     # instead of the underlying option
     # @return [Array<Symbol>] option keys
     def reserved_keys
-      [:widget, :fixed, :options, :html_options, :checked_value, :unchecked_value, :required, :label, :help, :cacheable]
+      [:widget, :fixed, :hide_when_empty, :options, :html_options, :checked_value, :unchecked_value, :required, :label, :help, :cacheable]
     end
 
     FALSE_VALUES=[ false, '', 0, '0', 'f', 'F', 'false', 'FALSE', 'off', 'OFF', 'no', 'NO' ]

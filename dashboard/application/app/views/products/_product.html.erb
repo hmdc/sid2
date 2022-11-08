@@ -9,16 +9,13 @@
     <% if product.git_repo? %>
       <span class="text-muted">[<%= product.version %>]</span>
     <% end %>
-    <% unless product.active_users.empty? %>
-      <span class="label label-default pull-right"><%= pluralize product.active_users.size, "active user" %></span>
-    <% end %>
     <p>
       <%= manifest_markdown(product.description) %>
     </p>
     <% unless product.valid?(:list_apps) %>
       <% product.errors.full_messages.each do |msg| %>
         <div class="alert alert-danger">
-          <p><%= msg.html_safe %></p>
+          <p><%= msg %></p>
         </div>
       <% end %>
     <% end %>

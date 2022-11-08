@@ -3,104 +3,124 @@ require 'test_helper'
 class SupportTicketTest < ActiveSupport::TestCase
 
   def setup
-    @ticket_parameters = {
+    attachment_mock = stub({size: 100})
+    @valid_hash = {
       username: "username",
-      email: "email@example.com",
+      email: "test@example.com",
       cc: "cc@example.com",
-      subject: "subject",
-      session_id: "session_id",
-      description: "description",
-      attachments: [],
+      subject: "support ticket subject",
+      description: "support ticket description",
+      attachments: [attachment_mock, attachment_mock],
+      session_id: "123456",
+      session_description: "session description",
+      queue: "queue_name"
     }
   end
 
-  test "all fields populated has no validation errors" do
-    target = SupportTicket.new(@ticket_parameters)
+  test "configures default fields" do
+    target = SupportTicket.from_config({})
+    assert_equal %w[username email cc subject session_id session_description attachments description queue], target.attributes.map(&:id)
+  end
 
-    assert target.valid?
+  test "sets all fields from hash and is valid" do
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
+
+    assert_equal "username", target.username
+    assert_equal "test@example.com", target.email
+    assert_equal "cc@example.com", target.cc
+    assert_equal "support ticket subject", target.subject
+    assert_equal "support ticket description", target.description
+    assert_equal @valid_hash[:attachments], target.attachments
+    assert_equal "123456", target.session_id
+    assert_equal "session description", target.session_description
+    assert_equal "queue_name", target.queue
+
+    assert_equal true, target.valid?
+    assert_equal true, target.errors.empty?
+  end
+
+  test "configures custom fields" do
+    config = {
+      form: ["email", "custom1", "custom2"]
+    }
+    target = SupportTicket.from_config(config)
+    assert_equal %w[email custom1 custom2], target.attributes.map(&:id)
   end
 
   test "username is required" do
-    @ticket_parameters[:username] = nil
-    target = SupportTicket.new(@ticket_parameters)
+    @valid_hash[:username] = nil
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal "is required", target.errors[:username][0]
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:username].blank?
   end
 
   test "email is required" do
-    @ticket_parameters[:email] = nil
-    target = SupportTicket.new(@ticket_parameters)
+    @valid_hash[:email] = nil
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal "is required", target.errors[:email][0]
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:email].blank?
   end
 
-  test "email format must be an email address" do
-    @ticket_parameters[:email] = "not-an-email.com"
-    target = SupportTicket.new(@ticket_parameters)
+  test "email should be an email address" do
+    @valid_hash[:email] = "no_email"
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal "format is invalid", target.errors[:email][0]
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:email].blank?
   end
 
-  test "cc format must be an email address" do
-    @ticket_parameters[:cc] = "not-an-email.com"
-    target = SupportTicket.new(@ticket_parameters)
+  test "cc should be an email address if provided" do
+    @valid_hash[:cc] = "no_email"
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal "format is invalid", target.errors[:cc][0]
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:cc].blank?
   end
 
   test "subject is required" do
-    @ticket_parameters[:subject] = nil
-    target = SupportTicket.new(@ticket_parameters)
+    @valid_hash[:subject] = nil
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal "is required", target.errors[:subject][0]
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:subject].blank?
   end
 
   test "description is required" do
-    @ticket_parameters[:description] = ""
-    target = SupportTicket.new(@ticket_parameters)
+    @valid_hash[:description] = nil
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal "is required", target.errors[:description][0]
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:description].blank?
   end
 
-  test "attachments - is optional, nil is supported" do
-    @ticket_parameters[:attachments] = nil
-    target = SupportTicket.new(@ticket_parameters)
+  test "only 4 attachments are allowed" do
+    attachment_mock = stub({size: 100})
+    @valid_hash[:attachments] = [attachment_mock, attachment_mock, attachment_mock, attachment_mock, attachment_mock]
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    assert target.valid?
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:attachments].blank?
   end
 
-  test "attachments - maximum 8 attachments" do
-    max_items = AttachmentsValidator.config[:items] + 1
-    attachments = [*1..max_items].map { |item| mock("attachment_#{item}") }
-    @ticket_parameters[:attachments] = attachments
-    target = SupportTicket.new(@ticket_parameters)
+  test "attachments size should be smaller than 6MB" do
+    #10MB = 10485760
+    attachment_mock = stub({size: 10485760})
+    @valid_hash[:attachments] = [attachment_mock]
+    target = SupportTicket.from_config({})
+    target.attributes = @valid_hash
 
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal "are invalid. #{attachments.size} attachments added, maximum number of items is #{AttachmentsValidator.config[:items]}", target.errors[:attachments][0]
-  end
-
-  test "attachments - maximum size is 6MB" do
-    attachment =  mock("attachment")
-    attachment.stubs(:size).returns(AttachmentsValidator.config[:size] + 1)
-    @ticket_parameters[:attachments] = [attachment]
-    target = SupportTicket.new(@ticket_parameters)
-
-    refute target.valid?
-    assert_equal 1, target.errors.size
-    assert_equal  "are invalid. Maximum attachment size is 6MB", target.errors[:attachments][0]
+    assert_equal false, target.valid?
+    assert_equal false, target.errors[:attachments].blank?
   end
 
 end

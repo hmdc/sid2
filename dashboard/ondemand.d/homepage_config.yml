@@ -1,0 +1,47 @@
+host_based_profiles: false
+disable_dashboard_logo: true
+pinned_apps_group_by:
+
+show_all_apps_link: false
+selected_apps:
+
+pinned_apps:
+  - sys/sas
+  - token: sys/bc_desktop
+    view:
+      title: "HP Desktop application"
+      icon_uri: fa://desktop
+      sub_title: |
+        1 CPU core and 8GB RAM
+        8 hours job run time
+        Dev Cluster
+  - token: sys/Rstudio/regular
+    view:
+      title: "HP RStudio Regular"
+      color: "#DA6027"
+      sub_title: |
+        Custom text
+        In Multiple Lines
+        Configurable
+custom_css_files_bak: ["/images/sid.css"]
+
+profile_type: user_settings
+
+profile_links:
+  - id: ""
+    name: "default"
+    icon: "cog"
+  - id: team1
+    name: "Team1"
+    icon: "user"
+  - id: team2
+    name: "Team2"
+    icon: "user"
+
+
+dashboard_layout:
+  rows:
+    - columns:
+        - width: 12
+          widgets:
+            - "pinned_apps"

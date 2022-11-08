@@ -26,13 +26,42 @@ class ConfigurationSingleton
   attr_accessor :app_sharing_facls_enabled
   alias_method :app_sharing_facls_enabled?, :app_sharing_facls_enabled
 
-  def cluster_metadata
-    @cluster_metadata ||= Ws::ClusterMetadata.load
+  def initialize
+    add_boolean_configs
+    add_string_configs
+  end
+
+  # All the boolean configurations that can be read through
+  # environment variables or through the config file.
+  #
+  # @return [Hash] key/value pairs of defaults
+  def boolean_configs
+    {
+      :csp_enabled                  => false,
+      :csp_report_only              => false,
+      :bc_dynamic_js                => false,
+      :per_cluster_dataroot         => false,
+      :file_navigator               => false,
+      :jobs_app_alpha               => false,
+      :files_app_remote_files       => false,
+      :host_based_profiles          => false,
+    }.freeze
+  end
+
+  # All the string configurations that can be read through
+  # environment variables or through the config file.
+  #
+  # @return [Hash] key/value pairs of defaults
+  def string_configs
+    {
+      :module_file_dir      => nil,
+      :user_settings_file   => '.ood',
+    }.freeze
   end
 
   # @return [String] memoized version string
   def app_version
-    @app_version ||= (version_from_file(Rails.root) || "Unknown").strip
+    @app_version ||= (version_from_file(Rails.root) || version_from_git(Rails.root) || "Unknown").strip
   end
 
   # @return [String] memoized version string
@@ -40,9 +69,9 @@ class ConfigurationSingleton
     @ood_version ||= (ood_version_from_env || version_from_file('/opt/ood') || version_from_git('/opt/ood') || "Unknown").strip
   end
 
-def ood_bc_ssh_to_compute_node
-  to_bool(ENV['OOD_BC_SSH_TO_COMPUTE_NODE'] || true)
-end
+  def ood_bc_ssh_to_compute_node
+    to_bool(ENV['OOD_BC_SSH_TO_COMPUTE_NODE'] || true)
+  end
 
   # @return [String, nil] version string from git describe, or nil if not git repo
   def version_from_git(dir)
@@ -52,6 +81,24 @@ end
     end
   rescue Errno::ENOENT
     nil
+  end
+
+  def login_clusters
+    OodCore::Clusters.new(
+      OodAppkit.clusters
+        .select(&:allow?)
+        .reject { |c| c.metadata.hidden }
+        .select(&:login_allow?)
+    )
+  end
+
+  # clusters you can submit jobs to
+  def job_clusters
+    @job_clusters ||= OodCore::Clusters.new(
+      OodAppkit.clusters
+        .select(&:job_allow?)
+        .reject { |c| c.metadata.hidden }
+    )
   end
 
   # @return [String, nil] version string from VERSION file, or nil if no file avail
@@ -82,10 +129,6 @@ end
 
   def load_external_bc_config?
     to_bool(ENV["OOD_LOAD_EXTERNAL_BC_CONFIG"] || (rails_env == "production"))
-  end
-
-  def request_tracker_config
-    @rt_config ||= load_request_tracker_config
   end
 
   # The file system path to the announcements
@@ -152,6 +195,15 @@ end
     xdmod_host.present?
   end
 
+  # Support ticket configuration
+  def support_ticket_config
+    config.fetch(:support_ticket, {})
+  end
+
+  def support_ticket_enabled?
+    !support_ticket_config.empty?
+  end
+
   # Load the dotenv local files first, then the /etc dotenv files and
   # the .env and .env.production or .env.development files.
   #
@@ -165,6 +217,10 @@ end
 
     # load the rest of the dotenv files
     Dotenv.load(*dotenv_files)
+
+    # load overloads
+    Dotenv.overload(*(overload_files(dotenv_files)))
+    Dotenv.overload(*(overload_files(dotenv_local_files)))
   end
 
   def dev_apps_root_path
@@ -182,52 +238,13 @@ end
     @app_sharing_enabled = to_bool(ENV['OOD_APP_SHARING'])
   end
   alias_method :app_sharing_enabled, :app_sharing_enabled?
-  
+
   def batch_connect_global_cache_enabled?
     to_bool(ENV["OOD_BATCH_CONNECT_CACHE_ATTR_VALUES"] || true )
   end
 
-  # URL to the Dashboard logo image
-  # @return [String, nil] URL of logo image
-  def logo_img
-    ENV["SID2__OOD_DASHBOARD_LOGO"]
-  end
-
-  # Whether we display the Dashboard logo image
-  # @return [Boolean] whether display logo image
-  def logo_img?
-    !to_bool(ENV["DISABLE_DASHBOARD_LOGO"])
-  end
-
-  # Dashboard logo height used to set the height style attribute
-  # @return [String, nil] Logo height
-  def logo_height
-    ENV["OOD_DASHBOARD_LOGO_HEIGHT"]
-  end
-
-  def brand_bg_color
-    ENV.values_at('OOD_BRAND_BG_COLOR', 'BOOTSTRAP_NAVBAR_DEFAULT_BG', 'BOOTSTRAP_NAVBAR_INVERSE_BG').compact.first
-  end
-
-  def brand_link_active_bg_color
-    ENV.values_at('SID2__OOD_BRAND_LINK_ACTIVE_BG_COLOR', 'OOD_BRAND_LINK_ACTIVE_BG_COLOR', 'BOOTSTRAP_NAVBAR_DEFAULT_LINK_ACTIVE_BG','BOOTSTRAP_NAVBAR_INVERSE_LINK_ACTIVE_BG' ).compact.first
-  end
-
-  def show_all_apps_link?
-    to_bool(ENV['SHOW_ALL_APPS_LINK'])
-  end
-
   def developer_docs_url
     ENV['OOD_DASHBOARD_DEV_DOCS_URL'] || "https://go.osu.edu/ood-app-dev"
-  end
-
-  # Turbolinks feature flag
-  def turbolinks_enabled?
-    to_bool(ENV['OOD_TURBOLINKS_ENABLED'])
-  end
-
-  def hpc_status_custom_enabled?
-    to_bool(ENV['OOD_HPC_STATUS_CUSTOM_ENABLED'] || false)
   end
 
   def dataroot
@@ -250,7 +267,7 @@ end
   end
 
   def locale
-    (ENV['OOD_LOCALE'] || I18n.default_locale).to_sym
+    (ENV['OOD_LOCALE'] || 'en').to_sym
   end
 
   def locales_root
@@ -262,7 +279,109 @@ end
     ENV['OOD_NATIVE_VNC_LOGIN_HOST']
   end
 
+  # Set the global configuration directory
+  def config_directory
+    Pathname.new(ENV['OOD_CONFIG_D_DIRECTORY'] || "/etc/ood/config/ondemand.d")
+  end
+
+  # Setting terminal functionality in files app
+  def files_enable_shell_button
+    to_bool(config.fetch(:files_enable_shell_button, true))
+  end
+
+  # Report performance of activejobs table rendering
+  def console_log_performance_report?
+    dataroot.join("debug").file? || rails_env != 'production'
+  end
+
+  def can_access_activejobs?
+    can_access_core_app? 'activejobs'
+  end
+
+  def can_access_files?
+    can_access_core_app? 'files'
+  end
+
+  def can_access_file_editor?
+    can_access_core_app? 'file-editor'
+  end
+
+  # Maximum file upload size that nginx will allow from clients in bytes
+  #
+  # @example No maximum upload size supplied.
+  #   file_upload_max #=> "10737420000"
+  # @example 20 gigabyte file size upload limit.
+  #   file_upload_max #=> "21474840000"
+  # @return [String] Maximum upload size for nginx.
+  def file_upload_max
+    [ENV['FILE_UPLOAD_MAX']&.to_i, ENV['NGINX_FILE_UPLOAD_MAX']&.to_i].compact.min || 10737420000
+  end
+
+  # The timeout (seconds) for "generating" a .zip from a directory.
+  #
+  # Default for OOD_DOWNLOAD_DIR_TIMEOUT_SECONDS is "5" (seconds).
+  # @return [Integer]
+  def file_download_dir_timeout
+    ENV['OOD_DOWNLOAD_DIR_TIMEOUT_SECONDS']&.to_i || 5
+  end
+
+  # The maximum size of a .zip file that can be downloaded.
+  #
+  # Default for OOD_DOWNLOAD_DIR_MAX is 10*1024*1024*1024 bytes.
+  # @return [Integer]
+  def file_download_dir_max
+    ENV['OOD_DOWNLOAD_DIR_MAX']&.to_i || 10737418240
+  end
+
+  def allowlist_paths
+    (ENV['OOD_ALLOWLIST_PATH'] || ENV['WHITELIST_PATH'] || "").split(':').map{ |s| Pathname.new(s) }
+  end
+
+  # default value for opening apps in new window
+  # that is used if app's manifest doesn't specify
+  # if not set default is true
+  #
+  # @return [Boolean] true if by default open apps in new window
+  def open_apps_in_new_window?
+    if ENV['OOD_OPEN_APPS_IN_NEW_WINDOW']
+      to_bool(ENV['OOD_OPEN_APPS_IN_NEW_WINDOW'])
+    else
+      true
+    end
+  end
+
+  # How many days before a Session record is considered old and ready to delete
+  def ood_bc_card_time
+    ood_bc_card_time = ENV['OOD_BC_CARD_TIME']
+    return 7 if ood_bc_card_time.blank? || /^([+-]\d+|\d+)/.match(ood_bc_card_time.to_s).nil?
+
+    ood_bc_card_time_int = ood_bc_card_time.to_i
+    (ood_bc_card_time_int < 0) ? 0 : ood_bc_card_time_int
+  end
+
+  def config
+    read_config
+  end
+
   private
+
+  def can_access_core_app?(name)
+    app_dir = Rails.root.realpath.parent.join(name)
+    app_dir.directory? && app_dir.join('manifest.yml').readable?
+  end
+
+  def read_config
+    files = Pathname.glob(config_directory.join("*.{yml,yaml,yml.erb,yaml.erb}"))
+    files.each_with_object({}) do |f, conf|
+      begin
+        content = ERB.new(f.read, nil, "-").result(binding)
+        yml = YAML.safe_load(content, aliases: true) || {}
+        conf.deep_merge!(yml.deep_symbolize_keys)
+      rescue => e
+        Rails.logger.error("Can't read or parse #{f} because of error #{e}")
+      end
+    end
+  end
 
   # The environment
   # @return [String] "development", "test", or "production"
@@ -291,31 +410,50 @@ end
     ].compact
   end
 
-  def load_request_tracker_config
-      #USE RT CONFIG FILE IF AVAILABLE
-    rt_config_file = Rails.root.join("config", "rt_config.yml")
-    if rt_config_file.readable?
-      rt_config = YAML.safe_load(rt_config_file.read).to_h.deep_symbolize_keys
-      Rails.logger.info "Loaded RT config from: #{rt_config_file}"
-    else
-      Rails.logger.warn "Unable to load RT config"
-    end
-    #DEFAULTS
-    rt_config[:timeout] ||= 10
-    rt_config[:verify_ssl].nil? && rt_config[:verify_ssl] = true
-    rt_config[:queues] ||= [ "General" ]
-    rt_config[:priority] ||= 4
-
-    Rails.logger.info "RT config - server=#{rt_config[:server]} proxy=#{rt_config[:proxy]} queues=#{rt_config[:queues]}"
-    return rt_config
+  # reverse list and suffix every path with '.overload'
+  def overload_files(files)
+    files.reverse.map {|p| p.sub(/$/, '.overload')}
   end
 
-  FALSE_VALUES=[nil, false, '', 0, '0', 'f', 'F', 'false', 'FALSE', 'off', 'OFF', 'no', 'NO']
+  FALSE_VALUES = [nil, false, '', 0, '0', 'f', 'F', 'false', 'FALSE', 'off', 'OFF', 'no', 'NO'].freeze
 
   # Bool coersion pulled from ActiveRecord::Type::Boolean#cast_value
   #
   # @return [Boolean] false for falsy value, true for everything else
   def to_bool(value)
-    ! FALSE_VALUES.include?(value)
+    !FALSE_VALUES.include?(value)
+  end
+
+  # private method to add the boolean_config methods to this instances
+  def add_boolean_configs
+    boolean_configs.each do |cfg_item, default|
+      define_singleton_method(cfg_item.to_sym) do
+        e = ENV["OOD_#{cfg_item.to_s.upcase}"]
+
+        if e.nil?
+          config.fetch(cfg_item, default)
+        else
+          to_bool(e.to_s)
+        end
+      end
+    end.each do |cfg_item, _|
+      define_singleton_method("#{cfg_item}?".to_sym) do
+        send(cfg_item)
+      end
+    end
+  end
+
+  def add_string_configs
+    string_configs.each do |cfg_item, default|
+      define_singleton_method(cfg_item.to_sym) do
+        e = ENV["OOD_#{cfg_item.to_s.upcase}"]
+
+        e.nil? ? config.fetch(cfg_item, default) : e.to_s
+      end
+    end.each do |cfg_item, _|
+      define_singleton_method("#{cfg_item}?".to_sym) do
+        send(cfg_item).nil?
+      end
+    end
   end
 end

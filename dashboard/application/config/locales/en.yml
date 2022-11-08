@@ -16,8 +16,18 @@
 #
 # This would use the information in config/locales/es.yml.
 #
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
 # To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
   dashboard:
@@ -31,10 +41,12 @@ en:
       Please be patient as your job currently sits in queue. The wait time depends
       on the number of cores as well as time requested.
 
+    motd_erb_render_error: "MOTD was not parsed or rendered correctly: %{error_message}"
     nav_help_change_password: "Change HPC Password"
     nav_help_docs: "Online Documentation"
     nav_help_support: "Contact Support"
     nav_help_two_factor: "Configure Two-Factor Authentication"
+    nav_help_support_ticket: "Submit Support Ticket"
 
     quota_additional_message: "Consider deleting or archiving files to free up disk space."
     quota_reload_message: "Reload page to see updated quota. Quotas are updated every 5 minutes."
@@ -65,6 +77,8 @@ en:
       <h4>Stack trace:</h4>
       <pre>%{exception_trace}</pre>
     apps_system_apps_title: "System Apps"
+    
+    shell_app_title: "%{cluster_title} Shell Access"
 
     batch_connect_form_attr_cache_error: "Unable to use previously cached values, using defaults instead. (%{error_message})"
     batch_connect_form_data_root: "data root directory"
@@ -73,6 +87,9 @@ en:
     batch_connect_form_session_data_html: |
       * The %{title} session data for this session can be accessed
         under the %{data_link_tag}.
+    batch_connect_form_invalid: "The form.yml has missing options in the %{id} form field."
+    batch_connect_invalid_form_array: "'form' element in form.yml is not an Array"
+    batch_connect_invalid_form_attributes: "'attributes' element in form.yml is not a Map"
     batch_connect_no_apps: "There are no available Interactive Apps."
     batch_connect_no_sessions: "You have no active sessions."
     batch_connect_sandbox: " [Sandbox]"
@@ -86,12 +103,9 @@ en:
       If this job failed to submit because of an invalid job name
       please ask your administrator to configure OnDemand to set the
       environment variable OOD_JOB_NAME_ILLEGAL_CHARS.
-    batch_connect_sessions_delete_confirm: "Are you sure you want to delete the session?<br />Deleting is permanent, and will delete all session details."
+    batch_connect_sessions_delete_confirm: "Are you sure?"
     batch_connect_sessions_delete_hover: "Delete Session"
     batch_connect_sessions_delete_title: "Delete"
-    batch_connect_sessions_terminate_confirm: "Are you sure you want to end the session?<br />Session details are saved for reference and reuse until you delete them.<br /> Any unsaved work in this session will be lost."
-    batch_connect_sessions_terminate_hover: "Cancel Session"
-    batch_connect_sessions_terminate_title: "Cancel"
     batch_connect_sessions_errors_staging: "Failed to stage the template with the following error:"
     batch_connect_sessions_errors_submission: "Failed to submit session with the following error:"
     batch_connect_sessions_novnc_launch: "Launch %{app_title}"
@@ -104,11 +118,11 @@ en:
     batch_connect_sessions_stats_time_requested: "Time Requested:"
     batch_connect_sessions_stats_time_used: "Time Used:"
     batch_connect_sessions_stats_undetermined_host: "Undetermined"
+    batch_connect_sessions_stats_support_ticket: "Problems with this session?"
+    batch_connect_sessions_stats_support_ticket_link_text:  "Submit support ticket"
     batch_connect_sessions_status_blurb_create_success: "Session was successfully created."
     batch_connect_sessions_status_blurb_delete_failure: "Failed to delete session."
     batch_connect_sessions_status_blurb_delete_success: "Session was successfully deleted."
-    batch_connect_sessions_status_blurb_terminate_failure: "Failed to cancel session."
-    batch_connect_sessions_status_blurb_terminate_success: "Session was successfully cancelled."
     batch_connect_sessions_status_starting: |
       Your session is currently starting... Please be patient as this process can
       take a few minutes.
@@ -123,7 +137,7 @@ en:
     nav_all_apps: "All Apps"
     nav_develop_docs: "Developer Documentation"
     nav_develop_my_sandbox_apps_dev: "My Sandbox Apps (Development)"
-    nav_develop_my_sandbox_apps_prod: "My Sandbox Apps (Production)"
+    nav_develop_my_sandbox_apps_prod: "My Shared Apps (Production)"
     nav_develop_title: "Develop"
     nav_help_title: "Help"
     nav_logout: "Log Out"
@@ -142,6 +156,8 @@ en:
       If it doesn't please, click: <a href="%{restart_url}">restart web server</a>.
 
     shared_apps_title: "Shared Apps"
+    shared_apps_caption: "Shared by %{owner_title} (%{owner})"
+    shared_apps_caption_short: "Shared by %{owner}"
     sharing_catalog_title: "App Catalog"
     sharing_no_shared_apps_html: |
       <strong>No custom shared apps available.</strong>
@@ -153,3 +169,61 @@ en:
     sharing_welcome_msg_html: |
       Cluster access applications are available from the dropdown menus in the navbar above.
       <br>Custom shared apps are available below.
+
+    all_apps_table_app_column: "Name"
+    all_apps_table_category_column: "Category"
+    all_apps_table_sub_category_column: "Sub Category"
+
+    unknown: "Unknown"
+    not_grouped: "Other Apps"
+
+    nav_limit_caption: 'showing %{subset_count} of %{total_count}'
+    pinned_apps_category: "Apps"
+    pinned_apps_title: 'Pinned Apps'
+    pinned_apps_caption_html: 'A featured subset of <a href="%{all_apps_url}">all available apps</a>'
+    development_apps_caption: "Sandbox App"
+
+    files_directory_download_error_modal_title: "Directory too large to download"
+    files_directory_download_unauthorized: "You can only download a directory as zip that you have read and execute access to"
+    files_directory_download_size_0: "The directory size is 0 and has no contents for download."
+    files_directory_too_large: "The directory is too large to download as a zip. The directory should be less than %{download_directory_size_limit} bytes."
+    files_directory_size_calculation_error: "Timeout while trying to determine directory size."
+    files_directory_size_calculation_timeout: "Timeout while trying to determine directory size."
+    files_directory_size_unknown: "Error with status %{exit_code} when trying to determine directory size: %{error}"
+
+    files_remote_disabled: "Remote file support is not enabled"
+    files_remote_empty_dir_unsupported: "Remote does not support empty directories"
+    files_remote_dir_not_created: "Did not create directory %{path}"
+    files_remote_error_listing_remotes: "Error listing Rclone remotes: %{error}"
+
+    jobs_project_created: "Project successfully created!"
+    jobs_project_deleted: "Project successfully deleted!"
+    jobs_project_delete_project_confirmation: "Delete all contents of project directory?"
+    jobs_project_manifest_updated: "Project manifest updated!"
+    jobs_project_name_validation: "Project name may only contain letters, digits, dashes, and underscores"
+    jobs_project_create_new_project_directory: "Create a new project directory"
+
+    settings_updated: "Settings updated"
+
+    profile_links_title: "Profiles"
+
+    breadcrumbs_support_ticket: "Support Ticket"
+    support_ticket:
+      title: "Support Ticket"
+      header: "Support Ticket Header"
+      description_html: "Support Ticket Description with HTML"
+      creation_success: "Support ticket email sent to: %{to}"
+      generic_error: "There was an error processing your request: %{error}"
+      validation_error: "Invalid Request. Please review the error messages below"
+      validation:
+        required: "The %{id} is required"
+        email: "The %{id} format is invalid. Expected a valid email address"
+        attachments_items: "The %{id} are invalid. %{items} added, maximum number of attachments is %{max}"
+        attachments_size: "The %{id} are invalid. Maximum attachment size is %{max}"
+        items:
+          attachments_js: "No more attachments allowed"
+        size:
+          attachments_js: "Max attachment size is %{max}. Selected file size is %{size}"
+
+      rt:
+        creation_success: "Support ticket created in RequestTracker system. TicketId: %{ticket_id}"

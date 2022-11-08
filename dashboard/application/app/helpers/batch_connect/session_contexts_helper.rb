@@ -1,22 +1,36 @@
+# Helper for creating new batch connect sessions.
 module BatchConnect::SessionContextsHelper
   def create_widget(form, attrib, format: nil)
-    return "" if attrib.fixed?
+    return '' if attrib.fixed?
+    return '' if attrib.hide_when_empty? && attrib.value.blank?
 
     widget = attrib.widget
     field_options = attrib.field_options(fmt: format)
     all_options = attrib.all_options(fmt: format)
 
     case widget
-    when "select"
+    when 'select'
       form.select attrib.id, attrib.select_choices, field_options, attrib.html_options
-    when "resolution_field"
+    when 'resolution_field'
       resolution_field(form, attrib.id, all_options)
-    when "check_box"
+    when 'check_box'
       form.form_group attrib.id, help: field_options[:help] do
         form.check_box attrib.id, all_options, attrib.checked_value, attrib.unchecked_value
       end
-    when "radio", "radio_button"
-      form.collection_radio_buttons attrib.id,   attrib.select_choices, :second, :first, checked: (attrib.value.presence || attrib.field_options[:checked])
+    when 'radio', 'radio_button'
+      form.form_group attrib.id, help: field_options[:help] do
+        form.collection_radio_buttons attrib.id, attrib.select_choices, :first, :second, { label: label_tag(attrib.id, attrib.label), checked: (attrib.value.presence || attrib.field_options[:checked]) }
+      end
+    when 'file_navigator'
+      if Configuration.file_navigator?
+        form.form_group attrib.id, help: field_options[:help] do
+          render :partial => "file_navigator", :locals => { attrib: attrib, field_options: field_options }
+        end
+      else
+        form.send widget, attrib.id, all_options
+      end
+    when 'file_attachments'
+      render :partial => "batch_connect/session_contexts/file_attachments", :locals => { form: form, attrib: attrib, field_options: field_options }
     else
       form.send widget, attrib.id, all_options
     end
@@ -27,14 +41,18 @@ module BatchConnect::SessionContextsHelper
       concat form.label(id, opts[:label])
       concat form.hidden_field(id, id: "#{id}_field")
       concat(
-        content_tag(:div, class: "row") do
+        content_tag(:div, class: "row mb-3") do
           concat (
             content_tag(:div, class: "col-sm-6") do
               concat (
                 content_tag(:div, class: "input-group") do
-                  concat content_tag(:div, "width", class: "input-group-addon", style: "width: 70px")
+                  concat (content_tag(:div, class: "input-group-prepend") do
+                    content_tag(:div, "width", class: "input-group-text")
+                  end)
                   concat number_field_tag("#{id}_x_field", nil, class: "form-control", min: 100, required: opts[:required])
-                  concat content_tag(:div, "px", class: "input-group-addon")
+                  concat (content_tag(:div, class: "input-group-append") do
+                    content_tag(:div, "px", class: "input-group-text")
+                  end)
                 end
               )
             end
@@ -43,9 +61,13 @@ module BatchConnect::SessionContextsHelper
             content_tag(:div, class: "col-sm-6") do
               concat (
                 content_tag(:div, class: "input-group") do
-                  concat content_tag(:div, "height", class: "input-group-addon", style: "width: 70px")
+                  concat (content_tag(:div, class: "input-group-prepend") do
+                    content_tag(:div, "height", class: "input-group-text")
+                  end)
                   concat number_field_tag("#{id}_y_field", nil, class: "form-control", min: 100, required: opts[:required])
-                  concat content_tag(:div, "px", class: "input-group-addon")
+                  concat (content_tag(:div, class: "input-group-append") do
+                    content_tag(:div, "px", class: "input-group-text")
+                  end)
                 end
               )
             end
@@ -53,7 +75,7 @@ module BatchConnect::SessionContextsHelper
         end
       )
       concat content_tag(:span, opts[:help], class: "help-block") if opts[:help]
-      concat button_tag(t('dashboard.batch_connect_form_reset_resolution'), id: "#{id}_reset", type: "button", class: "btn btn-default")
+      concat button_tag(t('dashboard.batch_connect_form_reset_resolution'), id: "#{id}_reset", type: "button", class: "btn btn-light")
       concat(
         content_tag(:script) do
           <<-EOT.html_safe

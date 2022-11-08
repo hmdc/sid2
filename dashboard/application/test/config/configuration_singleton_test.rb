@@ -12,6 +12,18 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     ENV.update(@env)
   end
 
+  def config_fixtures
+    {
+      OOD_CONFIG_D_DIRECTORY: "#{Rails.root}/test/fixtures/config/ondemand.d"
+    }
+  end
+
+  def no_config_env
+    {
+      OOD_CONFIG_D_DIRECTORY: '/dev/null'
+    }
+  end
+
   test "should have default config root" do
     assert_equal Pathname.new("/etc/ood/config/apps/dashboard"), ConfigurationSingleton.new.config_root
   end
@@ -59,6 +71,68 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
       assert_equal "another test", ENV["TEST_QUOTE"]
       assert_equal "123", ENV["TEST_NUMBER"]
       assert_nil ENV["TEST_UNDEFINED"]
+    end
+  end
+
+  test "should load environment variable overload" do
+    Dir.mktmpdir do |dir|
+      ENV['FOO'] = '123'
+
+      Pathname.new(dir).join(".env.overload").write <<-EOT
+        FOO=456
+      EOT
+
+      cfg = ConfigurationSingleton.new
+      cfg.stubs(:app_root).returns(Pathname.new(dir))
+      cfg.load_dotenv_files
+
+      assert_equal "456", ENV['FOO']
+    end
+  end
+
+  test "should load environment variable local overloads" do
+    Dir.mktmpdir do |dir|
+      environment = "test"
+      ENV['FOO'] = '123'
+
+      Configuration
+
+      Pathname.new(dir).join(".env.#{environment}.overload").write <<-EOT
+        FOO=456
+      EOT
+
+      Pathname.new(dir).join(".env.#{environment}.local.overload").write <<-EOT
+        FOO=789
+      EOT
+
+      cfg = ConfigurationSingleton.new
+      cfg.stubs(:app_root).returns(Pathname.new(dir))
+      cfg.stubs(:rails_env).returns(environment)
+      cfg.load_dotenv_files
+
+      assert_equal "789", ENV['FOO']
+    end
+  end
+
+  test "rails_env specific env var overloads have precendent over env overloads" do
+    Dir.mktmpdir do |dir|
+      environment = "test"
+      ENV['FOO'] = '123'
+
+      Pathname.new(dir).join(".env.overload").write <<-EOT
+        FOO=456
+      EOT
+
+      Pathname.new(dir).join(".env.#{environment}.overload").write <<-EOT
+        FOO=789
+      EOT
+
+      cfg = ConfigurationSingleton.new
+      cfg.stubs(:app_root).returns(Pathname.new(dir))
+      cfg.stubs(:rails_env).returns(environment)
+      cfg.load_dotenv_files
+
+      assert_equal "789", ENV['FOO']
     end
   end
 
@@ -152,51 +226,6 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     assert_equal "https://www.example.com", ConfigurationSingleton.new.developer_docs_url
   end
 
-  test "Sid should set brand bg color" do
-    assert_equal "#F0F0F0", ConfigurationSingleton.new.brand_bg_color
-  end
-
-  test "can configure brand bg color" do
-    ENV["OOD_BRAND_BG_COLOR"] = "MY_COLOR"
-    assert_equal "MY_COLOR", ConfigurationSingleton.new.brand_bg_color
-  end
-
-  test "SID should set default brand link active bg color" do
-    assert_equal "#3B3D3F", ConfigurationSingleton.new.brand_link_active_bg_color
-  end
-
-  test "can configure brand link active bg color" do
-    ENV["OOD_BRAND_LINK_ACTIVE_BG_COLOR"] = "MY_COLOR"
-    assert_equal "MY_COLOR", ConfigurationSingleton.new.brand_link_active_bg_color
-  end
-
-  test "should not have default logo img" do
-    assert_nil ConfigurationSingleton.new.logo_img
-  end
-
-  test "can configure logo img" do
-    ENV["SID2__OOD_DASHBOARD_LOGO"] = "MY_LOGO"
-    assert_equal "MY_LOGO", ConfigurationSingleton.new.logo_img
-  end
-
-  test "should try to display logo img by default" do
-    assert ConfigurationSingleton.new.logo_img?
-  end
-
-  test "can disable the display of logo img" do
-    ENV["DISABLE_DASHBOARD_LOGO"] = "true"
-    refute ConfigurationSingleton.new.logo_img?
-  end
-
-  test "should hide the all apps link by default" do
-    refute ConfigurationSingleton.new.show_all_apps_link?
-  end
-
-  test "can enable the all apps link" do
-    ENV["SHOW_ALL_APPS_LINK"] = "true"
-    assert ConfigurationSingleton.new.show_all_apps_link?
-  end
-
   test "should have default dataroot under app if not production" do
     assert_equal Rails.root.join("data"), ConfigurationSingleton.new.dataroot
   end
@@ -244,18 +273,182 @@ class ConfigurationSingletonTest < ActiveSupport::TestCase
     assert_equal ENV["OOD_NATIVE_VNC_LOGIN_HOST"], ConfigurationSingleton.new.native_vnc_login_host
   end
 
-  test "should load rt configuration from config file if available" do
-    rt_config_path = Rails.root.join("test", "fixtures")
-    Rails.stubs(:root).returns(rt_config_path)
+  test "does not throw error when it can't read config files" do
+    with_modified_env(OOD_CONFIG_FILE: "/dev/null", OOD_CONFIG_D_DIRECTORY: "/dev/null") do
+      assert_equal ConfigurationSingleton.new.files_enable_shell_button, true
+      assert_equal ConfigurationSingleton.new.send(:config), {}
+    end
+  end
 
-    rtc = ConfigurationSingleton.new.request_tracker_config
-    assert_equal "https://fileconfig.com", rtc[:server]
-    assert_equal "file", rtc[:user]
-    assert_equal "file-password", rtc[:pass]
-    assert_equal "file-auth-token", rtc[:auth_token]
-    assert_equal 1022, rtc[:timeout]
-    assert_equal true, rtc[:verify_ssl]
-    assert_equal "General", rtc[:queues][0]
-    assert_equal "99", rtc[:priority]
+  test "does not read .bak files" do
+    with_modified_env(config_fixtures) do
+      cfg = ConfigurationSingleton.new.send(:config)
+      assert_nil cfg[:key_in_bak_file]
+    end
+  end
+
+  test "reads yaml with an a files" do
+    with_modified_env(config_fixtures) do
+      cfg = ConfigurationSingleton.new.send(:config)
+      assert_equal 'I got read!', cfg[:key_from_yaml_file]
+    end
+  end
+
+  test "reads arbitrary keys" do
+    with_modified_env(config_fixtures) do
+      cfg = ConfigurationSingleton.new.send(:config)
+      assert_equal 'test_value', cfg[:test_key]
+      assert_equal ['one', 'two', 'three'], cfg[:test_array]
+      assert_equal 'some_value', cfg[:test_hash][:some_key]
+      assert_equal ['four', 'five', 'six'], cfg[:test_hash][:another_array]
+    end
+  end
+
+  test "reads from good erb file" do
+    with_modified_env(config_fixtures) do
+      cfg = ConfigurationSingleton.new.send(:config)
+      assert_equal 42, cfg[:the_erb_answer]
+    end
+  end
+
+  test "supports YAML anchors and aliases" do
+    with_modified_env({ OOD_CONFIG_D_DIRECTORY: "#{Rails.root}/test/fixtures/config/anchors_aliases" }) do
+      cfg = ConfigurationSingleton.new.send(:config)
+      assert_equal 'single_value', cfg[:single_original]
+      assert_equal 'single_value', cfg[:single_with_alias]
+
+      expect_hash = {key_one: "hash_one", key_two: "hash_two"}
+      assert_equal expect_hash, cfg[:hash_original]
+      assert_equal expect_hash, cfg[:hash_with_alias]
+    end
+  end
+
+  test "logs read and parse errors" do
+    with_modified_env(config_fixtures) do
+      bad_erb_rex = /bad_erb.yml.erb because of error undefined local variable or method `wont_find_this_functon/
+      bad_yml_rex = /not_good_yml.yml because of error \(<unknown>\): did not find expected '-' indicator while parsing a block collection at line 2 column 3/
+      Rails.logger.expects(:error).with(regexp_matches(bad_erb_rex)).at_least_once
+      Rails.logger.expects(:error).with(regexp_matches(bad_yml_rex)).at_least_once
+      ConfigurationSingleton.new.send(:config)
+    end
+  end
+
+  test "files_enable_shell_button returns true by default" do
+    cfg = ConfigurationSingleton.new 
+    assert_equal true, cfg.files_enable_shell_button
+  end
+
+  test "files_enable_shell_button returns false when set" do
+    cfg = ConfigurationSingleton.new 
+    cfg.stubs(:config).returns({files_enable_shell_button: false})
+    assert_equal false, cfg.files_enable_shell_button
+  end
+
+  test 'boolean configs have correct default' do
+    c = ConfigurationSingleton.new
+
+    with_modified_env(no_config_env) do
+      c.boolean_configs.each do |config, default|
+        assert_equal default, c.send(config), "#{config} should have been #{default} through the default value."
+      end
+    end
+  end
+
+  test 'string configs have correct default' do
+    c = ConfigurationSingleton.new
+
+    with_modified_env(no_config_env) do
+      c.string_configs.each do |config, default|
+        if default.nil?
+          # assert_equal on nil is deprecated
+          assert_nil c.send(config), "#{config} should have been nil through the default value."
+        else
+          assert_equal default, c.send(config), "#{config} should have been #{default} through the default value."
+        end
+      end
+    end
+  end
+
+  test 'boolean configs respond to env variables' do
+    c = ConfigurationSingleton.new
+
+    c.boolean_configs.each do |config, default|
+      env_var = "OOD_#{config.upcase}"
+      with_modified_env(no_config_env.merge({ env_var => (!default).to_s })) do
+        assert_equal !default, c.send(config), "#{config} should have responded to ENV['#{env_var}']=#{ENV[env_var]}."
+      end
+    end
+  end
+
+  test 'string configs respond to env variables' do
+    c = ConfigurationSingleton.new
+
+    c.string_configs.each do |config, _|
+      env_var = "OOD_#{config.upcase}"
+      other_string = 'some other string that can never be a real value 2073423rnabsdf0y3b4123kbasdoifgadf'
+      with_modified_env(no_config_env.merge({ env_var => other_string })) do
+        assert_equal other_string, c.send(config), "#{config} should have responded to ENV['#{env_var}']=#{ENV[env_var]}."
+      end
+    end
+  end
+
+  test 'dynamic configs respond config files' do
+    Dir.mktmpdir do |dir|
+      with_modified_env({ OOD_CONFIG_D_DIRECTORY: dir.to_s }) do
+        # write !defaults out
+        other_string = 'another random string asdfn31-ndf12nadsnfsad[nf-5t2fwnasdfm'
+        File.open("#{dir}/config.yml", 'w+') do |file|
+          cfg = ConfigurationSingleton.new.boolean_configs.each_with_object({}) do |(config, default), hsh|
+            hsh[config.to_s] = !default
+          end.merge(
+            ConfigurationSingleton.new.string_configs.each_with_object({}) do |(config, _), hsh|
+              hsh[config.to_s] = other_string
+            end
+          )
+          file.write(cfg.to_yaml)
+        end
+
+        c = ConfigurationSingleton.new
+        c.boolean_configs.each do |config, default|
+          assert_equal !default, c.send(config), "#{config} should have been #{!default} through a fixture file."
+        end
+        c.string_configs.each do |config, _|
+          assert_equal other_string, c.send(config), "#{config} should have been #{other_string} through a fixture file."
+        end
+      end
+    end
+  end
+
+  test 'env variables have precedence in dynamic configs' do
+    other_string = 'string in env variable'
+    env = ConfigurationSingleton.new.boolean_configs.map do |config, default|
+      ["OOD_#{config.upcase}", default.to_s]
+    end.concat(
+      ConfigurationSingleton.new.string_configs.map do |config, _|
+        ["OOD_#{config.upcase}", other_string]
+      end
+    ).compact.to_h
+
+    with_modified_env(config_fixtures.merge(env)) do
+      c = ConfigurationSingleton.new
+      c.boolean_configs.each do |config, default|
+        env_var = "OOD_#{config.upcase}"
+        assert_equal default, c.send(config), "#{config} should have responded to ENV['#{env_var}']=#{ENV[env_var]}."
+      end
+      c.string_configs.each do |config, _|
+        assert_equal 'string in env variable', c.send(config), "#{config} should have been 'string in env variable'."
+      end
+    end
+
+    # just to be sure, let's assert the opposite with a different env
+    with_modified_env(config_fixtures) do
+      c = ConfigurationSingleton.new
+      c.boolean_configs.each do |config, default|
+        assert_equal !default, c.send(config), "#{config} should have been #{!default} through a fixture file."
+      end
+      c.string_configs.each do |config, _|
+        assert_equal 'string from file', c.send(config), "#{config} should have been 'string from file' through a fixture file."
+      end
+    end
   end
 end

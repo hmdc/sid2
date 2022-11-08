@@ -1,35 +1,35 @@
+# Helper for active batch connect sessions.
+#
+# Note that this module programatically generates the cards for
+# active batch connect sessions.
 module BatchConnect::SessionsHelper
   def session_panel(session)
-    content_tag(:div, id: session.id, class: "panel panel-#{status_context(session)} session-panel", data: { hash: session.to_hash }) do
+    content_tag(:div, id: "id_#{session.id}", class: "card session-panel mb-4", data: { id: session.id, hash: session.to_hash }) do
       concat(
-        content_tag(:div, class: "panel-heading") do
-          content_tag(:h1, class: "panel-title") do
-            concat link_to(content_tag(:strong, session.title), new_batch_connect_session_context_path(token: session.token))
-            concat " (#{session.job_id})"
+        content_tag(:div, class: "card-heading") do
+          content_tag(:h5, class: "card-header overflow-auto alert-#{status_context(session)}") do
+            concat link_to(content_tag(:span, session.title, class: "card-text alert-#{status_context(session)}"), new_batch_connect_session_context_path(token: session.token))
+            concat tag.span(" (#{session.job_id})", class: 'card-text')
             concat(
-              content_tag(:div, class: "pull-right") do
+              content_tag(:div, class: "float-right") do
                 num_nodes = session.info.allocated_nodes.size
                 num_cores = session.info.procs.to_i
 
                 # Generate nice status display
                 status = []
                 if session.starting? || session.running?
-                  status << content_tag(:span, pluralize(num_nodes, "node"), class: "badge") unless num_nodes.zero?
-                  status << content_tag(:span, pluralize(num_cores, "core"), class: "badge") unless num_cores.zero?
+                  status << content_tag(:span, pluralize(num_nodes, "node"), class: "badge badge-#{status_context(session)} badge-pill") unless num_nodes.zero?
+                  status << content_tag(:span, pluralize(num_cores, "core"), class: "badge badge-#{status_context(session)} badge-pill") unless num_cores.zero?
                 end
                 status << "#{status session}"
-                if session.queued?
-                  status << content_tag(:span, "Expected Start: #{session.info.native[:start_time]}", class: "badge")
-                end
-                status.join(" | ").html_safe
+                tag.span(status.join(" | ").html_safe, class: "card-text")
               end
             )
-            concat content_tag(:div, "", class: "clearfix")
           end
         end
       )
       concat(
-        content_tag(:div, class: "panel-body") do
+        content_tag(:div, class: "card-body") do
           yield
         end
       )
@@ -40,17 +40,13 @@ module BatchConnect::SessionsHelper
     capture do
       concat(
         content_tag(:div) do
-          concat content_tag(:div, delete_terminate_buttons(session))
+          concat content_tag(:div, delete(session), class: 'float-right')
           concat host(session)
           concat created(session)
-          concat requested_parameters(session)
-          concat exit_status(session)
-          concat queued_reason(session)
           concat time(session)
           concat id(session)
-          concat support(session)
-          concat tag.hr                         if session.info_view
-          safe_concat custom_info_view(session) if session.info_view
+          concat support_ticket(session) if Configuration.support_ticket_enabled?
+          safe_concat custom_info_view(session) if session.app.session_info_view
         end
       )
       concat content_tag(:div) { yield }
@@ -58,8 +54,15 @@ module BatchConnect::SessionsHelper
   end
 
   def custom_info_view(session)
+    concat tag.hr
     content_tag(:div) do
-      concat render partial: "batch_connect/sessions/connections/info", locals: { view: session.info_view, session: session }
+      concat session.render_info_view
+
+      if session.render_info_view_error_message
+        content_tag(:div, class: "alert alert-danger", role: "alert") do
+          concat tag.p session.render_info_view_error_message
+        end
+      end
     end
   end
 
@@ -68,61 +71,6 @@ module BatchConnect::SessionsHelper
       concat content_tag(:strong, t('dashboard.batch_connect_sessions_stats_created_at'))
       concat " "
       concat Time.at(session.created_at).localtime.strftime("%Y-%m-%d %H:%M:%S %Z")
-    end
-  end
-
-
-  def requested_parameters(session)
-    if session.completion_info
-      memory = session.completion_info["memory"]
-      cores = session.completion_info["cpu"]
-      runtime = distance_of_time_in_words(session.completion_info["runtime"].to_i, 0, false, :only => [:minutes, :hours], :accumulate_on => :hours) if session.completion_info["runtime"].to_i != 0
-    elsif session.info.native
-      memory = session.info.native[:min_memory]
-      cores = session.info.native[:min_cpus]
-      runtime = distance_of_time_in_words(session.info.wallclock_limit, 0, false, :only => [:minutes, :hours], :accumulate_on => :hours)
-    end
-
-    content_tag(:p) do
-      concat content_tag(:strong, "Basic Parameters:")
-      concat " "
-      concat "#{memory || "N/A"} Memory | #{cores ? pluralize(cores, "Core") : "N/A Core"} | #{runtime || "N/A"} Runtime"
-    end
-  end
-
-  def exit_status(session)
-    if session.completed? && session.completion_info
-      content_tag(:p) do
-        concat content_tag(:strong, "Exit Status:")
-        concat " "
-        concat "#{session.completion_info["state"] || "N/A"} | #{session.completion_info["reason"] || "N/A"} | #{session.completion_info["exit_code"] || "N/A"} Exit code"
-      end
-    else
-      ""
-    end
-  end
-
-  def queued_reason(session)
-    if session.queued?
-      content_tag(:p) do
-        concat content_tag(:strong, "Queued Reason:")
-        concat " #{session.info.native[:reason]}"
-      end
-    else
-      ""
-    end
-  end
-
-  def support(session)
-    content_tag(:p) do
-      concat content_tag(:strong, "Problems with this session?")
-      concat " "
-      concat(
-        link_to(
-          "Submit support ticket",
-          support_path(session_id: session.id)
-        )
-      )
     end
   end
 
@@ -152,7 +100,7 @@ module BatchConnect::SessionsHelper
   end
 
   def host(session)
-    if ::Configuration.ood_bc_ssh_to_compute_node
+    if session.ssh_to_compute_node?
       content_tag(:p) do
         concat content_tag(:strong, t('dashboard.batch_connect_sessions_stats_host'))
         concat " "
@@ -183,6 +131,19 @@ module BatchConnect::SessionsHelper
           session.id,
           OodAppkit.files.url(path: session.staged_root).to_s,
           target: "_blank"
+        )
+      )
+    end
+  end
+
+  def support_ticket(session)
+    content_tag(:p) do
+      concat content_tag(:strong, t('dashboard.batch_connect_sessions_stats_support_ticket'))
+      concat " "
+      concat(
+        link_to(
+          t('dashboard.batch_connect_sessions_stats_support_ticket_link_text'),
+          support_path(session_id: session.id)
         )
       )
     end
@@ -222,34 +183,22 @@ module BatchConnect::SessionsHelper
     end
   end
 
-  def delete_terminate_buttons(session)
-    if session.completed?
-      link_to(
-        icon("fas", "trash-alt", t('dashboard.batch_connect_sessions_delete_title'), class: "fa-fw"),
-        batch_connect_session_path(session, r: session.redirect),
-        method: :delete,
-        class: "btn btn-sid-delete pull-right btn-delete",
-        title: t('dashboard.batch_connect_sessions_delete_hover'),
-        data: { confirm: t('dashboard.batch_connect_sessions_delete_confirm'), cancel: 'Close', toggle: "tooltip", placement: "bottom"}
-      )
-    else
-      link_to(
-        icon("fas", "times-circle", t('dashboard.batch_connect_sessions_terminate_title'), class: "fa-fw"),
-        batch_connect_session_path(session, r: session.redirect, delete: 'false'),
-        method: :delete,
-        class: "btn btn-sid-terminate pull-right btn-terminate",
-        title: t('dashboard.batch_connect_sessions_terminate_hover'),
-        data: { confirm: t('dashboard.batch_connect_sessions_terminate_confirm'), cancel: 'Close', toggle: "tooltip", placement: "bottom"}
-      )
-    end
+  def delete(session)
+    link_to(
+      fa_icon('trash-alt', classes: nil) << ' ' << t('dashboard.batch_connect_sessions_delete_title'),
+      session,
+      method: :delete,
+      class: "btn btn-danger float-right btn-delete",
+      title: t('dashboard.batch_connect_sessions_delete_hover'),
+      data: { confirm: t('dashboard.batch_connect_sessions_delete_confirm'), toggle: "tooltip", placement: "bottom"}
+    )
   end
 
   def novnc_link(connect, view_only: false)
     version  = "1.1.0"
     password = view_only ? connect.spassword : connect.password
     resize   = view_only ? "downscale" : "remote"
-    path = asset_path("noVNC-#{version}/vnc.html?autoconnect=true&password=#{password}&path=rnode/#{connect.host}/#{connect.websocket}/websockify&resize=#{resize}", skip_pipeline: true)
-    sys_url(path)
+    asset_path("noVNC-#{version}/vnc.html?autoconnect=true&password=#{password}&path=rnode/#{connect.host}/#{connect.websocket}/websockify&resize=#{resize}", skip_pipeline: true)
   end
 
   def connection_tabs(id, tabs)
@@ -272,8 +221,8 @@ module BatchConnect::SessionsHelper
         concat(
           content_tag(:ul, class: "nav nav-tabs") do
             tabs.map { |t| t[:title] }.map.with_index do |title, idx|
-              content_tag(:li, class: "#{"active" if idx.zero?}") do
-                link_to title, "##{id}_#{idx}", data: { toggle: "tab" }
+              content_tag(:li, class: "nav-item #{"active" if idx.zero?}") do
+                link_to title, "#c_#{id}_#{idx}", data: { toggle: "tab" }, aria: { selected: (true if idx.zero?) }, class: "nav-link #{"active" if idx.zero?}"
               end
             end.join("\n").html_safe
           end
@@ -282,7 +231,7 @@ module BatchConnect::SessionsHelper
         concat(
           content_tag(:div, class: "tab-content") do
             tabs.map.with_index do |tab, idx|
-              content_tag(:div, id: "#{id}_#{idx}", class: "tab-pane ood-appkit markdown #{"active" if idx == 0}") do
+              content_tag(:div, id: "c_#{id}_#{idx}", class: "tab-pane ood-appkit markdown #{"active" if idx.zero?}", role: 'tabpanel') do
                 render partial: "batch_connect/sessions/connections/#{tab[:partial]}", locals: tab[:locals]
               end
             end.join("\n").html_safe

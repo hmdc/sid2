@@ -1,0 +1,76 @@
+profiles:
+  team1: &team1_profile
+    show_all_apps_link: false
+    selected_apps: ["sys/myjobs", "sys/files", "sys/activejobs", "sys/shell", "sys/sas"]
+    navconfig_categories_filter: false
+    navconfig_categories: ["Clusters", "Apps", "My Interactive Sessions", "Left Link", "Interactive Apps", "Files"]
+
+    navbar_type: default
+    dashboard_header_img_logo: "/pun/dev/ood/sid_logo.png"
+    brand_bg_color: "#F0F0F0"
+    brand_link_active_bg_color: "#3B3D3F"
+    disable_dashboard_logo: false
+    dashboard_logo: "/pun/dev/dashboard/sid_logo.png"
+    custom_css_files: []
+
+    support_ticket_template: "SupportTicketRtService"
+
+    nav_bar_aday:
+      - title: "Help"
+        links:
+          - title: "Doc Links"
+          - title: "how to docs"
+            icon: fa://desktop
+            url: "/docs"
+            new_tab: false
+          - title: "submit a help ticket"
+            icon: fa://question-circle
+            url: "/tickets"
+            new_tab: false
+          - app: "sys/sas"
+      - title: "Documentation"
+        url: "/sid2"
+        new_tab: true
+      - title: "Apps Menu"
+        links:
+          - title: "Main App"
+          - app: "sys/shell"
+          - title: "Sas Main"
+            app: "sys/sas"
+          - title: "SubApp"
+            tokens: [ "sys/Rstudio/gpu" ]
+          - title: "Core Apps"
+          - tokens: [ "sys/Rstudio/*" ]
+          - title: "Profiles"
+          - title: "Team 1"
+            icon: fa://question-circle
+            profile: "team1"
+      - title: "SAS Menu"
+        app: "sys/sas"
+      - title: "Wiki"
+        icon: fa://desktop
+        url: "/sid2"
+        new_tab: true
+      - title: "About"
+        url: "https://www.iq.harvard.edu/research-computing#AboutSidNG"
+        new_tab: false
+      - template: "sessions"
+      - template: "all_apps"
+      - template: "custom/nav_featured_apps"
+
+    pinned_apps_group_by:
+    pinned_apps:
+      - sys/shell
+      - sys/sas
+      - sys/sas
+
+    dashboard_layout:
+
+    custom_pages:
+      docs:
+        layout:
+        rows:
+          - columns:
+              - width: 12
+                widgets:
+                  - "pinned_apps"

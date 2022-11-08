@@ -1,21 +1,40 @@
-<ol class="breadcrumb">
-  <li>
-    <%= link_to t('dashboard.breadcrumbs_home'), root_path %>
-  </li>
-  <li class="active">
-    <%= t('dashboard.breadcrumbs_all_apps') %>
-  </li>
-</ol>
+<%= javascript_include_tag 'apps', nonce: true %>
 
-<div class="row">
-  <div class="col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= t('dashboard.apps_system_apps_title') %></div>
-      <div class="panel-body">
-        <%= render partial: "app_list", collection: @core_app_groups %>
-      </div>
-    </div>
-  </div>
+<%= render partial: 'batch_connect/shared/breadcrumb',
+locals: {
+  links: [
+  {
+    text: t('dashboard.breadcrumbs_home'),
+    href: root_path
+  },
+  {
+    text: t('dashboard.breadcrumbs_all_apps')
+  }]
+}
+%>
 
-  <%= render partial: "app_list", collection: @app_groups, layout: "col3_layout" %>
-</div>
+<table class="table apps-table" id="all-apps-table">
+  <thead>
+    <tr id="all-apps-table-header">
+      <th scope="col"><%= t('dashboard.all_apps_table_app_column') %></th>
+      <th scope="col"><%= t('dashboard.all_apps_table_category_column') %></th>
+      <th scope="col"><%= t('dashboard.all_apps_table_sub_category_column') %></th>
+      <%- @metadata_columns.each do |column| -%>
+      <th scope="col"><%= column.to_s.titleize %></th>
+      <%- end -%>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @sys_apps.each do |group| -%>
+      <%= render partial: "app_group_rows", locals: { group: group } %>
+    <% end %>
+
+    <%- @usr_apps.each do |group| -%>
+      <%= render partial: "app_group_rows", locals: { group: group } %>
+    <% end %>
+
+    <%- @dev_apps.each do |group| -%>
+      <%= render partial: "app_group_rows", locals: { group: group } %>
+    <% end %>
+  </tbody>
+</table>

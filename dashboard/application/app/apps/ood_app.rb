@@ -1,8 +1,9 @@
+# OodApp is an Open OnDemand application.
 class OodApp
   include Rails.application.routes.url_helpers
 
   attr_reader :router
-  delegate :owner, :caption, :type, :path, :name, :token, to: :router
+  delegate :owner, :type, :path, :name, :token, to: :router
 
   def accessible?
     path.executable? && path.readable?
@@ -26,7 +27,7 @@ class OodApp
   end
 
   def invalid_batch_connect_app?
-    batch_connect_app? && batch_connect.sub_app_list.none?(&:valid?)
+    batch_connect_app? && sub_app_list.none?(&:valid?)
   end
 
   def should_appear_in_nav?
@@ -39,6 +40,14 @@ class OodApp
 
   def title
     manifest.name.empty? ? name.titleize : manifest.name
+  end
+
+  def open_in_new_window?
+    if manifest.new_window.nil?
+      Configuration.open_apps_in_new_window?
+    else
+      manifest.new_window
+    end
   end
 
   def url
@@ -59,7 +68,6 @@ class OodApp
     end
   end
 
-  #THIS IS TAKEN FROM OOD 2.0
   def self.fix_if_internal_url(url, base_url)
     if(Addressable::URI.parse(url).relative? && ! url.include?('.') && ! url.start_with?('/'))
       File.join base_url, url
@@ -68,7 +76,9 @@ class OodApp
     end
   end
 
-  # the problem is we need the context :-P
+  # Return the links for this app based on this app's role. One app may have several links.
+  #
+  # @return [Array<OodAppLink>] The links for this app.
   def links
     if role == "files"
       # assumes Home Directory is primary...
@@ -79,7 +89,7 @@ class OodApp
           url: OodAppkit::Urls::Files.new(base_url: url).url(path: Dir.home),
           icon_uri: "fas://home",
           caption: caption,
-          new_tab: true
+          new_tab: open_in_new_window?
         )
       ].concat(
         OodFilesApp.new.favorite_paths.map do |favorite_path|
@@ -87,10 +97,10 @@ class OodApp
             title: favorite_path.title || favorite_path.path.to_s,
             subtitle: favorite_path.title ? favorite_path.path.to_s : nil,
             description: manifest.description,
-            url: OodAppkit::Urls::Files.new(base_url: url).url(path: favorite_path.path.to_s),
+            url: OodAppkit::Urls::Files.new(base_url: url).url(path: favorite_path.path.to_s, fs: favorite_path.filesystem),
             icon_uri: "fas://folder",
             caption: caption,
-            new_tab: true
+            new_tab: open_in_new_window?
           )
         end
       )
@@ -104,28 +114,28 @@ class OodApp
       if login_clusters.none?
         [
           OodAppLink.new(
-            title: "Shell Access",
+            title: I18n.t('dashboard.shell_app_title', cluster_title: nil).to_s.strip,
             description: manifest.description,
             url: OodAppkit::Urls::Shell.new(base_url: url).url,
             icon_uri: "fas://terminal",
             caption: caption,
-            new_tab: true
+            new_tab: open_in_new_window?
           )
         ]
       else
         login_clusters.map do |cluster|
           OodAppLink.new(
-            title: "#{cluster.metadata.title || cluster.id.to_s.titleize} Shell Access",
+            title: I18n.t('dashboard.shell_app_title', cluster_title: cluster.metadata.title || cluster.id.to_s.titleize),
             description: manifest.description,
             url: OodAppkit::Urls::Shell.new(base_url: url).url(host: cluster.login.host),
             icon_uri: "fas://terminal",
             caption: caption,
-            new_tab: true
+            new_tab: open_in_new_window?
           )
         end.sort_by { |lnk| lnk.title }
       end
     elsif role == "batch_connect"
-      batch_connect.sub_app_list.select(&:valid?).map(&:link)
+      sub_app_list.select(&:valid?).map(&:link)
     else
       [
         OodAppLink.new(
@@ -134,7 +144,7 @@ class OodApp
           url: (type == :sys && owner == :sys) ? app_path(name, nil, nil) : app_path(name, type, owner),
           icon_uri: icon_uri,
           caption: caption,
-          new_tab: true
+          new_tab: open_in_new_window?
         )
       ]
     end
@@ -144,8 +154,8 @@ class OodApp
     # hack - but at least this hack is in a method next to the method it is
     # coupled with and this prevents control coupling from the outside by doing
     # something atrocious like links(validate: false)
-    if role == "batch_connect"
-      batch_connect.sub_app_list.map(&:link)
+    if batch_connect_app?
+      sub_app_list.map(&:link)
     else
       links
     end
@@ -175,12 +185,20 @@ class OodApp
     end
   end
 
+  def caption
+    manifest.caption.empty? ? router.caption : manifest.caption
+  end
+
   def subcategory
     manifest.subcategory
   end
 
   def role
     manifest.role
+  end
+
+  def metadata
+    manifest.metadata
   end
 
   def manifest
@@ -191,12 +209,30 @@ class OodApp
     path.join("manifest.yml")
   end
 
+  def svg_icon?
+    @svg_icon ||= path.join("icon.svg").file?
+  end
+
+  def png_icon?
+    @png_icon ||= path.join("icon.png").file?
+  end
+
+  def image_icon?
+    png_icon? || svg_icon?
+  end
+
   def icon_path
-    path.join("icon.png")
+    if svg_icon?
+      path.join("icon.svg")
+    elsif png_icon?
+      path.join("icon.png")
+    else
+      Pathname.new('')
+    end
   end
 
   def icon_uri
-    if icon_path.file?
+    if image_icon?
       app_icon_path(name, type, owner)
     elsif manifest.icon =~ /^fa[bsrl]?:\/\//
       manifest.icon
@@ -205,25 +241,12 @@ class OodApp
     end
   end
 
-  def image_path
-    image_file = path.glob("image.{jpg,gif,png,svg}").find(&:file?)
-    image_file ? image_file : path.join("image.jpg")
-  end
-
-  def image_uri
-    if image_path.file?
-      app_image_path(name, type, owner)
-    else
-      "iqss_logo.png"
-    end
-  end
-
   class SetupScriptFailed < StandardError; end
   # run the production setup script for setting up the user's
   # dataroot and database for the current app, if the production
   # setup script exists and can be executed
   def run_setup_production
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       ENV['BUNDLE_USER_CONFIG'] = '/dev/null'
       setup = "./bin/setup-production"
       Dir.chdir(path) do
@@ -236,8 +259,8 @@ class OodApp
           #
           # This makes the execution of the setup-production script use the same ruby versions
           # that Passenger uses when launching the app.
-          output = `PATH=#{path.join('bin').to_s}:$PATH bundle exec #{setup} 2>&1`
-          unless $?.success?
+          output, status = Open3.capture2e({'PATH' => path.join('bin').to_s + ':'+ ENV['PATH']}, 'bundle','exec', setup)
+          unless status.success?
             msg = "Per user setup failed for script at #{path}/#{setup} "
             msg += "for user #{Etc.getpwuid.name} with output: #{output}"
             raise SetupScriptFailed, msg
@@ -281,6 +304,27 @@ class OodApp
   # @return [String] memoized version string
   def version
     @version ||= (version_from_file || version_from_git || "unknown").strip
+  end
+
+  # test whether this object is equal to another.
+  # @return [Boolean]
+  def ==(other)
+    other.respond_to?(:url) ? url == other.url : false
+  end
+
+  def sub_app_list
+    batch_connect_app? ? batch_connect.sub_app_list : []
+  end
+
+  # The subapp list may only be of size 1 and actually contains
+  # this app. This returns true if there are indeed sub apps that
+  # that differ from this object.
+  def has_sub_apps?
+    if batch_connect_app?
+      sub_app_list.size > 1 || sub_app_list[0] != batch_connect
+    else
+      false
+    end
   end
 
   private

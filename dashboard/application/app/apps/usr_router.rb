@@ -1,3 +1,4 @@
+# The router class for all user shared apps.
 class UsrRouter
   attr_reader :name, :owner
 
@@ -6,16 +7,19 @@ class UsrRouter
     @owner = owner
   end
 
-  # Get a human readable explanation of the owner of this app such as:
+  # The Internationalizable caption for display in an icon or text.
+  # In two forms, with full name if it can get it from Etc, otherwise
+  # the short form.
   #
-  #     "Shared by Eric Franz (efranz)"
+  #     "Shared by aokley"
+  #     "Shared by Annie Oakley (aokley)"
   #
   # @return [String] human readable owner string
   def caption
     if owner_title == owner
-      "Shared by #{owner}"
+      I18n.t('dashboard.shared_apps_caption_short', owner: owner)
     else
-      "Shared by #{owner_title} (#{owner})"
+      I18n.t('dashboard.shared_apps_caption', owner: owner, owner_title: owner_title)
     end
   end
 
@@ -57,28 +61,14 @@ class UsrRouter
   end
 
   def self.base_path(owner: OodSupport::Process.user.name)
-    # ood
     Pathname.new "/var/www/ood/apps/usr/#{owner}/gateway"
-
-    # dev
-    # Pathname.new Rails.root.join("data", "apps","usr", owner)
-
-    # awesim
-    # Pathname.new(Dir.home).join("awesim_shared_apps")
   end
 
   def self.owners
     owners = []
 
-    # ood
     target = Pathname.new("/var/www/ood/apps/usr")
     owners = target.children(false).map(&:to_s) if target.directory? && target.executable? && target.readable?
-
-    # dev
-    # owners = Rails.root.join("data", "apps","usr").children(false).map(&:to_s)
-
-    # awesim
-    # owners = ["awe0011", "efranz", "jnicklas"]
 
     owners
   end

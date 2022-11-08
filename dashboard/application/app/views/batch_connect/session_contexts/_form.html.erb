@@ -1,3 +1,4 @@
+
 <%= bootstrap_form_for(@session_context) do |f| %>
   <% f.object.each do |attrib| %>
     <%= create_widget(f, attrib, format: @render_format) %>
@@ -5,6 +6,8 @@
 
   <%= f.submit t('dashboard.batch_connect_form_launch'), class: "btn btn-primary btn-block" %>
 <% end %>
+
+<%= javascript_include_tag 'batch_connect', nonce: true if Configuration.bc_dynamic_js? %>
 
 <% @app.custom_javascript_files.each do |jsfile| %>
   <%= javascript_tag "(function(){\n" + jsfile.read + "\n}());" %>

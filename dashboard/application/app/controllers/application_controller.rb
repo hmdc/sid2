@@ -1,33 +1,40 @@
+# The parent controller for all other controllers.
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_user, :set_nav_groups, :set_announcements, :set_locale
+  before_action :set_user, :set_user_configuration, :set_pinned_apps, :set_nav_groups, :set_announcements
   before_action :set_my_balances, only: [:index, :new, :featured]
-
-  def set_locale
-    I18n.locale = ::Configuration.locale
-  rescue I18n::InvalidLocale => e
-    logger.warn "I18n::InvalidLocale #{::Configuration.locale}: #{e.message}"
-  end
+  before_action :set_featured_group, :set_custom_navigation
 
   def set_user
-    @user = User.new
+    @user = CurrentUser
+  end
+
+  def set_user_configuration
+    @user_configuration ||= UserConfiguration.new(request_hostname: request.hostname)
+  end
+
+  def set_custom_navigation
+    @nav_bar = NavBar.items(@user_configuration.nav_bar)
+    @help_bar = NavBar.items(@user_configuration.help_bar)
   end
 
   def set_nav_groups
     #TODO: for AweSim, what if we added the shared apps here?
-    if NavConfig.categories_whitelist?
-        @nav_groups = OodAppGroup.select(titles: NavConfig.categories, groups: sys_app_groups)
-    else
-        @nav_groups = OodAppGroup.order(titles: NavConfig.categories, groups: sys_app_groups)
-    end
+    @nav_groups = filter_groups(sys_app_groups)
+  end
+
+  def set_featured_group
+    apps = AppRecategorizer.recategorize(@pinned_apps, I18n.t("dashboard.pinned_apps_category"), I18n.t('dashboard.pinned_apps_title'))
+    group = OodAppGroup.groups_for(apps: apps, nav_limit: @user_configuration.pinned_apps_menu_length)
+
+    @featured_group = filter_groups(group).first # 1 single group called 'Apps'
   end
 
   def sys_apps
-    #RESTRICT THE INTERACTIVE APPS THAT APPEAR IN THE MENU
-    @sys_apps ||= SysRouter.apps.select { |app| NavConfig.select_interactive_apps(app) }
+    @sys_apps ||= SysRouter.apps
   end
 
   def dev_apps
@@ -36,6 +43,10 @@ class ApplicationController < ActionController::Base
 
   def usr_apps
     @usr_apps ||= ::Configuration.app_sharing_enabled? ? UsrRouter.all_apps(owners: UsrRouter.owners) : []
+  end
+
+  def nav_all_apps
+    @nav_all_apps ||= nav_sys_apps + nav_usr_apps + nav_dev_apps
   end
 
   def nav_sys_apps
@@ -52,6 +63,10 @@ class ApplicationController < ActionController::Base
 
   def sys_app_groups
     OodAppGroup.groups_for(apps: nav_sys_apps)
+  end
+
+  def set_pinned_apps
+    @pinned_apps ||= PinnedApp.pinned_apps(@user_configuration.pinned_apps, nav_all_apps)
   end
 
   def set_announcements
@@ -75,5 +90,15 @@ class ApplicationController < ActionController::Base
     @my_balances = []
     ::Configuration.balance_paths.each { |path| @my_balances += Balance.find(path, OodSupport::User.new.name) }
     @my_balances
+  end
+
+  private
+
+  def filter_groups(groups)
+    if @user_configuration.filter_nav_categories?
+      OodAppGroup.select(titles: @user_configuration.nav_categories, groups: groups)
+    else
+      OodAppGroup.order(titles: @user_configuration.nav_categories, groups: groups)
+    end
   end
 end

@@ -1,0 +1,32 @@
+<div class='page-header text-center'>
+  <h1>Jobs App</h1>
+  <%= link_to 'New Project', new_project_path, class: 'btn btn-info', 
+  title: I18n.t('dashboard.jobs_project_create_new_project_directory') %>
+</div>
+<br>
+<div class='card'>
+  <h3 class='card-header'>Projects</h3>
+  <div class='card-body'>
+    <table class='table table-borderless'>
+      <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>Actions</th>
+        <tr>
+      </thead>
+      <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.title %></td>
+          <td><%= link_to 'Work in', project_path(project.directory), class: 'btn btn-success', 
+          title: 'View project directory contents' %>
+          <td><%= link_to 'Edit', edit_project_path(project.directory), class: 'btn btn-info',
+          title: 'Edit project directory' %>
+          <td><%= link_to 'Delete', project_path(project.directory), class: 'btn btn-danger', :method => :delete,
+          data: {confirm: I18n.t('dashboard.jobs_project_delete_project_confirmation')} %>
+        <tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

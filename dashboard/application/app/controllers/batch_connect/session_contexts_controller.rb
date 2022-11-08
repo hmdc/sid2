@@ -1,3 +1,4 @@
+# The controller for creating batch connect sessions.
 class BatchConnect::SessionContextsController < ApplicationController
   include BatchConnectConcern
 
@@ -8,9 +9,8 @@ class BatchConnect::SessionContextsController < ApplicationController
     set_session_context
 
     if @app.valid?
-      # Read in context from cache file if cache is disabled and context.json exist
       begin
-       @session_context.update_with_cache(JSON.parse(cache_file.read))  if cache_file.file?
+        @app.update_session_with_cache(@session_context, cache_file)
       rescue => e
         flash.now[:alert] = t('dashboard.batch_connect_form_attr_cache_error',error_message: e.message)
       end
@@ -75,11 +75,13 @@ class BatchConnect::SessionContextsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_contexts_param
-      params.require(:batch_connect_session_context).permit(@session_context.attributes.keys)
+      params.require(:batch_connect_session_context).permit(@session_context.attributes.keys) if params[:batch_connect_session_context].present?
     end
 
     # Store session context into a cache file
     def cache_file
-      BatchConnect::Session.dataroot(@app.token).tap { |p| p.mkpath unless p.exist? }.join("context.json")
-    end 
+      BatchConnect::Session.cache_root.tap do |p|
+        p.mkpath unless p.exist?
+      end.join("#{@app.token.gsub('/', '_')}.json")
+    end
 end

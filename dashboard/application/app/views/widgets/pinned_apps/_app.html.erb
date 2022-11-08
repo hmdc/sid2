@@ -1,0 +1,32 @@
+<%- link = app.links.first -%>
+<%- link_data = {:method => "get"}.merge link.data -%>
+<%- border_color = app.view_config[:color] ? "border-color: #{app.view_config[:color]};" : "" -%>
+
+<div class="col-sm-3 col-md-3 app-launcher-container">
+  <div class="app-launcher app-launcher-hover" data-toggle="launcher-button">
+  <%=
+    link_to(
+      link.url.to_s,
+      class: "",
+      target: link.new_tab? ? "_blank" : nil,
+      data: link_data,
+      style: border_color
+    ) do
+  %>
+    <div class="center-block text-center">
+      <%= icon_tag(URI(app.view_config.fetch(:icon_uri, link.icon_uri).to_s)) %>
+      <%= content_tag(:p, app.view_config.fetch(:title, link.title), class: "app-title") %>
+
+      <% if app.view_config.blank? %>
+        <%= content_tag(:p, content_tag(:span, link.caption), class: "text-muted", style: "margin-top: 20px") if link.caption %>
+      <% else %>
+        <div class="mt-2 mb-1">
+          <%- app.view_config.fetch(:sub_title, "").each_line do |line| -%>
+            <%= content_tag(:p, line, class: "app-description text-muted") %>
+          <%- end -%>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>

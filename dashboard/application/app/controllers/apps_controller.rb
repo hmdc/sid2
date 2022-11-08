@@ -1,17 +1,13 @@
 require 'ostruct'
 
+# The controller for apps pages /dashboard/apps
 class AppsController < ApplicationController
 
-  IMAGE_TYPE_MAPPER = {
-    ".jpg" => "image/jpeg",
-    ".gif" => "image/gif",
-    ".png" => "image/png",
-    ".svg" => "image/svg+xml",
-  }
-
   def index
-    @core_app_groups = OodAppGroup.select(titles: %w(Files Jobs Clusters), groups: sys_app_groups)
-    @app_groups = sys_app_groups.select {|g| ! %w(Files Jobs Clusters).include?(g.title) }
+    @sys_apps = sys_app_groups
+    @dev_apps = OodAppGroup.groups_for(apps: nav_dev_apps)
+    @usr_apps = OodAppGroup.groups_for(apps: nav_usr_apps)
+    set_metadata_columns
   end
 
   def featured
@@ -60,18 +56,10 @@ class AppsController < ApplicationController
   def icon
     set_app
 
-    if @app.icon_path.file?
+    if @app.svg_icon? 
+      send_file @app.icon_path, :type => 'image/svg+xml', :disposition => 'inline'
+    elsif @app.png_icon?
       send_file @app.icon_path, :type => 'image/png', :disposition => 'inline'
-    else
-      raise ActionController::RoutingError.new('Not Found')
-    end
-  end
-
-  def image
-    set_app
-
-    if @app.image_path.file?
-      send_file @app.image_path, :type => IMAGE_TYPE_MAPPER[@app.image_path.extname], :disposition => 'inline'
     else
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -95,6 +83,18 @@ class AppsController < ApplicationController
     else
       #FIXME: app type doesn't exit
       raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
+  def set_metadata_columns
+    @metadata_columns = begin
+      nav_all_apps.each_with_object([]) do |app, columns|
+        app.metadata.each do |k,v|
+          columns.append(k.to_s)
+        end
+      end.uniq.sort_by do |column|
+        column.to_s
+      end
     end
   end
 end

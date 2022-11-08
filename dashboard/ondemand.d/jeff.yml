@@ -1,0 +1,112 @@
+support_ticket:
+  #ui_template: "rt_service_template"
+  attributesi:
+    username:
+      readonly: false
+  forms:
+    - email
+    - cc
+    - subject
+    - custom_field
+  rt_api:
+    server: "http://rt:34000"
+    user: "root"
+    pass: "password"
+    priority: 4
+    queues:
+      - "General"
+  emailo:
+    from: "config@example.com"
+    to: "support@support.system.com"
+    delivery_method: "smtp"
+    raise_delivery_errors: true
+    perform_deliveries: true
+    delivery_settings:
+      address: "host.docker.internal"
+      port: "25"
+
+custom_pages:
+  docs:
+    rows:
+      - columns:
+          - width: 12
+            widgets:
+              - "pinned_apps"
+
+profiles:
+  team2:
+    batch_menu:
+
+    apps_menus:
+      title: "Custom Menu"
+      links:
+        - group: "Doc Links"
+        - apps: "sys/sas"
+        - group: "A Links"
+        - apps: "sys/sas"
+        - title: "how to docs"
+          description: "This is how we do it"
+          icon_uri: fa://desktop
+          url: "/docs"
+          new_tab: true
+        - title: "submit a help ticket"
+          icon_uri: fa://question-circle
+          url: "/tickets"
+          new_tab: false
+        - apps: "sys/Rstudio/*"
+
+    help_bars:
+      - title: "Help"
+        links:
+          - group: "Doc Links"
+          - apps: "sys/sas"
+          - group: "Other Links"
+          - apps: "sys/sas"
+          - title: "how to docs"
+            icon_uri: fa://desktop
+            url: "/docs"
+            new_tab: true
+          - title: "submit a help ticket"
+            icon_uri: fa://question-circle
+            url: "/tickets"
+            new_tab: false
+          - apps: "sys/sas"
+      - "user"
+      - "log_out"
+
+    nav_bar:
+      - title: "Documentation"
+        page: "docs"
+      - title: "Rstudio Menu"
+        links:
+          - group: "Core Apps"
+          - "sys/Rstudio"
+          - apps: [ "sys/sas" ]
+          - apps: "sys/sas"
+          - apps: "sys/shell"
+      - title: "Rdesktop Menu"
+        links:
+          - apps: [ "sys/bc_desktop" ]
+          - group: "BI Desktop"
+          - apps: [ "sys/OdysseyRD" ]
+          - apps: "sys/sas"
+          - apps: "sys/shell"
+          - group: "Financial Desktop"
+          - apps: [ "sys/bc_desktop" ]
+      - title: "Profiles"
+        links:
+          - group: "Profiles"
+          - title: "Team 1"
+            profile: "team1"
+          - title: "Team 2"
+            profile: "team2"
+      - "sys/sas"
+      - title: "Support"
+        icon_uri: fa://desktop
+        url: "support"
+        new_tab: false
+      - title: "About"
+        page: "about"
+        urls: "support_ticket"
+        new_tab: false
+      - all_apps
