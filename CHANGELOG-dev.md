@@ -1,3 +1,10 @@
+## [2023.1.1-dev.1](https://github.com/hmdc/sid2/compare/2022.8.1-dev.1...2023.1.1-dev.1) (2023-01-05)
+
+
+### Bug Fixes
+
+* **build:** gh [#813](https://github.com/hmdc/sid2/issues/813) updates to Sid OnDemand Docker image to fix latest OOD codebase build process ([#70](https://github.com/hmdc/sid2/issues/70)) ([f6d9ad9](https://github.com/hmdc/sid2/commit/f6d9ad98af1418b2da69ea357add49cea5da2aaf))
+
 ## [2022.8.1-dev.1](https://github.com/hmdc/sid2/compare/2022.7.1-dev.1...2022.8.1-dev.1) (2022-08-19)
 
 
