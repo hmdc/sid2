@@ -1,3 +1,10 @@
+## [2023.1.2-dev.1](https://github.com/hmdc/sid2/compare/2023.1.1-dev.1...2023.1.2-dev.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* **build:** gh [#818](https://github.com/hmdc/sid2/issues/818) Updated OnDemand version to 2.0.29 for Sid Docker image to fix shell app error ([#71](https://github.com/hmdc/sid2/issues/71)) ([9dbd01c](https://github.com/hmdc/sid2/commit/9dbd01c118614ea3d39febca3f6a0421355d8c0d))
+
 ## [2023.1.1-dev.1](https://github.com/hmdc/sid2/compare/2022.8.1-dev.1...2023.1.1-dev.1) (2023-01-05)
 
 
