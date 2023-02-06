@@ -15,15 +15,15 @@ cy.sid = {
     {"id": "dev-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
     {"id": "dev-rdesktop", "token": "sys/OdysseyRD", "name": "Remote Desktop"},
 
-    {"id": "cannon-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
-    {"id": "cannon-rdesktop", "token": "sys/NativeRD", "name": "FAS-RC Remote Desktop"},
+    {"id": "cannon-rstudio", "token": "sys/RStudioServer", "name": "RStudio Server"},
+    {"id": "cannon-rdesktop", "token": "sys/RemoteDesktop", "name": "Remote Desktop"},
     {"id": "cannon-jupyter", "token": "sys/Jupyter", "name": "Jupyter notebook / Jupyterlab"},
     {"id": "cannon-stata", "token": "sys/Stata", "name": "Stata"},
     {"id": "cannon-sas", "token": "sys/SAS", "name": "SAS"},
     {"id": "cannon-matlab", "token": "sys/Matlab", "name": "Matlab"},
 
-    {"id": "fasse-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},
-    {"id": "fasse-rdesktop", "token": "sys/NativeRD", "name": "FAS-RC Remote Desktop"},
+    {"id": "fasse-rstudio", "token": "sys/RStudioServer", "name": "RStudio Server"},
+    {"id": "fasse-rdesktop", "token": "sys/RemoteDesktop", "name": "Remote Desktop"},
     {"id": "fasse-jupyter", "token": "sys/Jupyter", "name": "Jupyter notebook / Jupyterlab"},
     {"id": "fasse-stata", "token": "sys/Stata", "name": "Stata"},
     {"id": "fasse-sas", "token": "sys/SAS", "name": "SAS"}
