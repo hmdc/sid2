@@ -2,22 +2,18 @@
 order: 10
 cluster: "fasse"
 form:
-  token: "sys/Rstudio"
+  token: "sys/RStudioServer"
+  modules: ""
   bc_queue: "test"
-  bc_account: ""
-  bc_num_slots: "1"
-  bc_num_hours: "1"
   custom_memory_per_node: "4"
   custom_num_cores: "2"
-  custom_num_gpus: "0"
   custom_time: "08:00:00"
-  envscript: ""
-  custom_email_address: ""
+  r_version: "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_15.sif"
   bc_email_on_started: "0"
+  custom_email_address: ""
   custom_reservation: ""
-  r_version: "R/4.1.0-fasrc01"
-  rlibs: "~/apps/R_4.1.0_fasrc01"
   custom_vanillaconf: "1"
+  bc_account: ""
 
 view:
   color: "#DA6027"
