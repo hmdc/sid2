@@ -1,0 +1,17 @@
+---
+cluster: "dev-cluster"
+title: "FAS-RC Remote Desktop"
+tile:
+  title: "Run FAS-RC Remote Desktop"
+  icon: "/public/images/desktop_logo.svg"
+  sub_caption: |
+    2 CPU cores and 4GB RAM
+    8 hours job run time
+    Cannon cluster
+attributes:
+  bc_account: ""
+  bc_num_slots: "1"
+  bc_num_hours: "1"
+  bc_queue: ""
+  bc_email_on_started: "0"
+  bc_vnc_resolution: "1024x768"

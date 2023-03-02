@@ -1,0 +1,1 @@
+<div style='text-decoration;none;border: 1px solid #000;background-color:#53a065;padding: 6px 10px 6px 6px;'><a class='wpfront-button' href='https://status.rc.fas.harvard.edu'>STATUS PAGE</a> <span><font color='#fff' style='text-decoration:none;padding:4px;'>No known issues. </font> </span></div>

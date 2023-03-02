@@ -1,0 +1,28 @@
+profiles:
+  fasrc:
+    show_all_apps_link: false
+    cancel_session_enabled: false
+    navbar_type: dark
+    dashboard_header_img_logo: "/public/images/fasrc_logo.png"
+    brand_bg_color: " rgb(157,47,60)"
+    brand_link_active_bg_color: "rgb(59, 61, 63)"
+    disable_dashboard_welcome_message: true
+    
+    pinned_apps_group_by: "category"
+    pinned_apps: ["*/main"]
+
+    nav_bar:
+      - "clusters"
+      - "files"
+      - "jobs"
+      - title: "Interactive Apps"
+        apps: "*/main"
+      - "sessions"
+
+    dashboard_layout:
+      rows:
+        - columns:
+            - width: 10
+              widgets:
+                - "pinned_apps"
+                - "motd"

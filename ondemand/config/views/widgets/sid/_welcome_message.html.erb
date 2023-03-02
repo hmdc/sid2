@@ -1,0 +1,12 @@
+<%= render partial: "/widgets/sid/util" %>
+
+<div class="welcome-message">
+  <% if cannon_cluster? %>
+    <h2>Welcome to <img src="/public/images/sid_logo.png"> <span class="cannon-color">Social Sciences dashboard on the <b>Cannon</b> Cluster</span></h2>
+    <%= render partial: "/widgets/sid/cannon_welcome_message" %>
+  <% elsif fasse_cluster? %>
+    <h2>Welcome to <img src="/public/images/sid_logo.png"> <span class="fasse-color">Social Sciences dashboard on the <b>FASSE</b> Cluster</span></h2>
+  <% else %>
+    <h2>Welcome to <img src="/public/images/sid_logo.png"> <span class="default-color">Social Sciences dashboard on the <b>Development</b> Cluster</span></h2>
+  <% end %>
+</div>

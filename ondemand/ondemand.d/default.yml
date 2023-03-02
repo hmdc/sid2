@@ -1,0 +1,13 @@
+host_based_profiles: false
+disable_dashboard_logo: false
+pinned_apps_group_by:
+show_all_apps_link: false
+
+help_menu:
+  - group: "Interface"
+  - title: "FASRC"
+    profile: "fasrc"
+    icon: "/public/images/fasrc_logo.jpg"
+  - title: "Sid"
+    profile: "sid"
+    icon: "/public/images/sid_logo.png"
