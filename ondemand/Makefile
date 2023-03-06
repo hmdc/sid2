@@ -2,13 +2,12 @@
 all::
 
 all:: dev
-.PHONY: dev remote-dev remote-fasse test release down up clean clean-remote-dev clean-remote-fasse version next-version docker-build docker-build-slurm docker-build-ood docker-push
+.PHONY: dev release down up clean version next-version docker-build docker-build-slurm docker-build-ood docker-push
 
 OOD_UID := $(shell id -u)
 OOD_GID := $(shell id -g)
-OOD_TAG := 2.1.0-0.rc8.el7
+OOD_TAG := 2.1.0-0.rc9.el7
 SLURM_TAG := slurm-21-08-6-1
-REMOTE_USERNAME := $(if $(SSH_USERNAME),$(SSH_USERNAME),$(USER))
 SID_SLURM_IMAGE := hmdc/sid-slurm:$(SLURM_TAG)
 SID_ONDEMAND_IMAGE := hmdc/sid-ood:$(SLURM_TAG)-ood-$(OOD_TAG)
 
@@ -41,23 +40,9 @@ remote-fasse:                    CHECK_TEMPLATE_VERSION  := ""
 
 dev: down up
 
-remote-dev remote-fasse: version
-	$(ENV) http_proxy=$(HTTP_PROXY) https_proxy=$(HTTPS_PROXY) docker-compose build
-	@echo "You need to be connected to the VPN"
-	ssh $(REMOTE_USERNAME)@$(LOGIN_HOST) mkdir -p $(APP_FOLDER)
-	$(ENV) docker-compose run --no-deps --entrypoint="" ood su - ood bash -c "export PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$$PATH; cd /home/ood/ondemand/dev/dashboard; scl enable rh-ruby27 rh-nodejs14 'gem install --user-install bundler -v 2.1.4 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
-	@echo "You need to be connected to the VPN"
-	@./download_and_check.sh $(REMOTE_USERNAME) $(TEMPLATE_URL)/$(TURBOVNC_TEMPLATE) $(TEMPLATE_LOCATION)/$(TURBOVNC_TEMPLATE) $(CHECK_TEMPLATE_VERSION)
-	@./download_and_check.sh $(REMOTE_USERNAME) $(TEMPLATE_URL)/$(KVM_TEMPLATE) $(TEMPLATE_LOCATION)/$(KVM_TEMPLATE) $(CHECK_TEMPLATE_VERSION)
-	rsync -avz --delete --exclude-from='rsync-exclude.conf' ./application/ -e ssh $(REMOTE_USERNAME)@$(LOGIN_HOST):$(APP_FOLDER)
-
-test:
-	$(ENV) docker-compose run --no-deps --entrypoint="" ood su - ood bash -c "export PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$$PATH; cd /home/ood/ondemand/dev/dashboard; scl enable rh-ruby27 rh-nodejs14 'gem install --user-install bundler -v 2.1.4 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake test'"
-
 release: next-version
-	$(ENV) docker-compose run --no-deps --entrypoint="" ood su - ood bash -c "export PATH=/home/ood/bin:/home/ood/ondemand/dev/dashboard/node_modules/.bin:$$PATH; export RAILS_ENV=production; cd /home/ood/ondemand/dev/dashboard; scl enable rh-ruby27 rh-nodejs14 'gem install --user-install bundler -v 2.1.4 && bundle config --local path 'vendor/bundle' && bundle install && npm install yarn --save && bundle exec rake assets:precompile'"
 	mkdir -p ./target
-	tar -czvf ./target/sid2-dashboard.tar.gz ./application
+	tar -czvf ./target/ondemand-dashboard.tar.gz ./application
 
 down:
 	$(ENV) docker-compose down -v || :
@@ -66,12 +51,7 @@ up:
 	$(ENV) docker-compose up --build $(DETACHED_MODE)
 
 clean:
-	rm -rf application/.bundle application/VERSION application/log application/node_modules application/public/assets application/tmp application/vendor/bundle data/*
 	$(ENV) docker-compose down --rmi all --volumes
-
-clean-remote-dev clean-remote-fasse:
-	echo "For FASSE, you need to be connected to the VPN"
-	ssh $(REMOTE_USERNAME)@$(LOGIN_HOST) rm -rfv $(APP_FOLDER) || :
 
 next-version:
 	docker run --rm -v $(PWD)/..:/usr/app -w /usr/app node:$(NODE_VERSION) /bin/bash -c "npm install && npm run version -- $(NPM_RUN_VERSION_ARGS) | tail -n 1 > dashboard/application/VERSION"
