@@ -1,7 +1,7 @@
 <%= render partial: "/widgets/sid/util" %>
 
 <h3>Quick Links</h3>
-<div class="row">
+<div id="quick-links-container" class="row">
   <%= render partial: "/widgets/sid/terminal_button" %>
   <%= render partial: "/widgets/sid/all_sessions_button" %>
   <%= render partial: "/widgets/sid/fasse_button" unless fasse_cluster? %>
