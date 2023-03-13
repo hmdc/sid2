@@ -2,6 +2,7 @@
 cy.sid = {
   // FOR LONG RUNNING CHECKS. IN MILLISECONDS
   timeout: 120000,
+  profiles: ['Sid', 'FASRC'],
   // SID DASHBOARD CREDENTIALS
   auth: {
     username: Cypress.env('dashboard_username'),
@@ -10,6 +11,13 @@ cy.sid = {
   //QUERY PARAMS TO ENABLE/DISABLE FEATURES WHEN NEEDED
   query_params: {
   },
+  // CONFIGURED PINNED APPS
+  pinnedApps: [
+    {"id": "dev-main-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server", "url": "/pun/sys/dashboard/batch_connect/sys/Rstudio/main/session_contexts/new"},
+    {"id": "dev-ql-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server", "url": "/pun/sys/dashboard/batch_connect/sys/Rstudio/ql_rstudio_dev/session_contexts"},
+    {"id": "dev-main-rdesktop", "token": "sys/OdysseyRD", "name": "Remote Desktop", "url": "/pun/sys/dashboard/batch_connect/sys/NativeRD/main/session_contexts/new"},
+    {"id": "dev-ql-rdesktop", "token": "sys/OdysseyRD", "name": "Remote Desktop", "url": "/pun/sys/dashboard/batch_connect/sys/NativeRD/ql_rdesktop_dev/session_contexts"},
+  ],
   // CONFIGURED LAUNCHERS
   launchers: [
     {"id": "dev-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server"},

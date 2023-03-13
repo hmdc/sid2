@@ -9,7 +9,7 @@ echo "Trying: ${ENDPOINT} with username: ${OOD_USERNAME}"
 for i in {1..20}; do
   STATUS_RECEIVED=$(curl -k -s -o /dev/null -L -w ''%{http_code}'' -u ${OOD_USERNAME}:${OOD_PASSWORD} ${ENDPOINT})
   if [ $STATUS_RECEIVED == "200" ]; then
-    echo "Sid Dashboard up and running..."
+    echo "Dashboard up and running..."
     exit 0
   fi
   echo "dashboard status: $STATUS_RECEIVED"

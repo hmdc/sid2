@@ -1,6 +1,6 @@
 ---
 cluster: "dev-cluster"
-title: "RStudio Server"
+title: "Rstudio Server"
 tile:
   title: "Run Rstudio Server"
   icon: "/public/images/rstudio_logo.png"

@@ -5,7 +5,7 @@ Cypress is a testing tool [https://docs.cypress.io](https://docs.cypress.io)
 ## TL;DR
 To install the dependencies and run the tests locally run:
  * `npm install`
- * `make local`
+ * `make sid CONFIG=local`
 
 ## Installing testing tooling - Cypress
 `npm install`
@@ -14,23 +14,23 @@ To install the dependencies and run the tests locally run:
 To run tests against `remote-dev`, `staging`, `FASSE`, and `Cannon`, you need to connect to the VPN.
 
 Cypress can be configured using environment variables. We use a feature of Cypress to setup and environment file: `cypress.env.json` with environment specific configuration. In order to support the multiple Sid2 environments, we have created several configuration files for each one of them:
- * `cypress.env.json.local`
- * `cypress.env.json.remote-dev`
- * `cypress.env.json.remote-fasse`
- * `cypress.env.json.staging-cannon`
- * `cypress.env.json.staging-fasse`
- * `cypress.env.json.prod-cannon`
- * `cypress.env.json.prod-fasse`
+ * `sid/cypress.env.json.local`
+ * `sid/cypress.env.json.remote-dev`
+ * `sid/cypress.env.json.remote-fasse`
+ * `sid/cypress.env.json.staging-cannon`
+ * `sid/cypress.env.json.staging-fasse`
+ * `sid/cypress.env.json.prod-cannon`
+ * `sid/cypress.env.json.prod-fasse`
 
  Each `make` task that executes a test will create a copy of the enviroment specific file as `cypress.env.json`
- The following `make` tasks will execute the tests locally against each environment using a Docker image to run the tests:
-  * `make local`
-  * `make remote-dev`
-  * `make remote-fasse`
-  * `make staging-cannon`
-  * `make staging-fasse`
-  * `make prod-cannon`
-  * `make prod-fasse`
+ The following `make` tasks will execute the tests locally against each environment using a Cypress runtime to run the tests:
+  * `make sid CONFIG=local`
+  * `make sid CONFIG=remote-dev`
+  * `make sid CONFIG=remote-fasse`
+  * `make sid CONFIG=staging-cannon`
+  * `make sid CONFIG=staging-fasse`
+  * `make sid CONFIG=prod-cannon`
+  * `make sid CONFIG=prod-fasse`
 
   There is a special make task that is used to run the tests within GitHub action: `make test`  
   This task will first start the Sid Dashboard in the local Docker environment and then run the tests against it.
@@ -40,7 +40,7 @@ In order to connect to the Sid dashboard, we need to provide the automated tests
  * `OOD_USERNAME`
  * `OOD_PASSWORD`
 
- example: `env OOD_USERNAME=ood OOD_PASSWORD=ood make prod-fasse`
+ example: `env OOD_USERNAME=ood OOD_PASSWORD=ood make sid CONFIG=prod-fasse`
 
  The credentials file can be droped at the root of the project: `credentials.json`. This is a JSON format file with the username and password, example:
 ```
@@ -50,7 +50,7 @@ In order to connect to the Sid dashboard, we need to provide the automated tests
 }
 ```
 
-For the local environment: `cypress.env.json.local`, the credentials are already configured.
+For the local environment: `sid/cypress.env.json.local`, the credentials are already configured.
 
 ## CLI
 We can run `Cypress` through `npm`, a `cypress` script was added to the `package.json` file.  
