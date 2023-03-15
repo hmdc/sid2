@@ -14,6 +14,15 @@ export const loadHomepage = () => {
   cy.visit(rootPath, { auth, qs })
 }
 
+export const navigateApplication = appName => {
+  cy.get('nav li[title="Interactive Apps"] > a').click()
+  cy.get(`nav li[title="Interactive Apps"] ul a[title="${appName}"]`).click()
+}
+
+export const navigateSessions = () => {
+  cy.get('nav li[title="My Interactive Sessions"] > a').click()
+}
+
 export const navigateToSupport = () => {
   cy.get('nav li[title="Help"] > a').click()
   cy.get(`nav li[title="Help"] ul a[title="Submit Support Ticket"]`).click()

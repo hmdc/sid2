@@ -1,29 +1,22 @@
-name: automated-tests
+name: manual-tests
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: [ "build-and-test" ]
-    branches: [ canary, stable ]
-    types:
-      - completed
 
 jobs:
   test-sid:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout ${{ github.sha }}
         uses: actions/checkout@v2
-      - name: Build and test
+      - name: Sid Build and test
         working-directory: ./automated-testing
         run: make test
   test-ondemand:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout ${{ github.sha }}
         uses: actions/checkout@v2
-      - name: Build and test
+      - name: OnDemand Run and test
         working-directory: ./automated-testing
         run: make ondemand-test

@@ -1,4 +1,4 @@
-import { NAVIGATION, loadHomepage } from "../../../support/utils/navigation.js";
+import { NAVIGATION, loadHomepage, navigateApplication } from "../../../support/utils/navigation.js";
 import { changeProfile } from "../../../support/utils/profiles.js";
 import { cleanupSessions, checkSession } from "../../../support/utils/sessions.js";
 
@@ -6,11 +6,6 @@ describe('Sid Dashboard - Interactive Apps', () => {
 
   const interactiveApps = Cypress.env('sid_dashboard_applications')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
-
-  const goToApp = app => {
-    cy.get('nav li[title="Interactive Apps"] > a').click()
-    cy.get(`nav li[title="Interactive Apps"] ul a[title="${app.name}"]`).click()
-  }
 
   before(() => {
     loadHomepage()
@@ -26,7 +21,7 @@ describe('Sid Dashboard - Interactive Apps', () => {
   it('Should display restricted interactive apps left menu', () => {
     cy.wrap(interactiveApps).each( app => {
       cy.task('log', `Checking interactive app menu: ${app.token}`)
-      goToApp(app)
+      navigateApplication(app.name)
       cy.get('div.system-and-shared-apps-header div.card-header').should($heading => {
         expect($heading.text()).to.match(/interactive apps/i)
       })
@@ -45,7 +40,7 @@ describe('Sid Dashboard - Interactive Apps', () => {
     it(`Should launch interactive application: ${app.token}`, () => {
       cleanupSessions()
 
-      goToApp(app)
+      navigateApplication(app.name)
       cy.get('div[role="main"] h3').should('contain.text', app.name)
       //LAUNCH APP WITH EMPTY PARAMETERS
       cy.get('form#new_batch_connect_session_context input[type="submit"]').click()

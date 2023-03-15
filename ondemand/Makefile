@@ -22,22 +22,6 @@ ifneq ($(shell git branch --show-current),stable)
 NPM_RUN_VERSION_ARGS := --config='.release-it-dev.json'
 endif
 
-TEMPLATE_LOCATION := ./application/lib/ood_core/batch_connect/templates
-TURBOVNC_TEMPLATE := turbovnc.rb
-KVM_TEMPLATE      := kvm.rb
-
-remote-dev clean-remote-dev:     LOGIN_HOST   := login.rc.fas.harvard.edu
-remote-dev clean-remote-dev:     APP_FOLDER   := ./fasrc/dev/dashboard
-remote-dev:                      TEMPLATE_URL := https://iqss-sid.rc.fas.harvard.edu/pun/sys/dashboard/files/fs/var/www/ood/apps/sys/sid/lib/ood_core/batch_connect/templates
-remote-dev:                      CHECK_TEMPLATE_VERSION  := "check_version"
-
-remote-fasse clean-remote-fasse: LOGIN_HOST   := fasselogin.rc.fas.harvard.edu
-remote-fasse clean-remote-fasse: APP_FOLDER   := ./.fasseood/dev/dashboard
-remote-fasse:                    TEMPLATE_URL := https://fasse-iqss-ood.rc.fas.harvard.edu/pun/sys/dashboard/files/fs/var/www/ood/apps/sys/sid/lib/ood_core/batch_connect/templates
-remote-fasse:                    HTTP_PROXY   := http://rcproxy.rc.fas.harvard.edu:3128
-remote-fasse:                    HTTPS_PROXY  := http://rcproxy.rc.fas.harvard.edu:3128
-remote-fasse:                    CHECK_TEMPLATE_VERSION  := ""
-
 dev: down up
 
 release: next-version

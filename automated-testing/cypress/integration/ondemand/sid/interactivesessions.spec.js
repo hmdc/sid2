@@ -1,4 +1,4 @@
-import { NAVIGATION, loadHomepage } from "../../../support/utils/navigation.js";
+import { NAVIGATION, loadHomepage, navigateSessions } from "../../../support/utils/navigation.js";
 import { changeProfile } from "../../../support/utils/profiles.js";
 
 describe('Sid Dashboard - Interactive Sessions', () => {
@@ -17,7 +17,7 @@ describe('Sid Dashboard - Interactive Sessions', () => {
   })
 
   it('Should display restricted interactive apps left menu', () => {
-    cy.get('nav li[title="My Interactive Sessions"] > a').click()
+    navigateSessions()
     interactiveApps.forEach( app => {
       cy.get('div.list-group a').filter(`a[data-title="${app.name}"]`).should($appElement => {
         $appElement.is(':visible')
