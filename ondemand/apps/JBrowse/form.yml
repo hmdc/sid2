@@ -1,0 +1,50 @@
+---
+title: "JBrowse"
+cluster: "odyssey3"
+attributes:
+  modules: null
+  extra_jupyter_args: ""
+  jbrowse_version:
+    widget: select
+    label: "JBrowse Version"
+    help: |
+      [JBrowse 2](https://jbrowse.org/jb2/) is generally recommended.
+      
+      Use [JBrowse 1](https://jbrowse.org/jbrowse1.html) if you have an existing [tracks.conf or minimal configuration file](https://jbrowse.org/docs/minimal.html)
+    options:
+      - [ "JBrowse 2 (v1.3.0)", "/n/singularity_images/informatics/jbrowse/jbrowse2_v1.3.0.sif" ]
+      - [ "JBrowse 1 (v1.6.11)", "/n/singularity_images/informatics/jbrowse/jbrowse_1.16.11.sif" ]
+  custom_time:
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM)."
+    value: "04:00:00"
+    widget: text_field
+  bc_queue: 
+    value: "shared,test"
+  custom_email_address:
+    label: email address for job status notification
+    widget: text_field
+  custom_memory_per_node: "256"
+  custom_num_cores: "1"
+  jbrowse_data_folder:
+    label: path of a JBrowse data directory
+    widget: text_field
+    help: |
+      Please specify the absolute pathname of a directory on a FAS RC file system containing either:
+
+      * **(JBrowse 2)** A JBrowse 2 [config.json](https://jbrowse.org/jb2/docs/config_guide) file
+      * **(JBrowse 1)** A JBrowse 1 [tracks.conf or trackList.json](https://jbrowse.org/docs/minimal.html) file
+
+      The config file must specify relative paths to data files that exist in that directory (or a subdirectory of).
+
+      See the [JBrowse on the FASRC Cluster](https://informatics.fas.harvard.edu/jbrowse-on-the-fasrc-cluster.html) guide for guidance on creating these configuration files.
+
+form:
+  - modules
+  - bc_queue
+  - custom_memory_per_node
+  - custom_num_cores
+  - custom_time
+  - jbrowse_data_folder
+  - jbrowse_version
+  - bc_email_on_started
+  - custom_email_address

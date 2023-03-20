@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Benchmark info
+echo "TIMING - Starting main script at: $(date)"
+
+#
+# Start JBrowse
+#
+
+container_image=<%= context.jbrowse_version %>
+
+# Launch JBrowse
+
+set -x
+
+MY_DATA_FOLDER=<%= context.jbrowse_data_folder %>
+
+SING_BINDS=" -B $MY_DATA_FOLDER:/var/www/localhost/htdocs/data:ro "
+echo $SINGULARITYENV_LIGHTTPD_PORT
+
+singularity run --containall $SING_BINDS $container_image
+

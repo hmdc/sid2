@@ -1,0 +1,8 @@
+# Find available port to run server on
+port=$(find_port ${host} 7000 11000 )
+
+export SINGULARITYENV_USER=${USER}
+
+# Define a password and export it for RStudio authentication
+password="$(create_passwd 16)"
+export SINGULARITYENV_PASSWORD="${password}"

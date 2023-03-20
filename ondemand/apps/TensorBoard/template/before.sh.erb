@@ -1,0 +1,9 @@
+[[ $(type -t module) == "function" ]] && export -f module
+
+# Find available port to run server on
+port=$(find_port localhost 7000 11000 )
+
+#  I will temporarily pass those attributes as command line arguments 
+export MY_TB_PORT=${port}
+export MY_TB_BASEURL=/node/${host}/${port}/
+

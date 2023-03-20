@@ -11,12 +11,28 @@ cy.sid = {
   //QUERY PARAMS TO ENABLE/DISABLE FEATURES WHEN NEEDED
   query_params: {
   },
-  // CONFIGURED PINNED APPS
-  pinnedApps: [
-    {"id": "dev-main-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server", "url": "/pun/sys/dashboard/batch_connect/sys/Rstudio/main/session_contexts/new"},
-    {"id": "dev-ql-rstudio", "token": "sys/Rstudio", "name": "Rstudio Server", "url": "/pun/sys/dashboard/batch_connect/sys/Rstudio/ql_rstudio_dev/session_contexts"},
-    {"id": "dev-main-rdesktop", "token": "sys/OdysseyRD", "name": "Remote Desktop", "url": "/pun/sys/dashboard/batch_connect/sys/NativeRD/main/session_contexts/new"},
-    {"id": "dev-ql-rdesktop", "token": "sys/OdysseyRD", "name": "Remote Desktop", "url": "/pun/sys/dashboard/batch_connect/sys/NativeRD/ql_rdesktop_dev/session_contexts"},
+  ondemandApplications: [
+    {"id": "main-genericrd", "token": "sys/GenericRD/main", "name": "Containerized FAS-RC Remote Desktop"},
+    {"id": "main-rdesktop", "token": "sys/RemoteDesktop/main", "name": "Remote Desktop"},
+    {"id": "main-omnisci", "token": "sys/OmniSci/main", "name": "OmniSci"},
+    {"id": "main-postgresql", "token": "sys/Postgres/main", "name": "Postgresql db"},
+    {"id": "main-totalview", "token": "sys/Totalview-Desktop/main", "name": "Desktop Environment for Totalview"},
+    {"id": "main-matlab", "token": "sys/Matlab/main", "name": "Matlab"},
+    {"id": "main-sas", "token": "sys/SAS/main", "name": "SAS"},
+    {"id": "main-stata", "token": "sys/Stata/main", "name": "Stata"},
+    {"id": "main-jbrowse", "token": "sys/JBrowse/main", "name": "JBrowse"},
+    {"id": "main-jupyter", "token": "sys/Jupyter/main", "name": "Jupyter notebook / Jupyterlab"},
+    {"id": "main-rstudio", "token": "sys/RStudioServer/main", "name": "RStudio Server"},
+    {"id": "main-tensorboard", "token": "sys/TensorBoard/main", "name": "TensorBoard"},
+
+    {"id": "dev-ql-matlab", "token": "sys/Matlab/ql_matlab_dev", "name": "Matlab"},
+    {"id": "dev-ql-sas", "token": "sys/SAS/ql_sas_dev", "name": "SAS"},
+    {"id": "dev-ql-stata", "token": "sys/Stata/ql_stata_dev", "name": "Stata"},
+    {"id": "dev-ql-jupyter", "token": "sys/Jupyter/ql_jupyter_dev", "name": "Jupyter notebook / Jupyterlab"},
+    {"id": "dev-ql-rstudio", "token": "sys/RStudioServer/ql_rstudio_dev", "name": "RStudio Server"},
+    {"id": "dev-ql-rdesktop", "token": "sys/RemoteDesktop/ql_remotedesktop_dev", "name": "Remote Desktop"},
+
+    {"id": "dev-app", "token": "sys/RstudioDev", "name": "Rstudio Dev"}
   ],
   // CONFIGURED LAUNCHERS
   launchers: [

@@ -1,6 +1,6 @@
 import { NAVIGATION, loadHomepage, navigateToSupport } from "../../support/utils/navigation.js";
 import { changeProfile } from "../../support/utils/profiles.js";
-import { startInteractiveApplication,  cleanupSessions } from "../../support/utils/sessions.js";
+import { startDevSession,  cleanupSessions } from "../../support/utils/sessions.js";
 
 describe('OnDemand Dashboard - Support Ticket', () => {
 
@@ -37,14 +37,13 @@ describe('OnDemand Dashboard - Support Ticket', () => {
     it(`${profile}: Should display support ticket page for selected session`, () => {
       changeProfile(profile)
       cleanupSessions()
-      startInteractiveApplication({name: 'Rstudio Server'})
+      startDevSession()
       cy.get('div.session-panel[data-id] .card-body p a:contains(support)').click()
   
       assertForm(true)
   
       cy.get('form#new_support_ticket input#support_ticket_session_description').should(($input) => {
         const val = $input.val()
-        expect(val).to.include('Rstudio Server')
         expect(val).to.include('running')
       })
     })

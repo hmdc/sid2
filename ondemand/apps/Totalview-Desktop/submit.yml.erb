@@ -1,0 +1,20 @@
+batch_connect:
+  template: turbovnc
+  geometry: "1024x768"
+script:
+  reservation_id: <%= custom_reservation %>
+  email: <%= custom_email_address %>
+  native:
+   <%- if !custom_memory_per_node.blank? -%>
+    - "--mem=<%= custom_memory_per_node.to_s %>"
+   <%- end -%>
+   <%- if !custom_memory_per_task.blank? -%>
+    - "--mem-per-cpu=<%= custom_memory_per_task.to_s %>"
+   <%- end -%>
+    - "--time=<%= custom_time.blank? ? "00:10:00" : custom_time.to_s %>"
+    - "--cpus-per-task=<%= custom_num_cores.blank? ? 1 : custom_num_cores.to_i %>"
+    - "--ntasks=<%= custom_num_tasks.blank? ? 1 : custom_num_tasks.to_i %>"
+   <%- if !custom_num_gpus.to_i.zero? -%>
+    - "--gres=gpu:<%= custom_num_gpus.to_i %>"
+   <%- end -%>
+

@@ -1,0 +1,20 @@
+---
+name: Remote Desktop
+icon: fa://desktop
+category: Interactive Apps
+subcategory: Desktops
+role: batch_connect
+description: |
+  This app will launch an interactive desktop session on a compute node in a partition of your choice. This app is useful to have graphical user interface (GUI) on the [FAS-RC] cluster.
+
+  You can select the amount of RAM (in GB), number of cores, and Timelimit (in hrs).
+
+  Upon request you can receive email notification when the job starts. You must specify your email address.
+
+  See Remote Desktop VDI app [documentation] for how to use the app, update the web browser within the app, copy and paste between your computer and the remote desktop app.
+
+  See [How to launch software] for how to launch various software, like Abaqus, Comsol, ParaView, etc.
+
+  [FAS-RC]: https://www.rc.fas.harvard.edu/about/cluster-architecture/
+  [documentation]: https://docs.rc.fas.harvard.edu/kb/vdi-apps/#VDI_Remote_Desktop
+  [How to launch software]: https://docs.rc.fas.harvard.edu/kb/ood-remote-desktop-how-to-open-software

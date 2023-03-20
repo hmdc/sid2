@@ -1,0 +1,60 @@
+---
+title: "SAS"
+cluster: "odyssey3"
+attributes:
+  desktop: "xfce"
+  bc_num_slots: null
+  bc_vnc_resolution:
+    value: "1024x768"
+    required: true
+  bc_account:
+    help: "Only relevant if you have multiple slurm accounts. It can be left blank otherwise"
+  custom_time:
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM). Maximum for this partition is 7 days"
+    value: "04:00:00"
+    widget: text_field
+  bc_queue: 
+    value: "shared"
+  custom_email_address:
+    label: email for status notification
+    widget: text_field
+  custom_memory_per_node:
+    label: Memory Allocation in GB
+    value: 4
+    min:   4
+    step:  1
+    max:   128
+    widget: number_field
+  custom_num_cores:
+    label: Number of cores
+    value: 1
+    min:   1
+    step:  1
+    max:   32
+    widget: number_field
+    help: "Number of Cpus to allocate"
+  custom_num_gpus:
+    label: Number of GPUs
+    value: 0
+    min:   0
+    step:  1
+    max:   8
+    widget: number_field
+    help: "Number of GPUs to allocate. Available only on GPU enabled partitions"
+  custom_reservation:
+    label: Reservation
+    widget: text_field
+
+form:
+  - desktop
+  - bc_vnc_resolution
+  - bc_num_slots
+  - bc_queue
+  - custom_memory_per_node
+  - custom_num_cores
+  - custom_num_gpus
+  - custom_time
+  - custom_email_address
+  - bc_email_on_started
+  - custom_reservation
+  - bc_account

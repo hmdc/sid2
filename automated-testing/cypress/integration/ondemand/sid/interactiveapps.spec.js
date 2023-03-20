@@ -4,7 +4,8 @@ import { cleanupSessions, checkSession } from "../../../support/utils/sessions.j
 
 describe('Sid Dashboard - Interactive Apps', () => {
 
-  const interactiveApps = Cypress.env('sid_dashboard_applications')
+  const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('sid_dashboard_applications').includes(l.id))
+  const launchApplications = Cypress.env('launch_applications')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
@@ -30,13 +31,15 @@ describe('Sid Dashboard - Interactive Apps', () => {
         cy.get('div.list-group a').filter(`a[data-title="${app.name}"]`).should($appElement => {
           $appElement.is(':visible')
           expect($appElement.text().trim()).to.equal(app.name)
-          expect($appElement.attr('href')).to.contain(`/sys/${app.token}`)
+          expect($appElement.attr('href')).to.contain(app.token)
         })
       })
     })
   })
 
-  interactiveApps.forEach( app => {
+  !launchApplications && it(`Should launch interactive application - DISABLED`, () => {})
+
+  launchApplications && interactiveApps.forEach( app => {
     it(`Should launch interactive application: ${app.token}`, () => {
       cleanupSessions()
 

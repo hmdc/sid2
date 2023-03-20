@@ -3,7 +3,7 @@ import { changeProfile } from "../../../support/utils/profiles.js";
 
 describe('FASRC Dashboard - Header', () => {
 
-  const interactiveApps = Cypress.env('fasrc_dashboard_applications')
+  const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrc_dashboard_applications').includes(l.id))
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
@@ -71,7 +71,7 @@ describe('FASRC Dashboard - Header', () => {
     })
   })
 
-  it('Should display Interactive Apps navigation item with restricted apps', () => {
+  it('Should display Interactive Apps navigation item with installed apps', () => {
     cy.get('nav li[title="Interactive Apps"]').as('navItem')
     cy.get('@navItem').find('> a').invoke('text').should('match', /interactive apps/i)
     cy.get('@navItem').find('> a').click()
@@ -80,8 +80,8 @@ describe('FASRC Dashboard - Header', () => {
     interactiveApps.forEach( (app) => {
       cy.get('@menu').filter(`a[title="${app.name}"]`).should($appElement => {
         $appElement.is(':visible')
-        expect($appElement.text().trim()).to.equal(app.name)
-        expect($appElement.attr('href')).to.contain(`/sys/${app.token}`)
+        expect($appElement.text().trim()).to.contain(app.name)
+        expect($appElement.attr('href')).to.contain(app.token)
       })
     })
   })

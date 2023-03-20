@@ -1,0 +1,12 @@
+---
+name: RStudio Server
+category: Interactive Apps
+subcategory: Servers
+role: batch_connect
+description: |
+  This app will launch an [RStudio Server](https://www.rstudio.com/products/rstudio-server/) instance on a FAS RC compute node.
+  This app provides a common software environment for FAS Informatics workshops and general-purpose single-node RStudio Server jobs.
+
+  See [RStudio Server OOD app](https://docs.rc.fas.harvard.edu/kb/rstudio-server-vs-rstudio-desktop) for more information.
+
+  * User-installed R libraries will be installed in *~/R/ifxrstudio/\<IMAGE_TAG\>*.

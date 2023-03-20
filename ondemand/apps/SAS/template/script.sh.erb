@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+# Clean the environment
+module purge
+
+set -x
+
+export WORKDIR=/scratch/$USER/$SLURM_JOBID 
+mkdir -p WORKDIR
+
+# Set working directory to home directory
+cd $WORKDIR
+
+
+#
+# Launch Xfce Window Manager and Panel
+#
+
+
+cat > myrun.sh <<EOF
+#!/bin/bash -l
+
+(
+  export SEND_256_COLORS_TO_REMOTE=1
+  export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+  export XDG_DATA_HOME="<%= session.staged_root.join("share") %>"
+  export XDG_CACHE_HOME="\$(mktemp -d)"
+  module restore
+  set -x
+  xfwm4 --compositor=off --daemon --sm-client-disable
+  xsetroot -solid "#D3D3D3"
+  xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
+) &
+
+## don't ask why we need to invoke xfce4 terminal calling xfce4-terminal here .... 
+## it just does not work without
+xfce4-terminal -e "/bin/bash -l -c 'module load sas ; sas -dms' "
+
+#wait 
+EOF
+
+chmod +x myrun.sh
+
+## am I trying to run on GPUs?
+export SING_GPU=""
+
+<%- if !context.custom_num_gpus.to_i.zero? -%>
+export SING_GPU="--nv"
+<%- end -%>
+
+## bind some extra stuff to be able to talk to slurm from within the container
+export SING_BINDS=" -B /etc/nsswitch.conf -B /etc/sssd/ -B /var/lib/sss -B /etc/slurm -B /slurm -B /var/run/munge  -B `which sbatch ` -B `which srun ` -B `which sacct ` -B `which scontrol `  -B `which scancel` -B `which squeue` -B `which sinfo`  -B /usr/lib64/slurm/ "
+
+# Load the required environment
+#export SINGULARITYENV_MATLAB_PREFDIR
+singularity exec   $SING_GPU $SING_BINDS /n/singularity_images/OOD/OdysseyRD/current/xfce-el7-7.6.1810-remotedesktop.img ./myrun.sh  
+
+
+
+
+

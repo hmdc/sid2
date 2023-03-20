@@ -1,0 +1,12 @@
+---
+name: "Desktop Environment for Totalview"
+icon: fa://desktop
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This form will launch a containerized interactive desktop session on a compute node to run Totalview
+
+  You can select the amount of memory and the amount of RAM, number of MPI tasks, number of cores per MPI task and Timelimit for the job.
+
+

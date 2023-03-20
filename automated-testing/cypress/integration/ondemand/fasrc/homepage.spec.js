@@ -3,7 +3,7 @@ import { changeProfile } from "../../../support/utils/profiles.js";
 import { cleanupSessions} from "../../../support/utils/sessions.js";
 
 describe('FASRC Dashboard - Homepage', () => {
-  const activePinnedApps = cy.sid.pinnedApps.filter(l => Cypress.env('fasrc_pinned_apps').includes(l.id))
+  const activePinnedApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrc_pinned_apps').includes(l.id))
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
@@ -21,8 +21,8 @@ describe('FASRC Dashboard - Homepage', () => {
   activePinnedApps.forEach( app => {
     it(`FASRC Pinned Apps: ${app.id}`, () => {
       // CLICK PINNED APPS
-      cy.get(`div[data-toggle="launcher-button"] a[href="${app.url}"]`).should('be.visible')
-      cy.get(`div[data-toggle="launcher-button"] a[href="${app.url}"]`).click()
+      cy.get(`div[data-toggle="launcher-button"] a:contains(${app.name})`).should('be.visible')
+      cy.get(`div[data-toggle="launcher-button"] a:contains(${app.name})`).click()
       // VERIFY APP FORM
       cy.get('div[role="main"] h3').should('contain.text', app.name)
 

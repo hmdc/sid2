@@ -25,6 +25,16 @@ export const startInteractiveApplication = ({position = 0, name} = {}) => {
   })
 }
 
+export const startDevSession = () => {
+  const auth = cy.sid.auth
+  const qs = cy.sid.query_params
+  const longRunningTimeout = cy.sid.timeout
+  // HARDCODE HIDDEN APP
+  cy.visit('/pun/sys/dashboard/batch_connect/sys/RstudioDev/session_contexts/new', { auth, qs })
+  cy.get('form#new_batch_connect_session_context input[type="submit"]').click()
+  cy.get('div.session-panel[data-id] div.card-heading div.float-right', { timeout: longRunningTimeout }).should('contain.text', 'Running')
+}
+
 export const checkSession = app => {
   //THERE SHOULD BE ONLY CURRENT SESSION RUNNING
   // CALL cleanupSessions BEFORE STARTING THE CURRENT ONE

@@ -39,8 +39,19 @@ services:
       - etc_slurm:/etc/slurm
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
-      - ./apps/Rstudio:/var/www/ood/apps/sys/Rstudio
-      - ./apps/NativeRD:/var/www/ood/apps/sys/NativeRD
+      - ./development/RstudioDev:/var/www/ood/apps/sys/RstudioDev
+      - ./apps/GenericRD:/var/www/ood/apps/sys/GenericRD
+      - ./apps/JBrowse:/var/www/ood/apps/sys/JBrowse
+      - ./apps/Jupyter:/var/www/ood/apps/sys/Jupyter
+      - ./apps/Matlab:/var/www/ood/apps/sys/Matlab
+      - ./apps/OmniSci:/var/www/ood/apps/sys/OmniSci
+      - ./apps/Postgres:/var/www/ood/apps/sys/Postgres
+      - ./apps/RemoteDesktop:/var/www/ood/apps/sys/RemoteDesktop
+      - ./apps/RStudioServer:/var/www/ood/apps/sys/RStudioServer
+      - ./apps/SAS:/var/www/ood/apps/sys/SAS
+      - ./apps/Stata:/var/www/ood/apps/sys/Stata
+      - ./apps/TensorBoard:/var/www/ood/apps/sys/TensorBoard
+      - ./apps/Totalview-Desktop:/var/www/ood/apps/sys/Totalview-Desktop
       - ../VERSION:/var/www/ood/apps/sys/dashboard/VERSION
       - ./data:/home/ood/ondemand/data:rw
       - ./config:/etc/ood/config/apps/dashboard

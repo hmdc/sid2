@@ -1,0 +1,25 @@
+Bootstrap: docker
+From: alpine:3.14
+
+%post
+    readonly VERSION=1.16.11
+
+    apk add --no-cache lighttpd
+    wget -O jbrowse.zip https://github.com/GMOD/jbrowse/releases/download/${VERSION}-release/JBrowse-${VERSION}.zip
+    unzip jbrowse.zip
+    rm jbrowse.zip
+    mv JBrowse-${VERSION}/* /var/www/localhost/htdocs
+    rmdir JBrowse-${VERSION}
+    cat <<'EOF' > /etc/lighttpd/lighttpd.conf
+server.document-root = "/var/www/localhost/htdocs"
+server.port = env.LIGHTTPD_PORT
+server.modules = ("mod_indexfile", "mod_setenv")
+index-file.names = ("index.html")
+include "mime-types.conf"
+$HTTP["url"] =~ "\.jsonz$" {
+  setenv.add-response-header = ( "Content-Encoding" => "gzip" )
+}
+EOF
+
+%runscript
+    lighttpd -D -f /etc/lighttpd/lighttpd.conf

@@ -4,7 +4,8 @@ import { startPinnedApp,  cleanupSessions, checkSession} from "../../../support/
 
 describe('Sid Dashboard - Homepage', () => {
 
-  const activePinnedApps = cy.sid.pinnedApps.filter(l => Cypress.env('sid_pinned_apps').includes(l.id))
+  const activePinnedApps = cy.sid.ondemandApplications.filter(l => Cypress.env('sid_pinned_apps').includes(l.id))
+  const launchApplications = Cypress.env('launch_applications')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
@@ -27,9 +28,19 @@ describe('Sid Dashboard - Homepage', () => {
   })
 
   activePinnedApps.forEach( app => {
-    it(`Sid Pinned Apps: ${app.id}`, () => {
-      startPinnedApp(app)
-      checkSession(app)
+    it(`Sid Pinned Apps: ${app.id} - launchApplications: ${launchApplications}`, () => {
+      //CHECK PINNED APPS TEXT
+      //CHECK URL IS POST
+      cy.get(`div[data-toggle="launcher-button"] a:contains(${app.name})`).should($launcherLink =>{
+        expect($launcherLink.attr('data-method')).to.equal('post')
+        expect($launcherLink.attr('href')).to.match(new RegExp(`${app.token}/session_contexts$`))
+      })
+      cy.get(`div[data-toggle="launcher-button"] p.app-title:contains(${app.name})`).should('be.visible')
+
+      if (launchApplications) {
+        startPinnedApp(app)
+        checkSession(app)
+      }
     })
   })
 

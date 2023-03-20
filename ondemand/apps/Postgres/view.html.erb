@@ -1,0 +1,13 @@
+<br>
+<br>
+The datbase is up and running on host : <%= host %>, port :<%= port %> 
+<br>
+<br>
+Once you are done with your work, if you want to make sure the database shuts down in clean way, instead of using the "Delete" button, you should run from command line :
+<br>scancel --signal=INT job_id.0 
+<br>where job_id is the job id of the current job (i.e. the number in parenthesis next to  "Postgresql db"<br>
+For example : scancel --signal=INT 20912089.0
+<br>
+<br>
+Note: the job will receive a clean shutdown signal 5 minutes before the timelimit for the job is reached.
+<br>

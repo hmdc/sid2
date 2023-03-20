@@ -1,0 +1,8 @@
+---
+name: JBrowse
+category: Interactive Apps
+subcategory: Servers
+role: batch_connect
+description: |
+  Launch a instance of the genome browser [JBrowse](https://jbrowse.org/) on a FAS RC compute node.
+  See the [JBrowse on the FASRC Cluster](https://informatics.fas.harvard.edu/jbrowse-on-the-fasrc-cluster.html) guide.

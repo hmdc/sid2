@@ -3,7 +3,7 @@ import { changeProfile } from "../../../support/utils/profiles.js";
 
 describe('Sid Dashboard - Header', () => {
 
-  const interactiveApps = Cypress.env('sid_dashboard_applications')
+  const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('sid_dashboard_applications').includes(l.id))
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
@@ -91,7 +91,7 @@ describe('Sid Dashboard - Header', () => {
       cy.get('@menu').filter(`a[title="${app.name}"]`).should($appElement => {
         $appElement.is(':visible')
         expect($appElement.text().trim()).to.equal(app.name)
-        expect($appElement.attr('href')).to.contain(`/sys/${app.token}`)
+        expect($appElement.attr('href')).to.contain(app.token)
       })
     })
   })

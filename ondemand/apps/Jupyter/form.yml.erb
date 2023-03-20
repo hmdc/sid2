@@ -1,0 +1,129 @@
+---
+title: "Jupyter notebook / Jupyterlab"
+cluster: "odyssey3"
+attributes:
+  bc_queue: 
+    value: "shared"
+    help: |
+      Partition where to submit your job (--partition).<br>You can find here the [list of public partitions](https://docs.rc.fas.harvard.edu/kb/running-jobs/#Slurm_partitions).
+  jupyterlab_switch:
+    widget: "check_box"
+    value: 1
+    label: "Use JupyterLab instead of Jupyter Notebook?"
+    help: |
+      [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) is the next generation of Jupyter, and is completely compatible with existing [Jupyter Notebooks](https://jupyter-notebook.readthedocs.io/en/stable/).
+  custom_memory_per_node:
+    label: Memory Allocation in GB
+    value: 4
+    min:   1
+    step:  1
+    widget: number_field
+    help: |
+      Memory required per node (--mem)
+  custom_num_cores:
+    label: Number of cores per task
+    value: 1
+    min:   1
+    step:  1
+    max:   64
+    widget: number_field
+    help: |
+      Number of CPUs to allocate (--cpus-per-task)
+  custom_num_gpus:
+    label: Number of GPUs
+    value: 0
+    min:   0
+    step:  1
+    max:   8
+    widget: number_field
+    help: |
+      Number of GPUs to allocate. Available only on GPU enabled partitions. (--gres=gpu:N)
+  custom_time:
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM)."
+    value: "04:00:00"
+    widget: text_field
+  custom_email_address:
+    label: email address for status notification (Optional)
+    widget: text_field
+  custom_reservation:
+    label: Reservation (Optional)
+    widget: text_field
+    help: |
+      Use this if you have an active reservation and would like to use it to run your job. (--reservation)
+  envscript:
+    label: Full path of script to be executed before launching jupyter (Optional)
+    widget: text_field
+    help: |
+      You can run custom scripts before starting jupyter.<br>We recommend **not** to load any python/anaconda module or conda activate command in this script.<br>
+      
+      If you need additional modules you can:
+        <li> add the corresponding **module load** statements in this script, or </li>
+        <li> add the list of modules you want to load in the section **extra modules** in this form, or </li>
+        <li> load them after you are on the jupyter main page following [these instructions](https://docs.rc.fas.harvard.edu/kb/vdi-apps/#How_do_I_load_additional_modules_that_my_kernels_need).</li>
+      
+      If you need to use in jupyter a python or R kernel in your environment you can follow [these instructions](https://docs.rc.fas.harvard.edu/kb/vdi-apps/#How_do_I_access_the_python_and_R_kernels_installed_in_my_conda_environments).<br> 
+  modules:
+    label: Extra Modules
+    widget: text_field
+    help: |
+      Comma separated list of modules you would like to load before starting jupyter.<br>
+      Example :  cuda/10.0.130-fasrc01,nccl/2.3.7-fasrc01
+      
+      Please make sure the modules selected can be loaded correctly in the order you listed.
+   
+      We recommend **not** to load any python/anaconda module as that would interfere with the jupyter installation.
+
+      If you need to use in jupyter a python or R kernel in one of your conda environments you can follow [these instructions](https://docs.rc.fas.harvard.edu/kb/vdi-apps/#How_do_I_access_the_python_and_R_kernels_installed_in_my_conda_environments).
+
+      As alternative, you can also load the modules you need after you are on the jupyter main page following [these instructions](https://docs.rc.fas.harvard.edu/kb/vdi-apps/#How_do_I_load_additional_modules_that_my_kernels_need).
+      
+  extra_slurm:
+    label: Additional Slurm options
+    widget: text_field
+    help: |
+      additional slurm options (**long format option only**)<br>
+      Example :  --constraint=intel --exclusive
+      
+      Please make sure the options you select are compatible with other fields in the form.<br>Also, please make sure you use **long format option only**<br>(e.g. --nodelist=holy7c24502 instead of -w holy7c24502)
+   
+      If you are not familiar with Slurm we recommend to leave this blank.
+      
+  bc_account:
+    label: "Slurm Account (Optional)"
+    value: '<%= OodSupport::User.new.group.name %>'
+    help: |
+      Account to charge for this job (--account). This will default to your main account (primary group). More information about [multiple slurm accounts here](https://docs.rc.fas.harvard.edu/kb/fairshare/#Multiple_Accounts).
+  working_folder:
+    label: 'Working Directory'
+    data-filepicker: true
+    # Optionally show dot files and folders; defaults to false
+    data-show-hidden: true
+    # Optionally permit selection of only files or directories; defaults to both
+    data-target-file-type: dirs  # Valid values are: files, dirs, or both
+    # Optionally specify a pattern for the name of selectable files or directories; defaults to matching anything
+    # Uses JavaScript regular expressions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+    #data-target-file-pattern: \.py$  # python files
+    # Optionally provide FS favorites manually
+    data-file_picker_favorites: '[{"title": "Global Scratch", "href": "/n/holyscratch01/<%= OodSupport::User.new.group.name %>"},{"title": "Home Folder", "href": "<%= OodSupport::User.new.home %>"}]'
+    # Optionally set a default directory
+    # data-default-directory: '~' 
+    # Optionally only allow editing through the file picker; defaults to false
+    readonly: true
+    # Optionally set a static starting directory by setting the value
+    # value: '<%= OodSupport::User.new.home %>'
+
+form:
+  - bc_queue
+  - jupyterlab_switch
+  - custom_memory_per_node
+  - custom_num_cores
+  - custom_num_gpus
+  - custom_time
+  - working_folder
+  - envscript
+  - modules
+  - custom_reservation
+  - extra_slurm
+  - bc_account
+  - custom_email_address
+  - bc_email_on_started

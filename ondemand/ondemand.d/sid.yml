@@ -24,7 +24,13 @@ profiles:
             url: "/pun/sys/shell/ssh/slurmctld"
             new_tab: true
       - title: "Interactive Apps"
-        apps: "*/main"
+        apps:
+          - "sys/RemoteDesktop/main"
+          - "sys/Jupyter/main"
+          - "sys/Matlab/main"
+          - "sys/RStudioServer/main"
+          - "sys/Stata/main"
+          - "sys/SAS/main"
       - "sessions"
 
     help_bar:

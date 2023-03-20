@@ -3,7 +3,8 @@ import { changeProfile } from "../../../support/utils/profiles.js";
 import { cleanupSessions, checkSession } from "../../../support/utils/sessions.js";
 
 describe('FASRC Dashboard - Interactive Apps', () => {
-  const interactiveApps = Cypress.env('fasrc_dashboard_applications')
+  const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrc_dashboard_applications').includes(l.id))
+  const launchApplications = Cypress.env('launch_applications')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
@@ -29,24 +30,28 @@ describe('FASRC Dashboard - Interactive Apps', () => {
         cy.get('div.list-group a').filter(`a[data-title="${app.name}"]`).should($appElement => {
           $appElement.is(':visible')
           expect($appElement.text().trim()).to.equal(app.name)
-          expect($appElement.attr('href')).to.contain(`/sys/${app.token}`)
+          expect($appElement.attr('href')).to.contain(app.token)
         })
       })
     })
   })
 
-  interactiveApps.forEach( app => {
-    it(`Should launch interactive application: ${app.token}`, () => {
+  !launchApplications && it(`Should launch interactive application - DISABLED`, () => {})
+
+  launchApplications && interactiveApps.forEach( app => {
+    it(`Should launch interactive application: ${app.token} - launchApplications: ${launchApplications}`, () => {
       cleanupSessions()
 
       navigateApplication(app.name)
       cy.get('div[role="main"] h3').should('contain.text', app.name)
+
       //LAUNCH APP WITH EMPTY PARAMETERS
       cy.get('form#new_batch_connect_session_context input[type="submit"]').click()
       //CHECK LAUNCHED APP IN SESSIONS PAGE IS RUNNING
       checkSession(app)
       //CLEANUP
       cleanupSessions()
+      
     })
   })
 
