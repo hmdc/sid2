@@ -144,4 +144,13 @@ describe('Sid Dashboard - Header', () => {
     })
   })
 
+  it.only('Should display Develop, User and Logout items', () => {
+    cy.get('nav li[title="Develop"] a.nav-link').contains('Develop')
+    cy.get('nav a.nav-link.disabled').contains('Logged in as')
+
+    cy.get('nav a.nav-link[href="/logout"]').should($logoutLinkElement => {
+      expect($logoutLinkElement.text().trim()).to.match(/log out/i)
+    })
+  })
+
 })
