@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  ood:
+    image: ondemand-puppet
+    privileged: true
+    hostname: localhost
+    container_name: ondemand_puppet
+    volumes:
+      - ./data:/etc/puppetlabs/code/environments/production/data
+      - ./sid:/tmp/sid
+      - ./manifests:/etc/puppetlabs/code/environments/production/manifests
+    ports:
+      - "33000:80"
+    expose:
+      - "6817"
+      - "8080"
+      - "80"
+      - "443"

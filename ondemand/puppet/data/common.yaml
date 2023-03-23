@@ -1,0 +1,22 @@
+#vi /etc/puppetlabs/code/environments/production/data/common.yaml
+#openondemand::repo_nightly: true
+#openondemand::manage_dependency_repos: false
+openondemand::repo_release: 'latest'
+#openondemand::ondemand_package_ensure: '2.0.31-1.el8'
+openondemand::ondemand_package_ensure: '3.0.0-0.rc1.el8'
+openondemand::ondemand_dex_package_ensure: 'absent'
+
+#openondemand::servername: 'localhost'
+openondemand::declare_apache: false
+apache::default_vhost: false
+
+openondemand::host_regex: 'slurmctld|c(1|2)'
+openondemand::node_uri: '/node'
+openondemand::rnode_uri: '/rnode'
+openondemand::auth_type: 'Basic'
+openondemand::auth_configs:
+ - 'AuthName "private"'
+ - 'AuthBasicProvider dbm'
+ - 'AuthDBMUserFile "/etc/httpd/.htpasswd.dbm"'
+ - 'RequestHeader unset Authorization'
+ - 'Require valid-user'

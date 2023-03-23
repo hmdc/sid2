@@ -1,0 +1,48 @@
+FROM rockylinux/rockylinux:8
+
+ARG OOD_UID=3210
+ARG OOD_GID=3210
+
+# setup the ondemand repositories
+#COPY ./ondemand-web-latest.repo /etc/yum.repos.d/ondemand-web-latest.repo
+RUN dnf install -y https://yum.puppet.com/puppet-release-el-8.noarch.rpm
+RUN dnf install -y puppetserver puppet
+
+RUN dnf install -y epel-release
+# install all the dependencies
+RUN dnf update -y && \
+    dnf install -y dnf-utils && \
+    dnf config-manager --set-enabled powertools && \
+    dnf install -y \
+        passwd \
+        file \
+        lsof \
+        sudo \
+        gcc \
+        gcc-c++ \
+        git \
+        patch \
+        lua-posix \
+        rsync \
+        rclone \
+        httpd
+        
+RUN dnf clean all && rm -rf /var/cache/dnf/*
+
+RUN groupadd -g $OOD_GID ood || : && \
+    useradd -u $OOD_UID --create-home --gid $OOD_GID ood && \
+    mkdir -p /home/ood/ondemand/data && \
+    chown -R ${OOD_UID}:${OOD_GID} /home/ood && \
+    echo -n "ood" | passwd --stdin ood
+RUN /usr/bin/htdbm -bc /etc/httpd/.htpasswd.dbm ood ood
+
+COPY ./puppet.conf /etc/puppetlabs/puppet/puppet.conf
+RUN git clone --branch feature/ondemand-2.1 https://github.com/OSC/puppet-module-openondemand.git /tmp/openondemand
+RUN tar -czvf /tmp/openondemand.tar.gz /tmp/openondemand
+RUN /opt/puppetlabs/bin/puppet module install /tmp/openondemand.tar.gz
+
+#RUN /opt/puppetlabs/bin/puppetserver start
+RUN systemctl enable puppetserver
+#CMD [ "/sbin/init" ]
+#CMD ["/bin/bash", "-c", "/usr/sbin/httpd -DFOREGROUND"]
+CMD ["/bin/bash", "-c", "/opt/puppetlabs/bin/puppetserver foreground --debug"]

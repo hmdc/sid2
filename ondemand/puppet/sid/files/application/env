@@ -1,0 +1,4 @@
+MOTD_PATH="/etc/ood/config/apps/dashboard/motd"
+MOTD_TITLE=""
+MOTD_FORMAT="markdown"
+ENABLE_NATIVE_VNC=true
