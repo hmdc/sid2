@@ -7,7 +7,6 @@ v2:
   job:
     adapter: "slurm"
     bin: "/usr/bin"
-    bin_host: "slurmctld"
     conf: "/etc/slurm/slurm.conf"
 
 # This section is for interactive app

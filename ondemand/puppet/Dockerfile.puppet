@@ -25,6 +25,7 @@ RUN dnf update -y && \
         lua-posix \
         rsync \
         rclone \
+        sshpass \
         httpd
         
 RUN dnf clean all && rm -rf /var/cache/dnf/*

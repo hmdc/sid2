@@ -13,6 +13,9 @@ apache::default_vhost: false
 openondemand::host_regex: 'slurmctld|c(1|2)'
 openondemand::node_uri: '/node'
 openondemand::rnode_uri: '/rnode'
+openondemand::ssl:
+ - 'SSLCertificateFile "/tmp/dashboard/files/apache/sid_development.crt"'
+ - 'SSLCertificateKeyFile "/tmp/dashboard/files/apache/sid_development.key"'
 openondemand::auth_type: 'Basic'
 openondemand::auth_configs:
  - 'AuthName "private"'
@@ -30,6 +33,7 @@ openondemand::clusters:
     job_host: slurmctld
     job_bin: /usr/bin
     job_submit_host: slurmctld
+    job_strict_host_checking: false
     job_lib: /usr/lib64
     job_conf: /etc/slurm/slurm.conf
 
@@ -80,6 +84,9 @@ openondemand::install_apps:
     app_source: '/tmp/dashboard/files/apps'
     manage_package: false
   Totalview-Desktop:
+    app_source: '/tmp/dashboard/files/apps'
+    manage_package: false
+  RstudioDev:
     app_source: '/tmp/dashboard/files/apps'
     manage_package: false
 
