@@ -1,4 +1,4 @@
-FROM rockylinux/rockylinux:8
+FROM rocky_systemd:8
 
 ARG OOD_UID=3210
 ARG OOD_GID=3210
@@ -37,12 +37,9 @@ RUN groupadd -g $OOD_GID ood || : && \
 RUN /usr/bin/htdbm -bc /etc/httpd/.htpasswd.dbm ood ood
 
 COPY ./puppet.conf /etc/puppetlabs/puppet/puppet.conf
-RUN git clone --branch feature/ondemand-2.1 https://github.com/OSC/puppet-module-openondemand.git /tmp/openondemand
+RUN git clone --branch ondemand-3.0 https://github.com/hmdc/puppet-module-openondemand.git /tmp/openondemand
 RUN tar -czvf /tmp/openondemand.tar.gz /tmp/openondemand
 RUN /opt/puppetlabs/bin/puppet module install /tmp/openondemand.tar.gz
 
-#RUN /opt/puppetlabs/bin/puppetserver start
 RUN systemctl enable puppetserver
-#CMD [ "/sbin/init" ]
-#CMD ["/bin/bash", "-c", "/usr/sbin/httpd -DFOREGROUND"]
-CMD ["/bin/bash", "-c", "/opt/puppetlabs/bin/puppetserver foreground --debug"]
+

@@ -54,7 +54,7 @@ services:
       - ./apps/Totalview-Desktop:/var/www/ood/apps/sys/Totalview-Desktop
       - ../VERSION:/var/www/ood/apps/sys/dashboard/VERSION
       - ./data:/home/ood/ondemand/data:rw
-      - ./config:/etc/ood/config/apps/dashboard
+      - ./application/dashboard:/etc/ood/config/apps/dashboard
       - ./lib/ood_core:/var/www/ood/apps/sys/dashboard/lib/ood_core
       - ./ondemand.d:/etc/ood/config/ondemand.d
       - ./public:/var/www/ood/public
