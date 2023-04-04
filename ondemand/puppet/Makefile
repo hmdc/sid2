@@ -44,7 +44,7 @@ ssh:
 
 docker_build:
 	docker build -t rocky_systemd:8 -f Dockerfile.systemd .
-	docker build -t ood_puppet:8 -f Dockerfile.puppet .
+	docker build --no-cache -t ood_puppet:8 -f Dockerfile.puppet .
 
 docker_build_ood:
-	docker build -t ood_puppet:8 -f Dockerfile.puppet .
+	docker build --no-cache -t ood_puppet:8 -f Dockerfile.puppet .
