@@ -12,7 +12,7 @@ profiles:
     custom_css_files: ["/css/sid.css"]
 
     pinned_apps_group_by:
-    pinned_apps: ["*/ql_*"]
+    pinned_apps: ["*/ql_*", sys/RstudioDev]
     
     nav_bar:
       - "files"
