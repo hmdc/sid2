@@ -1,0 +1,8 @@
+support_ticket:
+  rt_api:
+    server: "http://rt:34000"
+    user: "root"
+    pass: "password"
+    priority: 4
+    queues:
+      - "General"

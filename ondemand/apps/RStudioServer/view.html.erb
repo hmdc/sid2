@@ -1,0 +1,26 @@
+<form action="/rnode/<%= host %>/<%= port %>/auth-do-sign-in" method="post" target="_blank" onsubmit="return connect_rstudio('/rnode/<%= host %>/<%= port %>', this);">
+  <input type="hidden" name="username" value="<%= ENV["USER"] %>">
+  <input type="hidden" name="password" value="<%= password %>">
+  <input type="hidden" name="staySignedIn" value="1">
+  <input type="hidden" name="appUri" value="./">
+  <input type="hidden" name="csrf-token" value="5905efa2-442a-46bf-8703-f35fe8a51888">
+  <button class="btn btn-primary" type="submit">
+    <i class="fa fa-registered"></i> Connect to RStudio Server
+  </button>
+</form>
+<script>
+<%#
+As of Rstudio 1.4, a CSRF token is required to authenticate. This is normally
+set on the sign-in page, but since we are bypassing the sign-in page and
+POSTing directly, we need to ensure that the CSRF token cookie is set ahead of
+time (i.e. just before the form submission).  When Rstudio receives the POST
+request, it will compare the POSTed csrf token against the value of the cookie.
+%>
+function connect_rstudio(path, form) {
+  const csrf_token = form.elements['csrf-token'].value;
+  const new_cookie = `csrf-token=${csrf_token}; path=${path}; secure`;
+  console.log("Setting Rstudio csrf-token cookie:", new_cookie);
+  document.cookie = new_cookie;
+  return true;
+}
+</script>

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -x
+# Benchmark info
+echo "TIMING - Starting main script at: $(date)"
+
+# Set working directory to home directory
+cd "${HOME}"
+#
+
+module purge
+
+# Benchmark info
+echo "TIMING - Starting TensorBoard at: $(date)"
+export container_image=/n/helmod/apps/centos7/Singularity/tensorboard/tensorboard-el7-7.4.1708.img
+
+export MY_TB_VERSION=<%= context.tb_version %>
+
+<%- if !context.custom_logfolder.blank? -%>
+export MY_TB_LOGDIR=<%= context.custom_logfolder.to_s %>
+<%- else -%>
+export MY_TB_LOGDIR=/scratch/$USER/$SLURM_JOBID
+<%- end -%>
+
+mkdir -p $MY_TB_LOGDIR
+
+
+echo "start the container"
+singularity exec   $container_image /bin/bash -c "source activate $MY_TB_VERSION  ; which python ;  tensorboard \
+           --host  0.0.0.0 \
+           --port ${MY_TB_PORT} \
+           --logdir  ${MY_TB_LOGDIR} \
+           --path_prefix ${MY_TB_BASEURL} "

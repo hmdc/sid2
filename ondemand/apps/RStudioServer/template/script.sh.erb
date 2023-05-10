@@ -1,0 +1,146 @@
+#
+# Start RStudio Server
+#
+
+container_image=<%= context.r_version %>
+
+# Set working directory to home directory
+cd "${HOME}"
+
+set -x
+# Launch the RStudio Server
+echo "Starting up rserver..."
+
+# instead of setting session-timeout-minutes=0 in /etc/rstudio/rsession.conf
+# per section 5.2.2 (Session Timeout) in
+# https://docs.rstudio.com/ide/server-pro/r-sessions.html#user-and-group-profiles,
+# set (undocumented) environment variable gleaned from source code:
+# https://github.com/rstudio/rstudio/blob/master/src/cpp/server/ServerSessionManager.cpp#L111
+export SINGULARITYENV_RSTUDIO_SESSION_TIMEOUT=0
+
+R_HOME=$(singularity exec --containall ${container_image} R RHOME)
+
+# Need a unique /tmp for this job for /tmp/rstudio-rsession & /tmp/rstudio-server
+# Need writable /run/rstudio-server :
+#   https://discourse.osc.edu/t/unable-to-launch-fully-containerized-rstudio/948
+WORKDIR=/scratch/${USER}/${SLURM_JOB_ID}
+
+# use a different directory for each image to be safe...
+readonly image_tag=$(basename "${container_image##*:}" .sif)
+if [ ${image_tag} = 'RELEASE_3_9' ] # legacy RELEASE_3_9 used major.minor version
+then
+  R_LIBS_USER=${HOME}/R/ifxrstudio/3.6
+else
+  R_LIBS_USER=${HOME}/R/ifxrstudio/${image_tag}
+fi
+
+mkdir -m 700 -p ${WORKDIR}/tmp ${WORKDIR}/run "${R_LIBS_USER}"
+
+export SINGULARITY_BIND="${WORKDIR}/tmp:/tmp,${WORKDIR}/run:/run,${WORKDIR}/rsession.sh:/etc/rstudio/rsession.sh,${WORKDIR}/Renviron.site:${R_HOME}/etc/Renviron.site"
+
+if [ ${image_tag#RELEASE_3_} -ge 12 ]
+then
+  # https://github.com/rstudio/rstudio/issues/5449#issuecomment-534184951
+  extra_options='--auth-timeout-minutes=0 --auth-stay-signed-in-days=30'
+fi
+
+if [ ${image_tag#RELEASE_3_} -ge 13 ]
+then
+  mkdir -m 700 -p ${WORKDIR}/var/lib/rstudio-server 
+  cat > ${WORKDIR}/database.conf <<END
+provider=sqlite
+directory=/var/lib/rstudio-server
+END
+  # explicitly mount /sys to enable RStudio Server 1.4.1717 "Memory
+  # Usage Report" & address startup warning:
+  #     ERROR system error 2 (No # such file or directory)
+  #     [path: /sys/fs/cgroup/memory/memory.limit_in_bytes]...
+  export SINGULARITY_BIND="/sys:/sys,${WORKDIR}/database.conf:/etc/rstudio/database.conf,${WORKDIR}/var/lib/rstudio-server:/var/lib/rstudio-server,${SINGULARITY_BIND}"
+fi
+
+if [ ${image_tag#RELEASE_3_} -eq 14 ]
+then
+  # allow python packages to be installed into the venv
+  mkdir -p "${R_LIBS_USER}"/venv
+  # prepending ${PYTHONUSERBASE}/bin to PATH in rsession.sh doesn't work;
+  # PATH is overritten in /etc/bash.bashrc
+  PYTHONUSERBASE=/opt/venv/reticulate/local/lib/python3.8/dist-packages
+  RETICULATE_PYTHON=/opt/venv/reticulate/bin/python
+  export SINGULARITY_BIND="${SINGULARITY_BIND},${R_LIBS_USER}/venv:${PYTHONUSERBASE}"
+fi
+
+if [ ${image_tag#RELEASE_3_} -ge 14 ]
+then
+  # https://github.com/grst/rstudio-server-conda/pull/18
+  extra_options="--server-user $USER ${extra_options}"
+  mkdir -p ${PYTHONUSERBASE=${R_LIBS_USER}/python-user-base}
+fi
+
+# users can chose if starting from a fresh config or keep the default in HOME/.rstudio
+<%- if !context.custom_vanillaconf.to_i.zero? -%>
+mkdir -p ${WORKDIR}/rstudio $HOME/.local/share/rstudio
+export SINGULARITY_BIND="${WORKDIR}/rstudio:$HOME/.local/share/rstudio,${SINGULARITY_BIND}"
+<%- end -%>
+
+# Debian /usr/local/lib/R/etc/Renviron hard-codes R_LIBS_USER to /usr/local/lib/R/site-library :
+# https://github.com/rocker-org/rocker-versioned/issues/153
+# can override in /etc/R/Renviron.site
+cat >${WORKDIR}/Renviron.site <<END
+R_LIBS_USER=$R_LIBS_USER
+END
+
+# rsession needs to start with OMP_NUM_THREADS set to prevent OpenBLAS
+# (and any other OpenMP-enhanced libraries used by R) from spawning too many
+# threads. Renviron.site appears to be processed too late to prevent this (any
+# environment variables set therein are not in rsession's environment) is not
+# in the , so instead a wrapper script is created for rsession.
+#
+# Also set MKL_THREADING_LAYER per:
+# https://github.com/eddelbuettel/mkl4deb#set-an-environment-variable
+
+cat > ${WORKDIR}/rsession.sh <<END
+#!/bin/sh
+set -o xtrace
+export OMP_NUM_THREADS=${SLURM_JOB_CPUS_PER_NODE}
+export MKL_THREADING_LAYER=GNU
+# disable the pip cache to optimize disk space
+export PIP_NO_CACHE_DIR=off
+export RETICULATE_MINICONDA_ENABLED=FALSE
+${PYTHONUSERBASE:+export PYTHONUSERBASE=${PYTHONUSERBASE}}
+export PATH=\$(python -msite --user-base)/bin:\${PATH}
+export PYTHONPATH=\$(python -msite --user-site)
+export PIP_USER=1
+${RETICULATE_PYTHON:+export RETICULATE_PYTHON=${RETICULATE_PYTHON}}
+exec /usr/lib/rstudio-server/bin/rsession "\${@}"
+END
+
+chmod +x ${WORKDIR}/rsession.sh
+
+#echo 'log-stderr=1' > ${WORKDIR}/rsession.conf
+# --bind "${WORKDIR}/rsession.conf:/etc/rstudio/rsession.conf" \
+
+# bioconductor/bioconductor_docker:RELEASE_3_10 sets USER in Dockerfile:
+# https://github.com/Bioconductor/bioconductor_docker/blob/RELEASE_3_10/Dockerfile#L154
+#
+# Apparently, quay.io/singularity/docker2singularity:v3.5.1 then sets USER in
+# the /.singularity.d/env/10-docker.sh, which overrides any externally-set USER
+# (in the environment of the "singularity exec" commmand). To work around this,
+# setting USER in a shell command that invokes the rserver process
+ 
+# set oom_score_adj to 1000 in job script (parent) so it app is terminated in
+# the event the rsession (child) OOMs to avoid the appearance of the app
+# continuing to function in OOD/Slurm with a 502 Proxy error on reconnect
+echo 1000 > /proc/self/oom_score_adj
+( 
+  echo 0 > /proc/self/oom_score_adj
+
+  singularity exec --cleanenv \
+   "${container_image}" \
+   sh -c "USER=${USER} rserver \
+   --www-port ${port} \
+   --auth-none 0 \
+   --auth-encrypt-password 0 \
+   --auth-pam-helper-path=pam-helper \
+   ${extra_options} \
+   --rsession-path=/etc/rstudio/rsession.sh"
+)

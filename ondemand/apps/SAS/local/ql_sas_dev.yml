@@ -1,0 +1,22 @@
+---
+cluster: "dev-cluster"
+tile:
+  title: "Run SAS"
+  sub_caption: |
+    1 CPU core and 4GB RAM
+    8 hours job run time
+    Cannon cluster
+attributes:
+  bc_queue: "test"
+  bc_account: ""
+  bc_num_slots: "1"
+  bc_num_hours: "1"
+  custom_memory_per_node: "4"
+  custom_num_cores: "1"
+  custom_num_gpus: "0"
+  custom_time: "08:00:00"
+  envscript: ""
+  custom_email_address: ""
+  bc_email_on_started: "0"
+  custom_reservation: ""
+  bc_vnc_resolution: "1024x768"

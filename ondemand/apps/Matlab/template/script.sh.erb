@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+# Clean the environment
+module purge
+
+#set -x
+
+#export MTLB_WORKDIR=/scratch/$USER/$SLURM_JOBID 
+#mkdir -p $MTLB_WORKDIR
+
+#export MATLAB_PREFDIR=/dev/shm/$USER/$SLURM_JOBID ; 
+#mkdir -p $MATLAB_PREFDIR 
+
+# Set working directory to home directory
+#cd $MTLB_WORKDIR
+cd "${HOME}"
+
+#cat > java.opts <<EOF
+#-Dsun.java2d.xrender=false
+#EOF
+
+#
+# Launch Xfce Window Manager and Panel
+#
+
+
+#cat > myrun.sh <<EOF
+
+##!/bin/bash -l
+
+(
+  export SEND_256_COLORS_TO_REMOTE=1
+  export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+  export XDG_DATA_HOME="<%= session.staged_root.join("share") %>"
+  export XDG_CACHE_HOME="\$(mktemp -d)"
+  module restore
+  set -x
+  xfwm4 --compositor=off --daemon --sm-client-disable
+  xsetroot -solid "#D3D3D3"
+  xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
+) &
+
+sleep 5 
+
+## don't ask why we need to invoke xfce4 terminal calling xfce4-terminal here .... 
+## it just does not work without
+##xfce4-terminal --minimize -e "xfce4-terminal -e matlab " 2>/dev/null
+#xfce4-terminal -e "xfce4-terminal -e matlab " 2>/dev/null
+
+#wait 
+#EOF
+
+#chmod +x myrun.sh
+
+## am I trying to run on GPUs?
+#export SING_GPU=""
+
+
+## bind some extra stuff to be able to talk to slurm from within the container
+#export SING_BINDS=" -B /etc/nsswitch.conf -B /etc/sssd/ -B /var/lib/sss -B /etc/slurm -B /slurm -B /var/run/munge  -B `which sbatch ` -B `which srun ` -B `which sacct ` -B `which scontrol `  -B `which scancel` -B `which squeue` -B `which sinfo`  -B /usr/lib64/slurm/ "
+
+# Load the required environment
+#export SINGULARITYENV_MATLAB_PREFDIR
+#singularity exec   $SING_GPU $SING_BINDS <%= context.matlab_version %> ./myrun.sh  
+
+module load <%= context.matlab_version %>
+
+# set oom_score_adj to 1000 in job script (parent) so it app is terminated in
+# the event the rsession (child) OOMs to avoid the appearance of the app
+# continuing to function in OOD/Slurm with a 502 Proxy error on reconnect
+echo 1000 > /proc/self/oom_score_adj
+(
+  echo 0 > /proc/self/oom_score_adj; $MATLAB_HOME/bin/matlab  -desktop -softwareopengl
+)
+
+
+
+

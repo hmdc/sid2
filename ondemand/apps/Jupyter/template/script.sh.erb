@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Benchmark info
+echo "TIMING - Starting main script at: $(date)"
+
+module purge
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/n/helmod/apps/centos7/Core/Anaconda3/2021.05-jupyterood-fasrc01/x/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/n/helmod/apps/centos7/Core/Anaconda3/2021.05-jupyterood-fasrc01/x/etc/profile.d/conda.sh" ]; then
+        . "/n/helmod/apps/centos7/Core/Anaconda3/2021.05-jupyterood-fasrc01/x/etc/profile.d/conda.sh"
+    else
+        export PATH="/n/helmod/apps/centos7/Core/Anaconda3/2021.05-jupyterood-fasrc01/x/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+set -x
+## if user instructed to source script prior to starting jupyter 
+<%- unless context.envscript.blank? -%>
+[ -f <%= context.envscript.to_s %> ] && source <%= context.envscript.to_s %>
+<%- end -%>
+
+## if additional modules are requested, 
+<%- unless context.modules.blank? -%>
+module purge
+  <%- context.modules.to_s.split(",").each do |mymodule| %>
+    module load <%= mymodule %>
+  <%- end -%>
+module list
+<%- end -%>
+
+# Benchmark info
+echo "TIMING - Starting jupyter at: $(date)"
+# Launch the Jupyter  Server
+jupyter <%= context.jupyterlab_switch == "1" ? "lab" : "notebook" %> --config="${CONFIG_FILE}"

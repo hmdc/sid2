@@ -9,7 +9,7 @@ on:
       - completed
 
 jobs:
-  test-all:
+  test-sid:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -18,3 +18,12 @@ jobs:
       - name: Build and test
         working-directory: ./automated-testing
         run: make test
+  test-ondemand:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Build and test
+        working-directory: ./automated-testing
+        run: make ondemand-test

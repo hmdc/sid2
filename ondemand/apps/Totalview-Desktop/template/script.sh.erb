@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Change working directory to user's home directory
+cd "${HOME}"
+
+set -x
+
+# Reset module environment (may require login shell for some HPC clusters)
+module purge && module restore
+
+export SINGULARITYENV_XDG_CONFIG_HOME=$XDG_CONFIG_HOME
+
+containerimg=<%= context.centos_version %>
+
+export SING_BINDS=" -B /etc/nsswitch.conf -B /etc/sssd/ -B /var/lib/sss -B /etc/slurm -B /slurm -B /var/run/munge -B /etc/ssh "
+
+export SING_GPU=""
+<%- if !context.custom_num_gpus.to_i.zero? -%>
+export SING_GPU="--nv"
+<%- end -%>
+
+
+containerimg=/n/singularity_images/OOD/OdysseyRD/current/xfce-el7-7.4.1708.img
+containercommand="singularity exec $SING_BINDS  $SING_GPU "
+
+
+# Start up desktop
+echo "Launching desktop '<%= context.desktop %>'..."
+chmod +x "<%= session.staged_root.join("desktops", "#{context.desktop}.sh") %>"
+#singularity exec -B ./mymachid:/var/lib/dbus/machine-id  $containerimg "<%= session.staged_root.join("desktops", "#{context.desktop}.sh") %>"
+#singularity exec  $containerimg "<%= session.staged_root.join("desktops", "#{context.desktop}.sh") %>"
+$containercommand  $containerimg "<%= session.staged_root.join("desktops", "#{context.desktop}.sh") %>"
+echo "Desktop '<%= context.desktop %>' ended..."

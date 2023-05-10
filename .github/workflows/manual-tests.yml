@@ -1,0 +1,22 @@
+name: manual-tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-sid:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: Sid Build and test
+        working-directory: ./automated-testing
+        run: make test
+  test-ondemand:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ${{ github.sha }}
+        uses: actions/checkout@v2
+      - name: OnDemand Run and test
+        working-directory: ./automated-testing
+        run: make ondemand-test

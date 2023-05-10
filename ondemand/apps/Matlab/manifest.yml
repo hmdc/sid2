@@ -1,0 +1,17 @@
+---
+name: MATLAB
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This app will launch a [MATLAB] GUI on [FAS-RC] cluster. You can select the Matlab version of your choice.
+
+  See Remote Desktop VDI app [documentation] for how to use the Remote Desktop interface.
+
+  See FAS-RC [Matlab documentation] and Github [User_Codes] for examples on how to run Matlab in parallel.
+
+  [MATLAB]: https://www.mathworks.com/products/matlab.html
+  [FAS-RC]: https://www.rc.fas.harvard.edu/about/cluster-architecture/
+  [documentation]: https://docs.rc.fas.harvard.edu/kb/vdi-apps/#VDI_Remote_Desktop
+  [Matlab documentation]: https://docs.rc.fas.harvard.edu/kb/parallel-matlab-pct-dcs/
+  [User_codes]: https://github.com/fasrc/User_Codes/tree/master/Parallel_Computing/MATLAB/Example1

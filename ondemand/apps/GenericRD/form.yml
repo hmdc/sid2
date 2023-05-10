@@ -1,0 +1,93 @@
+---
+title: "Containerized FAS-RC Remote Desktop"
+cluster: "odyssey3"
+attributes:
+  desktop: "myxfce"
+  bc_vnc_idle: 0
+  node_type: null
+  bc_num_slots: null
+  bc_vnc_resolution:
+    value: "1024x768"
+    required: true
+  bc_account:
+    help: "Only relevant if you have multiple slurm accounts. It can be left blank otherwise"
+  custom_time:
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM)."
+    value: "04:00:00"
+    widget: text_field
+  bc_queue: 
+    value: "shared"
+  bc_num_hours: null
+  custom_email_address:
+    label: email for status notification
+    widget: text_field
+  custom_memory_per_node:
+    label: Memory Allocation in GB
+    value: 4
+    min:   4
+    step:  1
+    max:   512
+    widget: number_field
+  custom_num_tasks:
+    label: Number of mpi tasks
+    value: 1
+    min:   1
+    step:  1
+    max:   64
+    widget: number_field
+    help: "Number of mpi tasks. If you are not sure what this means, just leave it at 1. (slurm option -n, --ntasks)"
+  custom_num_cores:
+    label: Number of cores per task
+    value: 1
+    min:   1
+    step:  1
+    max:   64
+    widget: number_field
+    help: "Number of Cpus to allocate per task. (slurm option -c, --cpus-per-task)"
+  custom_num_gpus:
+    label: Number of GPUs
+    value: 0
+    min:   0
+    step:  1
+    max:   8
+    widget: number_field
+    help: "Number of GPUs to allocate. Available only on GPU enabled partitions"
+  custom_reservation:
+    label: Reservation
+    widget: text_field
+  custom_desktop:
+    label: "Custom Desktop Folder"
+    widget: check_box
+    value: 1
+    help: |
+          **_Checking this box will create a desktop folder unique to this job_**
+  centos_version:
+    widget: select
+    label: "centos version"
+    help: "We recommend to always use the latest version available, unless you have compatibility issues in your software. Please select centos6 ONLY if you have software that has demonstrated severe issues of running in centos7. Centos7 should be used in the vast majority of the times"
+    options:
+      - [ "centos7.9",  "/n/singularity_images/OOD/OdysseyRD/current/remote_desktop_082021.sif" ]
+      - [ "centos7.8",  "/n/singularity_images/OOD/OdysseyRD/current/remote_desktop_011821.sif" ]
+      - [ "centos7.6",  "/n/singularity_images/OOD/OdysseyRD/current/xfce-el7-7.6.1810-remotedesktop.img" ]
+      - [ "centos7.4",  "/n/singularity_images/OOD/OdysseyRD/current/xfce-el7-7.4.1708.img" ]
+      - [ "centos6",  "/n/singularity_images/OOD/OdysseyRD/current/xfce-el6fasrc.img" ]
+
+form:
+  - bc_vnc_idle
+  - desktop
+  - bc_vnc_resolution
+  - bc_num_slots
+  - node_type
+  - bc_queue
+  - custom_memory_per_node
+  - custom_num_cores
+  - custom_num_tasks
+  - custom_num_gpus
+  - bc_num_hours
+  - custom_time
+  - centos_version
+  - custom_desktop
+  - custom_email_address
+  - bc_email_on_started
+  - custom_reservation
+  - bc_account

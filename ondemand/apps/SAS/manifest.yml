@@ -1,0 +1,10 @@
+---
+name: SAS
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This app will launch a [SAS] GUI on [FAS-RC Cluster].
+
+  [SAS]: https://www.sas.com/en_us/home.html
+  [FAS-RC Cluster]: https://www.rc.fas.harvard.edu/about/cluster-architecture/

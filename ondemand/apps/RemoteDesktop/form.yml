@@ -1,0 +1,79 @@
+---
+title: "Remote Desktop"
+cluster: "odyssey3"
+attributes:
+  desktop: "myxfce"
+  bc_vnc_idle: 0
+  node_type: null
+  bc_num_slots: null
+  bc_vnc_resolution:
+    value: "1024x768"
+    required: true
+  bc_account:
+    help: "Only relevant if you have multiple slurm accounts. It can be left blank otherwise"
+  custom_time:
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM)."
+    value: "04:00:00"
+    widget: text_field
+    help: |
+      *sbatch -t, --time=\<time\>*
+  bc_num_hours: null
+  bc_queue: 
+    value: "test"
+    help: |
+      *sbatch -p, --partition=\<partition_names\>*
+
+      [Slurm partition](https://www.rc.fas.harvard.edu/resources/running-jobs/#Slurm_partitions) name (e.g., **shared** ), or comma-separated list of partition names (e.g., **shared,test** )
+  custom_email_address:
+    label: email for status notification
+    widget: text_field
+  custom_memory_per_node:
+    label: Memory Allocation in GB
+    value: 4
+    min:   4
+    step:  1
+    max:   2000
+    widget: number_field
+  custom_num_cores:
+    label: Number of cores
+    value: 1
+    min:   1
+    step:  1
+    max:   64
+    widget: number_field
+    help: "Number of Cpus to allocate"
+  custom_num_gpus:
+    label: Number of GPUs
+    value: 0
+    min:   0
+    step:  1
+    max:   4
+    widget: number_field
+    help: "Number of GPUs to allocate. Available only on GPU enabled partitions"
+  custom_reservation:
+    label: Reservation
+    widget: text_field
+  custom_desktop:
+    label: "Custom Desktop Folder"
+    widget: check_box
+    value: 1
+    help: |
+          **_Checking this box will create a desktop folder unique to this job_**
+
+form:
+  - bc_vnc_idle
+  - desktop
+  - bc_vnc_resolution
+  - bc_num_slots
+  - node_type
+  - bc_queue
+  - custom_memory_per_node
+  - custom_num_cores
+  - custom_num_gpus
+  - bc_num_hours
+  - custom_time
+  - custom_desktop
+  - custom_email_address
+  - bc_email_on_started
+  - custom_reservation
+  - bc_account

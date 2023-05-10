@@ -1,0 +1,354 @@
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+
+#
+#
+<%- if !context.custom_desktop.to_i.zero? -%> 
+## create custom desktop folder
+export DESKTOP_FOLDER="${PWD}/desktop"
+export XDG_DESKTOP_DIR=$DESKTOP_FOLDER
+mkdir -p $DESKTOP_FOLDER
+
+## create an icon for the terminal 
+cat > $DESKTOP_FOLDER/terminal.desktop <<EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=exo-open --launch TerminalEmulator
+Icon=utilities-terminal
+StartupNotify=true
+Terminal=false
+Categories=Utility;X-XFCE;X-Xfce-Toplevel;
+OnlyShowIn=XFCE;
+Name=Terminal
+Comment=Use the command line
+EOF
+
+chmod +x $DESKTOP_FOLDER/terminal.desktop
+
+## create the configuration folder
+export XDG_CONFIG_HOME=$PWD/config
+mkdir -p $XDG_CONFIG_HOME
+export XDG_CONFIG_DIRS=$XDG_CONFIG_HOME
+
+## we set a separate desktop folder, but unique Documents , etc etc 
+cat > $XDG_CONFIG_DIRS/user-dirs.dirs  <<EOF
+XDG_DESKTOP_DIR="$DESKTOP_FOLDER"
+XDG_DOCUMENTS_DIR="$HOME/Documents"
+XDG_DOWNLOAD_DIR="$HOME/Downloads"
+XDG_MUSIC_DIR="$HOME/Music"
+XDG_PICTURES_DIR="$HOME/Pictures"
+XDG_PUBLICSHARE_DIR="$HOME/Public"
+XDG_TEMPLATES_DIR="$HOME/Templates"
+XDG_VIDEOS_DIR="$HOME/Videos"
+EOF
+
+## configure the desktop so not to display removable folders
+export DESKTOP_CONFIG=$XDG_CONFIG_DIRS/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+mkdir -p "$(dirname "${DESKTOP_CONFIG}")"
+cat > $DESKTOP_CONFIG <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-desktop" version="1.0">
+  <property name="backdrop" type="empty">
+    <property name="screen0" type="empty">
+      <property name="monitor0" type="empty">
+        <property name="workspace0" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="$PWD/assets/background_fasrc.jpg"/>
+        </property>
+        <property name="workspace1" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/images/default.png"/>
+        </property>
+        <property name="workspace2" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/images/default.png"/>
+        </property>
+        <property name="workspace3" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="image-style" type="int" value="5"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/images/default.png"/>
+        </property>
+      </property>
+    </property>
+  </property>
+  <property name="desktop-icons" type="empty">
+    <property name="file-icons" type="empty">
+      <property name="show-removable" type="bool" value="false"/>
+    </property>
+  </property>
+</channel>
+EOF
+
+
+## configure the panel so not to display removable folders
+export PANEL_CONFIG=$XDG_CONFIG_DIRS/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+mkdir -p "$(dirname "${PANEL_CONFIG}")"
+cat > $PANEL_CONFIG <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <value type="int" value="2"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=6;x=0;y=0"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="30"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="1"/>
+        <value type="int" value="3"/>
+        <value type="int" value="15"/>
+        <value type="int" value="4"/>
+        <value type="int" value="5"/>
+        <value type="int" value="6"/>
+      </property>
+    </property>
+    <property name="panel-2" type="empty">
+      <property name="position" type="string" value="p=10;x=0;y=0"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="7"/>
+        <value type="int" value="8"/>
+        <value type="int" value="9"/>
+        <value type="int" value="10"/>
+        <value type="int" value="12"/>
+        <value type="int" value="13"/>
+        <value type="int" value="14"/>
+      </property>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-1" type="string" value="applicationsmenu"/>
+    <property name="plugin-3" type="string" value="tasklist"/>
+    <property name="plugin-15" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-4" type="string" value="pager"/>
+    <property name="plugin-5" type="string" value="clock"/>
+    <property name="plugin-6" type="string" value="systray"/>
+    <property name="plugin-7" type="string" value="showdesktop"/>
+    <property name="plugin-8" type="string" value="separator"/>
+    <property name="plugin-9" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="15403481811.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-10" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="15403481812.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-12" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="15403481824.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-13" type="string" value="separator"/>
+    <property name="plugin-14" type="string" value="directorymenu">
+      <property name="base-directory" type="string" value="$HOME"/>
+    </property>
+  </property>
+</channel>
+EOF
+
+
+## configure the application menu  so not to display unwanted applications
+export MENU_CONFIG=$XDG_CONFIG_DIRS/menus/xfce-applications.menu
+mkdir -p "$(dirname "${MENU_CONFIG}")"
+cat > $MENU_CONFIG <<EOF
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+  "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+<Menu>
+    <Name>Xfce</Name>
+    <DefaultAppDirs/>
+    <DefaultDirectoryDirs/>
+    <DefaultMergeDirs/>
+    <Include>
+        <Category>X-Xfce-Toplevel</Category>
+    </Include>
+    <Layout>
+        <Filename>xfce4-run.desktop</Filename>
+        <Separator/>
+        <Filename>exo-terminal-emulator.desktop</Filename>
+        <Filename>exo-file-manager.desktop</Filename>
+        <Separator/>
+        <Menuname>Preferences</Menuname>
+        <Menuname>Administration</Menuname>
+        <Separator/>
+        <Merge type="all"/>
+        <Separator/>
+        <Filename>xfce4-session-logout.desktop</Filename>
+    </Layout>
+
+    <Menu>
+        <Name>Preferences</Name>
+        <Directory>xfce-settings.directory</Directory>
+        <Include>
+            <And>
+                <Category>Settings</Category>
+                <Not><Category>System</Category></Not>
+                <Not><Category>Screensaver</Category></Not>
+                <Not><Filename>fedora-im-chooser.desktop</Filename></Not>
+                <Not><Filename>gnome-default-applications.desktop</Filename></Not>
+            </And>
+        </Include>
+        <Layout>
+            <Filename>xfce-settings-manager.desktop</Filename>
+            <Separator/>
+            <Merge type="all"/>
+        </Layout>
+    </Menu>
+
+    <Menu>
+        <Name>Administration</Name>
+        <Directory>SystemConfig.directory</Directory>
+        <Include>
+            <And>
+                <Category>Settings</Category>
+                <Category>System</Category>
+                <Not><Category>Screensaver</Category></Not>
+            </And>
+            <Filename>gpk-application.desktop</Filename>
+            <Filename>gpk-update-viewer.desktop</Filename>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Accessories</Name>
+        <Directory>xfce-accessories.directory</Directory>
+        <Include>
+            <And>
+                <Category>Utility</Category>
+                <Not><Category>System</Category></Not>
+            </And>
+        </Include>
+        <Exclude>
+            <Or>
+                <Filename>exo-file-manager.desktop</Filename>
+                <Filename>exo-terminal-emulator.desktop</Filename>
+                <Filename>xfce4-about.desktop</Filename>
+                <Filename>xfce4-run.desktop</Filename>
+            </Or>
+        </Exclude>
+    </Menu>
+
+    <Menu>
+        <Name>Development</Name>
+        <Directory>xfce-development.directory</Directory>
+        <Include>
+            <Category>Development</Category>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Documentation</Name>
+        <Directory>Documentation.directory</Directory>
+        <Include>
+            <Category>Documentation</Category>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Education</Name>
+        <Directory>xfce-education.directory</Directory>
+        <Include>
+            <Or>
+                <Category>Education</Category>
+                <Category>Science</Category>
+            </Or>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Games</Name>
+        <Directory>xfce-games.directory</Directory>
+        <Include>
+            <Category>Game</Category>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Graphics</Name>
+        <Directory>xfce-graphics.directory</Directory>
+        <Include>
+            <Category>Graphics</Category>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Multimedia</Name>
+        <Directory>xfce-multimedia.directory</Directory>
+        <Include>
+            <Category>Audio</Category>
+            <Category>Video</Category>
+            <Category>AudioVideo</Category>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Network</Name>
+        <Directory>xfce-network.directory</Directory>
+        <Include>
+            <Category>Network</Category>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>Office</Name>
+        <Directory>xfce-office.directory</Directory>
+        <Include>
+            <Category>Office</Category>
+        </Include>
+    </Menu>
+
+    <Menu>
+        <Name>System</Name>
+        <Directory>xfce-system.directory</Directory>
+        <Include>
+            <And>
+                <Or>
+                    <Category>Emulator</Category>
+                    <Category>System</Category>
+                </Or>
+                <Not><Category>Settings</Category></Not>
+                <Not><Category>Screensaver</Category></Not>
+                <Not><Filename>gpk-application.desktop</Filename></Not>
+                <Not><Filename>gpk-update-viewer.desktop</Filename></Not>
+            </And>
+        </Include>
+        <Exclude>
+            <Or>
+                <Filename>xfce4-session-logout.desktop</Filename>
+            </Or>
+        </Exclude>
+    </Menu>
+
+    <Menu>
+        <Name>Other</Name>
+        <Directory>xfce-other.directory</Directory>
+        <OnlyUnallocated/>
+        <Include>
+            <All/>
+        </Include>
+    </Menu>
+</Menu>
+EOF
+
+<%- else -%>
+## refer back to default central configuration
+export XDG_CONFIG_HOME=$HOME/.config
+mkdir -p $XDG_CONFIG_HOME
+export XDG_DESKTOP_DIR=$HOME/Desktop
+export DESKTOP_FOLDER=$XDG_DESKTOP_DIR
+mkdir -p $DESKTOP_FOLDER
+<%- end -%>
+
+
+
+

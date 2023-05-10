@@ -1,0 +1,62 @@
+---
+title: "TensorBoard"
+cluster: "odyssey3"
+attributes:
+  modules: null
+  extra_jupyter_args: ""
+  custom_time:
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM)."
+    value: "04:00:00"
+    widget: text_field
+  bc_queue: 
+    value: "shared"
+  custom_email_address:
+    label: email address for status notification
+    widget: text_field
+  custom_memory_per_node:
+    label: Memory Allocation in GB
+    value: 4
+    min:   1
+    step:  1
+    max:   120
+    widget: number_field
+  custom_num_cores:
+    label: Number of cores
+    value: 1
+    min:   1
+    step:  1
+    max:   32
+    widget: number_field
+    help: "Number of Cpus to allocate"
+  tb_version:
+    widget: select
+    label: "TensorBoard version"
+    help: "This defines the version of TensorBoard that will be used"
+    options:
+      - [ "Version 1.12.2", "tb_1.12.2" ]
+      - [ "Version 1.11.0", "tb_1.11.0" ]
+      - [ "Version 1.10.0", "tb_1.10.0" ]
+  custom_logfolder:
+    label: LogDir for tensorboard
+    widget: text_field
+    help: "This is the folder where you have your TensorFlow logs"
+  custom_reservation:
+    label: Reservation
+    widget: text_field
+  bc_account:
+    label: "Slurm Account"
+    help: "If you are not in multiple labs please leave this blank."
+
+form:
+  - modules
+  - extra_jupyter_args
+  - bc_queue
+  - custom_memory_per_node
+  - custom_num_cores
+  - custom_time
+  - tb_version
+  - custom_logfolder
+  - bc_email_on_started
+  - custom_email_address
+  - custom_reservation
+  - bc_account
