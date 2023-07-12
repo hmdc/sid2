@@ -21,7 +21,7 @@ RUN groupadd -g $OOD_GID ood || : && \
     ssh-keygen -A && \
     cd /apps && \
     echo auth-minimum-user-id=100 >> /etc/rstudio/rserver.conf && \
-    singularity pull --name rserver-launcher-centos7.simg shub://OSC/centos7-launcher
+    singularity pull --name rserver-launcher-centos7.simg https://datasets.datalad.org/shub/OSC/centos7-launcher/latest/2021-04-19-02a3f1d4-b97ce30c/b97ce30c2b35f67b28d7a6830dca5bbe.simg
 
 COPY ./docker/with-ssh.sh /usr/local/bin/with-ssh.sh
 
