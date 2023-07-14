@@ -1,0 +1,69 @@
+profiles:
+  navigation:
+    show_all_apps_link: false
+    announcement_path: "/etc/ood/config/announcement.sid.d/"
+
+    navbar_type:
+    dashboard_header_img_logo:
+    brand_bg_color:
+    brand_link_active_bg_color:
+    disable_dashboard_welcome_message: true
+
+    pinned_apps_group_by:
+    pinned_apps: ["*/ql_*"]
+    
+    nav_bar:
+      - "files"
+      - title: "Email"
+        icon: "fas://envelope"
+        url: "/invalid"
+      - title: "Terminals"
+        icon: "fas://ghost"
+        links:
+          - title: "Cannon"
+            icon: "fas://terminal"
+            url: "/pun/sys/shell/ssh/slurmctld"
+            new_tab: true
+      - title: "RStudio"
+        apps: ["sys/RstudioDev/*", "sys/RStudioServer/main"]
+      - title: "Engineering"
+        links:
+        - group: "Cloud Computing"
+        - title: "Documentation"
+          icon: "fas://book"
+          page: "docs"
+        - group: "AI"
+        - title: "ChatGPT"
+          url: "/invalid"
+          icon: "/public/images/fasrc_logo.jpg"
+        - title: "Bard"
+          url: "/invalid"
+          icon: "/public/images/sid_logo.png"
+      - title: "Research"
+        icon: "fas://globe"
+        links:
+          - group: "Social Sciences"
+          - title: "Documentation"
+            icon: "fas://book"
+            page: "docs"
+          - group: "Computing"
+          - title: "Programming"
+            url: "/invalid"
+            icon: "fas://code"
+          - title: "Operations"
+            url: "/invalid"
+            icon: "fas://gamepad"
+
+    dashboard_layout:
+      layout:
+        rows:
+
+    custom_pages:
+      docs:
+        layout:
+        rows:
+          - columns:
+              - width: 12
+                widgets:
+                  - "recently_used_apps"
+                  - "sid/docs"

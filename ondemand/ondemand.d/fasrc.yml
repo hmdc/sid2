@@ -2,8 +2,7 @@ host_based_profiles: false
 disable_dashboard_logo: false
 show_all_apps_link: false
 
-show_all_apps_link: false
-cancel_session_enabled: false
+cancel_session_enabled: true
 navbar_type: dark
 dashboard_header_img_logo: "/public/images/fasrc_logo.png"
 brand_bg_color: " rgb(157,47,60)"
@@ -48,3 +47,6 @@ help_menu:
   - title: "Sid"
     profile: "sid"
     icon: "/public/images/sid_logo.png"
+  - title: "Navigation"
+    profile: "navigation"
+    icon: "fas://user"

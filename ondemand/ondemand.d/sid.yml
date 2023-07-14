@@ -39,9 +39,9 @@ profiles:
         icon: ""
         new_tab: true
       - title: "Documentation"
-        url: "https://docs.rc.fas.harvard.edu/kb/sid-documentation/"
+        page: docs
         icon: ""
-        new_tab: true
+        new_tab: false
       - title: "Support"
         url: "https://docs.rc.fas.harvard.edu/kb/getting-help-with-sid/"
         icon: ""
@@ -69,5 +69,6 @@ profiles:
           - columns:
               - width: 12
                 widgets:
-                  - "sessions"
-                  - "pinned_apps"
+                  - "sid/custom_message"
+                  - "recently_used_apps"
+                  - "sid/docs"
