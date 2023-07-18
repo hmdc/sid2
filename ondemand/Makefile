@@ -54,3 +54,7 @@ docker-build-ood:
 
 docker-push-ood:
 	docker push $(SID_ONDEMAND_IMAGE)
+
+pearc23:
+	env SLURM_TAG=pearc23 SID_SLURM_IMAGE=hmdc/sid-slurm:pearc23 SID_ONDEMAND_IMAGE=hmdc/sid-ood:pearc23 OOD_UID=$(OOD_UID) OOD_GID=$(OOD_GID) docker-compose down -v || :
+	env SLURM_TAG=pearc23 SID_SLURM_IMAGE=hmdc/sid-slurm:pearc23 SID_ONDEMAND_IMAGE=hmdc/sid-ood:pearc23 OOD_UID=$(OOD_UID) OOD_GID=$(OOD_GID) docker-compose up --build
