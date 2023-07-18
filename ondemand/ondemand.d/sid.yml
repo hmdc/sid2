@@ -34,15 +34,11 @@ profiles:
       - "sessions"
 
     help_bar:
-      - title: "About"
-        url: "https://www.iq.harvard.edu/research-computing#AboutSidNG"
-        icon: ""
-        new_tab: true
-      - title: "Documentation"
+      - title: "Custom Page"
         page: docs
         icon: ""
         new_tab: false
-      - title: "Support"
+      - title: "Docs"
         url: "https://docs.rc.fas.harvard.edu/kb/getting-help-with-sid/"
         icon: ""
         new_tab: true
