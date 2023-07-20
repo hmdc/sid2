@@ -1,5 +1,6 @@
 ---
 cluster: "dev-cluster"
+title: "RStudio Dev"
 form:
   - bc_account
   - bc_queue

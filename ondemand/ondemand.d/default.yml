@@ -1,0 +1,20 @@
+host_based_profiles: false
+disable_dashboard_logo: false
+show_all_apps_link: false
+
+cancel_session_enabled: true
+
+help_menu:
+  - group: "Interface"
+  - title: "Default"
+    profile: ""
+    icon: "fas://magnet"
+  - title: "FASRC"
+    profile: "fasrc"
+    icon: "/public/images/fasrc_logo.jpg"
+  - title: "Sid"
+    profile: "sid"
+    icon: "/public/images/sid_logo.png"
+  - title: "Navigation"
+    profile: "navigation"
+    icon: "fas://user"

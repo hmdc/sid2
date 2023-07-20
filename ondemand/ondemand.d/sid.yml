@@ -28,7 +28,7 @@ profiles:
           - "sys/RemoteDesktop/main"
           - "sys/Jupyter/main"
           - "sys/Matlab/main"
-          - "sys/RStudioServer/main"
+          - "sys/RstudioDev/main"
           - "sys/Stata/main"
           - "sys/SAS/main"
       - "sessions"
