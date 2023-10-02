@@ -52,42 +52,42 @@ openondemand::confs:
 
 openondemand::install_apps:
   GenericRD:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/GenericRD'
     manage_package: false
   JBrowse:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/JBrowse'
     manage_package: false
   Jupyter:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/Jupyter'
     manage_package: false
   Matlab:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/Matlab'
     manage_package: false
   OmniSci:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/OmniSci'
     manage_package: false
   Postgres:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/Postgres'
     manage_package: false
   RemoteDesktop:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/RemoteDesktop'
     manage_package: false
   RStudioServer:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/RStudioServer'
     manage_package: false
   SAS:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/SAS'
     manage_package: false
   Stata:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/Stata'
     manage_package: false
   TensorBoard:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/TensorBoard'
     manage_package: false
   Totalview-Desktop:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/Totalview-Desktop'
     manage_package: false
   RstudioDev:
-    app_source: '/tmp/dashboard/files/apps'
+    source: '/tmp/dashboard/files/apps/RstudioDev'
     manage_package: false
 
