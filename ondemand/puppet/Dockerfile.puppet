@@ -38,9 +38,7 @@ RUN groupadd -g $OOD_GID ood || : && \
 RUN /usr/bin/htdbm -bc /etc/httpd/.htpasswd.dbm ood ood
 
 COPY ./puppet.conf /etc/puppetlabs/puppet/puppet.conf
-RUN git clone https://github.com/hmdc/puppet-module-openondemand.git /tmp/openondemand
-RUN tar -czvf /tmp/openondemand.tar.gz /tmp/openondemand
-RUN /opt/puppetlabs/bin/puppet module install /tmp/openondemand.tar.gz
+RUN /opt/puppetlabs/bin/puppet module install osc-openondemand --version 4.2.0
 
 RUN systemctl enable puppetserver
 
