@@ -1,0 +1,31 @@
+ARG SLURM_TAG
+
+FROM hmdc/slurm-docker-cluster:${SLURM_TAG}
+
+ARG OOD_UID=3210
+ARG OOD_GID=3210
+
+RUN dnf install -y epel-release && \
+    dnf config-manager --set-enabled powertools && \
+    dnf install -y passwd && \
+    dnf module enable -y ruby:3.0 nodejs:14 && \
+    yum install -y https://yum.osc.edu/ondemand/3.0/ondemand-release-web-3.0-1.noarch.rpm && \
+    yum install -y ondemand && \
+    mkdir -p /etc/ood/config/clusters.d && \
+    mkdir -p /etc/ood/config/apps/shell
+
+RUN mkdir -p /etc/ood/config/tls
+COPY ./apache/sid_development.crt ./apache/sid_development.key /etc/ood/config/tls/
+COPY ./docker/ood_portal.yml ./docker/nginx_stage.yml /etc/ood/config/
+RUN rm -f /etc/httpd/conf.d/* && \
+    /opt/ood/ood-portal-generator/sbin/update_ood_portal && \
+    systemctl enable httpd
+RUN groupadd -g $OOD_GID ood || : && \
+    useradd -u $OOD_UID --create-home --gid $OOD_GID ood && \
+    mkdir -p /home/ood/ondemand/data && \
+    chown -R ${OOD_UID}:${OOD_GID} /home/ood && \
+    echo -n "ood" | passwd --stdin ood && \
+    htdbm -bc /etc/httpd/.htpasswd.dbm ood ood
+
+COPY ./docker/launch-httpd /usr/local/bin/
+CMD ["/usr/local/bin/launch-httpd"]

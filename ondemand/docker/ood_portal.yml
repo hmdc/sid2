@@ -234,6 +234,8 @@
 #     register_root: '/var/www/ood/register'
 # Default: null (display error to user if mapping fails)
 #register_root: null
+listen_addr_port:
+ - '443'
 ssl:
  - 'SSLCertificateFile "/etc/ood/config/tls/sid_development.crt"'
  - 'SSLCertificateKeyFile "/etc/ood/config/tls/sid_development.key"'
@@ -245,6 +247,6 @@ auth:
  - 'AuthType Basic'
  - 'AuthName "private"'
  - 'AuthBasicProvider dbm'
- - 'AuthDBMUserFile "/opt/rh/httpd24/root/etc/httpd/.htpasswd.dbm"'
+ - 'AuthDBMUserFile "/etc/httpd/.htpasswd.dbm"'
  - 'RequestHeader unset Authorization'
  - 'Require valid-user'

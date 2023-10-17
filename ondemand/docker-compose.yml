@@ -40,6 +40,7 @@ services:
       - slurm_jobdir:/data
       - var_log_slurm:/var/log/slurm
       - ./development/RstudioDev:/var/www/ood/apps/sys/RstudioDev
+      - ./development/rdesktop:/var/www/ood/apps/sys/rdesktop
       - ./apps/GenericRD:/var/www/ood/apps/sys/GenericRD
       - ./apps/JBrowse:/var/www/ood/apps/sys/JBrowse
       - ./apps/Jupyter:/var/www/ood/apps/sys/Jupyter
