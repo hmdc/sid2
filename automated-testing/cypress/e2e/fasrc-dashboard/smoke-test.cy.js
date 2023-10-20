@@ -71,6 +71,7 @@ describe('FASRC Dashboard - Smoke test', () => {
   })
 
   it('Launch Interactive Application', () => {
+    cy.visit(rootPath, { auth })
     cleanupSessions()
 
     const fasrcApplication = Cypress.env('dashboard_fasrc_application')

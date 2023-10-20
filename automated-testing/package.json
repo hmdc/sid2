@@ -6,6 +6,6 @@
     "cypress": "cypress"
   },
   "dependencies": {
-    "cypress": "^8.6.0"
+    "cypress": "^13.3.2"
   }
 }

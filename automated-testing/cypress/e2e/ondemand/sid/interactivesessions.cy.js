@@ -16,6 +16,7 @@ describe('Sid Dashboard - Interactive Sessions', () => {
   beforeEach(() => {
     //DEFAULT SIZE FOR THESE TESTS
     cy.viewport(cy.sid.screen.largeWidth, cy.sid.screen.height)
+    loadHomepage()
   })
 
   it('Should display restricted interactive apps left menu', () => {

@@ -16,6 +16,7 @@ describe('Sid Dashboard - Homepage', () => {
   beforeEach(() => {
     //DEFAULT SIZE FOR THESE TESTS
     cy.viewport(cy.sid.screen.largeWidth, cy.sid.screen.height)
+    loadHomepage()
     cleanupSessions()
     loadHomepage()
   })

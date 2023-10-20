@@ -21,28 +21,28 @@ endif
 sid:
 	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
 	cp -rf ./sid/cypress.env.json.$(CONFIG) cypress.env.json
-	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec cypress/integration/fasrc-dashboard/*,cypress/integration/sid-dashboard/*
+	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec cypress/e2e/fasrc-dashboard/*,cypress/e2e/sid-dashboard/*
 
 test:
 	cd ../dashboard/ && DETACHED=true make
 	docker pull $(DOCKER_CYPRESS_IMAGE)
 	./wait_for_dashboard.sh
 	cp -rf ./sid/cypress.env.json.local cypress.env.json
-	docker run --rm --network=host -v $(WORKING_DIR):/usr/local/app -v /usr/local/app/node_modules -w /usr/local/app --env cypress_dashboard_username=$$OOD_USERNAME --env cypress_dashboard_password=$$OOD_PASSWORD $(DOCKER_CYPRESS_IMAGE) /bin/bash -c "npm install && ./node_modules/.bin/cypress run --headless --spec cypress/integration/fasrc-dashboard/*,cypress/integration/sid-dashboard/*" || :
+	docker run --rm --network=host -v $(WORKING_DIR):/usr/local/app -v /usr/local/app/node_modules -w /usr/local/app --env cypress_dashboard_username=$$OOD_USERNAME --env cypress_dashboard_password=$$OOD_PASSWORD $(DOCKER_CYPRESS_IMAGE) /bin/bash -c "npm install && ./node_modules/.bin/cypress run --headless --spec cypress/e2e/fasrc-dashboard/*,cypress/e2e/sid-dashboard/*" || :
 	cd ../dashboard/ && make down
 
 ondemand:
 	cp -rf ./ondemand/cypress.env.json.$(CONFIG) cypress.env.json
-	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/integration/ondemand/**/*.spec.js"
+	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/ondemand/**/*.cy.js"
 
 ondemand-test:
 	cd ../ondemand/ && DETACHED=true make
 	docker pull $(DOCKER_CYPRESS_IMAGE)
 	env ENDPOINT=https://localhost:33000/pun/sys/dashboard ./wait_for_dashboard.sh
 	cp -rf ./ondemand/cypress.env.json.local cypress.env.json
-	docker run --rm --network=host -v $(WORKING_DIR):/usr/local/app -v /usr/local/app/node_modules -w /usr/local/app --env cypress_dashboard_username=$$OOD_USERNAME --env cypress_dashboard_password=$$OOD_PASSWORD $(DOCKER_CYPRESS_IMAGE) /bin/bash -c 'npm install && ./node_modules/.bin/cypress run --headless --spec "cypress/integration/ondemand/**/*.spec.js"' || :
+	docker run --rm --network=host -v $(WORKING_DIR):/usr/local/app -v /usr/local/app/node_modules -w /usr/local/app --env cypress_dashboard_username=$$OOD_USERNAME --env cypress_dashboard_password=$$OOD_PASSWORD $(DOCKER_CYPRESS_IMAGE) /bin/bash -c 'npm install && ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/ondemand/**/*.cy.js"' || :
 	cd ../ondemand/ && make down
 
 landing:
 	cp -rf landing/cypress.env.json.landing cypress.env.json
-	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec cypress/integration/sid-landing-site/*
+	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec cypress/e2e/sid-landing-site/*
