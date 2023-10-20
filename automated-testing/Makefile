@@ -2,8 +2,8 @@
 all:: local
 .PHONY: sid test ondemand ondemand-test landing
 
-DOCKER_NODE_IMAGE := node:16
-DOCKER_CYPRESS_IMAGE := cypress/base:16.4.0
+DOCKER_NODE_IMAGE := node:18
+DOCKER_CYPRESS_IMAGE := cypress/base:18.16.0
 WORKING_DIR := $(shell pwd)
 FASSE_ENV := env no_proxy=.harvard.edu http_proxy=http://rcproxy.rc.fas.harvard.edu:3128 https_proxy=http://rcproxy.rc.fas.harvard.edu:3128
 

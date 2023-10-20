@@ -1,4 +1,7 @@
+import { cleanupSessions, checkSession } from "../../support/utils/sessions_2.0.js";
+
 describe('FASRC Dashboard - Smoke test', () => {
+  const longRunningTimeout = cy.sid.timeout
   const baseUrl = Cypress.env('dashboard_baseUrl')
   const rootPath = "/pun/sys/dashboard"
   const auth = cy.sid.auth
@@ -68,6 +71,7 @@ describe('FASRC Dashboard - Smoke test', () => {
   })
 
   it('Launch Interactive Application', () => {
+    cleanupSessions()
 
     const fasrcApplication = Cypress.env('dashboard_fasrc_application')
 
@@ -76,8 +80,8 @@ describe('FASRC Dashboard - Smoke test', () => {
     cy.get('div[role="main"] h3').should('contain.text', fasrcApplication.name)
 
     cy.get('form#new_batch_connect_session_context input[type="submit"]').click()
-    //CHECK LAUNCHED APP IN SESSIONS PAGE IS RUNNING
-    cy.get('div.alert-success').should('contain.text', 'Session was successfully created')
+    checkSession(fasrcApplication)  
+    cleanupSessions()
   })
 
 })
