@@ -42,17 +42,13 @@ services:
       - ./development/RstudioDev:/var/www/ood/apps/sys/RstudioDev
       - ./development/rdesktop:/var/www/ood/apps/sys/rdesktop
       - ./apps/GenericRD:/var/www/ood/apps/sys/GenericRD
-      - ./apps/JBrowse:/var/www/ood/apps/sys/JBrowse
       - ./apps/Jupyter:/var/www/ood/apps/sys/Jupyter
       - ./apps/Matlab:/var/www/ood/apps/sys/Matlab
-      - ./apps/OmniSci:/var/www/ood/apps/sys/OmniSci
-      - ./apps/Postgres:/var/www/ood/apps/sys/Postgres
       - ./apps/RemoteDesktop:/var/www/ood/apps/sys/RemoteDesktop
       - ./apps/RStudioServer:/var/www/ood/apps/sys/RStudioServer
       - ./apps/SAS:/var/www/ood/apps/sys/SAS
       - ./apps/Stata:/var/www/ood/apps/sys/Stata
-      - ./apps/TensorBoard:/var/www/ood/apps/sys/TensorBoard
-      - ./apps/Totalview-Desktop:/var/www/ood/apps/sys/Totalview-Desktop
+      - ./apps/HeavyAI:/var/www/ood/apps/sys/HeavyAI
       - ../VERSION:/var/www/ood/apps/sys/dashboard/VERSION
       - ./data:/home/ood/ondemand/data:rw
       - ./application/dashboard:/etc/ood/config/apps/dashboard

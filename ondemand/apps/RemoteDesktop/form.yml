@@ -29,14 +29,14 @@ attributes:
     widget: text_field
   custom_memory_per_node:
     label: Memory Allocation in GB
-    value: 4
+    value: 8
     min:   4
     step:  1
     max:   2000
     widget: number_field
   custom_num_cores:
     label: Number of cores
-    value: 1
+    value: 2
     min:   1
     step:  1
     max:   64
@@ -59,6 +59,18 @@ attributes:
     value: 1
     help: |
           **_Checking this box will create a desktop folder unique to this job_**
+  extra_slurm:
+    label: Additional Slurm options
+    widget: text_field
+    help: |
+      additional slurm options (**long format option only**)<br>
+      Example :  --constraint=intel --exclusive
+      
+      Please make sure the options you select are compatible with other fields in the form.<br>Also, please make sure you use **long format option only**<br>(e.g. --nodelist=holy7c24502 instead of -w holy7c24502)
+   
+      If you are not familiar with Slurm we recommend to leave this blank.
+      
+
 
 form:
   - bc_vnc_idle
@@ -77,3 +89,4 @@ form:
   - bc_email_on_started
   - custom_reservation
   - bc_account
+  - extra_slurm

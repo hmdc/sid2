@@ -7,62 +7,67 @@ attributes:
   bc_vnc_resolution:
     value: "1024x768"
     required: true
-  bc_account:
-    help: "Only relevant if you have multiple slurm accounts. It can be left blank otherwise"
   custom_time:
-    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM). Maximum for this partition is 7 days"
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM)"
     value: "04:00:00"
     widget: text_field
+    help: |
+      *sbatch -t, --time=\<time\>*
   bc_queue: 
     value: "shared"
+    help: |
+      *sbatch -p, --partition=\<partition_names\>*
+
+      [Slurm partition](https://www.rc.fas.harvard.edu/resources/running-jobs/#Slurm_partitions) name (e.g., **shared** ), or comma-separated list of partition names (e.g., **shared,test** )
   custom_email_address:
-    label: email for status notification
+    label: Email address for status notification
     widget: text_field
   custom_memory_per_node:
     label: Memory Allocation in GB
-    value: 4
+    value: 8
     min:   4
     step:  1
-    max:   128
     widget: number_field
+    help: |
+      *sbatch --mem=\<size\>G*
   custom_num_cores:
-    label: Number of cores
+    label: "Number of CPUs (cores) to allocate"
     value: 1
     min:   1
     step:  1
-    max:   32
+    max:   64
     widget: number_field
-    help: "Number of Cpus to allocate"
+    help: |
+      *sbatch -c, --cpus-per-task=\<ncpus\>*
   custom_num_gpus:
-    label: Number of GPUs
+    label: "Number of GPUs to allocate. Available only on GPU enabled partitions"
     value: 0
     min:   0
     step:  1
     max:   8
     widget: number_field
-    help: "Number of GPUs to allocate. Available only on GPU enabled partitions"
-  custom_reservation:
-    label: Reservation
-    widget: text_field
+    help: |
+      *sbatch --gres=gpu:\<ngpus\>*
   matlab_version:
     widget: select
     label: "Matlab Version"
     help: |
       Loading the Matlab module for requested version
     options:
-      - ["matlab R2022a", "matlab/R2022a-fasrc01"]
-      - ["matlab R2021a", "matlab/R2021a-fasrc01"]
-      - ["matlab R2020b", "matlab/R2020b-fasrc01"]
-      - ["matlab R2020a", "matlab/R2020a-fasrc01"] 
-      - ["matlab R2019b", "matlab/R2019b-fasrc01"]
-      - ["matlab R2019a", "matlab/R2019a-fasrc01"]
-      - ["matlab R2018b", "matlab/R2018b-fasrc01"]
-      - ["matlab R2018a", "matlab/R2018b-fasrc01"]
-      #- [ "matlab R2020a Standard",  "/n/singularity_images/OOD/matlab/current/Matlab2020a_standard-xfce-el7-7.6.1810.sif" ]
-      #- [ "matlab R2020a Minimal",  "/n/singularity_images/OOD/matlab/current/Matlab2020a_minimal-xfce-el7-7.6.1810.sif" ]
-      #- [ "matlab R2020a Full",  "/n/singularity_images/OOD/matlab/current/Matlab2020a_full-xfce-el7-7.6.1810.sif" ]
-      #- [ "matlab R2018b Minimal",  "/n/singularity_images/OOD/matlab/current/matlab2018bminimal-xfce-el7-7.4.1708.img" ]
-      #- [ "matlab R2018b Full",  "/n/singularity_images/OOD/matlab/current/matlab2018b-xfce-el7-7.4.1708.img" ]
+      - ["matlab R2022b", "matlab/R2022b-fasrc01"]
+
+  custom_reservation:
+    label: Reservation
+    widget: text_field
+    help: |
+      *sbatch --reservation=\<name\>*
+
+      Leave blank if you do not have a Slurm reservation
+  bc_account:
+    help: |
+      *sbatch -A, --account=\<account\>*
+
+      Leave blank if you do not have multiple Slurm accounts
 
 form:
   - desktop

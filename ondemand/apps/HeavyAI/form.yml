@@ -1,0 +1,84 @@
+---
+title: "HeavyAI"
+cluster: "odyssey3"
+attributes:
+  modules: null
+  extra_jupyter_args: ""
+  custom_time:
+    label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM)."
+    value: "08:00:00"
+    widget: text_field
+    help: |
+      *sbatch -t, --time=\<time\>*
+  bc_queue: 
+    value: "gpu_test"
+    help: |
+      *sbatch -p, --partition=\<partition_names\>*
+
+      [Slurm partition](https://www.rc.fas.harvard.edu/resources/running-jobs/#Slurm_partitions) name (e.g., **gpu** ), or comma-separated list of partition names (e.g., **gpu,gpu_test** )
+  custom_email_address:
+    label: email address for status notification
+    widget: text_field
+  custom_memory_per_node:
+    label: Memory Allocation in GB
+    value: 100
+    min:   1
+    step:  1
+    widget: number_field
+    help: |
+      *sbatch --mem=\<size\>G*
+  custom_num_cores:
+    label: "Number of CPUs to allocate"
+    value: 2
+    min:   1
+    step:  1
+    max:   64
+    widget: number_field
+    help: |
+      *sbatch -c, --cpus-per-task=\<ncpus\>*
+  custom_num_gpus:
+    label: "Number of GPUs to allocate. Available only on GPU enabled partitions"
+    value: 1
+    min:   0
+    step:  1
+    widget: number_field
+    help: |
+      *sbatch --gres=gpu:\<ngpus\>*
+  heavyai_version:
+    widget: select
+    label: "HeavyAI version"
+    options:
+      - [ "HeavyAI 7.0.0", "/n/singularity_images/OOD/omnisci/heavyai-ee-cuda_v7.0.0.sif" ]
+    help: |
+      This defines the version of HeavyAI you want to use.
+
+  custom_reservation:
+    label: Reservation
+    widget: text_field
+  envscript:
+    label: script to be executed before starting HeavyAI
+    widget: text_field
+    help: "This will be executed before starting the container outside the container"
+  heavyai_base:
+    label: Location to map HEAVYAI_BASE (/var/lib/heavyai)
+    widget: text_field
+    help: "This is the folder location that will be mapped to /var/lib/heavyai (default: /scratch/$USER/$SLURM_JOB_ID)"
+  bc_account:
+    label: "Slurm Account"
+    help: "If you are not in multiple labs please leave this blank."
+
+form:
+  - modules
+  - extra_jupyter_args
+  - bc_queue
+  - custom_memory_per_node
+  - custom_num_cores
+  - custom_num_gpus
+  - custom_time
+  - heavyai_version
+  - heavyai_base
+  - envscript
+  - bc_email_on_started
+  - custom_email_address
+  - custom_reservation
+  - bc_account

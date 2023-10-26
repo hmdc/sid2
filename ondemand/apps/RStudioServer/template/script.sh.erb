@@ -27,24 +27,21 @@ WORKDIR=/scratch/${USER}/${SLURM_JOB_ID}
 
 # use a different directory for each image to be safe...
 readonly image_tag=$(basename "${container_image##*:}" .sif)
-if [ ${image_tag} = 'RELEASE_3_9' ] # legacy RELEASE_3_9 used major.minor version
-then
-  R_LIBS_USER=${HOME}/R/ifxrstudio/3.6
-else
-  R_LIBS_USER=${HOME}/R/ifxrstudio/${image_tag}
-fi
+R_LIBS_USER=${HOME}/R/ifxrstudio/${image_tag}
 
 mkdir -m 700 -p ${WORKDIR}/tmp ${WORKDIR}/run "${R_LIBS_USER}"
 
 export SINGULARITY_BIND="${WORKDIR}/tmp:/tmp,${WORKDIR}/run:/run,${WORKDIR}/rsession.sh:/etc/rstudio/rsession.sh,${WORKDIR}/Renviron.site:${R_HOME}/etc/Renviron.site"
 
-if [ ${image_tag#RELEASE_3_} -ge 12 ]
+readonly image_version=${image_tag#RELEASE_3_} 
+
+if [ ${image_version} -ge 12 ]
 then
   # https://github.com/rstudio/rstudio/issues/5449#issuecomment-534184951
   extra_options='--auth-timeout-minutes=0 --auth-stay-signed-in-days=30'
 fi
 
-if [ ${image_tag#RELEASE_3_} -ge 13 ]
+if [ ${image_version} -ge 13 ]
 then
   mkdir -m 700 -p ${WORKDIR}/var/lib/rstudio-server 
   cat > ${WORKDIR}/database.conf <<END
@@ -58,7 +55,7 @@ END
   export SINGULARITY_BIND="/sys:/sys,${WORKDIR}/database.conf:/etc/rstudio/database.conf,${WORKDIR}/var/lib/rstudio-server:/var/lib/rstudio-server,${SINGULARITY_BIND}"
 fi
 
-if [ ${image_tag#RELEASE_3_} -eq 14 ]
+if [ ${image_version} -eq 14 ]
 then
   # allow python packages to be installed into the venv
   mkdir -p "${R_LIBS_USER}"/venv
@@ -69,12 +66,19 @@ then
   export SINGULARITY_BIND="${SINGULARITY_BIND},${R_LIBS_USER}/venv:${PYTHONUSERBASE}"
 fi
 
-if [ ${image_tag#RELEASE_3_} -ge 14 ]
+if [ ${image_version} -ge 14 ]
 then
   # https://github.com/grst/rstudio-server-conda/pull/18
   extra_options="--server-user $USER ${extra_options}"
-  mkdir -p ${PYTHONUSERBASE=${R_LIBS_USER}/python-user-base}
 fi
+
+case ${image_version} in
+  14|15) mkdir -p ${PYTHONUSERBASE=${R_LIBS_USER}/python-user-base} ;;
+esac
+
+<%- if !context.custom_num_gpus.to_i.zero? -%>
+export SINGULARITY_NV=1
+<%- end -%>
 
 # users can chose if starting from a fresh config or keep the default in HOME/.rstudio
 <%- if !context.custom_vanillaconf.to_i.zero? -%>
@@ -106,10 +110,12 @@ export MKL_THREADING_LAYER=GNU
 # disable the pip cache to optimize disk space
 export PIP_NO_CACHE_DIR=off
 export RETICULATE_MINICONDA_ENABLED=FALSE
-${PYTHONUSERBASE:+export PYTHONUSERBASE=${PYTHONUSERBASE}}
-export PATH=\$(python -msite --user-base)/bin:\${PATH}
-export PYTHONPATH=\$(python -msite --user-site)
-export PIP_USER=1
+if [ "${PYTHONUSERBASE:-}" ] # backwards compatibility w/ RELEASE_3_1[45]
+then
+  export PYTHONUSERBASE="${PYTHONUSERBASE}"
+  export PATH=\$(python -msite --user-base)/bin:\${PATH}
+  export PYTHONPATH="${PYTHONUSERBASE}"
+fi
 ${RETICULATE_PYTHON:+export RETICULATE_PYTHON=${RETICULATE_PYTHON}}
 exec /usr/lib/rstudio-server/bin/rsession "\${@}"
 END

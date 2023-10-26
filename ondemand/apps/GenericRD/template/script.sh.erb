@@ -12,7 +12,7 @@ export SINGULARITYENV_XDG_CONFIG_HOME=$XDG_CONFIG_HOME
 
 container_image=<%= context.centos_version %>
 
-export SING_BINDS=" -B /etc/nsswitch.conf -B /etc/sssd/ -B /var/lib/sss -B /etc/slurm -B /slurm -B /var/run/munge  -B `which sbatch ` -B `which srun ` -B `which sacct ` -B `which scontrol ` -B `which salloc`  -B /usr/lib64/slurm/  -B /usr/lib64/libmunge.so.2 -B /usr/lib64/libmunge.so.2.0.0 -B /usr/local/bin -B /usr/lib64/liblustreapi.a -B /usr/lib64/liblustreapi.so -B /usr/lib64/liblustreapi.so.1 -B /usr/lib64/liblustreapi.so.1.0.0"
+export SING_BINDS=" -B /etc/nsswitch.conf -B /etc/sssd/ -B /var/lib/sss -B /etc/slurm -B /slurm -B /var/run/munge  -B `which sbatch ` -B `which srun ` -B `which sacct ` -B `which scontrol ` -B `which salloc`  -B /usr/lib64/slurm/  -B /usr/lib64/libmunge.so.2 -B /usr/lib64/libmunge.so.2.0.0 -B /usr/lib64/liblustreapi.a -B /usr/lib64/liblustreapi.so -B /usr/lib64/liblustreapi.so.1 -B /usr/lib64/liblustreapi.so.1.0.0"
 
 
 

@@ -1,6 +1,6 @@
+---
 batch_connect:
-  template: turbovnc
-  geometry: "1024x768"
+  template: "basic"
 script:
   reservation_id: <%= custom_reservation %>
   email: <%= custom_email_address %>
@@ -10,9 +10,5 @@ script:
     - "--cpus-per-task=<%= custom_num_cores.blank? ? 1 : custom_num_cores.to_i %>"
    <%- if !custom_num_gpus.to_i.zero? -%>
     - "--gres=gpu:<%= custom_num_gpus.to_i %>"
-   <%- end %>
-   <%- unless extra_slurm.blank? -%>
-   <%- extra_slurm.split.each do |slurm_option| %>
-    - "<%= slurm_option.to_s %>"
-   <%- end %>
    <%- end -%>
+

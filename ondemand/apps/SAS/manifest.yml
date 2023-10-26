@@ -1,7 +1,7 @@
 ---
 name: SAS
 category: Interactive Apps
-subcategory: GUIs
+subcategory: Desktop Apps
 role: batch_connect
 description: |
   This app will launch a [SAS] GUI on [FAS-RC Cluster].

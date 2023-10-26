@@ -7,17 +7,16 @@ tile:
     8 hours job run time
     Cannon cluster
 attributes:
+  desktop: "xfce"
   bc_queue: "test"
   bc_account: ""
-  bc_num_slots: "1"
-  bc_num_hours: "1"
+  bc_num_slots: null
   custom_memory_per_node: "8"
   custom_num_cores: "1"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
-  envscript: ""
   custom_email_address: ""
   bc_email_on_started: "0"
   custom_reservation: ""
   bc_vnc_resolution: "1024x768"
-  stata_version: "stata/16.0-fasrc01"
+  stata_version: "stata/17.0-fasrc01"

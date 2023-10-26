@@ -1,7 +1,7 @@
 ---
 name: Jupyter
 category: Interactive Apps
-subcategory: Servers
+subcategory: Web Apps
 role: batch_connect
 description: |
   This app will launch [Jupyter] on a compute node on the [FAS-RC] cluster:

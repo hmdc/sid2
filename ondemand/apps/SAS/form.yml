@@ -8,15 +8,24 @@ attributes:
     value: "1024x768"
     required: true
   bc_account:
-    help: "Only relevant if you have multiple slurm accounts. It can be left blank otherwise"
+    help: |
+      *sbatch -A, --account=\<account\>*
+
+      Leave blank if you do not have multiple Slurm accounts
   custom_time:
     label: "Allocated Time (expressed in MM , or HH:MM:SS , or DD-HH:MM). Maximum for this partition is 7 days"
     value: "04:00:00"
     widget: text_field
+    help: |
+      *sbatch -t, --time=\<time\>*
   bc_queue: 
     value: "shared"
+    help: |
+      *sbatch -p, --partition=\<partition_names\>*
+
+      [Slurm partition](https://www.rc.fas.harvard.edu/resources/running-jobs/#Slurm_partitions) name (e.g., **shared** ), or comma-separated list of partition names (e.g., **shared,test** )
   custom_email_address:
-    label: email for status notification
+    label: Email address for status notification
     widget: text_field
   custom_memory_per_node:
     label: Memory Allocation in GB
@@ -25,6 +34,8 @@ attributes:
     step:  1
     max:   128
     widget: number_field
+    help: |
+      *sbatch --mem=\<size\>G*
   custom_num_cores:
     label: Number of cores
     value: 1
@@ -33,6 +44,8 @@ attributes:
     max:   32
     widget: number_field
     help: "Number of Cpus to allocate"
+    help: |
+      *sbatch -c, --cpus-per-task=\<ncpus\>*
   custom_num_gpus:
     label: Number of GPUs
     value: 0
@@ -41,9 +54,15 @@ attributes:
     max:   8
     widget: number_field
     help: "Number of GPUs to allocate. Available only on GPU enabled partitions"
+    help: |
+      *sbatch --gres=gpu:\<ngpus\>*
   custom_reservation:
     label: Reservation
     widget: text_field
+    help: |
+      *sbatch --reservation=\<name\>*
+
+      Leave blank if you do not have a Slurm reservation
 
 form:
   - desktop

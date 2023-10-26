@@ -1,0 +1,12 @@
+---
+name: HeavyAI
+category: Interactive Apps
+subcategory: Web Apps
+role: batch_connect
+description: |
+  Formely known as OmniSci.
+
+  This app will launch [HeavyAI] on a compute node on the [FAS-RC] Cannon cluster.
+
+  [HeavyAI]:  https://www.heavy.ai/
+  [FAS-RC]: https://www.rc.fas.harvard.edu

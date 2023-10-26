@@ -6,23 +6,18 @@ show_all_apps_link: false
 cancel_session_enabled: false
 navbar_type: dark
 dashboard_header_img_logo: "/public/images/fasrc_logo.png"
-brand_bg_color: " rgb(157,47,60)"
+brand_bg_color: "rgb(157,47,60)"
 brand_link_active_bg_color: "rgb(59, 61, 63)"
 disable_dashboard_welcome_message: true
 
 pinned_apps_group_by: "category"
 pinned_apps:
   - sys/Jupyter/main
-  - sys/RStudioServer/main*
   - sys/Matlab/main
+  - sys/RStudioServer/main*
   - sys/RemoteDesktop/main
-  - sys/Abaqus/main
-  - sys/Comsol/main
-  - sys/Postgres/main
-  - sys/Stata/main
   - sys/SAS/main
-
-
+  - sys/Stata/main
 
 nav_bar:
   - "clusters"

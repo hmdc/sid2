@@ -1,7 +1,7 @@
 ---
 name: RStudio Server
 category: Interactive Apps
-subcategory: Servers
+subcategory: Web Apps
 role: batch_connect
 description: |
   This app will launch an [RStudio Server](https://www.rstudio.com/products/rstudio-server/) instance on a FAS RC compute node.

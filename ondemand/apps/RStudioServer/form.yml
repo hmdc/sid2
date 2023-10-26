@@ -20,7 +20,7 @@ attributes:
     widget: text_field
   custom_memory_per_node:
     label: Memory Allocation in GB
-    value: 4
+    value: 8
     min:   1
     step:  1
     max:   2000
@@ -29,30 +29,36 @@ attributes:
       *sbatch --mem=\<size\>G*
   custom_num_cores:
     label: "Number of CPUs to allocate"
-    value: 1
+    value: 2
     min:   1
     step:  1
     max:   64
     widget: number_field
     help: |
       *sbatch -c, --cpus-per-task=\<ncpus\>*
+  custom_num_gpus:
+    label: Number of GPUs
+    value: 0
+    min:   0
+    step:  1
+    max:   8
+    widget: number_field
+    help: |
+      Number of GPUs to allocate. Available only on GPU enabled partitions. (--gres=gpu:N)
   r_version:
     widget: select
     label: "R version"
     options:
+      - [ "R 4.2.3 (Bioconductor 3.16, RStudio 2023.03.0)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_16.sif" ]
       - [ "R 4.2.0 (Bioconductor 3.15, RStudio 2022.02.3)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_15.sif" ]
       - [ "R 4.1.3 (Bioconductor 3.14, RStudio 2022.02.0)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_14.sif" ]
       - [ "R 4.1.0 (Bioconductor 3.13, RStudio 1.4.1717)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_13.sif" ]
       - [ "R 4.0.3 (Bioconductor 3.12, Rstudio 1.3.1093)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_12.sif" ]
       - [ "R 4.0.0 (Bioconductor 3.11, Rstudio 1.3.1093)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_11.sif" ]
       - [ "R 3.6.2 (Bioconductor 3.10, Rstudio 1.2.5033)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_10.sif" ]
-      - [ "R 3.6.1 (Bioconductor 3.9, RStudio 1.2.1578)", "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_9.sif" ]
     help: |
       This defines the version of R/Bioconductor you want to use.
 
-      * Bioconductor 3.10 has the [Intel Math Kernel Library (MKL)](https://software.intel.com/en-us/mkl) for improved performance of some R routines, a [zlib compression library optimized with Intel Integrated Performance Primitives](https://software.intel.com/en-us/articles/how-to-use-zlib-with-intel-ipp-optimization), as well as several R packages used by FAS Informatics.
-      * Bioconductor 3.12 adds [rocker/geospatial](https://hub.docker.com/r/rocker/geospatial).
-      * Bioconductor 3.13 adds [RStudio v1.4 Python Support](https://blog.rstudio.com/2020/10/07/rstudio-v1-4-preview-python-support/).
   custom_reservation:
     label: "(optional) Slurm Reservation"
     widget: text_field
@@ -78,11 +84,13 @@ attributes:
           This is useful if you need to run different instances at the same time with different configurations.<br> 
           Leave the box unchecked if you want rstudio to start with the default configuration you have in your ~/.rstudio
 
+
 form:
   - modules
   - bc_queue
   - custom_memory_per_node
   - custom_num_cores
+  - custom_num_gpus
   - custom_time
   - r_version
   - bc_email_on_started
