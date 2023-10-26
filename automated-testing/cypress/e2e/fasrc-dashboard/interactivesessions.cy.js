@@ -1,25 +1,22 @@
-import { NAVIGATION, loadHomepage, navigateSessions, visitApplication } from "../../../support/utils/navigation.js";
-import { changeProfile } from "../../../support/utils/profiles.js";
-import { cleanupSessions, checkSession } from "../../../support/utils/sessions.js";
+import { navigateSessions, navigateApplication } from "../../support/utils/navigation.js";
+import { cleanupSessions, checkSession } from "../../support/utils/sessions_2.0.js";
 
 describe('Sid Dashboard - Interactive Sessions', () => {
-
   const demoApp = cy.sid.ondemandApplications.filter(l => l.id == Cypress.env('interactive_sessions_app')).shift()
   const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrc_dashboard_applications').includes(l.id))
-  Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
-  before(() => {
-    loadHomepage()
-    changeProfile('FASRC')
-  })
+  const baseUrl = Cypress.env('dashboard_baseUrl')
+  const rootPath = "/pun/sys/dashboard"
+  const auth = cy.sid.auth
+  Cypress.config('baseUrl', baseUrl);
 
   beforeEach(() => {
     //DEFAULT SIZE FOR THESE TESTS
     cy.viewport(cy.sid.screen.largeWidth, cy.sid.screen.height)
-    loadHomepage()
+    cy.visit(rootPath, { auth })
   })
 
-  it('Should display restricted interactive apps left menu', () => {
+  it('Should display interactive apps left menu', () => {
     navigateSessions()
     interactiveApps.forEach( app => {
       cy.get('div.list-group a').filter(`a[data-title="${app.name}"]`).should($appElement => {
@@ -32,7 +29,7 @@ describe('Sid Dashboard - Interactive Sessions', () => {
 
   it('Should display session panel fields', () => {
     cleanupSessions()
-    visitApplication(demoApp.token)
+    navigateApplication(demoApp.name)
     cy.get('div[role="main"] h3').should('contain.text', demoApp.name)
     //LAUNCH APP WITH EMPTY PARAMETERS
     cy.get('form#new_batch_connect_session_context input[type="submit"]').click()

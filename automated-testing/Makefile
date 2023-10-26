@@ -1,6 +1,6 @@
 # default build target
 all:: local
-.PHONY: sid test ondemand ondemand-test landing
+.PHONY: sid fasrc test ondemand ondemand-test landing
 
 DOCKER_NODE_IMAGE := node:18
 DOCKER_CYPRESS_IMAGE := cypress/base:18.16.0
@@ -22,6 +22,11 @@ sid:
 	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
 	cp -rf ./sid/cypress.env.json.$(CONFIG) cypress.env.json
 	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec cypress/e2e/fasrc-dashboard/*,cypress/e2e/sid-dashboard/*
+
+fasrc:
+	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
+	cp -rf ./sid/cypress.env.json.$(CONFIG) cypress.env.json
+	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/fasrc-dashboard/*"
 
 test:
 	cd ../dashboard/ && DETACHED=true make

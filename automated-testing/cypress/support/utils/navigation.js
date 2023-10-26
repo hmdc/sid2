@@ -19,11 +19,17 @@ export const navigateApplication = appName => {
   cy.get(`nav li[title="Interactive Apps"] ul a[title="${appName}"]`).click()
 }
 
+export const visitApplication = appToken => {
+  const auth = cy.sid.auth
+  const qs = cy.sid.query_params
+  cy.visit(`/pun/sys/dashboard/batch_connect/${appToken}/session_contexts/new`, { auth, qs })
+}
+
 export const navigateSessions = () => {
   cy.get('nav li[title="My Interactive Sessions"] > a').click()
 }
 
 export const navigateToSupport = () => {
   cy.get('nav li[title="Help"] > a').click()
-  cy.get(`nav li[title="Help"] ul a[title="Submit Support Ticket"]`).click()
+  cy.get('nav li[title="Help"] ul a[title="Submit Support Ticket"]').click()
 }
