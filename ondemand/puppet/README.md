@@ -1,7 +1,9 @@
-# OnDemand 3.0.0 + Puppet
+# OnDemand 3.x (Rocky8) + Slurm 21-08-6-1 (CentOS 7)
 
 ## Build and Run
-Build Docker image with Rockylinux:8 and Puppet7. All these commands run on the working directory `ondemand/puppet`
+The Docker environment uses the existing Slurm Cluster built for Sid (with CentOS7): hmdc/sid-slurm:slurm-21-08-6-1. No need to rebuild.
+
+Build the OnDemand Docker image with Rockylinux:8 and Puppet7. All these commands run on the working directory `ondemand/puppet`.
 ```
 cd ondemand/puppet
 make docker_build

@@ -234,8 +234,6 @@
 #     register_root: '/var/www/ood/register'
 # Default: null (display error to user if mapping fails)
 #register_root: null
-listen_addr_port:
- - '443'
 ssl:
  - 'SSLCertificateFile "/etc/ood/config/tls/sid_development.crt"'
  - 'SSLCertificateKeyFile "/etc/ood/config/tls/sid_development.key"'
