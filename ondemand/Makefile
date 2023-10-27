@@ -8,7 +8,7 @@ OOD_UID := $(shell id -u)
 OOD_GID := $(shell id -g)
 OOD_TAG := 3.0.1-1.el7
 SLURM_TAG := slurm-21-08-6-1
-#SLURM_TAG := slurm-21-08-8-2
+# LATEST SLURM VERSION TO WORK WITH CURRENT CONFIGURATION: slurm-21-08-8-2
 SID_SLURM_IMAGE := hmdc/sid-slurm:$(SLURM_TAG)
 SID_ONDEMAND_IMAGE := hmdc/sid-ood:$(SLURM_TAG)-ood-$(OOD_TAG)
 ONDEMAND_ENV_IMAGE := ondemand_env:$(SLURM_TAG)
@@ -58,7 +58,7 @@ docker-build-ood:
 	docker build --build-arg OOD_TAG=$(OOD_TAG) --build-arg SLURM_TAG=$(SLURM_TAG) -t $(SID_ONDEMAND_IMAGE) -f docker/Dockerfile.ondemand .
 
 docker-build-env:
-	docker build --build-arg SLURM_TAG=$(SLURM_TAG) -t $(ONDEMAND_ENV_IMAGE) -f docker/Dockerfile.environment .
+	docker build --build-arg SLURM_TAG=$(SLURM_TAG) -t $(ONDEMAND_ENV_IMAGE) -f docker/env-files/Dockerfile.env.ondemand .
 
 docker-push-ood:
 	docker push $(SID_ONDEMAND_IMAGE)

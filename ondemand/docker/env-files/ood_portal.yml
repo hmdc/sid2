@@ -247,6 +247,6 @@ auth:
  - 'AuthType Basic'
  - 'AuthName "private"'
  - 'AuthBasicProvider dbm'
- - 'AuthDBMUserFile "/opt/rh/httpd24/root/etc/httpd/.htpasswd.dbm"'
+ - 'AuthDBMUserFile "/etc/httpd/.htpasswd.dbm"'
  - 'RequestHeader unset Authorization'
  - 'Require valid-user'

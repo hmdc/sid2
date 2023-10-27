@@ -1,13 +1,13 @@
-# OnDemand 3.0.0 + CENTOS 7
+# OnDemand 3.x + Slurm 21-08-6-1 + CentOS 7
 
 ## Build and Run
-Build the Sid based Slurm image and the new OnDemand 3.0.1 image. All these commands run on the working directory `ondemand`
+Build the Slurm cluster and the new OnDemand 3.0.1 images. All these commands run on the working directory `ondemand`
 ```
 cd ondemand
 make docker-build
 ```
 
-If you have already built the Slurm image and only the new OnDemand image is needed, execute:
+If you have already built the Slurm cluster images and only the new OnDemand 3.0.1 image is needed, execute:
 ```
 cd ondemand
 make docker-build-ood
@@ -40,5 +40,6 @@ To configure OnDemand with the FASRC and Sid profiles and features, the followin
  - apps
  - development
  - lib
+ - ondemand.d
  - public
 
