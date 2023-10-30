@@ -23,6 +23,34 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - var_lib_mysql:/var/lib/mysql
+  
+  ood:
+    image: ood_puppet:8
+    hostname: localhost
+    container_name: puppet_ood
+    privileged: true
+    cgroup: host
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - ../data:/home/ood/ondemand/data
+      - ../apache:/tmp/dashboard/files/apache
+      - ../application:/tmp/dashboard/files/application
+      - ../apps:/tmp/dashboard/files/apps
+      - ../development/RstudioDev:/tmp/dashboard/files/apps/RstudioDev
+      - ../development/rdesktop:/tmp/dashboard/files/apps/rdesktop
+      - ../lib:/tmp/dashboard/files/lib
+      - ../ondemand.d:/tmp/dashboard/files/ondemand.d
+      - ../public:/tmp/dashboard/files/public
+      - ./dev-cluster.yml:/tmp/dashboard/files/dev-cluster.yml
+      - ./data:/etc/puppetlabs/code/environments/production/data
+      - ./manifests:/etc/puppetlabs/code/environments/production/manifests
+    ports:
+      - "33000:443"
+    expose:
+      - "6817"
+      - "8080"
+      - "80"
+      - "443"
 
   slurmdbd:
     build:

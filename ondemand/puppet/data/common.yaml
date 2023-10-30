@@ -25,8 +25,9 @@ openondemand::auth_configs:
  - 'RequestHeader unset Authorization'
  - 'Require valid-user'
 
-
-openondemand::clusters:
+# BATCH CONNECT turbovnc and kvm NOT SUPPORTED BY ONDEMAND PUPPET MODULE
+# IT IS DISABLED JUST FOR REFERENCE
+openondemand::clusters_bak:
   dev-cluster:
     cluster_title: 'Example Cluster'
     login_host: slurmctld
@@ -37,6 +38,32 @@ openondemand::clusters:
     job_strict_host_checking: false
     job_lib: /usr/lib64
     job_conf: /etc/slurm/slurm.conf
+    batch_connect:
+      basic:
+        script_wrapper: |
+          %s
+        set_host: "host=$(hostname -A | awk '{print $1}')"
+      vnc:
+        script_wrapper: |
+          module purge
+          export PATH="/opt/TurboVNC/bin:$PATH"
+          export WEBSOCKIFY_CMD="/usr/bin/websockify"
+          %s
+        set_host: "host=$(hostname -A | awk '{print $1}')"
+      turbovnc:
+        script_wrapper: |
+          module purge
+          export PATH="/opt/TurboVNC/bin/:$PATH"
+          export WEBSOCKIFY_CMD="/usr/bin/websockify"
+          %s
+        set_host: "host=$(hostname -A | awk '{print $1}')"
+      kvm:
+        script_wrapper: |
+          module purge
+          export PATH="/opt/TurboVNC/bin/:$PATH"
+          export WEBSOCKIFY_CMD="/opt/websockify/bin/run"
+          %s
+        set_host: "host=$(hostname -A | awk '{print $1}')"
 
 # This is to configure app overrides
 #openondemand::apps_config_repo: 'https://github.com/AdvancedResearchComputing/OnDemandApps.git'
@@ -54,20 +81,11 @@ openondemand::install_apps:
   GenericRD:
     source: '/tmp/dashboard/files/apps/GenericRD'
     manage_package: false
-  JBrowse:
-    source: '/tmp/dashboard/files/apps/JBrowse'
-    manage_package: false
   Jupyter:
     source: '/tmp/dashboard/files/apps/Jupyter'
     manage_package: false
   Matlab:
     source: '/tmp/dashboard/files/apps/Matlab'
-    manage_package: false
-  OmniSci:
-    source: '/tmp/dashboard/files/apps/OmniSci'
-    manage_package: false
-  Postgres:
-    source: '/tmp/dashboard/files/apps/Postgres'
     manage_package: false
   RemoteDesktop:
     source: '/tmp/dashboard/files/apps/RemoteDesktop'
@@ -81,13 +99,10 @@ openondemand::install_apps:
   Stata:
     source: '/tmp/dashboard/files/apps/Stata'
     manage_package: false
-  TensorBoard:
-    source: '/tmp/dashboard/files/apps/TensorBoard'
-    manage_package: false
-  Totalview-Desktop:
-    source: '/tmp/dashboard/files/apps/Totalview-Desktop'
-    manage_package: false
   RstudioDev:
     source: '/tmp/dashboard/files/apps/RstudioDev'
+    manage_package: false
+  rdesktop:
+    source: '/tmp/dashboard/files/apps/rdesktop'
     manage_package: false
 

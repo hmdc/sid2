@@ -33,6 +33,9 @@ RUN dnf clean all && rm -rf /var/cache/dnf/*
 RUN groupadd -g $OOD_GID ood || : && \
     useradd -u $OOD_UID --create-home --gid $OOD_GID ood && \
     mkdir -p /home/ood/ondemand/data && \
+    mkdir -p /home/ood/.ssh && \
+    chmod 0700 /home/ood/.ssh && \
+    ssh-keygen -t rsa -N '' -f /home/ood/.ssh/id_rsa && \
     chown -R ${OOD_UID}:${OOD_GID} /home/ood && \
     echo -n "ood" | passwd --stdin ood
 RUN /usr/bin/htdbm -bc /etc/httpd/.htpasswd.dbm ood ood

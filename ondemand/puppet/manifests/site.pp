@@ -18,10 +18,25 @@ node default {
     recurse => 'remote',
   }
 
-    file { '/var/www/ood/public/css':
+  file { '/var/www/ood/public/css':
     ensure => directory,
     source => "${config_path}/public/css",
     recurse => 'remote',
+  }
+
+  file { "/etc/ood/config/clusters.d/dev-cluster.yml":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source => "${config_path}/dev-cluster.yml",
+    notify  => Class['openondemand::service'],
+  }
+
+  exec { 'install_ood_ssh_key':
+    command => '/usr/bin/sshpass -p ood /usr/bin/ssh-copy-id -o StrictHostKeyChecking=no -i /home/ood/.ssh/id_rsa.pub ood@slurmctld',
+    user => 'ood',
+    creates => '/home/ood/.ssh/ssh_key_installed',  # The command will only run if this file doesn't exist
   }
 
 }
