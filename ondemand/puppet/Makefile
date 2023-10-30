@@ -2,7 +2,7 @@
 all::
 
 all:: up
-.PHONY: up down network slurm puppet ssh docker_build docker_build_ood
+.PHONY: up down puppet ssh docker_build docker_build_ood
 
 OOD_UID := $(shell id -u)
 OOD_GID := $(shell id -g)
@@ -13,30 +13,10 @@ ENV := env SLURM_TAG=$(SLURM_TAG) SID_SLURM_IMAGE=$(SID_SLURM_IMAGE) OOD_UID=$(O
 
 PWD := $(shell pwd)
 
-slurm:
-	$(ENV) docker-compose down -v || :
+up: down
 	$(ENV) docker-compose up --build
 
-up:
-	rm -rf ./files/*
-	cp -r ../apache ./files
-	cp -r ../application ./files
-	cp -r ../apps ./files
-	cp -r ../development/RstudioDev ./files/apps
-	cp -r ../development/rdesktop ./files/apps
-	cp -r ../lib ./files
-	cp -r ../ondemand.d ./files
-	cp -r ../public ./files
-
-	docker run --rm --hostname localhost --name puppet_ood --privileged -v $(PWD)/../data/:/home/ood/ondemand/data -v puppet_ood_dashboard:/var/www/ood/apps/sys/dashboard -v /sys/fs/cgroup:/sys/fs/cgroup:rw -v $(PWD)/files:/tmp/dashboard/files -v $(PWD)/data:/etc/puppetlabs/code/environments/production/data -v $(PWD)/manifests:/etc/puppetlabs/code/environments/production/manifests --cgroupns=host -p 33000:443 -it ood_puppet:8
-
-network:
-	docker network connect puppet_default puppet_ood
-	docker exec -it --user ood puppet_ood ssh-keygen -t rsa -N '' -f /home/ood/.ssh/id_rsa
-	docker exec -it --user ood puppet_ood /bin/bash -c "sshpass -p ood ssh-copy-id -o StrictHostKeyChecking=no -i /home/ood/.ssh/id_rsa.pub ood@slurmctld"
-
 down:
-	docker rm -f puppet_ood
 	$(ENV) docker-compose down -v || :
 
 puppet:
