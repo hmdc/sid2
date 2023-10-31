@@ -1,42 +1,59 @@
-# Sid2 project automated tests
+# OnDemand automated tests for IQSS
+The automated tests are based on the Cypress testing tool: [https://docs.cypress.io](https://docs.cypress.io)
 
-Cypress is a testing tool [https://docs.cypress.io](https://docs.cypress.io)
+We have 2 test suites, one suite has been developed for the Sid custom dashboard and FASRC dashboard based on OnDemand version 2.0.29. This suite is called `sid`.
 
-## TL;DR
-To install the dependencies and run the tests locally run:
- * `npm install`
- * `make sid CONFIG=local`
+The second suite based on OnDemand version 3.x and the Sid and FASRC profiles. This suite is called `ondemand`
 
-## Installing testing tooling - Cypress
+The `sid` suite will deprecated and deleted once the new OnDemand environments are deployed into Staging and Production.
+
+## Installing testing tooling and dependencies - Cypress
 `npm install`
 
 ## Running tests
-To run tests against `remote-dev`, `staging`, `FASSE`, and `Cannon`, you need to connect to the VPN.
+To run tests against a remote environment, you need to be connected to the appropriate VPN, `fasrc` or `fasse`.
 
-Cypress can be configured using environment variables. We use a feature of Cypress to setup and environment file: `cypress.env.json` with environment specific configuration. In order to support the multiple Sid2 environments, we have created several configuration files for each one of them:
- * `sid/cypress.env.json.local`
- * `sid/cypress.env.json.remote-dev`
- * `sid/cypress.env.json.remote-fasse`
+Cypress can be configured using environment variables. We use a feature of Cypress to setup and environment file: `cypress.env.json` with environment specific configuration. Each `make` task that executes a test will create a copy of the enviroment specific file into the `cypress.env.json` file.
+
+### Sid Tests
+In order to support the multiple Sid2 environments, we have created several configuration files for each one of them:
+ * `sid/cypress.env.json.local` - to be removed.
+ * `sid/cypress.env.json.remote-dev` - to be removed.
+ * `sid/cypress.env.json.remote-fasse` - to be removed.
  * `sid/cypress.env.json.staging-cannon`
  * `sid/cypress.env.json.staging-fasse`
  * `sid/cypress.env.json.prod-cannon`
  * `sid/cypress.env.json.prod-fasse`
 
- Each `make` task that executes a test will create a copy of the enviroment specific file as `cypress.env.json`
  The following `make` tasks will execute the tests locally against each environment using a Cypress runtime to run the tests:
-  * `make sid CONFIG=local`
-  * `make sid CONFIG=remote-dev`
-  * `make sid CONFIG=remote-fasse`
+  * `make sid CONFIG=local` - to be removed.
+  * `make sid CONFIG=remote-dev` - to be removed.
+  * `make sid CONFIG=remote-fasse` - to be removed.
   * `make sid CONFIG=staging-cannon`
   * `make sid CONFIG=staging-fasse`
   * `make sid CONFIG=prod-cannon`
   * `make sid CONFIG=prod-fasse`
 
-  There is a special make task that is used to run the tests within GitHub action: `make test`  
-  This task will first start the Sid Dashboard in the local Docker environment and then run the tests against it.
+  There is a special make task that is used to run the tests within a GitHub action for the Sid2 project: `make test`  
+  This task will first start the Sid custom Dashboard in the local Docker environment and then run the tests against it.
 
-### Sid Dashboard Credentials
-In order to connect to the Sid dashboard, we need to provide the automated tests with credentials. We can set environment variables or a credentials file. The environment variables are:
+### OnDemand Tests
+In order to support the multiple OnDemand environments, we have created several configuration files for each one of them:
+ * `ondemand/cypress.env.json.local` - to be removed.
+ * `ondemand/cypress.env.json.staging-cannon`
+ * `ondemand/cypress.env.json.staging-fasse`
+ * `ondemand/cypress.env.json.prod-cannon` - to be created after staging deployment.
+ * `ondemand/cypress.env.json.prod-fasse` - to be created after staging deployment.
+
+The following `make` tasks will execute the tests locally against each environment using a Cypress runtime to run the tests:
+  * `make ondemand CONFIG=local` - to be removed.
+  * `make ondemand CONFIG=staging-cannon`
+  * `make ondemand CONFIG=staging-fasse`
+  * `make ondemand CONFIG=prod-cannon`
+  * `make ondemand CONFIG=prod-fasse`
+
+### Dashboard Credentials
+In order to connect to the dashboard, we need to provide the automated tests with credentials. We can set environment variables or a credentials file. The environment variables are:
  * `OOD_USERNAME`
  * `OOD_PASSWORD`
 
@@ -50,29 +67,32 @@ In order to connect to the Sid dashboard, we need to provide the automated tests
 }
 ```
 
-For the local environment: `sid/cypress.env.json.local`, the credentials are already configured.
+For all the local environments, the credentials are already configured in the environment configuration.
 
 ## CLI
 We can run `Cypress` through `npm`, a `cypress` script was added to the `package.json` file.  
 The `--` parameter is added to pass parameters from the command line to the executed script through npm.
+
+When using the `Cypress` CLI, please ensure that the right environment has been copied into `cypress.env.json` file.
 
 ```
 Opening Cypress UI
 npm run cypress -- open
 
 Running all tests inside a folder
-npm run cypress -- run --spec "cypress/integration/sid-dashboard/*"
+npm run cypress -- run --spec "cypress/e2e/sid-dashboard/*"
 
 Running an individual test
-npm run cypress -- run --spec "cypress/integration/sid-dashboard/footer.spec.js"
+npm run cypress -- run --spec "cypress/e2e/sid-dashboard/footer.spec.js"
+npm run cypress -- run --spec "cypress/e2e/ondemand/supportticket.cy.js"
 
 Running with other browsers
 npm run cypress -- run --browser chrome"
 ```
 
 ## Tests and Configuration
-Tests are located under: `cypress/integration/*`  
-General constants and utilites: `cypress/support/base.js`  
+Tests are located under: `cypress/e2e/*`  
+General constants and utilites: `cypress/support/base.js` and `cypress/support/utils/*`  
 Reading credentials utility: `cypress/plugins/index.js`  
 Cypress API reference: [https://docs.cypress.io/api/table-of-contents](https://docs.cypress.io/api/table-of-contents)
 

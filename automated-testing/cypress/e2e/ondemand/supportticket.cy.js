@@ -42,6 +42,8 @@ describe('OnDemand Dashboard - Support Ticket', () => {
   
       assertForm(true)
   
+      // VALIDATE THAT THE SUPPORT TICKET FORM HAS THE SELECTED SESSION
+      cy.get('form#new_support_ticket input[type=hidden]#support_ticket_session_id').should('have.length', 1)
       cy.get('form#new_support_ticket input#support_ticket_session_description').should(($input) => {
         const val = $input.val()
         expect(val).to.include('running')

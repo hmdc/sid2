@@ -99,6 +99,9 @@ openondemand::install_apps:
   Stata:
     source: '/tmp/dashboard/files/apps/Stata'
     manage_package: false
+  HeavyAI:
+    source: '/tmp/dashboard/files/apps/HeavyAI'
+    manage_package: false
   RstudioDev:
     source: '/tmp/dashboard/files/apps/RstudioDev'
     manage_package: false
