@@ -12,16 +12,11 @@ node default {
     require => File['/var/www/ood/apps/sys/dashboard'],
   }
 
-  file { '/var/www/ood/public/images':
+  file { '/var/www/ood/public/static':
     ensure => directory,
-    source => "${config_path}/public/images",
+    source => "${config_path}/public/static",
     recurse => 'remote',
-  }
-
-  file { '/var/www/ood/public/css':
-    ensure => directory,
-    source => "${config_path}/public/css",
-    recurse => 'remote',
+    require => File['/var/www/ood/public'],
   }
 
   file { "/etc/ood/config/clusters.d/dev-cluster.yml":

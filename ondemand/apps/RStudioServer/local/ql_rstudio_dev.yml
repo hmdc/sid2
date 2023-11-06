@@ -2,7 +2,7 @@
 cluster: "dev-cluster"
 tile:
   title: "Run RStudio Server"
-  icon: "/public/images/rstudio_logo.png"
+  icon: "/public/static/images/rstudio_logo.png"
   sub_caption: |
     2 CPU cores and 4GB RAM
     8 hours job run time

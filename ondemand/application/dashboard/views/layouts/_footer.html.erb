@@ -15,7 +15,7 @@
       <%= content_tag(
             :img,
             "",
-            src: "/public/images/fasrc_logo.jpg",
+            src: "/public/static/images/fasrc_logo.jpg",
             class: "footer-logo img-responsive center-block",
             alt: "FASRC",
             height: "40",
@@ -28,7 +28,7 @@
       <%= content_tag(
             :img,
             "",
-            src: "/public/images/iqss_logo.png",
+            src: "/public/static/images/iqss_logo.png",
             class: "footer-logo img-responsive center-block",
             alt: "IQSS",
             height: "40",
@@ -40,7 +40,6 @@
     <span class="footer_version">You are on <%= `hostname` %></span>
   </div>
   <div class="p-4">
-    <span class="footer_version">OnDemand version: <%= Configuration.ood_version %></span><br />
-    <span class="footer_version">Config version: <%= Configuration.app_version %></span>
+    <span class="footer_version">OnDemand version: <%= Configuration.ood_version %></span>
   </div>
 </footer>
