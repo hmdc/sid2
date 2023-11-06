@@ -14,7 +14,7 @@ pinned_apps_group_by: "category"
 pinned_apps:
   - sys/Jupyter/main
   - sys/Matlab/main
-  - sys/RStudioServer/main*
+  - sys/RStudioServer/main
   - sys/RemoteDesktop/main
   - sys/SAS/main
   - sys/Stata/main

@@ -1,0 +1,28 @@
+---
+token: "sys/RemoteDesktop/main"
+order: 20
+tile:
+  title: "Run Remote Desktop"
+  icon: "/public/images/desktop_logo.svg"
+  sub_caption: |
+    2 CPU core and 4GB RAM
+    8 hours job run time
+    Cannon cluster
+attributes:
+  bc_vnc_idle: 0
+  desktop: "myxfce"
+  node_type: null
+  bc_queue: "test"
+  bc_account: ""
+  bc_num_slots: null
+  bc_num_hours: null
+  custom_memory_per_node: "4"
+  custom_num_cores: "2"
+  custom_num_gpus: "0"
+  custom_time: "08:00:00"
+  custom_email_address: ""
+  bc_email_on_started: "0"
+  custom_reservation: ""
+  bc_vnc_resolution: "1024x768"
+  custom_desktop: "1"
+  extra_slurm: ""

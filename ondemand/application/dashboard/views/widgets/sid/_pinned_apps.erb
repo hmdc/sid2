@@ -1,0 +1,68 @@
+<%-
+  launchers = []
+  launchers_path = ::Configuration.config_root.join("views", "widgets", "sid", "launchers")
+  if launchers_path.directory? && launchers_path.readable?
+    # LOAD LAUNCHER YAML CONFIG FILES
+    launchers_path.children.select{|p| p.to_s.end_with? '.yml' }.each do |launcher_file|
+      launcher_config = YAML.safe_load(launcher_file.read).to_h.deep_symbolize_keys
+
+      # A VALID TOKEN IS REQUIRED
+      ood_app = BatchConnect::App.from_token(launcher_config[:token] || "")
+      next if !ood_app.valid?
+      # ADD DEFAULT CLUSTER IF NOT PROVIDED
+      launcher_config[:attributes][:cluster] = ood_app.clusters.first.id.to_s if ood_app.clusters.any?
+      link = ood_app.link
+      params = ood_app.attributes.map{|attribute| ["batch_connect_session_context[#{attribute.id}]", launcher_config[:attributes].fetch(attribute.id.to_sym, '')]}.to_h
+
+      launcher_config[:link] = link
+      launcher_config[:params] = params
+
+      launchers.push launcher_config
+    end
+  end
+
+  launchers = launchers.sort_by { |l| l[:order] ||  999999 }
+-%>
+
+<h3><%= t('dashboard.pinned_apps_title') %> <small><%= t('dashboard.pinned_apps_caption_html', all_apps_url: apps_index_path) %></small></h3>
+
+<div class="row">
+  <%- launchers.each do |launcher| -%>
+  <%- token = launcher[:token] -%>
+  <%- link = launcher[:link] -%>
+  <%- tile_data = launcher[:tile] -%>
+  <%- params = launcher[:params] -%>
+
+  <div class="col-sm-3 col-md-3 app-launcher-container">
+    <div class="app-launcher app-launcher-hover" data-toggle="<%= link.new_tab? ? '' : 'launcher-button' %>">
+    <%=
+      button_to(
+        batch_connect_session_contexts_path(token: token),
+        class: ['launcher-click', tile_data[:border_color]],
+        method: 'post',
+        params: params
+      ) do
+    %>
+    <!-- CONTENT -->
+        <div class="center-block text-center">
+          <%= icon_tag(URI(tile_data.fetch(:icon, link.icon_uri).to_s)) %>
+          <%= content_tag(:p, tile_data.fetch(:title, link.title), class: "app-title") %>
+
+          <% if tile_data.blank? %>
+            <%= content_tag(:p, content_tag(:span, link.caption), class: "text-muted mt-1") if link.caption %>
+          <% else %>
+            <div class="mt-2 mb-1">
+              <%- tile_data.fetch(:sub_caption, "").each_line do |line| -%>
+                <%= content_tag(:p, line, class: "app-description text-muted") %>
+              <%- end -%>
+            </div>
+          <% end %>
+        </div>
+    <!-- CONTENT -->
+
+    <% end %>
+    </div>
+  </div><!-- app-launcher-container -->
+   <!-- END LAUNCHERS -->
+  <%- end -%>
+</div><!-- ROW -->

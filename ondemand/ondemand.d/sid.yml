@@ -58,7 +58,7 @@ profiles:
               widgets:
                 - "sid/welcome_message"
                 - "sessions"
-                - "pinned_apps"
+                - "sid/pinned_apps"
                 - "sid/quick_links"
                 - "sid/docs"
 

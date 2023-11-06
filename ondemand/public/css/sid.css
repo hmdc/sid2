@@ -97,17 +97,17 @@ div.welcome-message span {
     font-weight: 300;
 }
 
-div.app-launcher-container a.launcher-click p {
+div.app-launcher-container .launcher-click p {
     margin: 0;
     padding-left: 10px;
     text-align: left;
 }
 
-div.app-launcher-container a.launcher-click div.mt-2.mb-1 {
+div.app-launcher-container .launcher-click div.mt-2.mb-1 {
     margin-top: 0 !important;
 }
 
-div.app-launcher-container a.launcher-click p.app-title {
+div.app-launcher-container .launcher-click p.app-title {
     margin-top: 10px;
 }
 

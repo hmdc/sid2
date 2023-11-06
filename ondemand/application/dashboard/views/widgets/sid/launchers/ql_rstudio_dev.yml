@@ -1,0 +1,23 @@
+---
+token: "sys/RStudioServer/main"
+order: 10
+tile:
+  title: "Run RStudio Server"
+  icon: "/public/images/rstudio_logo.png"
+  sub_caption: |
+    2 CPU cores and 4GB RAM
+    8 hours job run time
+    Cannon cluster
+attributes:
+  modules: ""
+  bc_queue: "test"
+  bc_account: ""
+  custom_memory_per_node: "4"
+  custom_num_cores: "2"
+  custom_num_gpus: "0"
+  custom_time: "08:00:00"
+  custom_email_address: ""
+  bc_email_on_started: "0"
+  custom_reservation: ""
+  r_version: "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_16.sif"
+  custom_vanillaconf: "1"
