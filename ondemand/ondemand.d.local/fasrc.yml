@@ -12,14 +12,20 @@ disable_dashboard_welcome_message: true
 
 pinned_apps_group_by: "category"
 pinned_apps:
-  - sys/Jupyter
-  - sys/Matlab
-  - sys/RStudioServer
-  - sys/RemoteDesktop
-  - sys/SAS
-  - sys/Stata
+  - sys/Jupyter/main
+  - sys/Matlab/main
+  - sys/RStudioServer/main
+  - sys/RemoteDesktop/main
+  - sys/SAS/main
+  - sys/Stata/main
 
-nav_categories: ["Clusters", "Files", "Jobs", "Interactive Apps" ]
+nav_bar:
+  - "clusters"
+  - "files"
+  - "jobs"
+  - title: "Interactive Apps"
+    apps: "*"
+  - "sessions"
 
 dashboard_layout:
   rows:

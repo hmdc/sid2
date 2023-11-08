@@ -75,7 +75,7 @@ openondemand::confs:
   fasrc:
     content_template: '/tmp/dashboard/files/ondemand.d/fasrc.yml'
   support_ticket:
-    content_template: '/tmp/dashboard/files/ondemand.d/support_ticket.yml'
+    content_template: '/tmp/dashboard/files/ondemand.d/support_ticket.yml.erb'
 
 openondemand::install_apps:
   GenericRD:
@@ -108,4 +108,3 @@ openondemand::install_apps:
   rdesktop:
     source: '/tmp/dashboard/files/apps/rdesktop'
     manage_package: false
-

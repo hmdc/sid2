@@ -1,5 +1,10 @@
 
 node default {
+  $rt_server= "http://rt:34000"
+  $rt_queues= ["General", "Internal:Logging"]
+  $rt_api_user= "root"
+  $rt_api_pass= "password"
+
   include openondemand
 
   $config_path = 'file:///tmp/dashboard/files'

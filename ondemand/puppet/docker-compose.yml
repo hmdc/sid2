@@ -39,7 +39,7 @@ services:
       - ../development/RstudioDev:/tmp/dashboard/files/apps/RstudioDev
       - ../development/rdesktop:/tmp/dashboard/files/apps/rdesktop
       - ../lib:/tmp/dashboard/files/lib
-      - ../ondemand.d:/tmp/dashboard/files/ondemand.d
+      - ../ondemand.d.local:/tmp/dashboard/files/ondemand.d
       - ../public:/tmp/dashboard/files/public
       - ./dev-cluster.yml:/tmp/dashboard/files/dev-cluster.yml
       - ./data:/etc/puppetlabs/code/environments/production/data
