@@ -73,7 +73,7 @@ openondemand::confs:
   sid:
     content_template: '/tmp/dashboard/files/ondemand.d/sid.yml'
   fasrc:
-    content_template: '/tmp/dashboard/files/ondemand.d/fasrc.yml'
+    content_template: '/tmp/dashboard/files/ondemand.d/fasrc.yml.erb'
   support_ticket:
     content_template: '/tmp/dashboard/files/ondemand.d/support_ticket.yml.erb'
 
@@ -108,3 +108,10 @@ openondemand::install_apps:
   rdesktop:
     source: '/tmp/dashboard/files/apps/rdesktop'
     manage_package: false
+
+#CANNON COLORS
+ood_bg_color: "rgb(157,47,60)"
+ood_active_bg_color: "rgb(59, 61, 63)"
+#FASSE COLORS
+ood_bg_color: "rgb(137,160,180)"
+ood_active_bg_color: ""

@@ -1,15 +1,15 @@
 ---
 support_ticket:
   rt_api:
-    server: "<%= scope.lookupvar('rt_server') %>"
-    user: "<%= scope.lookupvar('rt_api_user') %>"
-    pass: "<%= scope.lookupvar('rt_api_pass') %>"
-<% if scope.lookupvar('rt_queues').length -%>
+    server: "<%= @rt_server %>"
+    user: "<%= @rt_api_user %>"
+    pass: "<%= @rt_api_pass %>"
+<% if @rt_queues.length -%>
   queues:
-<% scope.lookupvar('rt_queues').each do |queue| -%>
+<% @rt_queues.each do |queue| -%>
     - "<%= queue %>"
 <% end -%>
 <% end -%>
-<% unless scope.lookupvar('proxy_server').nil? -%>
-  proxy: "<%= scope.lookupvar('proxy_server') %>"
+<% unless @proxy_server.nil? -%>
+  proxy: "<%= @proxy_server %>"
 <% end -%>

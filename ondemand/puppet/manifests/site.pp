@@ -1,9 +1,12 @@
 
 node default {
-  $rt_server= "http://rt:34000"
-  $rt_queues= ["General", "Internal:Logging"]
-  $rt_api_user= "root"
-  $rt_api_pass= "password"
+  
+  $rt_server = 'http://rt:34000' 
+  $rt_queues = ['General', 'Internal:Logging']
+  $rt_api_user = 'root'
+  $rt_api_pass = 'password'
+  $ood_bg_color = hiera('ood_bg_color')
+  $ood_active_bg_color = hiera('ood_active_bg_color')
 
   include openondemand
 
