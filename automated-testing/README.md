@@ -1,11 +1,13 @@
 # OnDemand automated tests for IQSS
 The automated tests are based on the Cypress testing tool: [https://docs.cypress.io](https://docs.cypress.io)
 
-We have 2 test suites, one suite has been developed for the Sid custom dashboard and FASRC dashboard based on OnDemand version 2.0.29. This suite is called `sid`.
+We have 3 test suites, one suite has been developed for the Sid custom dashboard and FASRC dashboard based on OnDemand version 2.0.29. This suite is called `sid`.
 
-The second suite based on OnDemand version 3.x and the Sid and FASRC profiles. This suite is called `ondemand`
+The second suite based on OnDemand version 3.x with the old FASRC configuration. This suite is called `fasrcv3`
 
-The `sid` suite will deprecated and deleted once the new OnDemand environments are deployed into Staging and Production.
+The third suite based on OnDemand version 3.x and the Sid and FASRC profiles. This suite is called `ondemand`
+
+The `sid` and `fasrcv3` suites will deprecated and deleted once the new OnDemand environments are deployed into Staging and Production.
 
 ## Installing testing tooling and dependencies - Cypress
 `npm install`
@@ -37,7 +39,7 @@ In order to support the multiple Sid2 environments, we have created several conf
   There is a special make task that is used to run the tests within a GitHub action for the Sid2 project: `make test`  
   This task will first start the Sid custom Dashboard in the local Docker environment and then run the tests against it.
 
-### OnDemand Tests
+### FASRCv3 and OnDemand Tests
 In order to support the multiple OnDemand environments, we have created several configuration files for each one of them:
  * `ondemand/cypress.env.json.local` - to be removed.
  * `ondemand/cypress.env.json.staging-cannon`
@@ -45,12 +47,19 @@ In order to support the multiple OnDemand environments, we have created several 
  * `ondemand/cypress.env.json.prod-cannon` - to be created after staging deployment.
  * `ondemand/cypress.env.json.prod-fasse` - to be created after staging deployment.
 
-The following `make` tasks will execute the tests locally against each environment using a Cypress runtime to run the tests:
+The following `make` tasks will execute the tests for FASRC v3:
+  * `make fasrcv3 CONFIG=staging-cannon`
+  * `make fasrcv3 CONFIG=staging-fasse`
+  * `make fasrcv3 CONFIG=prod-cannon` - to be created.
+  * `make fasrcv3 CONFIG=prod-fasse` - to be created.
+
+The following `make` tasks will execute the tests for OnDemand v3 with the FASRC and Sid profiles against the different environments:
   * `make ondemand CONFIG=local` - to be removed.
   * `make ondemand CONFIG=staging-cannon`
   * `make ondemand CONFIG=staging-fasse`
-  * `make ondemand CONFIG=prod-cannon`
-  * `make ondemand CONFIG=prod-fasse`
+  * `make ondemand CONFIG=prod-cannon` - to be created.
+  * `make ondemand CONFIG=prod-fasse` - to be created.
+
 
 ### Dashboard Credentials
 In order to connect to the dashboard, we need to provide the automated tests with credentials. We can set environment variables or a credentials file. The environment variables are:

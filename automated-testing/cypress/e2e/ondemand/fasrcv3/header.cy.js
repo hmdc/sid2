@@ -1,14 +1,12 @@
 import { NAVIGATION, loadHomepage } from "../../../support/utils/navigation.js";
-import { changeProfile } from "../../../support/utils/profiles.js";
 
 describe('FASRC Dashboard - Header', () => {
 
-  const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrc_dashboard_applications').includes(l.id))
+  const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrcv3_dashboard_applications').includes(l.id))
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
     loadHomepage()
-    changeProfile('FASRC')
   })
 
   beforeEach(() => {
@@ -25,7 +23,7 @@ describe('FASRC Dashboard - Header', () => {
       })
       .find('img').should($imageElement => {
         expect($imageElement).to.have.length(1)
-        expect($imageElement.attr('src')).to.match(/.*fasrc_logo.png$/i)
+        expect($imageElement.attr('src')).to.match(/.*logo_small_fasrc.png$/i)
       })
   })
 
@@ -98,22 +96,11 @@ describe('FASRC Dashboard - Header', () => {
   it('Should display Help links', () => {
     cy.get('nav li[title="Help"] ul.dropdown-menu').as('helpMenu')
     cy.get('@helpMenu').find('a').should($helpLinks => {
-      //SUPPORT TICKET IS FIRST ITEM INSIDE HELP MENU
-      expect($helpLinks.first().text().trim()).to.match(/submit support ticket/i)
-      expect($helpLinks.first().attr('href')).to.match(/support$/)
-    })
+      expect($helpLinks.eq(0).text().trim()).to.match(/contact support/i)
+      expect($helpLinks.eq(0).attr('href')).to.eq('https://docs.rc.fas.harvard.edu/kb/support/')
 
-    // PROFILE LINKS
-    cy.get('@helpMenu').find('li.dropdown-header').should($profileHeaderElement => {
-      expect($profileHeaderElement.text().trim()).to.match(/interface/i)
-    })
-    cy.get('@helpMenu').find('a[title="FASRC"]').should($profileLinkElement => {
-      expect($profileLinkElement.text().trim()).to.match(/fasrc/i)
-      expect($profileLinkElement.attr('href')).to.match(new RegExp('/settings.*fasrc', 'i'))
-    })
-    cy.get('@helpMenu').find('a[title="Sid"]').should($profileLinkElement => {
-      expect($profileLinkElement.text().trim()).to.match(/sid/i)
-      expect($profileLinkElement.attr('href')).to.match(new RegExp('/settings.*sid', 'i'))
+      expect($helpLinks.eq(1).text().trim()).to.match(/change hpc password/i)
+      expect($helpLinks.eq(1).attr('href')).to.eq('https://portal.rc.fas.harvard.edu/pwreset/')
     })
   })
 

@@ -36,9 +36,16 @@ test:
 	docker run --rm --network=host -v $(WORKING_DIR):/usr/local/app -v /usr/local/app/node_modules -w /usr/local/app --env cypress_dashboard_username=$$OOD_USERNAME --env cypress_dashboard_password=$$OOD_PASSWORD $(DOCKER_CYPRESS_IMAGE) /bin/bash -c "npm install && ./node_modules/.bin/cypress run --headless --spec cypress/e2e/fasrc-dashboard/*,cypress/e2e/sid-dashboard/*" || :
 	cd ../dashboard/ && make down
 
+fasrcv3:
+	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
+	cp -rf ./ondemand/cypress.env.json.$(CONFIG) cypress.env.json
+	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/ondemand/fasrcv3/*.cy.js"
+
 ondemand:
+	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
 	cp -rf ./ondemand/cypress.env.json.$(CONFIG) cypress.env.json
 	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/ondemand/**/*.cy.js"
+
 
 ondemand-test:
 	cd ../ondemand/ && DETACHED=true make

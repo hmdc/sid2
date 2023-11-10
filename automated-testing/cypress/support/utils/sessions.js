@@ -35,7 +35,7 @@ export const startDevSession = () => {
   cy.get('div.session-panel[data-id] div.card-heading div.float-right', { timeout: longRunningTimeout }).should('contain.text', 'Running')
 }
 
-export const checkSession = app => {
+export const checkSession = (app, supportTicketEnabled=true) => {
   //THERE SHOULD BE ONLY CURRENT SESSION RUNNING
   // CALL cleanupSessions BEFORE STARTING THE CURRENT ONE
   const longRunningTimeout = cy.sid.timeout
@@ -54,7 +54,9 @@ export const checkSession = app => {
     expect(titlesArray).to.contain('created at:')
     expect(titlesArray).to.contain('time remaining:')
     expect(titlesArray).to.contain('session id:')
-    expect(titlesArray).to.contain('problems with this session?')
+    if (supportTicketEnabled) {
+      expect(titlesArray).to.contain('problems with this session?')
+    }
   })
 }
 
