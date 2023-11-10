@@ -1,5 +1,5 @@
 ---
-token: "sys/RStudioServer"
+token: "sys/RStudioServer/main"
 order: 10
 tile:
   title: "Run RStudio Server"

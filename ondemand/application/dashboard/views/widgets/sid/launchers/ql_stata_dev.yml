@@ -1,5 +1,5 @@
 ---
-token: "sys/Stata/main"
+token: "sys/Stata"
 order: 60
 tile:
   title: "Run Stata"

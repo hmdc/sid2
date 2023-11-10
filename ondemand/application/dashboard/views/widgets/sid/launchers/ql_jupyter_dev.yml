@@ -1,5 +1,5 @@
 ---
-token: "sys/Jupyter/main"
+token: "sys/Jupyter"
 order: 30
 tile:
   title: "Run Jupyter notebook / Jupyterlab"

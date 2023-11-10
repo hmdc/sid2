@@ -1,5 +1,5 @@
 ---
-token: "sys/Matlab/main"
+token: "sys/Matlab"
 order: 40
 tile:
   title: "Run Matlab"

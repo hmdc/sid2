@@ -1,5 +1,5 @@
 ---
-token: "sys/SAS"
+token: "sys/SAS/main"
 order: 50
 tile:
   title: "Run SAS"

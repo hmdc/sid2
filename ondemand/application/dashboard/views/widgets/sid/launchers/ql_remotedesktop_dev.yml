@@ -1,5 +1,5 @@
 ---
-token: "sys/RemoteDesktop/main"
+token: "sys/RemoteDesktop"
 order: 20
 tile:
   title: "Run Remote Desktop"
