@@ -1,0 +1,42 @@
+host_based_profiles: false
+disable_dashboard_logo: false
+show_all_apps_link: false
+
+show_all_apps_link: false
+cancel_session_enabled: true
+navbar_type: dark
+# dashboard_title property does not work yet
+# It requires a new change to the OnDemand Puppet Module. PR raised. 
+dashboard_title: FASSE
+dashboard_header_img_logo: "/public/static/images/fasrc_logo.png"
+brand_bg_color: "rgb(137,160,180)"
+brand_link_active_bg_color: "rgb(0,0,0)"
+disable_dashboard_welcome_message: true
+
+pinned_apps_group_by: "category"
+pinned_apps:
+  - sys/Jupyter
+  - sys/Matlab
+  - sys/RStudioServer
+  - sys/RemoteDesktop
+  - sys/SAS
+  - sys/Stata
+
+nav_categories: ["Clusters", "Files", "Jobs", "Interactive Apps" ]
+
+dashboard_layout:
+  rows:
+    - columns:
+        - width: 10
+          widgets:
+            - "pinned_apps"
+            - "motd"
+
+help_menu:
+  - group: "Interface"
+  - title: "FASSE"
+    profile: "fasse"
+    icon: "/public/static/images/fasrc_logo.jpg"
+  - title: "Sid"
+    profile: "sid"
+    icon: "/public/static/images/sid_logo.png"

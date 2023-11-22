@@ -1,0 +1,7 @@
+openondemand::confs:
+  sid:
+    content_template: '/tmp/dashboard/files/ondemand.d/sid.yml'
+  fasse:
+    content_template: '/tmp/dashboard/files/ondemand.d/fasse.yml'
+  support_ticket:
+    content_template: '/tmp/dashboard/files/ondemand.d/support_ticket.yml.erb'

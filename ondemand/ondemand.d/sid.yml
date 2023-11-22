@@ -4,6 +4,9 @@ profiles:
     announcement_path: "/etc/ood/config/announcement.sid.d/"
 
     navbar_type: default
+    # dashboard_title property does not work yet
+    # It requires a new change to the OnDemand Puppet Module. PR raised. 
+    dashboard_title: Sid
     dashboard_header_img_logo: "/public/static/images/sid_logo.png"
     brand_bg_color: "#F0F0F0"
     brand_link_active_bg_color: "#3B3D3F"
