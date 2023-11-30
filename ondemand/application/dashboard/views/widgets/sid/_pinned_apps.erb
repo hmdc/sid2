@@ -9,8 +9,13 @@
       # A VALID TOKEN IS REQUIRED
       ood_app = BatchConnect::App.from_token(launcher_config[:token] || "")
       next if !ood_app.valid?
-      # ADD DEFAULT CLUSTER IF NOT PROVIDED
-      launcher_config[:attributes][:cluster] = ood_app.clusters.first.id.to_s if ood_app.clusters.any?
+      # ADD FIRST CLUSTER AS DEFAULT VALUE
+      selected_cluster = ood_app.clusters.first.id.to_s if ood_app.clusters.any?
+      # OVERRIDE THE CLUSTER IF SET AS A LAUNCHER CONFIGURATION
+      selected_cluster = launcher_config[:cluster] if launcher_config[:cluster]
+      # VALIDATE CLUSTER
+      next if ood_app.clusters.map{ |c| c.id.to_s }.select{|id| id.casecmp?(selected_cluster) }.empty?
+      launcher_config[:attributes][:cluster] = selected_cluster
       link = ood_app.link
       params = ood_app.attributes.map{|attribute| ["batch_connect_session_context[#{attribute.id}]", launcher_config[:attributes].fetch(attribute.id.to_sym, '')]}.to_h
 
