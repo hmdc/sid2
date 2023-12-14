@@ -64,7 +64,7 @@ export const deleteSession = sessionId => {
   cy.on('window:confirm',function(confirmationText){
     expect(confirmationText).to.contain('Are you sure')
   })
-  cy.log(`Deleting session: ${sessionId}`)
+  cy.task('log', `Deleting session: ${sessionId}`)
   cy.get(`div#batch_connect_sessions div[data-id="${sessionId}"]`).should('be.visible')
   cy.get(`div#batch_connect_sessions div[data-id="${sessionId}"]`).then($session => {
     if ($session.find('div button.btn-cancel').length > 0) {
@@ -89,7 +89,7 @@ export const cleanupSessions = () => {
       return
     }
 
-    cy.log(`sessions to cancel: ${$sessions.length}`)
+    cy.task('log', `sessions to cancel: ${$sessions.length}`)
     const sessionId = $sessions.first().attr('data-id')
     deleteSession(sessionId)
 

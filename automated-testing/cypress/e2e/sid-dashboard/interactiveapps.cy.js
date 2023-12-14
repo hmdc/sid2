@@ -7,7 +7,7 @@ describe('Sid Dashboard - Interactive Apps', () => {
   Cypress.config('baseUrl', baseUrl);
 
   const cancelSession = sessionId => {
-    cy.log(`Deleting session: ${sessionId}`)
+    cy.task('log', `Deleting session: ${sessionId}`)
     cy.get(`div[data-toggle="poll"].sessions > div#${sessionId}`).should('be.visible')
     cy.get(`div[data-toggle="poll"].sessions > div#${sessionId}`).find('div a.btn-terminate').click()
     cy.get('div.modal-dialog div.modal-body').should('contain.text', 'Are you sure')

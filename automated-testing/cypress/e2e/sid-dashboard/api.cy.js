@@ -63,7 +63,6 @@ describe('Sid Dashboard - API', () => {
   }
 
   const checkInteractiveSession = (sessionId, launcherInfo) => {
-    cy.log(`Requesting sessionId: ${sessionId}`)
     cy.task('log', `Requesting sessionId: ${sessionId}`)
     cy.request(configureRequest(`/ws/sessions/${sessionId}`))
     .then(getSessionResponse => {
@@ -77,7 +76,6 @@ describe('Sid Dashboard - API', () => {
   }
 
   const deleteInteractiveSession = sessionId => {
-    cy.log(`Deleting sessionId: ${sessionId}`)
     cy.task('log', `Deleting sessionId: ${sessionId}`)
     cy.request(configureRequest(`/ws/sessions/${sessionId}`, 'DELETE'))
     .then(deleteResponse => {
@@ -123,7 +121,6 @@ describe('Sid Dashboard - API', () => {
     cy.request(configureRequest('/ws/launchers'))
     .then(launchersResponse => {
       const launcherInfo = launchersResponse.body.items.filter(l => l.metadata.operational)[0]
-      cy.log(`Creating session for: ${launcherInfo.metadata.id}`)
       cy.task('log', `Creating session for: ${launcherInfo.metadata.id}`)
       cy.request(configureRequest('/ws/sessions', 'POST', launcherInfo.form))
       .then(createResponse => {
@@ -183,7 +180,6 @@ describe('Sid Dashboard - API', () => {
     cy.request(configureRequest('/ws/launchers'))
     .then(launchersResponse => {
       const launcherInfo = launchersResponse.body.items.filter(l => l.metadata.operational)[0]
-      cy.log(`Creating session for: ${launcherInfo.metadata.id}`)
       cy.task('log', `Creating session for: ${launcherInfo.metadata.id}`)
       cy.request(configureRequest('/ws/sessions', 'POST', launcherInfo.form))
       .then(createResponse => {

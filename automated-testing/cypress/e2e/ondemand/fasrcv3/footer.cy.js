@@ -11,6 +11,12 @@ describe('OnDemand Dashboard - Footer', () => {
     loadHomepage()
   })
 
+  it('FASRC: display version and host', () => {
+    cy.get('footer').then($versions => {
+        cy.task('log', `Version and Host: ${$versions.eq(0).text().trim()}`)
+      })
+  })
+
   it('FASRC: Should display footer expected logos with link', () => {
     cy.get('footer a').should($logos => {
         expect($logos).to.have.length(1)

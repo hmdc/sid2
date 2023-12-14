@@ -8,7 +8,7 @@ describe('Sid Dashboard - Homepage', () => {
   Cypress.config('baseUrl', baseUrl);
   
   const cancelSession = sessionId => {
-    cy.log(`Deleting session: ${sessionId}`)
+    cy.task('log', `Deleting session: ${sessionId}`)
     cy.get(`div#sessions-container > div#${sessionId}`).should('be.visible')
     cy.get(`div#sessions-container > div#${sessionId}`).find('div a.btn-terminate').click()
     cy.get('div.modal-dialog div.modal-body').should('contain.text', 'Are you sure')
@@ -24,7 +24,7 @@ describe('Sid Dashboard - Homepage', () => {
         return
       }
 
-      cy.log(`sessions to cancel: ${numberOfSessions}`)
+      cy.task('log', `sessions to cancel: ${numberOfSessions}`)
       const sessionId = $sessionsContainer.children().first().attr('id')
       cancelSession(sessionId)
 

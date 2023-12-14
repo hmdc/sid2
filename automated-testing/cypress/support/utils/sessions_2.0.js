@@ -18,7 +18,7 @@ export const checkSession = app => {
 }
 
 export const deleteSession = sessionId => {
-  cy.log(`Deleting session: ${sessionId}`)
+  cy.task('log', `Deleting session: ${sessionId}`)
   cy.get(`div[data-toggle="poll"].sessions > div#${sessionId}`).should('be.visible')
   cy.get(`div[data-toggle="poll"].sessions > div#${sessionId}`).find('div a.btn-delete').click()
   cy.get('div.modal-dialog div.modal-body').should('contain.text', 'Are you sure')
