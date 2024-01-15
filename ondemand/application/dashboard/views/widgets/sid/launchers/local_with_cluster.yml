@@ -1,0 +1,17 @@
+---
+token: "sys/RstudioDev"
+cluster: "dev-cluster"
+order: 1
+tile:
+  title: "Run RStudio CLUSTER"
+  icon: "/public/static/images/rstudio_logo.png"
+  sub_caption: |
+    1 CPU cores and 4GB RAM
+    1 hours job run time
+    Local cluster
+attributes:
+  bc_queue: ""
+  bc_account: ""
+  bc_email_on_started: ""
+  bc_num_hours: ""
+  bc_num_slots: ""
