@@ -45,13 +45,13 @@ In order to support the multiple OnDemand environments, we have created several 
  * `ondemand/cypress.env.json.staging-cannon`
  * `ondemand/cypress.env.json.staging-fasse`
  * `ondemand/cypress.env.json.prod-cannon` - to be created after staging deployment.
- * `ondemand/cypress.env.json.prod-fasse` - to be created after staging deployment.
+ * `ondemand/cypress.env.json.prod-fasse`
 
 The following `make` tasks will execute the tests for FASRC v3:
   * `make fasrcv3 CONFIG=staging-cannon`
   * `make fasrcv3 CONFIG=staging-fasse`
   * `make fasrcv3 CONFIG=prod-cannon` - to be created.
-  * `make fasrcv3 CONFIG=prod-fasse` - to be created.
+  * `make fasrcv3 CONFIG=prod-fasse`
 
 The following `make` tasks will execute the tests for OnDemand v3 with the FASRC and Sid profiles against the different environments:
   * `make ondemand CONFIG=local` - to be removed.
