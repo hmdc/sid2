@@ -18,22 +18,6 @@ node default {
     require => File['/var/www/ood/apps/sys/dashboard'],
   }
 
-  file { '/var/www/ood/public/static':
-    ensure => directory,
-    source => "${config_path}/public/static",
-    recurse => 'remote',
-    require => File['/var/www/ood/public'],
-  }
-
-  file { "/etc/ood/config/clusters.d/dev-cluster.yml":
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source => "${config_path}/dev-cluster.yml",
-    notify  => Class['openondemand::service'],
-  }
-
   exec { 'install_ood_ssh_key':
     command => '/usr/bin/sshpass -p ood /usr/bin/ssh-copy-id -o StrictHostKeyChecking=no -i /home/ood/.ssh/id_rsa.pub ood@slurmctld',
     user => 'ood',

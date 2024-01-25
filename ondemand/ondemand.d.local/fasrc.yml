@@ -8,7 +8,7 @@ navbar_type: dark
 # dashboard_title property does not work yet
 # It requires a new change to the OnDemand Puppet Module. PR raised. 
 dashboard_title: FASRC
-dashboard_header_img_logo: "/public/static/images/fasrc_logo.png"
+dashboard_header_img_logo: "/public/fasrc_logo.png"
 brand_bg_color: "rgb(157,47,60)"
 brand_link_active_bg_color: "rgb(59, 61, 63)"
 
@@ -43,7 +43,7 @@ help_menu:
   - group: "Interface"
   - title: "FASRC"
     profile: "fasrc"
-    icon: "/public/static/images/fasrc_logo.jpg"
+    icon: "/public/fasrc_logo.png"
   - title: "Sid"
     profile: "sid"
-    icon: "/public/static/images/sid_logo.png"
+    icon: "/public/sid_logo.png"

@@ -4,12 +4,18 @@
 #openondemand::repo_release: 'latest'
 openondemand::repo_release: '3.0'
 #openondemand::ondemand_package_ensure: '2.0.31-1.el8'
-openondemand::ondemand_package_ensure: '3.0.0-1.el8'
+openondemand::ondemand_package_ensure: '3.0.3-1.el8'
 openondemand::ondemand_dex_package_ensure: 'absent'
 
 #openondemand::servername: 'localhost'
 openondemand::declare_apache: false
 apache::default_vhost: false
+
+#openondemand::servername: 'ood.com'
+openondemand::server_aliases: ['ood.com', 'localhost', 'team2.local.com']
+openondemand::security_csp_frame_ancestors: 'https://*.local.com'
+#openondemand::use_rewrites: true
+
 
 openondemand::host_regex: 'slurmctld|c(1|2)'
 openondemand::node_uri: '/node'
@@ -25,48 +31,10 @@ openondemand::auth_configs:
  - 'RequestHeader unset Authorization'
  - 'Require valid-user'
 
-# BATCH CONNECT turbovnc and kvm NOT SUPPORTED BY ONDEMAND PUPPET MODULE
-# IT IS DISABLED JUST FOR REFERENCE
-openondemand::clusters_bak:
+openondemand::clusters:
   dev-cluster:
-    cluster_title: 'Example Cluster'
-    login_host: slurmctld
-    job_adapter: slurm
-    job_host: slurmctld
-    job_bin: /usr/bin
-    job_submit_host: slurmctld
-    job_strict_host_checking: false
-    job_lib: /usr/lib64
-    job_conf: /etc/slurm/slurm.conf
-    batch_connect:
-      basic:
-        script_wrapper: |
-          %s
-        set_host: "host=$(hostname -A | awk '{print $1}')"
-      vnc:
-        script_wrapper: |
-          module purge
-          export PATH="/opt/TurboVNC/bin:$PATH"
-          export WEBSOCKIFY_CMD="/usr/bin/websockify"
-          %s
-        set_host: "host=$(hostname -A | awk '{print $1}')"
-      turbovnc:
-        script_wrapper: |
-          module purge
-          export PATH="/opt/TurboVNC/bin/:$PATH"
-          export WEBSOCKIFY_CMD="/usr/bin/websockify"
-          %s
-        set_host: "host=$(hostname -A | awk '{print $1}')"
-      kvm:
-        script_wrapper: |
-          module purge
-          export PATH="/opt/TurboVNC/bin/:$PATH"
-          export WEBSOCKIFY_CMD="/opt/websockify/bin/run"
-          %s
-        set_host: "host=$(hostname -A | awk '{print $1}')"
+    source: '/tmp/dashboard/files/dev-cluster.yml'
 
-# This is to configure app overrides
-#openondemand::apps_config_repo: 'https://github.com/AdvancedResearchComputing/OnDemandApps.git'
 openondemand::apps_config_source: '/tmp/dashboard/files/application'
 
 openondemand::confs:
@@ -78,6 +46,8 @@ openondemand::confs:
     content_template: '/tmp/dashboard/files/ondemand.d/support_ticket.yml.erb'
 
 openondemand::install_apps:
+  bc_desktop:
+    mode: '0700'
   GenericRD:
     source: '/tmp/dashboard/files/apps/GenericRD'
     manage_package: false
@@ -108,3 +78,14 @@ openondemand::install_apps:
   rdesktop:
     source: '/tmp/dashboard/files/apps/rdesktop'
     manage_package: false
+
+openondemand::public_files_source_paths:
+  - '/tmp/dashboard/files/public/css/sid.css'
+  - '/tmp/dashboard/files/public/images/sid_logo.png'
+  - '/tmp/dashboard/files/public/images/fasrc_logo.png'
+  - '/tmp/dashboard/files/public/images/fasrc_logo.jpg'
+  - '/tmp/dashboard/files/public/images/rc-logo-text_2017.png'
+  - '/tmp/dashboard/files/public/images/iqss_logo.png'
+  - '/tmp/dashboard/files/public/images/rstudio_logo.png'
+  - '/tmp/dashboard/files/public/images/desktop_logo.svg'
+  - '/tmp/dashboard/files/public/images/term_logo.svg'
