@@ -1,9 +1,9 @@
 <%
   def cannon_cluster?
-    OodAppkit.clusters.map(&:id).include?('odyssey3')
+    OodAppkit.clusters.map(&:id).include?('odyssey3'.to_sym)
   end
 
   def fasse_cluster?
-    OodAppkit.clusters.map(&:id).include?('fasse')
+    OodAppkit.clusters.map(&:id).include?('fasse'.to_sym)
   end
 %>
