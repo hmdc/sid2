@@ -10,6 +10,7 @@ profiles:
     dashboard_header_img_logo: "/public/sid_logo.png"
     brand_bg_color: "#F0F0F0"
     brand_link_active_bg_color: "#3B3D3F"
+    disable_dashboard_logo: true
     disable_dashboard_welcome_message: true
     dashboard_logo: "/public/sid_logo.png"
     custom_css_files: ["sid.css"]
@@ -22,18 +23,18 @@ profiles:
       - "jobs"
       - title: "Terminals"
         links:
-          - title: "Cannon"
+          - title: "FASSE"
             icon: "fas://terminal"
             url: "/pun/sys/shell/ssh/slurmctld"
             new_tab: true
       - title: "Interactive Apps"
         apps:
-          - "sys/RemoteDesktop/main"
-          - "sys/Jupyter/main"
-          - "sys/Matlab/main"
-          - "sys/RStudioServer/main"
-          - "sys/Stata/main"
-          - "sys/SAS/main"
+          - "sys/RemoteDesktop"
+          - "sys/Jupyter"
+          - "sys/Matlab"
+          - "sys/RStudioServer"
+          - "sys/Stata"
+          - "sys/SAS"
       - "sessions"
 
     help_bar:
@@ -65,12 +66,3 @@ profiles:
                 - "sid/quick_links"
                 - "sid/docs"
 
-    custom_pages:
-      docs:
-        layout:
-        rows:
-          - columns:
-              - width: 12
-                widgets:
-                  - "sessions"
-                  - "pinned_apps"

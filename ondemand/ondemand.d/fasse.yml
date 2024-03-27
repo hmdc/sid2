@@ -1,5 +1,6 @@
 host_based_profiles: false
-disable_dashboard_logo: false
+disable_dashboard_logo: true
+disable_dashboard_welcome_message: true
 show_all_apps_link: false
 
 show_all_apps_link: false
@@ -11,7 +12,6 @@ dashboard_title: FASSE
 dashboard_header_img_logo: "/public/fasrc_logo.png"
 brand_bg_color: "rgb(137,160,180)"
 brand_link_active_bg_color: "rgb(0,0,0)"
-disable_dashboard_welcome_message: true
 
 pinned_apps_group_by: "category"
 pinned_apps:
