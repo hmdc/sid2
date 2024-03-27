@@ -10,7 +10,7 @@ describe('Sid Dashboard - Interactive Apps', () => {
 
   before(() => {
     loadHomepage()
-    changeProfile('Sid')
+    changeProfile(cy.sid.profiles.sid.title)
   })
 
   beforeEach(() => {

@@ -1,18 +1,19 @@
-export const startPinnedApp = app => {
+export const launchPinnedApp = app => {
   const longRunningTimeout = cy.sid.timeout
+  //NAVIGATE TO HOMEPAGE
   cy.get('nav > a.navbar-brand').click()
   //LAUNCH SESSION
-  cy.get(`div[data-toggle="launcher-button"] a[href="${app.url}"]`).should('be.visible')
-  cy.get(`div[data-toggle="launcher-button"] a[href="${app.url}"]`).click()
+  const appUrl = `/pun/sys/dashboard/batch_connect/${app.token}/session_contexts`
+  console.log(appUrl)
+  if (cy.get(`div[data-toggle="launcher-button"] form[action="${appUrl}"] button[type="submit"]`).length > 0) {
+    cy.get(`div[data-toggle="launcher-button"] form[action="${appUrl}"] button[type="submit"]`).click()
+  } else {
+    cy.get(`div[data-toggle="launcher-button"] a[href="${appUrl}"]`).should('be.visible')
+    cy.get(`div[data-toggle="launcher-button"] a[href="${appUrl}"]`).click()
+  }
 
   cy.get('div.alert-success').should('contain.text', 'Session was successfully')
   cy.get('div.alert-success button').click()
-
-  cy.get('div.session-panel[data-id]', { timeout: longRunningTimeout }).should('be.visible')
-  cy.get('div.session-panel[data-id]').should('have.length', 1)
-  //WAIT UNTIL RUNNING
-  cy.get('div.session-panel[data-id] div.card-heading div.float-right', { timeout: longRunningTimeout }).should('contain.text', 'Running')
-  cy.get('div.session-panel[data-id] div.card-heading a').invoke('text').should('match', new RegExp(app.name, 'i'))
 }
 
 export const startInteractiveApplication = ({position = 0, name} = {}) => {

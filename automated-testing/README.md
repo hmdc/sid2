@@ -9,6 +9,29 @@ The third suite based on OnDemand version 3.x and the Sid and FASRC profiles. Th
 
 The `sid` and `fasrcv3` suites will deprecated and deleted once the new OnDemand environments are deployed into Staging and Production.
 
+## Local environment
+The automated tests has been developed and tested using:
+* `node/18.16.0`
+* `npm/9.5.1`
+
+Install Homebrew:  
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+Use a tool to manage multiple versions of Node, like [n](https://github.com/tj/n)
+```
+brew install n
+```
+
+Install Node.js with n.
+```
+# Download and install a Node version:
+n 18.16.0
+# Use n to select the Node version 18.16.0:
+n
+# Verify current Node version:
+node --version
+```
+
 ## Installing testing tooling and dependencies - Cypress
 `npm install`
 

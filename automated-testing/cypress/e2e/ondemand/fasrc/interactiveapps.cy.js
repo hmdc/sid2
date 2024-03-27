@@ -5,11 +5,12 @@ import { cleanupSessions, checkSession } from "../../../support/utils/sessions.j
 describe('FASRC Dashboard - Interactive Apps', () => {
   const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrc_dashboard_applications').includes(l.id))
   const launchApplications = Cypress.env('launch_applications')
+  const fasrcClusterProfile = Cypress.env('fasrc_cluster_profile')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
     loadHomepage()
-    changeProfile('FASRC')
+    changeProfile(fasrcClusterProfile)
   })
 
   beforeEach(() => {
@@ -18,7 +19,7 @@ describe('FASRC Dashboard - Interactive Apps', () => {
     loadHomepage()
   })
 
-  it('Should display restricted interactive apps left menu', () => {
+  it(`${fasrcClusterProfile}: Should display restricted interactive apps left menu`, () => {
     cy.wrap(interactiveApps).each( app => {
       cy.task('log', `Checking interactive app menu: ${app.token}`)
       navigateApplication(app.name)
@@ -39,7 +40,7 @@ describe('FASRC Dashboard - Interactive Apps', () => {
   !launchApplications && it(`Should launch interactive application - DISABLED`, () => {})
 
   launchApplications && interactiveApps.forEach( app => {
-    it(`Should launch interactive application: ${app.token} - launchApplications: ${launchApplications}`, () => {
+    it(`${fasrcClusterProfile}: Should launch interactive application: ${app.token} - launchApplications: ${launchApplications}`, () => {
       cleanupSessions()
 
       navigateApplication(app.name)

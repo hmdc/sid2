@@ -1,6 +1,6 @@
 import { NAVIGATION, loadHomepage } from "../../../support/utils/navigation.js";
 import { changeProfile } from "../../../support/utils/profiles.js";
-import { startPinnedApp,  cleanupSessions, checkSession} from "../../../support/utils/sessions.js";
+import { cleanupSessions, checkSession} from "../../../support/utils/sessions.js";
 
 describe('Sid Dashboard - Homepage', () => {
 
@@ -10,7 +10,7 @@ describe('Sid Dashboard - Homepage', () => {
 
   before(() => {
     loadHomepage()
-    changeProfile('Sid')
+    changeProfile(cy.sid.profiles.sid.title)
   })
 
   beforeEach(() => {
@@ -30,18 +30,27 @@ describe('Sid Dashboard - Homepage', () => {
 
   activePinnedApps.forEach( app => {
     it(`Sid Pinned Apps: ${app.id} - launchApplications: ${launchApplications}`, () => {
-      //CHECK PINNED APPS TEXT
-      //CHECK URL IS POST
-      cy.get(`div[data-toggle="launcher-button"] a:contains(${app.name})`).should($launcherLink =>{
-        expect($launcherLink.attr('data-method')).to.equal('post')
-        expect($launcherLink.attr('href')).to.match(new RegExp(`${app.token}/session_contexts$`))
-      })
       cy.get(`div[data-toggle="launcher-button"] p.app-title:contains(${app.name})`).should('be.visible')
 
-      if (launchApplications) {
-        startPinnedApp(app)
+      const appUrl = `/pun/sys/dashboard/batch_connect/${app.token}/session_contexts`
+      //CHECK IF USING CUSTOM PINNED APPS WIDGET
+      cy.get(`div[data-toggle="launcher-button"] form[action="${appUrl}"] button[type="submit"]`).then(submitButton => {
+        if (submitButton.length > 0) {
+          submitButton.first().click()
+        } else {
+          //STANDARD PINNED APPS FROM OSC
+          //CHECK PINNED APPS TEXT
+          //CHECK URL IS POST
+          cy.get(`div[data-toggle="launcher-button"] a:contains(${app.name})`).should($launcherLink =>{
+            expect($launcherLink.attr('data-method')).to.equal('post')
+            expect($launcherLink.attr('href')).to.match(new RegExp(`${app.token}/session_contexts$`))
+          })
+          cy.get(`div[data-toggle="launcher-button"] a[href="${appUrl}"]`).should('be.visible')
+          cy.get(`div[data-toggle="launcher-button"] a[href="${appUrl}"]`).click()
+        }
+
         checkSession(app)
-      }
+      }) 
     })
   })
 

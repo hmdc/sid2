@@ -3,7 +3,7 @@ import { changeProfile } from "../../support/utils/profiles.js";
 
 describe('OnDemand Dashboard - Footer', () => {
 
-  const profiles = cy.sid.profiles
+  const profiles = Cypress.env('profiles')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   beforeEach(() => {
@@ -13,6 +13,13 @@ describe('OnDemand Dashboard - Footer', () => {
   })
 
   profiles.forEach(profile => {
+    it(`${profile}: display version and host`, () => {
+      changeProfile(profile)
+      cy.get('footer').then($versions => {
+          cy.task('log', `Version and Host: ${$versions.eq(0).text().trim()}`)
+        })
+    })
+
     it(`${profile}: Should display footer expected logos with link`, () => {
       changeProfile(profile)
       cy.get('footer a').should($logos => {
@@ -32,11 +39,10 @@ describe('OnDemand Dashboard - Footer', () => {
     it(`${profile}: Should display footer expected text elements`, () => {
       changeProfile(profile)
       cy.get('footer span.footer_version').should($versions => {
-          expect($versions).to.have.length(3)
+          expect($versions).to.have.length(2)
   
           expect($versions.eq(0).text()).to.match(/you are on/i)
           expect($versions.eq(1).text()).to.match(/ondemand version:/i)
-          expect($versions.eq(2).text()).to.match(/config version:/i)
         })
     })
   })

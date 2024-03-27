@@ -1,11 +1,12 @@
-import { NAVIGATION, loadHomepage, navigateToSupport } from "../../support/utils/navigation.js";
+import { NAVIGATION, loadHomepage, visitApplication, navigateToSupport } from "../../support/utils/navigation.js";
 import { changeProfile } from "../../support/utils/profiles.js";
-import { startDevSession,  cleanupSessions } from "../../support/utils/sessions.js";
+import { checkSession,  cleanupSessions } from "../../support/utils/sessions.js";
 
 describe('OnDemand Dashboard - Support Ticket', () => {
 
-  const profiles = cy.sid.profiles
+  const profiles = Cypress.env('profiles')
   const supportTicket = Cypress.env('support_ticket') || cy.sid.supportTicket
+  const demoApp = cy.sid.ondemandApplications.filter(l => l.id == Cypress.env('interactive_sessions_app')).shift()
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   const assertForm = (checkSessionDescription = false) => {
@@ -37,7 +38,10 @@ describe('OnDemand Dashboard - Support Ticket', () => {
     it(`${profile}: Should display support ticket page for selected session`, () => {
       changeProfile(profile)
       cleanupSessions()
-      startDevSession()
+      visitApplication(demoApp.token)
+      //LAUNCH APP WITH EMPTY PARAMETERS
+      cy.get('form#new_batch_connect_session_context input[type="submit"]').click()
+      checkSession(demoApp, true)
       cy.get('div.session-panel[data-id] .card-body p a:contains(support)').click()
   
       assertForm(true)
@@ -102,7 +106,7 @@ describe('OnDemand Dashboard - Support Ticket', () => {
       if (supportTicket.creationEnabled) {
         navigateToSupport()
         cy.get('form#new_support_ticket input#support_ticket_email').type('sid_automated_test@example.com')
-        cy.get('form#new_support_ticket input#support_ticket_subject').type('TEST: Sid automated test')
+        cy.get('form#new_support_ticket input#support_ticket_subject').type(`TEST: profile ${profile} automated test`)
         cy.get('form#new_support_ticket textarea#support_ticket_description').type('Sid automated test - to delete')
         cy.get('form#new_support_ticket input#support_ticket_queue').then(elem => {
           elem.val(supportTicket.queue)

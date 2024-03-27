@@ -4,11 +4,12 @@ import { changeProfile } from "../../../support/utils/profiles.js";
 describe('Sid Dashboard - Header', () => {
 
   const interactiveApps = cy.sid.ondemandApplications.filter(l => Cypress.env('sid_dashboard_applications').includes(l.id))
+  const fasrcClusterProfile = Cypress.env('fasrc_cluster_profile')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
     loadHomepage()
-    changeProfile('Sid')
+    changeProfile(cy.sid.profiles.sid.title)
   })
 
   beforeEach(() => {
@@ -125,18 +126,21 @@ describe('Sid Dashboard - Header', () => {
   it('Should display Help links', () => {
     cy.get('nav li[title="Help"] ul.dropdown-menu').as('helpMenu')
     cy.get('@helpMenu').find('a').should($helpLinks => {
-      //SUPPORT TICKET IS FIRST ITEM INSIDE HELP MENU
-      expect($helpLinks.first().text().trim()).to.match(/submit support ticket/i)
-      expect($helpLinks.first().attr('href')).to.match(/support$/)
+      expect($helpLinks.eq(0).text().trim()).to.match(/contact support/i)
+      expect($helpLinks.eq(0).attr('href')).to.equal('https://docs.rc.fas.harvard.edu/kb/support/')
+      expect($helpLinks.eq(1).text().trim()).to.match(/change hpc password/i)
+      expect($helpLinks.eq(1).attr('href')).to.equal('https://portal.rc.fas.harvard.edu/pwreset/')
+      expect($helpLinks.eq(2).text().trim()).to.match(/submit support ticket/i)
+      expect($helpLinks.eq(2).attr('href')).to.match(/support$/)
     })
 
     // PROFILE LINKS
     cy.get('@helpMenu').find('li.dropdown-header').should($profileHeaderElement => {
       expect($profileHeaderElement.text().trim()).to.match(/interface/i)
     })
-    cy.get('@helpMenu').find('a[title="FASRC"]').should($profileLinkElement => {
-      expect($profileLinkElement.text().trim()).to.match(/fasrc/i)
-      expect($profileLinkElement.attr('href')).to.match(new RegExp('/settings.*fasrc', 'i'))
+    cy.get('@helpMenu').find(`a[title="${fasrcClusterProfile}"]`).should($profileLinkElement => {
+      expect($profileLinkElement.text().trim()).to.equal(fasrcClusterProfile)
+      expect($profileLinkElement.attr('href')).to.match(new RegExp(`/settings.*${fasrcClusterProfile}`, 'i'))
     })
     cy.get('@helpMenu').find('a[title="Sid"]').should($profileLinkElement => {
       expect($profileLinkElement.text().trim()).to.match(/sid/i)
@@ -144,7 +148,7 @@ describe('Sid Dashboard - Header', () => {
     })
   })
 
-  it.only('Should display Develop, User and Logout items', () => {
+  it('Should display Develop, User and Logout items', () => {
     cy.get('nav li[title="Develop"] a.nav-link').contains('Develop')
     cy.get('nav a.nav-link.disabled').contains('Logged in as')
 

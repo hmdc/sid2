@@ -2,7 +2,11 @@
 cy.sid = {
   // FOR LONG RUNNING CHECKS. IN MILLISECONDS
   timeout: 120000,
-  profiles: ['Sid', 'FASRC'],
+  profiles: {
+    sid: {title: "Sid"},
+    fasrc: {title: "FASRC"},
+    fasse: {title: "FASSE"}
+  },
   // SID DASHBOARD CREDENTIALS
   auth: {
     username: Cypress.env('dashboard_username'),

@@ -2,6 +2,8 @@
 all:: local
 .PHONY: sid fasrc test ondemand ondemand-test landing
 
+WARNING=\033[0;32m
+NC=\033[0m
 DOCKER_NODE_IMAGE := node:18
 DOCKER_CYPRESS_IMAGE := cypress/base:18.16.0
 WORKING_DIR := $(shell pwd)
@@ -9,6 +11,9 @@ FASSE_ENV := env no_proxy=.harvard.edu http_proxy=http://rcproxy.rc.fas.harvard.
 
 # Add FASSE proxy when running against FASSE environment.
 ifeq "$(CONFIG)" "remote-fasse"
+    ENV:=$(FASSE_ENV)
+endif
+ifeq "$(CONFIG)" "dev-fasse"
     ENV:=$(FASSE_ENV)
 endif
 ifeq "$(CONFIG)" "staging-fasse"
@@ -19,12 +24,12 @@ ifeq "$(CONFIG)" "prod-fasse"
 endif
 
 sid:
-	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
+	@echo -e "${WARNING}For FASSE and Cannon environments, you need to be connected to the VPN${NC}"
 	cp -rf ./sid/cypress.env.json.$(CONFIG) cypress.env.json
 	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec cypress/e2e/fasrc-dashboard/*,cypress/e2e/sid-dashboard/*
 
 fasrc:
-	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
+	@echo "${WARNING}For FASSE and Cannon environments, you need to be connected to the VPN${NC}"
 	cp -rf ./sid/cypress.env.json.$(CONFIG) cypress.env.json
 	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/fasrc-dashboard/*"
 
@@ -37,14 +42,14 @@ test:
 	cd ../dashboard/ && make down
 
 fasrcv3:
-	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
+	@echo "${WARNING}For FASSE and Cannon environments, you need to be connected to the VPN${NC}"
 	cp -rf ./ondemand/cypress.env.json.$(CONFIG) cypress.env.json
 	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/ondemand/fasrcv3/*.cy.js"
 
 ondemand:
-	@echo "For FASSE and Cannon environments, you need to be connected to the VPN"
+	@echo "${WARNING}For FASSE and Cannon environments, you need to be connected to the VPN${NC}"
 	cp -rf ./ondemand/cypress.env.json.$(CONFIG) cypress.env.json
-	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/ondemand/**/*.cy.js"
+	$(ENV) npm install && $(ENV) ./node_modules/.bin/cypress run --headless --spec "cypress/e2e/ondemand/*.cy.js,cypress/e2e/ondemand/fasrc/*.cy.js,cypress/e2e/ondemand/sid/*.cy.js"
 
 
 ondemand-test:

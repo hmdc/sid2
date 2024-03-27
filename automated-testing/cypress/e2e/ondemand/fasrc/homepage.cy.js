@@ -4,11 +4,12 @@ import { cleanupSessions} from "../../../support/utils/sessions.js";
 
 describe('FASRC Dashboard - Homepage', () => {
   const activePinnedApps = cy.sid.ondemandApplications.filter(l => Cypress.env('fasrc_pinned_apps').includes(l.id))
+  const fasrcClusterProfile = Cypress.env('fasrc_cluster_profile')
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
 
   before(() => {
     loadHomepage()
-    changeProfile('FASRC')
+    changeProfile(fasrcClusterProfile)
   })
 
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe('FASRC Dashboard - Homepage', () => {
   })
 
   activePinnedApps.forEach( app => {
-    it(`FASRC Pinned Apps: ${app.id}`, () => {
+    it(`${fasrcClusterProfile}: FASRC Pinned Apps: ${app.id}`, () => {
       // CLICK PINNED APPS
       cy.get(`div[data-toggle="launcher-button"] a:contains(${app.name})`).should('be.visible')
       cy.get(`div[data-toggle="launcher-button"] a:contains(${app.name})`).click()
@@ -30,12 +31,10 @@ describe('FASRC Dashboard - Homepage', () => {
     })
   })
 
-  it('Documentation main sections', () => {
-    cy.get('div img[alt="fas-rc"]').should($imageElement => {
-      expect($imageElement).to.have.length(1)
-      expect($imageElement.attr('src')).to.match(/.*rc-logo-text_2017.png$/i)
-    })
-    cy.get('div h1').invoke('text').should('match', /Welcome to FAS-RC Cluster/)
+  it(`${fasrcClusterProfile}: Documentation main sections`, () => {
+    cy.get('div img[src="/public/rc-logo-text_2017_sm.png"]').first().should('be.visible')
+    const welcomeText = Cypress.env('fasrc_welcome_text')
+    cy.get('div h1').invoke('text').should('match', new RegExp(welcomeText, "i"))
     cy.get('div h2').eq(0).invoke('text').should('match', /Documentation and Training/)
     cy.get('div h2').eq(1).invoke('text').should('match', /System Status and Planned Downtime/)
   })
