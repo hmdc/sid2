@@ -6,9 +6,9 @@ support_ticket:
     pass: "<%= @rt_api_pass %>"
     priority: "<%= @rt_priority %>"
   <% if @rt_queues.length -%>
-    queues:
+  queues:
   <% @rt_queues.each do |queue| -%>
-      - "<%= queue %>"
+    - "<%= queue %>"
   <% end -%>
   <% end -%>
   <% unless @rt_proxy_server.nil? -%>
