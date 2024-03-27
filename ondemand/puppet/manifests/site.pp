@@ -1,8 +1,8 @@
 
 node default {
 
-  include ::ood_support_ticket
   include openondemand
+  include sid2::ood_support_ticket
 
   $config_path = 'file:///tmp/dashboard/files'
 

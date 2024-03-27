@@ -8,7 +8,7 @@ openondemand::pinned_apps: null
 openondemand::dashboard_layout: null
 openondemand::pinned_apps_group_by: null
 
-ood_support_ticket::rt_server: 'http://rt:34000' 
-ood_support_ticket::rt_queues: ['General', 'Internal:Logging']
-ood_support_ticket::rt_api_user: 'root'
-ood_support_ticket::rt_api_pass: 'password'
+sid2::ood_support_ticket::rt_server: 'http://rt:34000' 
+sid2::ood_support_ticket::rt_queues: ['General', 'Internal:Logging', 'TEST']
+sid2::ood_support_ticket::rt_api_user: 'root'
+sid2::ood_support_ticket::rt_api_pass: 'password'

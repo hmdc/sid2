@@ -1,5 +1,5 @@
 host_based_profiles: false
-disable_dashboard_logo: false
+disable_dashboard_logo: true
 show_all_apps_link: false
 
 show_all_apps_link: false
