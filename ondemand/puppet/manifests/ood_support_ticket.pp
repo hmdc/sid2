@@ -4,6 +4,7 @@ class sid2::ood_support_ticket (
   Optional[Array] $rt_queues = [],
   Optional[String] $rt_api_user = undef,
   Optional[String] $rt_api_pass = undef,
+  Optional[String] $rt_priority = '4',
   Optional[String] $rt_proxy_server = undef,
 ){
 

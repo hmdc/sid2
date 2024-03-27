@@ -4,12 +4,13 @@ support_ticket:
     server: "<%= @rt_server %>"
     user: "<%= @rt_api_user %>"
     pass: "<%= @rt_api_pass %>"
-<% if @rt_queues.length -%>
-  queues:
-<% @rt_queues.each do |queue| -%>
-    - "<%= queue %>"
-<% end -%>
-<% end -%>
-<% unless @rt_proxy_server.nil? -%>
-  proxy: "<%= @rt_proxy_server %>"
-<% end -%>
+    priority: "<%= @rt_priority %>"
+  <% if @rt_queues.length -%>
+    queues:
+  <% @rt_queues.each do |queue| -%>
+      - "<%= queue %>"
+  <% end -%>
+  <% end -%>
+  <% unless @rt_proxy_server.nil? -%>
+    proxy: "<%= @rt_proxy_server %>"
+  <% end -%>
