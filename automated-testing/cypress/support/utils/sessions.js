@@ -1,21 +1,3 @@
-export const launchPinnedApp = app => {
-  const longRunningTimeout = cy.sid.timeout
-  //NAVIGATE TO HOMEPAGE
-  cy.get('nav > a.navbar-brand').click()
-  //LAUNCH SESSION
-  const appUrl = `/pun/sys/dashboard/batch_connect/${app.token}/session_contexts`
-  console.log(appUrl)
-  if (cy.get(`div[data-toggle="launcher-button"] form[action="${appUrl}"] button[type="submit"]`).length > 0) {
-    cy.get(`div[data-toggle="launcher-button"] form[action="${appUrl}"] button[type="submit"]`).click()
-  } else {
-    cy.get(`div[data-toggle="launcher-button"] a[href="${appUrl}"]`).should('be.visible')
-    cy.get(`div[data-toggle="launcher-button"] a[href="${appUrl}"]`).click()
-  }
-
-  cy.get('div.alert-success').should('contain.text', 'Session was successfully')
-  cy.get('div.alert-success button').click()
-}
-
 export const startInteractiveApplication = ({position = 0, name} = {}) => {
   const longRunningTimeout = cy.sid.timeout
   cy.get('nav li[title="Interactive Apps"] > a').click()
