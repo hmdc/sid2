@@ -5,9 +5,9 @@ tile:
   title: "Run Remote Desktop"
   icon: "/public/desktop_logo.svg"
   sub_caption: |
-    2 CPU core and 4GB RAM
+    2 CPU core and 16GB RAM
     8 hours job run time
-    Cannon cluster
+    FASSE cluster
 attributes:
   bc_vnc_idle: 0
   desktop: "myxfce"
@@ -16,7 +16,7 @@ attributes:
   bc_account: ""
   bc_num_slots: null
   bc_num_hours: null
-  custom_memory_per_node: "4"
+  custom_memory_per_node: "16"
   custom_num_cores: "2"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
