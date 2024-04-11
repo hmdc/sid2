@@ -4,14 +4,29 @@ node default {
   include openondemand
   include sid2::ood_support_ticket
 
+  # resource defaults from FASRC openondemand.pp
+  File {
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package[ondemand]
+  }
+
   $config_path = 'file:///tmp/dashboard/files'
 
-  file { '/var/www/ood/apps/sys/dashboard/lib':
+  file { ['/var/www/ood/apps/sys/dashboard/lib/ood_core',
+          '/var/www/ood/apps/sys/dashboard/lib/ood_core/batch_connect',
+          '/var/www/ood/apps/sys/dashboard/lib/ood_core/batch_connect/templates',]:
     ensure => directory,
-    source => "${config_path}/lib",
-    recurse => 'remote',
-    notify  => Class['openondemand::service'],
-    require => File['/var/www/ood/apps/sys/dashboard'],
+  }
+
+  file { '/var/www/ood/apps/sys/dashboard/lib/ood_core/batch_connect/templates/kvm.rb':
+    source => "${config_path}/lib/ood_core/batch_connect/templates/kvm.rb",
+  }
+
+  file { '/var/www/ood/apps/sys/dashboard/lib/ood_core/batch_connect/templates/turbovnc.rb':
+    source => "${config_path}/lib/ood_core/batch_connect/templates/turbovnc.rb",
   }
 
   exec { 'install_ood_ssh_key':

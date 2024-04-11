@@ -7,7 +7,7 @@ cancel_session_enabled: true
 navbar_type: dark
 # dashboard_title property does not work yet
 # It requires a new change to the OnDemand Puppet Module. PR raised. 
-dashboard_title: FASSE
+dashboard_title: "FASSE title"
 dashboard_header_img_logo: "/public/fasrc_logo.png"
 brand_bg_color: "rgb(137,160,180)"
 brand_link_active_bg_color: "rgb(0,0,0)"

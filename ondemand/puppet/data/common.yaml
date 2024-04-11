@@ -2,9 +2,13 @@
 #openondemand::repo_nightly: true
 #openondemand::manage_dependency_repos: false
 #openondemand::repo_release: 'latest'
+#openondemand::repo_release: '2.0'
+#openondemand::ondemand_package_ensure: '2.0.29-1.el8'
+#openondemand::manage_dependency_repos: false
 openondemand::repo_release: '3.0'
-#openondemand::ondemand_package_ensure: '2.0.31-1.el8'
 openondemand::ondemand_package_ensure: '3.0.3-1.el8'
+#openondemand::repo_release: '3.1'
+#openondemand::ondemand_package_ensure: '3.1.0-0.rc1.el8'
 openondemand::ondemand_dex_package_ensure: 'absent'
 
 #openondemand::servername: 'localhost'
@@ -15,6 +19,8 @@ apache::default_vhost: false
 openondemand::server_aliases: ['ood.com', 'localhost', 'team2.local.com']
 openondemand::security_csp_frame_ancestors: 'https://*.local.com'
 #openondemand::use_rewrites: true
+
+openondemand::nginx_stage_ondemand_title: null
 
 
 openondemand::host_regex: 'slurmctld|c(1|2)'
@@ -42,8 +48,6 @@ openondemand::confs:
     content_template: '/tmp/dashboard/files/ondemand.d/sid.yml'
   fasrc:
     content_template: '/tmp/dashboard/files/ondemand.d/fasrc.yml'
-  support_ticket:
-    content_template: '/tmp/dashboard/files/ondemand.d/support_ticket.yml.erb'
 
 openondemand::install_apps:
   bc_desktop:
