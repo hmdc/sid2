@@ -16,7 +16,7 @@ openondemand::declare_apache: false
 apache::default_vhost: false
 
 #openondemand::servername: 'ood.com'
-openondemand::server_aliases: ['ood.com', 'localhost', 'team2.local.com']
+openondemand::server_aliases: ['ood.com', 'localhost', 'team1.local.com', 'team2.local.com', 'team3.local.com']
 openondemand::security_csp_frame_ancestors: 'https://*.local.com'
 #openondemand::use_rewrites: true
 
@@ -29,13 +29,37 @@ openondemand::rnode_uri: '/rnode'
 openondemand::ssl:
  - 'SSLCertificateFile "/tmp/dashboard/files/apache/sid_development.crt"'
  - 'SSLCertificateKeyFile "/tmp/dashboard/files/apache/sid_development.key"'
-openondemand::auth_type: 'Basic'
+#openondemand::auth_type: 'Basic'
+#openondemand::auth_configs:
+# - 'AuthName "private"'
+# - 'AuthDBMUserFile "/etc/httpd/.htpasswd.dbm"'
+# - 'AuthBasicProvider dbm'
+# - 'RequestHeader unset Authorization'
+# - 'Require valid-user'
+
+openondemand::auth_type: 'openid-connect'
 openondemand::auth_configs:
- - 'AuthName "private"'
- - 'AuthBasicProvider dbm'
- - 'AuthDBMUserFile "/etc/httpd/.htpasswd.dbm"'
- - 'RequestHeader unset Authorization'
- - 'Require valid-user'
+  - 'Require valid-user'
+openondemand::user_map_match: '.*'
+openondemand::logout_uri: '/logout'
+openondemand::logout_redirect: '/oidc?logout=https://%{literal("%")}{HTTP_HOST}'
+openondemand::oidc_uri: '/oidc'
+openondemand::oidc_provider_metadata_url: 'http://keycloak:34080/realms/ondemand/.well-known/openid-configuration'
+openondemand::oidc_scope: 'openid profile email'
+openondemand::oidc_client_id: 'ood'
+openondemand::oidc_client_secret: 'XAOkZRPPxttVhociTxbOpR5rSuanqneU'
+openondemand::oidc_state_max_number_of_cookies: '10 true'
+openondemand::oidc_remote_user_claim: 'preferred_username'
+openondemand::oidc_settings:
+  OIDCPassIDTokenAs: 'serialized'
+  OIDCPassRefreshToken: 'On'
+  OIDCPassClaimsAs: 'environment'
+  OIDCStripCookies: 'mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1'
+### END auth config
+
+# This can be used to replace he logout_uri and logout_redirect
+openondemand::custom_vhost_directives:
+  - 'RewriteRule ^/logout$ /oidc?logout=https://%{literal("%")}{HTTP_HOST} [R=301,L]'
 
 openondemand::clusters:
   dev-cluster:
