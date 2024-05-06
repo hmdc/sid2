@@ -22,6 +22,12 @@ endif
 ifeq "$(CONFIG)" "prod-fasse"
     ENV:=$(FASSE_ENV)
 endif
+ifeq "$(CONFIG)" "prod-fasse-a"
+    ENV:=$(FASSE_ENV)
+endif
+ifeq "$(CONFIG)" "prod-fasse-c"
+    ENV:=$(FASSE_ENV)
+endif
 
 sid:
 	@echo -e "${WARNING}For FASSE and Cannon environments, you need to be connected to the VPN${NC}"
