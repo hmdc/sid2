@@ -15,9 +15,11 @@ node default {
 
   $config_path = 'file:///tmp/dashboard/files'
 
-  file { '/opt/ood/ood-portal-generator/templates/ood-portal.conf.erb':
-    source => "${config_path}/lib/ood-portal-generator/ood-portal-v3.0.conf.erb",
-    notify    => Exec['ood-portal-generator-generate'],
+  if $openondemand::oidc_uri {
+    file { '/opt/ood/ood-portal-generator/templates/ood-portal.conf.erb':
+      source => "${config_path}/lib/ood-portal-generator/ood-portal-v3.0.conf.erb",
+      notify    => Exec['ood-portal-generator-generate'],
+    }
   }
 
   file { ['/var/www/ood/apps/sys/dashboard/lib/ood_core',
