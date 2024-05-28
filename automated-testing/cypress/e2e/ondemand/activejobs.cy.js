@@ -27,9 +27,16 @@ describe('FASRC Dashboard - Active Jobs', () => {
     cy.wait(2000)
 
     cy.get('div.row h2').invoke('text').should('match', new RegExp('active jobs', "i"))
+    // ORDER BY JOB ID DESCENDENT
+    // NEED TO CLICK TWICE. FIRST ASCENDANT, SECOND DESCENDANT
+    cy.get('div.row table#job_status_table thead th.sorting').first().click()
+    cy.wait(2000)
+    cy.get('div.row table#job_status_table thead th.sorting').first().click()
+    cy.wait(2000)
+
     cy.get('div.row table#job_status_table tbody tr').then($jobs => {
       expect($jobs).to.have.length.greaterThan(0)
-      const $jobFields = $jobs.last().find("td")
+      const $jobFields = $jobs.first().find("td")
       expect($jobFields).to.have.length(10)
       expect($jobFields.eq(2).text()).to.match(new RegExp(demoApp.token, 'i'))
       expect($jobFields.eq(7).text()).to.match(/running/i)
