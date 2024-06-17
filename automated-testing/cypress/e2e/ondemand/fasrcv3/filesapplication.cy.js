@@ -1,7 +1,6 @@
 import { NAVIGATION, loadHomepage, navigateFiles } from "../../../support/utils/navigation.js";
 
-describe('FASRC Dashboard - Job Composer', () => {
-  const demoApp = cy.sid.ondemandApplications.filter(l => l.id == Cypress.env('fasrcv3_interactive_sessions_app')).shift()
+describe('FASRC Dashboard - Files Application', () => {
   Cypress.config('baseUrl', NAVIGATION.baseUrl);
   
   before(() => {
@@ -14,7 +13,7 @@ describe('FASRC Dashboard - Job Composer', () => {
     loadHomepage()
   })
 
-  it('Should display job composer page', () => {
+  it('Should display files application page', () => {
     navigateFiles()
 
     // SHOULD DISPLAY FAVORITES
