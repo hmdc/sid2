@@ -1,31 +1,18 @@
 # default build target
 all:: local
-.PHONY: sid fasrc test ondemand ondemand-test landing
+.PHONY: sid fasrc fasrcv3 test ondemand ondemand-test landing
 
 WARNING=\033[0;32m
 NC=\033[0m
 DOCKER_NODE_IMAGE := node:18
 DOCKER_CYPRESS_IMAGE := cypress/base:18.16.0
 WORKING_DIR := $(shell pwd)
+# PROXY NOT REQUIRED WHEN CONNECTED TO @iqssrc
 FASSE_ENV := env no_proxy=.harvard.edu http_proxy=http://rcproxy.rc.fas.harvard.edu:3128 https_proxy=http://rcproxy.rc.fas.harvard.edu:3128
 
 # Add FASSE proxy when running against FASSE environment.
+# Proxy not required when connected to @iqssrc. Here just for reference
 ifeq "$(CONFIG)" "remote-fasse"
-    ENV:=$(FASSE_ENV)
-endif
-ifeq "$(CONFIG)" "dev-fasse"
-    ENV:=$(FASSE_ENV)
-endif
-ifeq "$(CONFIG)" "staging-fasse"
-    ENV:=$(FASSE_ENV)
-endif
-ifeq "$(CONFIG)" "prod-fasse"
-    ENV:=$(FASSE_ENV)
-endif
-ifeq "$(CONFIG)" "prod-fasse-a"
-    ENV:=$(FASSE_ENV)
-endif
-ifeq "$(CONFIG)" "prod-fasse-c"
     ENV:=$(FASSE_ENV)
 endif
 
