@@ -38,6 +38,9 @@
 #      sudo systemctl try-restart httpd.service htcacheclean.service
 #
 
+# 300 => 5 MINUTES
+TimeOut 300
+
 <% if @listen_addr_port -%>
 # Listen should always be one of:
 #     - <port>

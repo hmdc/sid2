@@ -1,5 +1,16 @@
-
 node default {
+
+  package { 'ruby:3.1':
+    ensure      => present,
+    provider    => dnfmodule,
+    enable_only => true,
+  }
+
+  package { 'nodejs:18':
+    ensure      => present,
+    provider    => dnfmodule,
+    enable_only => true,
+  }
 
   include openondemand
   include sid2::ood_support_ticket
@@ -20,6 +31,11 @@ node default {
       source => "${config_path}/lib/ood-portal-generator/ood-portal-v3.0.conf.erb",
       notify    => Exec['ood-portal-generator-generate'],
     }
+  }
+
+  file { '/var/lib/ondemand-nginx/config/apps/sys/ood.conf':
+      source     => "${config_path}/lib/ood-portal-generator/ood.conf",
+      require    => Exec['nginx_stage-nginx_clean'],
   }
 
   file { ['/var/www/ood/apps/sys/dashboard/lib/ood_core',

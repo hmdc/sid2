@@ -14,8 +14,9 @@ class sid2::ood_support_ticket (
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-      #content => template('puppet:///modules/profile/openondemand/common/ondemand.d/support_ticket.yml.erb'),
-      content => template('/tmp/dashboard/files/ondemand.d/support_ticket.yml.erb'),
+      content => template('puppet:///modules/profile/openondemand/common/ondemand.d/support_ticket.yml.erb'),
+      # Local environment configuratiopn
+      # content => template('/tmp/dashboard/files/ondemand.d/support_ticket.yml.erb'),
     }
   }
 }

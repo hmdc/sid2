@@ -1,8 +1,6 @@
 profiles:
   sid:
     show_all_apps_link: false
-    announcement_path: "/etc/ood/config/announcement.sid.d/"
-
     navbar_type: default
     # dashboard_title property does not work yet
     # It requires a new change to the OnDemand Puppet Module. PR raised. 
@@ -10,31 +8,24 @@ profiles:
     dashboard_header_img_logo: "/public/sid_logo.png"
     brand_bg_color: "#F0F0F0"
     brand_link_active_bg_color: "#3B3D3F"
-    disable_dashboard_logo: true
+
     disable_dashboard_welcome_message: true
+    disable_dashboard_logo: true
+    
+    announcement_path: "/etc/ood/config/announcement.sid.d/"
     dashboard_logo: "/public/sid_logo.png"
     custom_css_files: ["sid.css"]
-
-    pinned_apps_group_by:
-    pinned_apps: ["*/ql_*"]
     
     nav_bar:
       - "files"
       - "jobs"
       - title: "Terminals"
         links:
-          - title: "FASSE"
+          - title: "Cannon"
             icon: "fas://terminal"
             url: "/pun/sys/shell/ssh/slurmctld"
             new_tab: true
-      - title: "Interactive Apps"
-        apps:
-          - "sys/RemoteDesktop"
-          - "sys/Jupyter"
-          - "sys/Matlab"
-          - "sys/RStudioServer"
-          - "sys/Stata"
-          - "sys/SAS"
+      - "interactive apps"
       - "sessions"
 
     help_bar:
