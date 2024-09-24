@@ -1,5 +1,5 @@
 help_menu:
-  - group: "Profile"
+  - group: "Profiles"
   - title: "FASSE"
     profile: "fasse"
     icon: "/public/fasrc_logo.jpg"
