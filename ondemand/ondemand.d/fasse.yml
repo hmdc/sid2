@@ -1,3 +1,12 @@
+help_menu:
+  - group: "Profile"
+  - title: "FASSE"
+    profile: "fasse"
+    icon: "/public/fasrc_logo.jpg"
+  - title: "Sid"
+    profile: "sid"
+    icon: "/public/sid_logo.png"
+    
 profiles:
   fasse:
     show_all_apps_link: false
@@ -30,12 +39,3 @@ profiles:
               widgets:
                 - "pinned_apps"
                 - "motd"
-
-    help_menu:
-      - group: "Profile"
-      - title: "FASSE"
-        profile: "fasse"
-        icon: "/public/fasrc_logo.jpg"
-      - title: "Sid"
-        profile: "sid"
-        icon: "/public/sid_logo.png"
