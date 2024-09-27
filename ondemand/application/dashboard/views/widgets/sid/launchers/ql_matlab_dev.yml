@@ -9,15 +9,17 @@ tile:
     FASSE cluster
 attributes:
   desktop: "xfce"
-  bc_queue: "test"
-  bc_account: ""
+  bc_vnc_resolution: "1024x768"
   bc_num_slots: null
+  bc_queue: "test"
   custom_memory_per_node: "32"
   custom_num_cores: "1"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
+  matlab_version: "matlab/R2022b-fasrc01"
   custom_email_address: ""
   bc_email_on_started: "0"
   custom_reservation: ""
-  bc_vnc_resolution: "1024x768"
-  matlab_version: "matlab/R2022b-fasrc01"
+  bc_account: ""
+  extra_slurm: ""
+

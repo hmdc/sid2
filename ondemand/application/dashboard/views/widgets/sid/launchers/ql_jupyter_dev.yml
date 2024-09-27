@@ -9,16 +9,19 @@ tile:
     FASSE cluster
 attributes:
   bc_queue: "test"
-  bc_account: ""
+  jupyterlab_switch: "1"
   custom_memory_per_node: "32"
   custom_num_cores: "1"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
+  working_folder: ""
   envscript: ""
   modules: ""
-  jupyterlab_switch: "1"
-  custom_email_address: ""
-  bc_email_on_started: "0"
   custom_reservation: ""
   extra_slurm: ""
-  working_folder: ""
+  bc_account: ""
+  custom_email_address: ""
+  bc_email_on_started: "0"
+
+
+

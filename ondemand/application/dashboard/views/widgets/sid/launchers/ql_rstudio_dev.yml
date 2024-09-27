@@ -11,7 +11,6 @@ tile:
 attributes:
   modules: ""
   bc_queue: "test"
-  bc_account: ""
   custom_memory_per_node: "16"
   custom_num_cores: "2"
   custom_num_gpus: "0"
@@ -19,5 +18,7 @@ attributes:
   custom_email_address: ""
   bc_email_on_started: "0"
   custom_reservation: ""
-  r_version: "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_16.sif"
+  r_version: "/n/singularity_images/informatics/ifxrstudio/ifxrstudio:RELEASE_3_18.sif"
   custom_vanillaconf: "1"
+  bc_account: ""
+  extra_slurm: ""
