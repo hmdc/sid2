@@ -4,14 +4,14 @@ order: 30
 tile:
   title: "Run Jupyter notebook / Jupyterlab"
   sub_caption: |
-    1 CPU core and 32GB RAM
+    2 CPU core and 32GB RAM
     8 hours job run time
     FASSE cluster
 attributes:
   bc_queue: "test"
   jupyterlab_switch: "1"
   custom_memory_per_node: "32"
-  custom_num_cores: "1"
+  custom_num_cores: "2"
   custom_num_gpus: "0"
   custom_time: "08:00:00"
   working_folder: ""
