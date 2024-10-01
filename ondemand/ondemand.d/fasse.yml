@@ -1,3 +1,4 @@
+default_profile: fasse
 help_menu:
   - group: "Profiles"
   - title: "FASSE"
