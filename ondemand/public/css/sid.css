@@ -192,8 +192,7 @@ div.quick-link-text .small-text {
     display: flex;
     justify-content: center;
     background-color: #F0F0F0;
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding: 20px 15px 40px 15px;
     width: 100vw;
     position: relative;
     left: 50%;
