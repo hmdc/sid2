@@ -21,7 +21,7 @@ profiles:
       - "jobs"
       - title: "Terminals"
         links:
-          - title: "Cannon"
+          - title: "FASSE"
             icon: "fas://terminal"
             url: "/pun/sys/shell/ssh/fasselogin.rc.fas.harvard.edu"
             new_tab: true
@@ -29,18 +29,6 @@ profiles:
       - "sessions"
 
     help_bar:
-      - title: "About"
-        url: "https://www.iq.harvard.edu/research-computing#AboutSidNG"
-        icon: ""
-        new_tab: true
-      - title: "Documentation"
-        url: "https://docs.rc.fas.harvard.edu/kb/sid-documentation/"
-        icon: ""
-        new_tab: true
-      - title: "Support"
-        url: "https://docs.rc.fas.harvard.edu/kb/getting-help-with-sid/"
-        icon: ""
-        new_tab: true
       - develop
       - help
       - user

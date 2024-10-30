@@ -23,24 +23,12 @@ profiles:
         links:
           - title: "Cannon"
             icon: "fas://terminal"
-            url: "/pun/sys/shell/ssh/fasselogin.rc.fas.harvard.edu"
+            url: "/pun/sys/shell/ssh/login.rc.fas.harvard.edu"
             new_tab: true
       - "interactive apps"
       - "sessions"
 
     help_bar:
-      - title: "About"
-        url: "https://www.iq.harvard.edu/research-computing#AboutSidNG"
-        icon: ""
-        new_tab: true
-      - title: "Documentation"
-        url: "https://docs.rc.fas.harvard.edu/kb/sid-documentation/"
-        icon: ""
-        new_tab: true
-      - title: "Support"
-        url: "https://docs.rc.fas.harvard.edu/kb/getting-help-with-sid/"
-        icon: ""
-        new_tab: true
       - develop
       - help
       - user
